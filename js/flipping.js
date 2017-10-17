@@ -3,42 +3,54 @@
     window.onload = function () {
 
 
-        var a = document.getElementById('left');
-        a.onclick = function () {
+        document.getElementById('left').onclick = function () {
             backward();
             return true;
-        }
+        };
 
-        var a = document.getElementById('right');
-        a.onclick = function () {
+        document.getElementById('right').onclick = function () {
             forward();
             return true;
-        }
+        };
 
 
         var page = 0;
+        var i;
+        var j;
 
         var imgfr;
         var imgbk;
 
         var images = [];
 
-        images[0] = ["images/1.jpg", "images/4.jpg", "images/7.jpg", "images/10.jpg", "images/13.jpg"];
-        images[1] = ["images/2.jpg", "images/5.jpg", "images/8.jpg", "images/11.jpg", "images/14.jpg"];
-        images[2] = ["images/3.jpg", "images/6.jpg", "images/9.jpg", "images/12.jpg", "images/15.jpg"];
-
         var flipping_cards = document.getElementById('flipping_cards');
         var cards = flipping_cards.getElementsByClassName('card');
 
+
+        for (i = 0; i < cards.length; i++) {
+
+            images[i] = [];
+            var divs = cards[i].children;
+
+            for (j = 0; j < divs.length; j++) {
+                images[i][j] = divs[j].innerHTML;//.getElementsByTagName('img')[0].src //.getElementsByTagName('div')
+            }
+
+            cards[i].innerHTML = '<div class="front"></div><div class="back"></div>';
+
+        }
+
+
         // prepare cards
-        for (var i = 0; i < cards.length; i++) {
+        for (i = 0; i < cards.length; i++) {
 
-            var fr = cards[i].getElementsByClassName('front')[0].style;
-            var bk = cards[i].getElementsByClassName('back')[0].style;
+            var fr = cards[i].getElementsByClassName('front')[0];
+            var bk = cards[i].getElementsByClassName('back')[0];
 
-            bk.display = 'block';
-            fr.backgroundImage = 'url(' + images[i][0] + ')';
-            bk.transform = 'rotateY(180deg)';
+            bk.style.display = 'block';
+            fr.innerHTML = images[i][0];
+            //fr.style.backgroundImage = 'url(' + images[i][0] + ')';
+            bk.style.transform = 'rotateY(180deg)';
 
         }
 
@@ -48,8 +60,8 @@
 
             for (var i = 0; i < cards.length; i++) {
 
-                var fr = cards[i].getElementsByClassName('front')[0].style;
-                var bk = cards[i].getElementsByClassName('back')[0].style;
+                var fr = cards[i].getElementsByClassName('front')[0];
+                var bk = cards[i].getElementsByClassName('back')[0];
 
                 // if last
                 if (page >= images[i].length - 1) {
@@ -66,10 +78,12 @@
                     imgbk = page + 1;
                 }
 
-                fr.backgroundImage = 'url(' + images[i][imgfr] + ')';
-                bk.backgroundImage = 'url(' + images[i][imgbk] + ')';
-                fr.transform = 'rotateY(' + (-180 * (page + 1)) + 'deg)';
-                bk.transform = 'rotateY(' + (-180 * page) + 'deg)';
+                fr.innerHTML = images[i][imgfr];
+                bk.innerHTML = images[i][imgbk];
+                /*fr.style.backgroundImage = 'url(' + images[i][imgfr] + ')';
+                 bk.style.backgroundImage = 'url(' + images[i][imgbk] + ')';*/
+                fr.style.transform = 'rotateY(' + (-180 * (page + 1)) + 'deg)';
+                bk.style.transform = 'rotateY(' + (-180 * page) + 'deg)';
 
             }
 
@@ -81,8 +95,8 @@
 
             for (var i = 0; i < cards.length; i++) {
 
-                var fr = cards[i].getElementsByClassName('front')[0].style;
-                var bk = cards[i].getElementsByClassName('back')[0].style;
+                var fr = cards[i].getElementsByClassName('front')[0];
+                var bk = cards[i].getElementsByClassName('back')[0];
 
                 // if first
                 if (page <= 0) {
@@ -99,14 +113,16 @@
                     imgbk = page - 1;
                 }
 
-                fr.backgroundImage = 'url(' + images[i][imgfr] + ')';
-                bk.backgroundImage = 'url(' + images[i][imgbk] + ')';
-                fr.transform = 'rotateY(' + (-180 * (page - 1)) + 'deg)';
+                fr.innerHTML = images[i][imgfr];
+                bk.innerHTML = images[i][imgbk];
+                /* fr.style.backgroundImage = 'url(' + images[i][imgfr] + ')';
+                 bk.style.backgroundImage = 'url(' + images[i][imgbk] + ')';*/
+                fr.style.transform = 'rotateY(' + (-180 * (page - 1)) + 'deg)';
                 if (page > 1) {
-                    bk.transform = 'rotateY(' + (-180 * (page - 2)) + 'deg)';
+                    bk.style.transform = 'rotateY(' + (-180 * (page - 2)) + 'deg)';
                 }
                 else {
-                    bk.transform = 'rotateY(' + 180 + 'deg)';
+                    bk.style.transform = 'rotateY(' + 180 + 'deg)';
                 }
 
             }

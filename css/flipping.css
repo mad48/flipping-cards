@@ -1,84 +1,86 @@
+
+:root {
+    --button-width: 55px;
+    --button-height: 60px;
+    --card-width: 250px;
+    --card-height: 280px;
+    --border-radius: 10px;
+}
+
 #flipping_cards {
-    margin-top: 10%;
+    margin: 10% auto;
+    width: calc(var(--button-width) * 2 + var(--card-width) * 3);
+    display: flex;
+    justify-content: center;
 }
 
 #flipping_cards div.button {
+    display: flex;
+    align-items: center;
+}
 
-    float: left;
-    margin: 20px;
-    margin-top: 110px;
-
-    display: inline-block;
+#flipping_cards div.button span {
     /*    -webkit-transform: scaleX(1.1);
         -moz-transform: scaleX(1.1);
         -o-transform: scaleX(1.1);
         transform: scaleX(1.1);*/
+    cursor: pointer;
     color: #e7e7e7;
     text-shadow: 0 2px 2px rgba(255, 255, 255, 0.7), 0 5px 6px rgba(0, 0, 0, 0.2);
-    font-size: 60px;
-    cursor: pointer;
-}
-
-#flipping_cards div.button:hover {
-    cursor: pointer;
-    -webkit-transition: all 0.3s ease;
-    -moz-transition: all 0.3s ease;
-    -o-transition: all 0.3s ease;
-    transition: all 0.3s ease;
-    text-shadow: 0 3px 3px rgba(0, 0, 0, 0.26);
-}
-
-#flipping_cards div.button:active {
-    text-shadow: 0 9px 19px rgba(0, 0, 0, 0.26);
-}
-
-#flipping_cards div.button:focus {
-    outline: none;
-}
-
-#flipping_cards div.button {
+    font-size: var(--button-height);
+    width: var(--button-width);
+    height: var(--button-height);
     -moz-user-select: none;
     -webkit-user-select: none;
     user-select: none;
 }
 
-/*#flipping_cards button.left {
-    background: url('../arrow_left.png') no-repeat;
-
+#flipping_cards div.button span:hover {
+    cursor: pointer;
+    -webkit-transition: all 0.3s ease;
+    -moz-transition: all 0.3s ease;
+    -o-transition: all 0.3s ease;
+    transition: all 0.3s ease;
+    text-shadow: 0 3px 3px #bdbdbd;
 }
-#flipping_cards button.right {
-    background: url('../arrow_right.png') no-repeat;
 
-}*/
+#flipping_cards div.button span:active {
+    text-shadow: 0 9px 19px rgba(0, 0, 0, 0.26);
+}
+
+#flipping_cards div.button span:focus {
+    outline: none;
+}
+
 #flipping_cards .card {
     -webkit-transform-style: preserve-3d;
     transform-style: preserve-3d;
     -webkit-perspective: 1000px;
     perspective: 1000px;
-    margin: 0 auto;
-    float: left;
 }
 
 #flipping_cards .card .front,
 .back {
+
     background-size: cover;
     background-position: center;
     -webkit-transition: -webkit-transform .7s cubic-bezier(0.4, 0.2, 0.2, 1);
     transition: -webkit-transform .7s cubic-bezier(0.4, 0.2, 0.2, 1);
     -o-transition: transform .7s cubic-bezier(0.4, 0.2, 0.2, 1);
-    transition: transform .7s cubic-bezier(0.4, 0.2, 0.2, 1);
     transition: transform .7s cubic-bezier(0.4, 0.2, 0.2, 1), -webkit-transform .7s cubic-bezier(0.4, 0.2, 0.2, 1);
+    transition: transform .7s cubic-bezier(0.4, 0.2, 0.2, 1);
     -webkit-backface-visibility: hidden;
     backface-visibility: hidden;
     text-align: center;
     min-height: 280px;
-    height: auto;
-    border-radius: 10px;
-    color: #fff;
-    font-size: 1.5rem;
 
-    width: 250px;
-    h4eight: 300px;
+    border-radius: var(--border-radius);
+    color: #fff;
+    font-size: 1.0rem;
+    font-family: Verdana, sans-serif;
+
+    width: var(--card-width);
+    height: var(--card-height);
     margin: 15px;
 
     -webkit-transform-style: preserve-3d;
@@ -91,4 +93,19 @@
     top: 0;
     left: 0;
     display: none;
+}
+
+#flipping_cards .card img {
+    width: var(--card-width);
+    height: var(--card-height);
+    border-radius: var(--border-radius);
+}
+
+#flipping_cards .card h1 {
+    position: absolute;
+    top: 0;
+    text-align: center;
+    width: 100%;
+    color: #ffffff;
+    text-shadow: 1px 1px 2px black, 0 0 1em rgba(0, 6, 22, 0.67);
 }

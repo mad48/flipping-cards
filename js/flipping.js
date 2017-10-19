@@ -1,138 +1,206 @@
-(function () {
+var flipping = {
 
-    window.onload = function () {
+    page: 0,
+    i: 0,
+    j: 0,
+
+    imgfr: "",
+    imgbk: "",
+
+    images: [],
+
+    flipping_cards: "",
+    cards: "",
+
+    options: {
+        auto: true,
+        time: 1000,
+        shadow: true
+    },
+    direction: 0,
+
+    init: function (elem, opt) {
 
 
-        document.getElementById('left').onclick = function () {
-            backward();
+        this.flipping_cards = document.getElementById(elem);
+        this.flipping_cards.style.display = 'flex';
+
+        this.cards = this.flipping_cards.getElementsByClassName('card');
+
+        this.flipping_cards.onmouseover = function () {
+            flipping.options.auto = false;
+        };
+
+        this.flipping_cards.onmouseout = function () {
+            flipping.options.auto = true;
+
+        };
+
+
+        this.flipping_cards.querySelectorAll('button')[0].onclick = function () {
+            flipping.backward();
             return true;
         };
 
-        document.getElementById('right').onclick = function () {
-            forward();
+        this.flipping_cards.querySelectorAll('button')[1].onclick = function () {
+            flipping.forward();
             return true;
         };
 
 
-        var page = 0;
-        var i;
-        var j;
+        for (var i = 0; i < this.cards.length; i++) {
 
-        var imgfr;
-        var imgbk;
-
-        var images = [];
-
-        var flipping_cards = document.getElementById('flipping_cards');
-        var cards = flipping_cards.getElementsByClassName('card');
-
-
-        for (i = 0; i < cards.length; i++) {
-
-            images[i] = [];
-            var divs = cards[i].children;
+            this.images[i] = [];
+            var divs = this.cards[i].children;
 
             for (j = 0; j < divs.length; j++) {
-                images[i][j] = divs[j].innerHTML;//.getElementsByTagName('img')[0].src //.getElementsByTagName('div')
+                this.images[i][j] = divs[j].innerHTML;//.getElementsByTagName('img')[0].src //.getElementsByTagName('div')
             }
 
-            cards[i].innerHTML = '<div class="front"></div><div class="back"></div>';
+            this.cards[i].innerHTML = '<div class="front"></div><div class="back"></div>';
 
         }
 
 
         // prepare cards
-        for (i = 0; i < cards.length; i++) {
+        for (i = 0; i < this.cards.length; i++) {
 
-            var fr = cards[i].getElementsByClassName('front')[0];
-            var bk = cards[i].getElementsByClassName('back')[0];
+            var fr = this.cards[i].getElementsByClassName('front')[0];
+            var bk = this.cards[i].getElementsByClassName('back')[0];
 
             bk.style.display = 'block';
-            fr.innerHTML = images[i][0];
+            fr.innerHTML = this.images[i][0];
             //fr.style.backgroundImage = 'url(' + images[i][0] + ')';
             bk.style.transform = 'rotateY(180deg)';
 
         }
 
+        /* options */
+        if (opt.auto === false) this.options.auto = false;
+        if (opt.time !== null) this.options.time = opt.time;
+        if (opt.shadow === false) this.options.shadow = false;
 
-        // next
-        function forward() {
 
-            for (var i = 0; i < cards.length; i++) {
+        /* shadow */
+        if (this.options.shadow === false) {
 
-                var fr = cards[i].getElementsByClassName('front')[0];
-                var bk = cards[i].getElementsByClassName('back')[0];
-
-                // if last
-                if (page >= images[i].length - 1) {
-                    page = images[i].length - 1;
-                    return;
-                }
-
-                if (page % 2) {
-                    imgfr = page + 1;
-                    imgbk = page;
-                }
-                else {
-                    imgfr = page;
-                    imgbk = page + 1;
-                }
-
-                fr.innerHTML = images[i][imgfr];
-                bk.innerHTML = images[i][imgbk];
-                /*fr.style.backgroundImage = 'url(' + images[i][imgfr] + ')';
-                 bk.style.backgroundImage = 'url(' + images[i][imgbk] + ')';*/
-                fr.style.transform = 'rotateY(' + (-180 * (page + 1)) + 'deg)';
-                bk.style.transform = 'rotateY(' + (-180 * page) + 'deg)';
-
-            }
-
-            page = page + 1;
+            [].forEach.call(this.flipping_cards.querySelectorAll('button'), function (el) {
+                el.style.textShadow = "none";
+            });
+            this.flipping_cards.querySelectorAll('.front, .back').forEach(function (el) {
+                el.style.boxShadow = "none";
+            });
         }
 
-        // prev
-        function backward() {
+        /* auto scroll */
+        if (this.options.auto === true) {
 
-            for (var i = 0; i < cards.length; i++) {
+            setTimeout(function go() {
 
-                var fr = cards[i].getElementsByClassName('front')[0];
-                var bk = cards[i].getElementsByClassName('back')[0];
+                if (flipping.options.auto) {
+                    if (flipping.page == 0) flipping.direction = 1;
+                    if (flipping.page == flipping.images[0].length - 1) flipping.direction = -1;
 
-                // if first
-                if (page <= 0) {
-                    page = 0;
-                    return;
+                    if (flipping.direction == 1) {
+                        flipping.forward();
+                    } else {
+                        flipping.backward();
+                    }
                 }
+                setTimeout(go, flipping.options.time);
 
-                if (page % 2) {
-                    imgfr = page - 1;
-                    imgbk = page;
-                }
-                else {
-                    imgfr = page;
-                    imgbk = page - 1;
-                }
+            }, flipping.options.time);
 
-                fr.innerHTML = images[i][imgfr];
-                bk.innerHTML = images[i][imgbk];
-                /* fr.style.backgroundImage = 'url(' + images[i][imgfr] + ')';
-                 bk.style.backgroundImage = 'url(' + images[i][imgbk] + ')';*/
-                fr.style.transform = 'rotateY(' + (-180 * (page - 1)) + 'deg)';
-                if (page > 1) {
-                    bk.style.transform = 'rotateY(' + (-180 * (page - 2)) + 'deg)';
-                }
-                else {
-                    bk.style.transform = 'rotateY(' + 180 + 'deg)';
-                }
 
-            }
-            page = page - 1;
         }
+    },
 
+
+    backward: function () {
+
+        for (var i = 0; i < this.cards.length; i++) {
+
+            var fr = this.cards[i].getElementsByClassName('front')[0];
+            var bk = this.cards[i].getElementsByClassName('back')[0];
+
+            // if first
+            if (this.page <= 0) {
+                this.page = 0;
+                return;
+            }
+
+            if (this.page % 2) {
+                this.imgfr = this.page - 1;
+                this.imgbk = this.page;
+            }
+            else {
+                this.imgfr = this.page;
+                this.imgbk = this.page - 1;
+            }
+
+            fr.innerHTML = this.images[i][this.imgfr];
+            bk.innerHTML = this.images[i][this.imgbk];
+
+            fr.style.transform = 'rotateY(' + (-180 * (this.page - 1)) + 'deg)';
+            if (this.page > 1) {
+                bk.style.transform = 'rotateY(' + (-180 * (this.page - 2)) + 'deg)';
+            }
+            else {
+                bk.style.transform = 'rotateY(' + 180 + 'deg)';
+            }
+
+        }
+        this.page = this.page - 1;
     }
+    ,
 
 
-})(this);
+    forward: function () {
 
+        for (var i = 0; i < this.cards.length; i++) {
 
+            var fr = this.cards[i].getElementsByClassName('front')[0];
+            var bk = this.cards[i].getElementsByClassName('back')[0];
 
+            // if last
+            if (this.page >= this.images[i].length - 1) {
+                this.page = this.images[i].length - 1;
+                return;
+            }
+
+            if (this.page % 2) {
+                this.imgfr = this.page + 1;
+                this.imgbk = this.page;
+            }
+            else {
+                this.imgfr = this.page;
+                this.imgbk = this.page + 1;
+            }
+
+            fr.innerHTML = this.images[i][this.imgfr];
+            bk.innerHTML = this.images[i][this.imgbk];
+
+            fr.style.transform = 'rotateY(' + (-180 * (this.page + 1)) + 'deg)';
+            bk.style.transform = 'rotateY(' + (-180 * this.page) + 'deg)';
+
+        }
+
+        this.page = this.page + 1;
+    }
+};
+
+/*
+ (function () {
+ })(this); // }).call(this);
+ */
+
+/*    
+ document.addEventListener("DOMContentLoaded", function () {
+ });
+ */
+
+//export default flipping;
+
+if (typeof module === 'object') {
+    module.exports.flipping = flipping;
+}

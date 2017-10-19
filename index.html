@@ -12,14 +12,16 @@
 
 <body>
 
-<div id="flipping_cards">
+<div id="flipping_cards" class="flipping">
 
-    <div id="left" class="button"><span>&#9668;</span></div>
+    <div>
+        <button>&#9668;</button>
+    </div>
 
 
     <div class="card">
         <div>
-            <h1> Deep Blue <br>Sea</h1>
+            <h1>Deep Blue <br>Sea</h1>
             <img src="images/1.jpg"/>
         </div>
         <div><img src="images/4.jpg"/></div>
@@ -30,7 +32,7 @@
 
     <div class="card">
         <div>
-            <h1> Northern <br>Lights</h1>
+            <h1>Northern <br>Lights</h1>
             <img src="images/2.jpg"/>
         </div>
         <div><img src="images/5.jpg"/></div>
@@ -41,7 +43,7 @@
 
     <div class="card">
         <div>
-            <h1> Over The <br>Mountains</h1>
+            <h1>Over The <br>Mountains</h1>
             <img src="images/3.jpg"/>
         </div>
         <div><img src="images/6.jpg"/></div>
@@ -50,9 +52,89 @@
         <div><img src="images/15.jpg"/></div>
     </div>
 
-    <div id="right" class="button"><span>&#9658;</span></div>
+    <div>
+        <button>&#9658;</button>
+    </div>
 
 </div>
 
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+
+        var options = {
+            auto: true,
+            time: 1000,
+            shadow: true
+        };
+
+        flipping.init('flipping_cards', options);
+
+    });
+
+</script>
+
+Usage with pure JavaScript:
+<xmp>
+    <link href="css/flipping.css" rel="stylesheet"/>
+    <script src="./flipping.js"/>
+    ...
+    <div id="flippingcards" class="flipping">
+
+        <div>
+            <button>&#9668;</button>
+        </div>
+
+
+        <div class="card">
+            <div>
+                <h1>Deep Blue <br>Sea</h1>
+                <img src="images/1.jpg"/>
+            </div>
+            <div><img src="images/4.jpg"/></div>
+            <div><img src="images/7.jpg"/></div>
+            <div><img src="images/10.jpg"/></div>
+            <div><img src="images/13.jpg"/></div>
+        </div>
+
+        <div class="card">
+            <div>
+                <h1>Northern <br>Lights</h1>
+                <img src="images/2.jpg"/>
+            </div>
+            <div><img src="images/5.jpg"/></div>
+            <div><img src="images/8.jpg"/></div>
+            <div><img src="images/11.jpg"/></div>
+            <div><img src="images/14.jpg"/></div>
+        </div>
+
+        <div class="card">
+            <div>
+                <h1>Over The <br>Mountains</h1>
+                <img src="images/3.jpg"/>
+            </div>
+            <div><img src="images/6.jpg"/></div>
+            <div><img src="images/9.jpg"/></div>
+            <div><img src="images/12.jpg"/></div>
+            <div><img src="images/15.jpg"/></div>
+        </div>
+
+        <div>
+            <button>&#9658;</button>
+        </div>
+
+    </div>
+
+
+    <script>
+        var options = {
+            auto: true,
+            time: 1000,
+            shadow: true
+        };
+
+        flipping.init('flippingcards', options);
+    </script>
+
+</xmp>
 </body>
 </html>

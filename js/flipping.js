@@ -4,69 +4,67 @@ var flipping = {
     i: 0,
     j: 0,
 
-    imgfr: "",
-    imgbk: "",
+    imgfr: null,
+    imgbk: null,
 
     images: [],
+    direction: null,
 
-    flipping_cards: "",
-    cards: "",
+    flipping_cards: null,
+    cards: null,
 
     options: {
         auto: true,
         time: 1000,
         shadow: true
     },
-    direction: 0,
+
 
     init: function (elem, opt) {
 
+        var self = this;
 
-        this.flipping_cards = document.getElementById(elem);
-        this.flipping_cards.style.display = 'flex';
+        self.flipping_cards = document.getElementById(elem);
+        self.flipping_cards.style.display = 'flex';
 
-        this.cards = this.flipping_cards.getElementsByClassName('card');
+        self.cards = self.flipping_cards.getElementsByClassName('card');
 
-        this.flipping_cards.onmouseover = function () {
-            flipping.options.auto = false;
+
+        this.flipping_cards.onmouseover = (function () {
+            this.options.auto = false;
+        }).bind(this);
+
+
+        self.flipping_cards.onmouseout = function () {
+            self.options.auto = true;
         };
 
-        this.flipping_cards.onmouseout = function () {
-            flipping.options.auto = true;
+        self.flipping_cards.querySelectorAll('button')[0].addEventListener('click', self.backward(), false);
 
-        };
-
-
-        this.flipping_cards.querySelectorAll('button')[0].onclick = function () {
-            flipping.backward();
-            return true;
-        };
-
-        this.flipping_cards.querySelectorAll('button')[1].onclick = function () {
-            flipping.forward();
-            return true;
+        self.flipping_cards.querySelectorAll('button')[1].onclick = function () {
+            self.forward();
         };
 
 
         for (var i = 0; i < this.cards.length; i++) {
 
-            this.images[i] = [];
-            var divs = this.cards[i].children;
+            self.images[i] = [];
+            var divs = self.cards[i].children;
 
             for (j = 0; j < divs.length; j++) {
-                this.images[i][j] = divs[j].innerHTML;//.getElementsByTagName('img')[0].src //.getElementsByTagName('div')
+                self.images[i][j] = divs[j].innerHTML;//.getElementsByTagName('img')[0].src //.getElementsByTagName('div')
             }
 
-            this.cards[i].innerHTML = '<div class="front"></div><div class="back"></div>';
+            self.cards[i].innerHTML = '<div class="front"></div><div class="back"></div>';
 
         }
 
 
         // prepare cards
-        for (i = 0; i < this.cards.length; i++) {
+        for (i = 0; i < self.cards.length; i++) {
 
-            var fr = this.cards[i].getElementsByClassName('front')[0];
-            var bk = this.cards[i].getElementsByClassName('back')[0];
+            var fr = self.cards[i].getElementsByClassName('front')[0];
+            var bk = self.cards[i].getElementsByClassName('back')[0];
 
             bk.style.display = 'block';
             fr.innerHTML = this.images[i][0];
@@ -76,40 +74,40 @@ var flipping = {
         }
 
         /* options */
-        if (opt.auto === false) this.options.auto = false;
-        if (opt.time !== null) this.options.time = opt.time;
-        if (opt.shadow === false) this.options.shadow = false;
+        if (opt.auto === false) self.options.auto = false;
+        if (opt.time !== null) self.options.time = opt.time;
+        if (opt.shadow === false) self.options.shadow = false;
 
 
         /* shadow */
-        if (this.options.shadow === false) {
+        if (self.options.shadow === false) {
 
-            [].forEach.call(this.flipping_cards.querySelectorAll('button'), function (el) {
+            [].forEach.call(self.flipping_cards.querySelectorAll('button'), function (el) {
                 el.style.textShadow = "none";
             });
-            this.flipping_cards.querySelectorAll('.front, .back').forEach(function (el) {
+            self.flipping_cards.querySelectorAll('.front, .back').forEach(function (el) {
                 el.style.boxShadow = "none";
             });
         }
 
         /* auto scroll */
-        if (this.options.auto === true) {
+        if (self.options.auto === true) {
 
             setTimeout(function go() {
 
-                if (flipping.options.auto) {
-                    if (flipping.page == 0) flipping.direction = 1;
-                    if (flipping.page == flipping.images[0].length - 1) flipping.direction = -1;
+                if (self.options.auto) {
+                    if (self.page == 0) self.direction = 1;
+                    if (self.page == self.images[0].length - 1) self.direction = -1;
 
-                    if (flipping.direction == 1) {
-                        flipping.forward();
+                    if (self.direction == 1) {
+                        self.forward();
                     } else {
-                        flipping.backward();
+                        self.backward();
                     }
                 }
-                setTimeout(go, flipping.options.time);
+                setTimeout(go, self.options.time);
 
-            }, flipping.options.time);
+            }, self.options.time);
 
 
         }
@@ -151,8 +149,7 @@ var flipping = {
 
         }
         this.page = this.page - 1;
-    }
-    ,
+    },
 
 
     forward: function () {

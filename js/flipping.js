@@ -1,9 +1,6 @@
 var flipping = {
 
     page: 0,
-    i: 0,
-    j: 0,
-
     imgfr: null,
     imgbk: null,
 
@@ -23,6 +20,7 @@ var flipping = {
     init: function (elem, opt) {
 
         var self = this;
+        var divs = null;
 
         self.flipping_cards = document.getElementById(elem);
         self.flipping_cards.style.display = 'flex';
@@ -30,29 +28,30 @@ var flipping = {
         self.cards = self.flipping_cards.getElementsByClassName('card');
 
 
-        this.flipping_cards.onmouseover = (function () {
-            this.options.auto = false;
-        }).bind(this);
-
+        self.flipping_cards.onmouseover = function () {
+            self.options.auto = false;
+        };
 
         self.flipping_cards.onmouseout = function () {
             self.options.auto = true;
         };
 
-        self.flipping_cards.querySelectorAll('button')[0].addEventListener('click', self.backward(), false);
-
-        self.flipping_cards.querySelectorAll('button')[1].onclick = function () {
+        var buttons = self.flipping_cards.querySelectorAll('button');
+        buttons[0].onclick = function () {
+            self.backward();
+        };
+        buttons[1].onclick = function () {
             self.forward();
         };
 
 
-        for (var i = 0; i < this.cards.length; i++) {
+        for (var i = 0; i < self.cards.length; i++) {
 
             self.images[i] = [];
-            var divs = self.cards[i].children;
+            divs = self.cards[i].children;
 
-            for (j = 0; j < divs.length; j++) {
-                self.images[i][j] = divs[j].innerHTML;//.getElementsByTagName('img')[0].src //.getElementsByTagName('div')
+            for (var j = 0; j < divs.length; j++) {
+                self.images[i][j] = divs[j].innerHTML;
             }
 
             self.cards[i].innerHTML = '<div class="front"></div><div class="back"></div>';
@@ -68,7 +67,6 @@ var flipping = {
 
             bk.style.display = 'block';
             fr.innerHTML = this.images[i][0];
-            //fr.style.backgroundImage = 'url(' + images[i][0] + ')';
             bk.style.transform = 'rotateY(180deg)';
 
         }

@@ -10,9 +10,11 @@ var flipping = {
     flipping_cards: null,
     cards: null,
 
+    paused: false,
+
     options: {
         auto: true,
-        time: 1000,
+        time: 1500,
         shadow: true
     },
 
@@ -28,13 +30,34 @@ var flipping = {
         self.cards = self.flipping_cards.getElementsByClassName('card');
 
 
-        self.flipping_cards.onmouseover = function () {
-            self.options.auto = false;
+        /* options */
+        if (opt.auto === false) self.options.auto = false;
+        if (opt.auto === true) self.options.auto = true;
+
+        if (opt.time !== null) self.options.time = opt.time;
+
+        if (opt.shadow === false) self.options.shadow = false;
+        if (opt.shadow === true) self.options.shadow = true;
+
+        // add suspend actions if automatic flipping is enabled
+        if (self.options.auto == true) {
+            self.flipping_cards.onmouseover = function () {
+                self.paused = true;
+            };
+
+            self.flipping_cards.onmouseout = function () {
+                self.paused = false;
+            }
+        }
+
+        // on deactivate window
+        window.onblur = function () {
+            self.paused = true;
+        };
+        window.onfocus = function () {
+            self.paused = false;
         };
 
-        self.flipping_cards.onmouseout = function () {
-            self.options.auto = true;
-        };
 
         var buttons = self.flipping_cards.querySelectorAll('button');
         buttons[0].onclick = function () {
@@ -71,11 +94,6 @@ var flipping = {
 
         }
 
-        /* options */
-        if (opt.auto === false) self.options.auto = false;
-        if (opt.time !== null) self.options.time = opt.time;
-        if (opt.shadow === false) self.options.shadow = false;
-
 
         /* shadow */
         if (self.options.shadow === false) {
@@ -93,7 +111,8 @@ var flipping = {
 
             setTimeout(function go() {
 
-                if (self.options.auto) {
+                if (self.options.auto && self.paused === false) {
+                    //console.log("do auto");
                     if (self.page == 0) self.direction = 1;
                     if (self.page == self.images[0].length - 1) self.direction = -1;
 
@@ -107,7 +126,6 @@ var flipping = {
 
             }, self.options.time);
 
-
         }
     },
 
@@ -120,7 +138,8 @@ var flipping = {
             var bk = this.cards[i].getElementsByClassName('back')[0];
 
             // if first
-            if (this.page <= 0) {
+            if (this.page == 0) {
+                console.log(this.page);
                 this.page = 0;
                 return;
             }
@@ -146,6 +165,7 @@ var flipping = {
             }
 
         }
+
         this.page = this.page - 1;
     },
 
@@ -194,8 +214,8 @@ var flipping = {
  });
  */
 
-//export default flipping;
 
+//export default flipping;
 if (typeof module === 'object') {
     module.exports.flipping = flipping;
 }

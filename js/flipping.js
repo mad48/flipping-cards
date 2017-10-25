@@ -15,9 +15,15 @@ var flipping = {
     options: {
         auto: true,
         time: 1500,
-        shadow: true
+        shadow: true,
+        sequential: 0
     },
 
+    k: 0,
+    imnum: 0,
+    krug: [],
+    krugfr: 0,
+    krugbk: 1,
 
     init: function (elem, opt) {
 
@@ -27,7 +33,7 @@ var flipping = {
         self.flipping_cards = document.getElementById(elem);
         self.flipping_cards.style.display = 'flex';
 
-        self.cards = self.flipping_cards.getElementsByClassName('card');
+        self.deck = self.flipping_cards.getElementsByClassName('card');
 
 
         /* options */
@@ -38,6 +44,8 @@ var flipping = {
 
         if (opt.shadow === false) self.options.shadow = false;
         if (opt.shadow === true) self.options.shadow = true;
+
+        if (opt.sequent !== null) self.options.sequent = opt.sequent;
 
         // add suspend actions if automatic flipping is enabled
         if (self.options.auto == true) {
@@ -61,32 +69,32 @@ var flipping = {
 
         var buttons = self.flipping_cards.querySelectorAll('button');
         buttons[0].onclick = function () {
-            self.backward();
+            // self.backward();
         };
         buttons[1].onclick = function () {
             self.forward();
         };
 
 
-        for (var i = 0; i < self.cards.length; i++) {
+        for (var i = 0; i < self.deck.length; i++) {
 
             self.images[i] = [];
-            divs = self.cards[i].children;
+            divs = self.deck[i].children;
 
             for (var j = 0; j < divs.length; j++) {
                 self.images[i][j] = divs[j].innerHTML;
             }
 
-            self.cards[i].innerHTML = '<div class="front"></div><div class="back"></div>';
+            self.deck[i].innerHTML = '<div class="front"></div><div class="back"></div>';
 
         }
 
 
         // prepare cards
-        for (i = 0; i < self.cards.length; i++) {
+        for (i = 0; i < self.deck.length; i++) {
 
-            var fr = self.cards[i].getElementsByClassName('front')[0];
-            var bk = self.cards[i].getElementsByClassName('back')[0];
+            var fr = self.deck[i].getElementsByClassName('front')[0];
+            var bk = self.deck[i].getElementsByClassName('back')[0];
 
             bk.style.display = 'block';
             fr.innerHTML = this.images[i][0];
@@ -106,6 +114,7 @@ var flipping = {
             });
         }
 
+
         /* auto scroll */
         if (self.options.auto === true) {
 
@@ -114,12 +123,12 @@ var flipping = {
                 if (self.options.auto && self.paused === false) {
                     //console.log("do auto");
                     if (self.page == 0) self.direction = 1;
-                    if (self.page == self.images[0].length - 1) self.direction = -1;
+                    // if (self.page == self.images[0].length - 1) self.direction = -1;
 
                     if (self.direction == 1) {
                         self.forward();
                     } else {
-                        self.backward();
+                        // self.backward();
                     }
                 }
                 setTimeout(go, self.options.time);
@@ -129,19 +138,76 @@ var flipping = {
         }
     },
 
+    matrix: function (len) {
+
+        var m = 0;
+        var n = 0;
+
+        var j;
+
+        var mas1 = [];
+        var mas2 = [];
+
+        if (len % 2 != 0) {
+
+            for (j = 1; j < len; j++) {
+                if (j % 2 === 0) {
+                    mas1[m++] = j;
+                    mas1[m++] = j;
+                } else {
+                    mas2[n++] = j;
+                    mas2[n++] = j;
+                }
+
+            }
+            mas1.unshift(0);
+            mas2.push(0);
+
+            /*            console.log(mas1);
+             console.log(mas2);*/
+        }
+
+
+        if (len % 2 == 0) {
+
+
+            for (j = 1; j < len; j++) {
+                if (j % 2 === 0) {
+                    mas1[m++] = j;
+                    mas1[m++] = j;
+                } else {
+                    mas2[n++] = j;
+                    mas2[n++] = j;
+                }
+
+            }
+            mas1.unshift(0);
+            mas1.push(0);
+
+
+            /*            console.log(mas1);
+             console.log(mas2);*/
+        }
+
+        return [mas1, mas2];
+
+
+    },
+
 
     backward: function () {
 
-        for (var i = 0; i < this.cards.length; i++) {
+        for (var i = 0; i < this.deck.length; i++) {
 
-            var fr = this.cards[i].getElementsByClassName('front')[0];
-            var bk = this.cards[i].getElementsByClassName('back')[0];
+            var fr = this.deck[i].getElementsByClassName('front')[0];
+            var bk = this.deck[i].getElementsByClassName('back')[0];
 
             // if first
-            if (this.page == 0) {
-                console.log(this.page);
-                this.page = 0;
+            if (this.page <= 0) {
+                //console.log(this.page);
+                //  this.page = 0;
                 return;
+
             }
 
             if (this.page % 2) {
@@ -156,9 +222,9 @@ var flipping = {
             fr.innerHTML = this.images[i][this.imgfr];
             bk.innerHTML = this.images[i][this.imgbk];
 
-            fr.style.transform = 'rotateY(' + (-180 * (this.page - 1)) + 'deg)';
+            fr.style.transform = 'rotateY(' + (-180 * (this.k - 1)) + 'deg)';
             if (this.page > 1) {
-                bk.style.transform = 'rotateY(' + (-180 * (this.page - 2)) + 'deg)';
+                bk.style.transform = 'rotateY(' + (-180 * (this.k - 2)) + 'deg)';
             }
             else {
                 bk.style.transform = 'rotateY(' + 180 + 'deg)';
@@ -166,53 +232,90 @@ var flipping = {
 
         }
 
+        this.k--;
         this.page = this.page - 1;
+
     },
 
 
     forward: function () {
 
-        for (var i = 0; i < this.cards.length; i++) {
+        var self = this;
+        var buttons = null;
+        var i = 0;
+        var f = function () {
+            // if (self.paused === false)
+            self.forwardflip(i);
 
-            var fr = this.cards[i].getElementsByClassName('front')[0];
-            var bk = this.cards[i].getElementsByClassName('back')[0];
-
-            // if last
-            if (this.page >= this.images[i].length - 1) {
-                this.page = this.images[i].length - 1;
-                return;
+            if (i == 0) {
+                buttons = self.flipping_cards.querySelectorAll('button');
+                buttons[0].onclick = function () {
+                };
+                buttons[1].onclick = function () {
+                };
             }
 
-            if (this.page % 2) {
-                this.imgfr = this.page + 1;
-                this.imgbk = this.page;
+            i = i + 1;
+            
+            if (i == self.deck.length) {
+
+                /* console.log("this.k " + self.k);*/
+                self.k++;
+                self.imnum++;
+                self.page = self.page + 1;
+
+                buttons = self.flipping_cards.querySelectorAll('button');
+                buttons[0].onclick = function () {
+                    // self.backward();
+                };
+                buttons[1].onclick = function () {
+                    self.forward();
+                };
+
             }
-            else {
-                this.imgfr = this.page;
-                this.imgbk = this.page + 1;
+
+            if (i < self.deck.length) setTimeout(f, self.options.sequent);
+
+        };
+
+        f();
+    },
+
+
+    forwardflip: function (i) {
+
+
+        var fr = this.deck[i].getElementsByClassName('front')[0];
+        var bk = this.deck[i].getElementsByClassName('back')[0];
+
+
+        if (this.imnum >= this.images[i].length) {
+            this.imnum = 0;
+            if (this.images[i].length % 2 != 0) {
+                this.krugfr = ~~!this.krugfr;
+                this.krugbk = ~~!this.krugfr;
             }
-
-            fr.innerHTML = this.images[i][this.imgfr];
-            bk.innerHTML = this.images[i][this.imgbk];
-
-            fr.style.transform = 'rotateY(' + (-180 * (this.page + 1)) + 'deg)';
-            bk.style.transform = 'rotateY(' + (-180 * this.page) + 'deg)';
-
         }
 
-        this.page = this.page + 1;
+        this.krug = this.matrix(this.images[i].length);
+
+
+        this.imgfr = this.krug[this.krugfr][this.imnum];
+        this.imgbk = this.krug[this.krugbk][this.imnum];
+
+
+        /*        console.log("this.krugfr " + this.krugfr);
+         console.log("this.krugbk " + this.krugbk);*/
+
+
+        fr.innerHTML = this.images[i][this.imgfr];
+        bk.innerHTML = this.images[i][this.imgbk];
+        fr.style.transform = 'rotateY(' + (-180 * (this.k + 1)) + 'deg)';
+        bk.style.transform = 'rotateY(' + (-180 * this.k) + 'deg)';
+
+        //console.log("k " + this.k + "   imnum " + this.imnum + "   imgfr " + this.imgfr + "   imgbk " + this.imgbk);
     }
 };
-
-/*
- (function () {
- })(this); // }).call(this);
- */
-
-/*    
- document.addEventListener("DOMContentLoaded", function () {
- });
- */
 
 
 //export default flipping;

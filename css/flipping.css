@@ -11,7 +11,7 @@
 
 }
 
-h4{
+h4 {
     font-family: Verdana, sans-serif;
 }
 
@@ -26,6 +26,11 @@ h4{
 /* buttons container */
 .flipping > div:first-child, .flipping > div:last-child {
     display: flex;
+    align-items: center;
+}
+
+.flipping > div:first-child {
+    display: none;
     align-items: center;
 }
 
@@ -122,4 +127,55 @@ h4{
     width: 100%;
     color: #ffffff;
     text-shadow: 1px 1px 2px black, 0 0 1em rgba(0, 6, 22, 0.67);
+}
+
+.flipping .card h2 {
+    position: absolute;
+    top: 70%;
+    text-align: center;
+    width: 100%;
+    color: #ffffff;
+    text-shadow: 1px 1px 2px black, 0 0 1em rgba(0, 6, 22, 0.67);
+}
+
+#nums .card {
+    -webkit-transform-style: preserve-3d;
+    transform-style: preserve-3d;
+    -webkit-perspective: 1000px;
+    perspective: 1000px;
+}
+
+#nums .card {
+
+    background-size: cover;
+    background-position: center;
+    -webkit-transition: -webkit-transform .7s cubic-bezier(0.4, 0.2, 0.2, 1);
+    transition: -webkit-transform .7s cubic-bezier(0.4, 0.2, 0.2, 1);
+    -o-transition: transform .7s cubic-bezier(0.4, 0.2, 0.2, 1);
+    transition: transform .7s cubic-bezier(0.4, 0.2, 0.2, 1), -webkit-transform .7s cubic-bezier(0.4, 0.2, 0.2, 1);
+    transition: transform .7s cubic-bezier(0.4, 0.2, 0.2, 1);
+    -webkit-backface-visibility: hidden;
+    backface-visibility: hidden;
+    text-align: center;
+    min-height: 280px;
+
+    border-radius: var(--border-radius);
+    color: #fff;
+    font-size: 1.0rem;
+    font-family: Verdana, sans-serif;
+
+    width: var(--card-width);
+    height: var(--card-height);
+    margin: 15px;
+
+    -webkit-transform-style: preserve-3d;
+    transform-style: preserve-3d;
+    box-shadow: 5px 5px 10px 5px rgba(0, 0, 0, .2);
+}
+
+.flipping .card .back {
+    position: absolute;
+    top: 0;
+    left: 0;
+    display: none;
 }

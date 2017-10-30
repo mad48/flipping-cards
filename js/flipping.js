@@ -1,11 +1,11 @@
 var flipping = {
 
-    page: 0,
     imgfr: null,
     imgbk: null,
 
+    slides: null,
     images: [],
-    direction: null,
+
 
     flipping_cards: null,
     cards: null,
@@ -16,37 +16,106 @@ var flipping = {
         auto: true,
         time: 1500,
         shadow: true,
-        sequential: 0
+        sequential: 0,
+        start: 0
     },
 
-    k: 0,
     imnum: 0,
     krug: [],
     krugfr: 0,
     krugbk: 1,
-    h: 0,
+
+    direction: 0,
+    directionprev: 0,
+    timer: 0,
+    timeout: null,
+
+    elem: null,
+
     init: function (elem, opt) {
-
-
         var self = this;
-        var divs = null;
+        self.elem = elem;
+        self.slides = document.getElementById(elem).getElementsByClassName('slides')[0].innerHTML;
 
-        self.flipping_cards = document.getElementById(elem);
+        self.prepare(elem);
+        self.configure(opt);
+
+    },
+
+    prepare: function () {
+        var self = this;
+
+        self.paused = false;
+        self.k = 0;
+        self.krug = [];
+        /*        self.krugfr = 0;
+         self.krugbk = 1;*/
+        self.imgfr = null;
+        self.imgbk = null;
+
+
+        //self.imnum = 0;
+
+        self.timer = null;
+
+
+        self.flipping_cards = document.getElementById(self.elem);
         self.flipping_cards.style.display = 'flex';
 
-        self.deck = self.flipping_cards.getElementsByClassName('card');
+        self.flipping_cards.getElementsByClassName('slides')[0].innerHTML = self.slides;
 
+        self.deck = self.flipping_cards.getElementsByClassName('deck');
 
-        /* options */
-        if (opt.auto === false) self.options.auto = false;
-        if (opt.auto === true) self.options.auto = true;
+        var divs = null;
+        // get content
+        for (var i = 0; i < self.deck.length; i++) {
 
-        if (opt.time !== null) self.options.time = opt.time;
+            self.images[i] = [];
+            divs = self.deck[i].children;
 
-        if (opt.shadow === false) self.options.shadow = false;
-        if (opt.shadow === true) self.options.shadow = true;
+            for (var j = 0; j < divs.length; j++) {
+                self.images[i][j] = divs[j].innerHTML;
+            }
 
-        if (opt.sequent !== null) self.options.sequent = opt.sequent;
+            self.deck[i].innerHTML = '<div class="front"></div><div class="back"></div>';
+        }
+
+        // prepare cards
+        for (i = 0; i < self.deck.length; i++) {
+            console.log("init imnum = " + self.imnum);
+
+            var fr = self.deck[i].getElementsByClassName('front')[0];
+            var bk = self.deck[i].getElementsByClassName('back')[0];
+
+            fr.innerHTML = self.images[i][self.imnum];
+
+            fr.style.transform = "none";
+            bk.style.transform = "none";
+
+            //console.log("fr.style.transform " + fr.style.transform);
+
+            if (self.direction == 1) {
+                bk.style.display = 'block';
+                bk.style.transform = 'rotateY(180deg)';
+            }
+            if (self.direction == -1) {
+                bk.style.display = 'block';
+                bk.style.transform = 'rotateY(-180deg)';
+            }
+
+            if (self.imnum % 2 != 0) {
+                self.krugfr = ~~!self.krugfr;
+                self.krugbk = ~~!self.krugfr;
+            }
+        }
+
+        // on deactivate window
+        window.onblur = function () {
+            self.paused = true;
+        };
+        window.onfocus = function () {
+            self.paused = false;
+        };
 
         // add suspend actions if automatic flipping is enabled
         if (self.options.auto == true) {
@@ -59,60 +128,36 @@ var flipping = {
             }
         }
 
-        // on deactivate window
-        window.onblur = function () {
-            self.paused = true;
-        };
-        window.onfocus = function () {
-            self.paused = false;
-        };
 
-
+        //-------------------------------------------------------------------------------------------
+        // button backward
         var buttons = self.flipping_cards.querySelectorAll('button');
+
         buttons[0].onclick = function () {
+
+            self.directionprev = self.direction;
+
+            if (self.directionprev == 1 || self.directionprev == 0) {
+                self.direction = -1;
+                self.prepare();
+            }
             self.backward();
         };
+
+        //forward
         buttons[1].onclick = function () {
+            self.directionprev = self.direction;
+
+            if (self.directionprev == -1 || self.directionprev == 0) {
+                self.direction = 1;
+                self.prepare();
+
+            }
             self.forward();
         };
 
-
-        for (var i = 0; i < self.deck.length; i++) {
-
-            self.images[i] = [];
-            divs = self.deck[i].children;
-
-            for (var j = 0; j < divs.length; j++) {
-                self.images[i][j] = divs[j].innerHTML;
-            }
-
-            self.deck[i].innerHTML = '<div class="front"></div><div class="back"></div>';
-
-        }
-
-        /*        document.addEventListener('transitionend', function (event) {
-         if (event.propertyName == 'transform') {
-         console.log(event.type + " " + new Date().getTime() + " " + event.propertyName);
-         }
-
-         });*/
-
-        // prepare cards
-        for (i = 0; i < self.deck.length; i++) {
-
-            var fr = self.deck[i].getElementsByClassName('front')[0];
-            var bk = self.deck[i].getElementsByClassName('back')[0];
-
-            bk.style.display = 'block';
-            fr.innerHTML = this.images[i][0];
-            bk.style.transform = 'rotateY(180deg)';
-
-        }
-
-
         /* shadow */
         if (self.options.shadow === false) {
-
             [].forEach.call(self.flipping_cards.querySelectorAll('button'), function (el) {
                 el.style.textShadow = "none";
             });
@@ -125,26 +170,50 @@ var flipping = {
         /* auto scroll */
         if (self.options.auto === true) {
 
-            setTimeout(function go() {
+
+            if (self.timeout) clearTimeout(self.timeout);
+            self.timeout = setTimeout(function go() {
 
                 if (self.options.auto && self.paused === false) {
-                    //console.log("do auto");
-                    if (self.page == 0) self.direction = 1;
-                    // if (self.page == self.images[0].length - 1) self.direction = -1;
 
-                    if (self.direction == 1) {
-                        self.forward();
-                    } else {
-                        // self.backward();
-                    }
+                    self.flipping_cards.querySelectorAll('button')[1].click();
+
                 }
-                setTimeout(go, self.options.time);
+                self.timeout = setTimeout(go, self.options.time);
 
             }, self.options.time);
+
 
         }
     },
 
+    // ------------------------------------------------------------------------------------------
+    configure: function (opt) {
+        /* options */
+        var self = this;
+        if (opt.auto === false) {
+            self.options.auto = false;
+            self.flipping_cards.querySelectorAll('button')[1].style.visibility="visible";
+        }
+
+        if (opt.auto === true) {
+            self.options.auto = true;
+            self.flipping_cards.querySelectorAll('button')[1].style.visibility="hidden";
+        }
+
+        if (opt.time != null) self.options.time = opt.time;
+
+        if (opt.shadow == false) self.options.shadow = false;
+        if (opt.shadow == true) self.options.shadow = true;
+
+        if (opt.sequent != null) self.options.sequent = opt.sequent;
+
+        if (opt.start != null) self.options.start = opt.start;
+
+
+    },
+
+    //-------------------------------------------------------------------------------------------
     matrix: function (direction, len) {
 
         var m = 0;
@@ -175,7 +244,7 @@ var flipping = {
             mas1.push(0);
         }
         if (direction == "backward") {
-            return [mas1, mas2];//.reverse()
+            return [mas2.reverse(), mas1.reverse()];//.reverse()
         }
         if (direction == "forward") {
             return [mas1, mas2];
@@ -189,151 +258,51 @@ var flipping = {
         var buttons = null;
         var i = 0;
 
-        for (i = 0; i < 1; i++) {
+        buttons = self.flipping_cards.querySelectorAll('button');
+        buttons[0].disabled = true;//console.log("start " + buttons[1].disabled);
+
+        self.timer = setInterval(function () {
             self.backwardflip(i);
-        }
-        self.k--;
-        self.imnum++;
-        self.page = self.page - 1;
-
-        return;
-        var f = function () {
-            // if (self.paused === false)
-            self.backwardflip(i);
-
-            if (i == 0) {
-                /*               buttons = self.flipping_cards.querySelectorAll('button');
-                 buttons[0].onclick = function () {
-                 };
-                 buttons[1].onclick = function () {
-                 };*/
-            }
-
-            i = i + 1;
+            i++;
 
             if (i == self.deck.length) {
-
-                /* console.log("this.k " + self.k);*/
+                clearInterval(self.timer);
                 self.k++;
                 self.imnum++;
-                self.page = self.page + 1;
-
-                /*                buttons = self.flipping_cards.querySelectorAll('button');
-                 buttons[0].onclick = function () {
-                 // self.backward();
-                 };
-                 buttons[1].onclick = function () {
-                 self.forward();
-                 };*/
-
+                buttons = self.flipping_cards.querySelectorAll('button');
+                buttons[0].disabled = false;// console.log("end " + buttons[1].disabled);
             }
-
-            if (i < self.deck.length) setTimeout(f, self.options.sequent);
-
-        };
-
-        f();
+        }, self.options.sequent);
     },
 
 
     forward: function () {
 
         var self = this;
-        /*  self.forwardflip(0);
-
-//        var fr = this.deck[i].getElementsByClassName('front')[0];
-        self.deck[0].addEventListener('transitionend', function () {
-            console.log("bk.addEventListener('transitionend' ");
-            if (i == self.deck.length) {
-
-                self.k++;
-                self.imnum++;
-                self.page = self.page + 1;
-            }else
-                self.forwardflip(++self.h);
-        });
-
-        return;*/
-        /*        self.forwardflip(i);
-         self.deck[0].getElementsByClassName('front')[0].addEventListener('transitionend', function() {
-         self.forwardflip(i++);
-         });
-         return;*/
-        buttons = self.flipping_cards.querySelectorAll('button');
-        buttons[1].disabled = true;
-        console.log("start " + buttons[1].disabled);
-
         var buttons = null;
         var i = 0;
 
-        var timer;
+        buttons = self.flipping_cards.querySelectorAll('button');
+        buttons[1].disabled = true;//console.log("start " + buttons[1].disabled);
 
-        timer = setInterval(function () {
+
+        self.timer = setInterval(function () {
             self.forwardflip(i);
             i++;
+
             if (i == self.deck.length) {
-                clearInterval(timer);
+                clearInterval(self.timer);
                 self.k++;
                 self.imnum++;
-                self.page = self.page + 1;
-
                 buttons = self.flipping_cards.querySelectorAll('button');
-                buttons[1].disabled = false;
-                console.log("end " + buttons[1].disabled);
+                buttons[1].disabled = false;// console.log("end " + buttons[1].disabled);
             }
-        }, 300);
+        }, self.options.sequent);
 
-
-        return;
-        /*        for (i = 0; i < 1; i++) {
-         self.forwardflip(i);
-         }
-         self.k++;
-         self.imnum++;
-         self.page = self.page + 1;
-
-         return;*/
-        var f = function () {
-            // if (self.paused === false)
-            self.forwardflip(i);
-
-            if (i == 0) {
-                /*               buttons = self.flipping_cards.querySelectorAll('button');
-                 buttons[0].onclick = function () {
-                 };
-                 buttons[1].onclick = function () {
-                 };*/
-            }
-
-            i = i + 1;
-
-            if (i == self.deck.length) {
-
-                /* console.log("this.k " + self.k);*/
-                self.k++;
-                self.imnum++;
-                self.page = self.page + 1;
-
-                /*                buttons = self.flipping_cards.querySelectorAll('button');
-                 buttons[0].onclick = function () {
-                 // self.backward();
-                 };
-                 buttons[1].onclick = function () {
-                 self.forward();
-                 };*/
-
-            }
-
-            if (i < self.deck.length) setTimeout(f, self.options.sequent);
-
-        };
-
-        f();
     },
 
 
     backwardflip: function (i) {
-
 
         var fr = this.deck[i].getElementsByClassName('front')[0];
         var bk = this.deck[i].getElementsByClassName('back')[0];
@@ -347,18 +316,20 @@ var flipping = {
             }
         }
 
-        //this.krug = this.matrix("backward", this.images[i].length);
+        /*        this.krug[0] = [0, 3, 3, 1, 1];
+         this.krug[1] = [4, 4, 2, 2, 0];*/
 
-        /*        function reverse(arr) {
-         return arr.slice().reverse();
-         }
+        this.krug = this.matrix("backward", this.images[i].length);
 
-         var array = [0, 1, 2];
 
-         // alert(this.krug[0].reverse().join(','));
+        console.log(this.krug);
+        /*       this.krug[0] = [1, 1, 3, 3, 0];
+         this.krug[1] = [0, 2, 2, 4, 4];
          */
-        this.krug[1] = [4, 4, 2, 2, 0];
-        this.krug[0] = [0, 3, 3, 1, 1];
+        /*
+         this.krug[0] = [0, 2, 2, 4, 4];
+         this.krug[1] = [1, 1, 3, 3, 0];*/
+
 
         this.imgfr = this.krug[this.krugfr][this.imnum];
         this.imgbk = this.krug[this.krugbk][this.imnum];
@@ -366,28 +337,23 @@ var flipping = {
 
         fr.innerHTML = this.images[i][this.imgfr];
         bk.innerHTML = this.images[i][this.imgbk];
-        fr.style.transform = 'rotateY(' + (-180 * (this.k - 1)) + 'deg)';
-        bk.style.transform = 'rotateY(' + (-180 * this.k  ) + 'deg)';
+        fr.style.transform = 'rotateY(' + (180 * (this.k + 1)) + 'deg)';
+        bk.style.transform = 'rotateY(' + (180 * this.k ) + 'deg)';
 
-        //console.log("k " + this.k + "   imnum " + this.imnum + "   imgfr " + this.imgfr + "   imgbk " + this.imgbk);
+
+        console.log("k " + this.k + "   imnum " + this.imnum + "   imgfr " + this.imgfr + "   imgbk " + this.imgbk + "  fr.style.transform " + fr.style.transform + "  bk.style.transform " + bk.style.transform);
+
+        this.imnum++;
+        console.log("imnum  " + this.imnum);
     },
+
 
     forwardflip: function (i) {
         var self = this;
+
         var fr = this.deck[i].getElementsByClassName('front')[0];
         var bk = this.deck[i].getElementsByClassName('back')[0];
-        /* var tt = 0;
 
-               fr.addEventListener('transitionend', function () {
-         console.log("fr.addEventListener('transitionend' ");
-         tt++;
-         });*/
-
-        /*        bk.addEventListener('transitionend', function () {
-         console.log("bk.addEventListener('transitionend' ");
-         tt++;
-         self.forwardflip(++self.h);
-         });*/
 
         if (this.imnum >= this.images[i].length) {
             this.imnum = 0;
@@ -399,6 +365,7 @@ var flipping = {
 
         this.krug = this.matrix("forward", this.images[i].length);
 
+        console.log(this.krug);
 
         this.imgfr = this.krug[this.krugfr][this.imnum];
         this.imgbk = this.krug[this.krugbk][this.imnum];
@@ -409,10 +376,13 @@ var flipping = {
         fr.style.transform = 'rotateY(' + (-180 * (this.k + 1)) + 'deg)';
         bk.style.transform = 'rotateY(' + (-180 * this.k) + 'deg)';
 
-        //console.log("k " + this.k + "   imnum " + this.imnum + "   imgfr " + this.imgfr + "   imgbk " + this.imgbk);
+
+        console.log("k " + this.k + "   imnum " + this.imnum + "   imgfr " + this.imgfr + "   imgbk " + this.imgbk + "  fr.style.transform " + fr.style.transform + "  bk.style.transform " + bk.style.transform);
 
 
-        console.log("end forwardflip(" + i + ")");
+        console.log("imnum  " + this.imnum);
+
+        //    console.log("end forwardflip(" + i + ")");
     }
 };
 

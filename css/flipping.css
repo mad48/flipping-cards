@@ -11,7 +11,7 @@
 
 }
 
-h4 {
+body, h4 {
     font-family: Verdana, sans-serif;
 }
 
@@ -28,11 +28,11 @@ h4 {
     display: flex;
     align-items: center;
 }
-/*
+
 .flipping > div:first-child {
     display: none;
     align-items: center;
-}*/
+}
 
 .flipping button {
 
@@ -70,14 +70,19 @@ h4 {
     outline: none;
 }
 
-.flipping .card {
+.flipping .slides {
+    display: flex;
+    align-items: center;
+}
+
+.flipping .deck {
     -webkit-transform-style: preserve-3d;
     transform-style: preserve-3d;
     -webkit-perspective: 1000px;
     perspective: 1000px;
 }
 
-.flipping .card .front, .back {
+.flipping .deck .front, .back {
 
     background-size: cover;
     background-position: center;
@@ -103,9 +108,10 @@ h4 {
     -webkit-transform-style: preserve-3d;
     transform-style: preserve-3d;
     box-shadow: 5px 5px 10px 5px rgba(0, 0, 0, .2);
+
 }
 
-.flipping .card .back {
+.flipping .deck .back {
     position: absolute;
     top: 0;
     left: 0;
@@ -114,13 +120,13 @@ h4 {
 
 /* user styles */
 
-.flipping .card img {
+.flipping .deck img {
     width: var(--card-width);
     height: var(--card-height);
     border-radius: var(--border-radius);
 }
 
-.flipping .card h1 {
+.flipping .deck h1 {
     position: absolute;
     top: 0;
     text-align: center;
@@ -129,7 +135,7 @@ h4 {
     text-shadow: 1px 1px 2px black, 0 0 1em rgba(0, 6, 22, 0.67);
 }
 
-.flipping .card h2 {
+.flipping .deck h2 {
     position: absolute;
     top: 70%;
     text-align: center;
@@ -138,14 +144,14 @@ h4 {
     text-shadow: 1px 1px 2px black, 0 0 1em rgba(0, 6, 22, 0.67);
 }
 
-#nums .card {
+#nums .deck {
     -webkit-transform-style: preserve-3d;
     transform-style: preserve-3d;
     -webkit-perspective: 1000px;
     perspective: 1000px;
 }
 
-#nums .card {
+#nums .deck {
 
     background-size: cover;
     background-position: center;
@@ -173,7 +179,7 @@ h4 {
     box-shadow: 5px 5px 10px 5px rgba(0, 0, 0, .2);
 }
 
-.flipping .card .back {
+.flipping .deck .back {
     position: absolute;
     top: 0;
     left: 0;

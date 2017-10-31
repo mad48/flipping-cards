@@ -1,113 +1,63 @@
 var flipping = {
 
-    imgfr: null,
-    imgbk: null,
-
-    slides: null,
-    images: [],
-
+    last_dir: 0,
 
     flipping_cards: null,
-    cards: null,
+    buttons: null,
+    decks: null,
 
+    content: [],
+    content_index: [],
+
+    timeout: null,
     paused: false,
 
     options: {
         auto: true,
         time: 1500,
         shadow: true,
-        sequential: 0,
-        start: 0
+        sequent: 0
     },
 
-    imnum: 0,
-    krug: [],
-    krugfr: 0,
-    krugbk: 1,
-
-    direction: 0,
-    directionprev: 0,
-    timer: 0,
-    timeout: null,
-
-    elem: null,
 
     init: function (elem, opt) {
         var self = this;
-        self.elem = elem;
-        self.slides = document.getElementById(elem).getElementsByClassName('slides')[0].innerHTML;
+        var i = 0;
 
-        self.prepare(elem);
+        self.flipping_cards = document.getElementById(elem);
+        self.flipping_cards.style.display = 'flex';
+        self.buttons = self.flipping_cards.querySelectorAll('button');
+        self.decks = self.flipping_cards.getElementsByClassName('deck');
+
         self.configure(opt);
 
-    },
 
-    prepare: function () {
-        var self = this;
-
-        self.paused = false;
-        self.k = 0;
-        self.krug = [];
-        /*        self.krugfr = 0;
-         self.krugbk = 1;*/
-        self.imgfr = null;
-        self.imgbk = null;
-
-
-        //self.imnum = 0;
-
-        self.timer = null;
-
-
-        self.flipping_cards = document.getElementById(self.elem);
-        self.flipping_cards.style.display = 'flex';
-
-        self.flipping_cards.getElementsByClassName('slides')[0].innerHTML = self.slides;
-
-        self.deck = self.flipping_cards.getElementsByClassName('deck');
-
+        //get content
         var divs = null;
-        // get content
-        for (var i = 0; i < self.deck.length; i++) {
+        for (i = 0; i < self.decks.length; i++) {
 
-            self.images[i] = [];
-            divs = self.deck[i].children;
+            self.content[i] = [];
+            self.content_index[i] = 0;
+
+            divs = self.decks[i].children;
 
             for (var j = 0; j < divs.length; j++) {
-                self.images[i][j] = divs[j].innerHTML;
+                self.content[i][j] = divs[j].innerHTML;
             }
 
-            self.deck[i].innerHTML = '<div class="front"></div><div class="back"></div>';
+            self.decks[i].innerHTML = '<div class="front"></div><div class="back"></div>';
         }
+
 
         // prepare cards
-        for (i = 0; i < self.deck.length; i++) {
-            console.log("init imnum = " + self.imnum);
-
-            var fr = self.deck[i].getElementsByClassName('front')[0];
-            var bk = self.deck[i].getElementsByClassName('back')[0];
-
-            fr.innerHTML = self.images[i][self.imnum];
-
-            fr.style.transform = "none";
-            bk.style.transform = "none";
-
-            //console.log("fr.style.transform " + fr.style.transform);
-
-            if (self.direction == 1) {
-                bk.style.display = 'block';
-                bk.style.transform = 'rotateY(180deg)';
-            }
-            if (self.direction == -1) {
-                bk.style.display = 'block';
-                bk.style.transform = 'rotateY(-180deg)';
-            }
-
-            if (self.imnum % 2 != 0) {
-                self.krugfr = ~~!self.krugfr;
-                self.krugbk = ~~!self.krugfr;
-            }
+        for (i = 0; i < self.decks.length; i++) {
+            var front = self.decks[i].getElementsByClassName('front')[0];
+            var back = self.decks[i].getElementsByClassName('back')[0];
+            front.innerHTML = self.content[i][0];
+            back.innerHTML = self.content[i][1];
+            back.style.transform = 'rotateY(' + (180) + 'deg)';
         }
+
 
         // on deactivate window
         window.onblur = function () {
@@ -122,39 +72,11 @@ var flipping = {
             self.flipping_cards.onmouseover = function () {
                 self.paused = true;
             };
-
             self.flipping_cards.onmouseout = function () {
                 self.paused = false;
             }
         }
 
-
-        //-------------------------------------------------------------------------------------------
-        // button backward
-        var buttons = self.flipping_cards.querySelectorAll('button');
-
-        buttons[0].onclick = function () {
-
-            self.directionprev = self.direction;
-
-            if (self.directionprev == 1 || self.directionprev == 0) {
-                self.direction = -1;
-                self.prepare();
-            }
-            self.backward();
-        };
-
-        //forward
-        buttons[1].onclick = function () {
-            self.directionprev = self.direction;
-
-            if (self.directionprev == -1 || self.directionprev == 0) {
-                self.direction = 1;
-                self.prepare();
-
-            }
-            self.forward();
-        };
 
         /* shadow */
         if (self.options.shadow === false) {
@@ -167,38 +89,121 @@ var flipping = {
         }
 
 
-        /* auto scroll */
+        self.buttons[0].onclick = function () {
+            self.sequential(-1);
+        };
+        self.buttons[1].onclick = function () {
+            self.sequential(1);
+        };
+    },
+
+    //-------------------------------------------------------------------------------------------
+    sequential: function (dir) {
+        var self = this;
+        var i = 0;
+
+        self.buttons[0].disabled = true;
+        self.buttons[1].disabled = true;
+
+        self.timer = setInterval(function () {
+            self.flip(i, dir);
+            i++;
+            if (i == self.decks.length) {
+                clearInterval(self.timer);
+                self.buttons[0].disabled = false;
+                self.buttons[1].disabled = false;
+            }
+        }, self.options.sequent);
+    },
+
+//----------------------------------------------------------------------------------------------
+    autoflip: function () {
+        var self = this;
         if (self.options.auto === true) {
 
-
-            if (self.timeout) clearTimeout(self.timeout);
+            // if (self.timeout) clearTimeout(self.timeout);
             self.timeout = setTimeout(function go() {
-
+                //console.log("self.options.auto " + self.options.auto);
                 if (self.options.auto && self.paused === false) {
 
-                    self.flipping_cards.querySelectorAll('button')[1].click();
+                    self.buttons[1].click();
 
                 }
                 self.timeout = setTimeout(go, self.options.time);
 
             }, self.options.time);
-
-
         }
     },
 
-    // ------------------------------------------------------------------------------------------
+    //-------------------------------------------------------------------------------------------
+    flip: function (num, dir) {
+        var self = this;
+
+        var i_front = self.content_index[num];
+        var i_back = self.next(self.content_index[num], self.content[num].length, dir);
+
+        //console.log("i_front " + i_front + " i_back" + i_back);
+
+        var deck = self.decks[num];
+        var front = deck.getElementsByTagName('div')[0];
+        var back = deck.getElementsByTagName('div')[1];
+
+        front.innerHTML = self.content[num][i_front];
+        back.innerHTML = self.content[num][i_back];
+
+        front.style.transform = 'rotateY(' + (-1 * dir * 180) + 'deg)';
+        back.style.transform = 'rotateY(' + 0 + 'deg)';
+
+        back.addEventListener('transitionend', function (event) {
+            if (event.propertyName == 'transform') {
+
+                var deck = self.decks[num];
+                deck.innerHTML = "<div class='front'>" + self.content[num][i_back] + "</div><div class='back'></div>";
+
+                var front = deck.getElementsByTagName('div')[0];
+                var back = deck.getElementsByTagName('div')[1];
+
+                //front.innerHTML = self.content[num][i_back];
+
+                front.style.transform = "none";
+                back.style.transform = 'rotateY(' + (1 * dir * 180) + 'deg)';
+            }
+
+        });
+
+        self.content_index[num] = i_back;
+        self.last_dir = dir;
+    },
+
+// ---------------------------------------------------------------------------------------------
+    next: function (i, len, dir) {
+        if (dir == 1) {
+            if (i >= len - 1) return 0;
+            return ++i;
+        }
+        if (dir == -1) {
+            i = i - 1;
+            if (i < 0) return len - 1;
+            return i;
+        }
+    },
+
+// ---------------------------------------------------------------------------------------------
     configure: function (opt) {
         /* options */
         var self = this;
         if (opt.auto === false) {
             self.options.auto = false;
-            self.flipping_cards.querySelectorAll('button')[1].style.visibility="visible";
+            self.buttons[0].style.visibility = "visible";
+            self.buttons[1].style.visibility = "visible";
+            self.autoflip();
         }
 
         if (opt.auto === true) {
             self.options.auto = true;
-            self.flipping_cards.querySelectorAll('button')[1].style.visibility="hidden";
+            self.buttons[0].style.visibility = "hidden";
+            self.buttons[1].style.visibility = "hidden";
+            self.autoflip();
         }
 
         if (opt.time != null) self.options.time = opt.time;
@@ -208,182 +213,10 @@ var flipping = {
 
         if (opt.sequent != null) self.options.sequent = opt.sequent;
 
-        if (opt.start != null) self.options.start = opt.start;
-
-
-    },
-
-    //-------------------------------------------------------------------------------------------
-    matrix: function (direction, len) {
-
-        var m = 0;
-        var n = 0;
-
-        var mas1 = [];
-        var mas2 = [];
-
-        var j;
-
-        for (j = 1; j < len; j++) {
-            if (j % 2 === 0) {
-                mas1[m++] = j;
-                mas1[m++] = j;
-            } else {
-                mas2[n++] = j;
-                mas2[n++] = j;
-            }
-        }
-
-        if (len % 2 != 0) {
-            mas1.unshift(0);
-            mas2.push(0);
-        }
-
-        if (len % 2 == 0) {
-            mas1.unshift(0);
-            mas1.push(0);
-        }
-        if (direction == "backward") {
-            return [mas2.reverse(), mas1.reverse()];//.reverse()
-        }
-        if (direction == "forward") {
-            return [mas1, mas2];
-        }
-
-    },
-
-
-    backward: function () {
-        var self = this;
-        var buttons = null;
-        var i = 0;
-
-        buttons = self.flipping_cards.querySelectorAll('button');
-        buttons[0].disabled = true;//console.log("start " + buttons[1].disabled);
-
-        self.timer = setInterval(function () {
-            self.backwardflip(i);
-            i++;
-
-            if (i == self.deck.length) {
-                clearInterval(self.timer);
-                self.k++;
-                self.imnum++;
-                buttons = self.flipping_cards.querySelectorAll('button');
-                buttons[0].disabled = false;// console.log("end " + buttons[1].disabled);
-            }
-        }, self.options.sequent);
-    },
-
-
-    forward: function () {
-
-        var self = this;
-        var buttons = null;
-        var i = 0;
-
-        buttons = self.flipping_cards.querySelectorAll('button');
-        buttons[1].disabled = true;//console.log("start " + buttons[1].disabled);
-
-
-        self.timer = setInterval(function () {
-            self.forwardflip(i);
-            i++;
-
-            if (i == self.deck.length) {
-                clearInterval(self.timer);
-                self.k++;
-                self.imnum++;
-                buttons = self.flipping_cards.querySelectorAll('button');
-                buttons[1].disabled = false;// console.log("end " + buttons[1].disabled);
-            }
-        }, self.options.sequent);
-
-    },
-
-
-    backwardflip: function (i) {
-
-        var fr = this.deck[i].getElementsByClassName('front')[0];
-        var bk = this.deck[i].getElementsByClassName('back')[0];
-
-
-        if (this.imnum >= this.images[i].length) {
-            this.imnum = 0;
-            if (this.images[i].length % 2 != 0) {
-                this.krugfr = ~~!this.krugfr;
-                this.krugbk = ~~!this.krugfr;
-            }
-        }
-
-        /*        this.krug[0] = [0, 3, 3, 1, 1];
-         this.krug[1] = [4, 4, 2, 2, 0];*/
-
-        this.krug = this.matrix("backward", this.images[i].length);
-
-
-        console.log(this.krug);
-        /*       this.krug[0] = [1, 1, 3, 3, 0];
-         this.krug[1] = [0, 2, 2, 4, 4];
-         */
-        /*
-         this.krug[0] = [0, 2, 2, 4, 4];
-         this.krug[1] = [1, 1, 3, 3, 0];*/
-
-
-        this.imgfr = this.krug[this.krugfr][this.imnum];
-        this.imgbk = this.krug[this.krugbk][this.imnum];
-
-
-        fr.innerHTML = this.images[i][this.imgfr];
-        bk.innerHTML = this.images[i][this.imgbk];
-        fr.style.transform = 'rotateY(' + (180 * (this.k + 1)) + 'deg)';
-        bk.style.transform = 'rotateY(' + (180 * this.k ) + 'deg)';
-
-
-        console.log("k " + this.k + "   imnum " + this.imnum + "   imgfr " + this.imgfr + "   imgbk " + this.imgbk + "  fr.style.transform " + fr.style.transform + "  bk.style.transform " + bk.style.transform);
-
-        this.imnum++;
-        console.log("imnum  " + this.imnum);
-    },
-
-
-    forwardflip: function (i) {
-        var self = this;
-
-        var fr = this.deck[i].getElementsByClassName('front')[0];
-        var bk = this.deck[i].getElementsByClassName('back')[0];
-
-
-        if (this.imnum >= this.images[i].length) {
-            this.imnum = 0;
-            if (this.images[i].length % 2 != 0) {
-                this.krugfr = ~~!this.krugfr;
-                this.krugbk = ~~!this.krugfr;
-            }
-        }
-
-        this.krug = this.matrix("forward", this.images[i].length);
-
-        console.log(this.krug);
-
-        this.imgfr = this.krug[this.krugfr][this.imnum];
-        this.imgbk = this.krug[this.krugbk][this.imnum];
-
-
-        fr.innerHTML = this.images[i][this.imgfr];
-        bk.innerHTML = this.images[i][this.imgbk];
-        fr.style.transform = 'rotateY(' + (-180 * (this.k + 1)) + 'deg)';
-        bk.style.transform = 'rotateY(' + (-180 * this.k) + 'deg)';
-
-
-        console.log("k " + this.k + "   imnum " + this.imnum + "   imgfr " + this.imgfr + "   imgbk " + this.imgbk + "  fr.style.transform " + fr.style.transform + "  bk.style.transform " + bk.style.transform);
-
-
-        console.log("imnum  " + this.imnum);
-
-        //    console.log("end forwardflip(" + i + ")");
+        //if (opt.start != null) self.options.start = opt.start;
     }
+
+
 };
 
 

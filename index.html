@@ -13,53 +13,48 @@
 
 <body>
 
-
 <div id="flipping_cards" class="flipping">
 
     <div>
         <button>&#9668;</button>
     </div>
 
-    <div class="slides">
 
-        <div class="deck">
-            <div>
-                <h1>Deep Blue <br>Sea</h1><img src="images/1.jpg"/>
-                <h2>0</h2>
-            </div>
-            <div><img src="images/4.jpg"/>
-                <h2>1</h2></div>
-            <div><img src="images/7.jpg"/>
-                <h2>2</h2></div>
-            <div><img src="images/10.jpg"/>
-                <h2>3</h2></div>
-            <div><img src="images/13.jpg"/>
-                <h2>4</h2></div>
-        </div>
-
-        <div class="deck">
-            <div>
-                <h1>Northern <br>Lights</h1>
-                <img src="images/2.jpg"/>
-            </div>
-            <div><img src="images/5.jpg"/></div>
-            <div><img src="images/8.jpg"/></div>
-            <div><img src="images/11.jpg"/></div>
-            <div><img src="images/14.jpg"/></div>
-        </div>
-
-        <div class="deck">
-            <div>
-                <h1>Over The <br>Mountains</h1>
-                <img src="images/3.jpg"/>
-            </div>
-            <div><img src="images/6.jpg"/></div>
-            <div><img src="images/9.jpg"/></div>
-            <div><img src="images/12.jpg"/></div>
-            <div><img src="images/15.jpg"/></div>
-        </div>
-
+    <div class="deck">
+        <div><h1>Deep Blue <br>Sea</h1><img src="images/1.jpg"/>
+            <h2>0</h2></div>
+        <div><img src="images/4.jpg"/>
+            <h2>1</h2></div>
+        <div><img src="images/7.jpg"/>
+            <h2>2</h2></div>
+        <div><img src="images/10.jpg"/>
+            <h2>3</h2></div>
+        <div><img src="images/13.jpg"/>
+            <h2>4</h2></div>
     </div>
+
+    <div class="deck">
+        <div>
+            <h1>Northern <br>Lights</h1>
+            <img src="images/2.jpg"/>
+        </div>
+        <div><img src="images/5.jpg"/></div>
+        <div><img src="images/8.jpg"/></div>
+        <div><img src="images/11.jpg"/></div>
+        <div><img src="images/14.jpg"/></div>
+    </div>
+
+    <div class="deck">
+        <div>
+            <h1>Over The <br>Mountains</h1>
+            <img src="images/3.jpg"/>
+        </div>
+        <div><img src="images/6.jpg"/></div>
+        <div><img src="images/9.jpg"/></div>
+        <div><img src="images/12.jpg"/></div>
+        <div><img src="images/15.jpg"/></div>
+    </div>
+
 
     <div>
         <button>&#9658;</button>
@@ -67,36 +62,22 @@
 
 </div>
 
+<input type="checkbox" name="conf_auto" id="conf_auto" checked="checked" onchange="apply()">
+<label for="conf_auto">Auto flipping</label> <br><br>
+Options:<br>
+<b>auto</b> - start flip in automatic mode<br>
+<b>time</b> - time before all cards flip<br>
+<b>shadow</b> - on/off shadow<br>
+<b>sequent</b> - sequential time before neighboring cards flip<br><br>
 
-<script>
-    document.addEventListener("DOMContentLoaded", function () {
+Features:<br>
+Auto stop on mouse over and on deactivated browser tab<br>
 
-        var options = {
-            auto: true,
-            time: 1200,
-            shadow: true,
-            sequent: 500,
-            start: 0
-        };
-
-        flipping.init('flipping_cards', options);
-
-    });
-
-</script>
-<input type="checkbox" name="conf_auto" id="conf_auto" checked="false" onchange="apply()">
-<label for="conf_auto">Auto flipping</label> <br>
-
-<!--<input type="checkbox" name="conf_shadow" id="conf_shadow" checked="true"><label for="conf_shadow">Shadow</label>-->
-<!--<input type="text" name="conf_time" id="conf_time" value="1200">Time before next flip<br>
-<input type="text" name="conf_sequent" id="conf_sequent" value="300">Next sequent flip time<br>
-<button onclick="apply()">Apply</button>-->
 <script>
     function apply() {
-
         var options = {
             auto: document.querySelector('#conf_auto').checked,
-           // shadow: document.querySelector('#conf_shadow').checked,
+            // shadow: document.querySelector('#conf_shadow').checked,
             //  time: document.querySelector('#conf_time').value,
             // sequent: document.querySelector('#conf_sequent').value
         };
@@ -104,6 +85,21 @@
     }
 </script>
 
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+
+        var options = {
+            auto: true,
+            time: 1000,
+            shadow: true,
+            sequent: 400
+        };
+
+        flipping.init('flipping_cards', options);
+
+    });
+
+</script>
 <h4>Usage with pure JavaScript:</h4>
 <pre class="prettyprint">
 <xmp>
@@ -117,7 +113,7 @@
         </div>
 
 
-        <div class="card">
+        <div class="deck">
             <div>
                 <h1>Deep Blue <br>Sea</h1>
                 <img src="images/1.jpg"/>

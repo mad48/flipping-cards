@@ -1,6 +1,6 @@
 var flipping = {
 
-    last_dir: 0,
+    last_dir: [],
 
     flipping_cards: null,
     buttons: null,
@@ -16,7 +16,10 @@ var flipping = {
         auto: true,
         time: 1500,
         shadow: true,
-        sequent: 0
+        sequent: 0,
+        flow: "row",
+        width: 250,
+        height: 280
     },
 
 
@@ -38,14 +41,22 @@ var flipping = {
 
             self.content[i] = [];
             self.content_index[i] = 0;
+            self.last_dir[i] = 1;
 
             divs = self.decks[i].children;
 
             for (var j = 0; j < divs.length; j++) {
                 self.content[i][j] = divs[j].innerHTML;
+
             }
 
             self.decks[i].innerHTML = '<div class="front"></div><div class="back"></div>';
+
+            self.decks[i].onclick = function (i) {
+                return function () {
+                    self.clickOnDeck(self.decks[i]);
+                }
+            }(i);
         }
 
 
@@ -61,21 +72,24 @@ var flipping = {
 
         // on deactivate window
         window.onblur = function () {
-            self.paused = true;
+            self.autoflip(false);
+            //self.paused = true;
         };
         window.onfocus = function () {
-            self.paused = false;
+            self.autoflip(true);
+            //self.paused = false;
         };
 
         // add suspend actions if automatic flipping is enabled
-        if (self.options.auto == true) {
-            self.flipping_cards.onmouseover = function () {
-                self.paused = true;
-            };
-            self.flipping_cards.onmouseout = function () {
-                self.paused = false;
-            }
-        }
+
+        self.flipping_cards.onmouseover = function () {
+            self.autoflip(false);
+            //self.paused = true;
+        };
+        self.flipping_cards.onmouseout = function () {
+            //self.paused = false;
+            self.autoflip(true);
+        };
 
 
         /* shadow */
@@ -88,6 +102,10 @@ var flipping = {
             });
         }
 
+        self.buttons[0].addEventListener('touchend', function (event) {
+            self.sequential(-1);
+        }, false);
+
 
         self.buttons[0].onclick = function () {
             self.sequential(-1);
@@ -95,6 +113,57 @@ var flipping = {
         self.buttons[1].onclick = function () {
             self.sequential(1);
         };
+
+
+    },
+
+
+    //-------------------------------------------------------------------------------------------
+    clickOnDeck: function (el) {
+        var self = this;
+
+        var x = 0;
+        var y = 0;
+
+        var event = event || window.event;
+
+        if (document.attachEvent != null) { // Internet Explorer & Opera
+            x = window.event.clientX + (document.documentElement.scrollLeft ? document.documentElement.scrollLeft : document.body.scrollLeft);
+            y = window.event.clientY + (document.documentElement.scrollTop ? document.documentElement.scrollTop : document.body.scrollTop);
+        } else if (!document.attachEvent && document.addEventListener) { // Gecko
+            x = event.clientX + window.scrollX;
+            y = event.clientY + window.scrollY;
+        }
+
+        x = x - el.offsetLeft;
+        y = y - el.offsetTop;
+
+        if (x < self.options.width / 2) self.buttons[0].click();
+        if (x >= self.options.width / 2) self.buttons[1].click();
+    },
+
+    //-------------------------------------------------------------------------------------------
+    sequential_old: function (dir) {
+        var self = this;
+        var i = 0;
+
+        self.buttonsoff(true);
+
+        self.timer = setInterval(function () {
+            self.flip(i, dir);
+            i++;
+            if (i == self.decks.length) {
+                clearInterval(self.timer);
+                self.buttonsoff(false);
+            }
+        }, self.options.sequent);
+    },
+
+    //-------------------------------------------------------------------------------------------
+    buttonsoff: function (state) {
+        var self = this;
+        self.buttons[0].disabled = state;
+        self.buttons[1].disabled = state;
     },
 
     //-------------------------------------------------------------------------------------------
@@ -102,36 +171,47 @@ var flipping = {
         var self = this;
         var i = 0;
 
-        self.buttons[0].disabled = true;
-        self.buttons[1].disabled = true;
+        self.buttonsoff(true);
 
-        self.timer = setInterval(function () {
-            self.flip(i, dir);
-            i++;
-            if (i == self.decks.length) {
-                clearInterval(self.timer);
-                self.buttons[0].disabled = false;
-                self.buttons[1].disabled = false;
-            }
-        }, self.options.sequent);
+        setTimeout(function () {
+            self.buttonsoff(false);
+        }, self.options.sequent * self.decks.length);
+
+
+        for (i = 0; i < self.decks.length; i++) {
+            (function (index) {
+                setTimeout(function () {
+                    self.flip(index, dir);
+                }, self.options.sequent * index);
+            })(i);
+        }
+
     },
 
 //----------------------------------------------------------------------------------------------
-    autoflip: function () {
+    autoflip_old: function () {
         var self = this;
         if (self.options.auto === true) {
-
-            // if (self.timeout) clearTimeout(self.timeout);
             self.timeout = setTimeout(function go() {
-                //console.log("self.options.auto " + self.options.auto);
-                if (self.options.auto && self.paused === false) {
-
+                if (self.options.auto && self.paused == false) {
                     self.buttons[1].click();
-
+                    //self.sequential(1);
+                    if (self.paused == false) clearTimeout(self.timeout);
                 }
                 self.timeout = setTimeout(go, self.options.time);
-
             }, self.options.time);
+        }
+    },
+
+    //----------------------------------------------------------------------------------------------
+    autoflip: function (state) {
+        var self = this;
+        if (state && self.options.auto) {
+            self.timeout = setInterval(function go() {
+                self.buttons[1].click();
+            }, self.options.time);
+        } else {
+            clearInterval(self.timeout);
         }
     },
 
@@ -163,16 +243,14 @@ var flipping = {
                 var front = deck.getElementsByTagName('div')[0];
                 var back = deck.getElementsByTagName('div')[1];
 
-                //front.innerHTML = self.content[num][i_back];
-
-                front.style.transform = "none";
                 back.style.transform = 'rotateY(' + (1 * dir * 180) + 'deg)';
-            }
 
+            }
+            self.content_index[num] = i_back;
+            self.last_dir[num] = dir;
         });
 
-        self.content_index[num] = i_back;
-        self.last_dir = dir;
+
     },
 
 // ---------------------------------------------------------------------------------------------
@@ -192,18 +270,19 @@ var flipping = {
     configure: function (opt) {
         /* options */
         var self = this;
-        if (opt.auto === false) {
+
+        if (opt.auto == false) {
             self.options.auto = false;
             self.buttons[0].style.visibility = "visible";
             self.buttons[1].style.visibility = "visible";
-            self.autoflip();
+            self.autoflip(false);
         }
 
         if (opt.auto === true) {
             self.options.auto = true;
             self.buttons[0].style.visibility = "hidden";
             self.buttons[1].style.visibility = "hidden";
-            self.autoflip();
+            self.autoflip(true);
         }
 
         if (opt.time != null) self.options.time = opt.time;
@@ -213,7 +292,10 @@ var flipping = {
 
         if (opt.sequent != null) self.options.sequent = opt.sequent;
 
-        //if (opt.start != null) self.options.start = opt.start;
+        if (opt.flow == "row" || opt.flow == "column") {
+            self.flipping_cards.style.flexFlow = opt.flow + ' wrap';
+        }
+
     }
 
 

@@ -62,13 +62,22 @@
 
 </div>
 
-<input type="checkbox" name="conf_auto" id="conf_auto" checked="checked" onchange="apply()">
-<label for="conf_auto">Auto flipping</label> <br><br>
+Flipping mode:
+<input type="checkbox" name="conf_auto" id="conf_auto" onchange="apply()">
+<label for="conf_auto">Auto</label> <br><br>
+
+Cards direction:
+<input type="radio" name="conf_flow" id="conf_flow_row" value="row" checked="checked" onchange="apply()">
+<label for="conf_flow_row">Row</label>
+<input type="radio" name="conf_flow" id="conf_flow_col" value="column" onchange="apply()">
+<label for="conf_flow_col">Column</label> <br><br>
+
 Options:<br>
-<b>auto</b> - start flip in automatic mode<br>
-<b>time</b> - time before all cards flip<br>
-<b>shadow</b> - on/off shadow<br>
-<b>sequent</b> - sequential time before neighboring cards flip<br><br>
+<b>auto</b> - start flip in automatic mode [true | false]<br>
+<b>time</b> - time before all cards flip [ms]<br>
+<b>shadow</b> - on/off shadow [true | false]<br>
+<b>sequent</b> - sequential time before neighboring cards flip [ms]<br>
+<b>flow</b> - row or column display direction [row | column]<br><br>
 
 Features:<br>
 Auto stop on mouse over and on deactivated browser tab<br>
@@ -80,6 +89,8 @@ Auto stop on mouse over and on deactivated browser tab<br>
             // shadow: document.querySelector('#conf_shadow').checked,
             //  time: document.querySelector('#conf_time').value,
             // sequent: document.querySelector('#conf_sequent').value
+            flow: document.querySelector('input[name=conf_flow]:checked').value
+
         };
         flipping.configure(options);
     }
@@ -89,13 +100,16 @@ Auto stop on mouse over and on deactivated browser tab<br>
     document.addEventListener("DOMContentLoaded", function () {
 
         var options = {
-            auto: true,
+            auto: false,
             time: 1000,
             shadow: true,
-            sequent: 400
+            sequent: 600,
+            flow: "row"
         };
 
         flipping.init('flipping_cards', options);
+
+        document.querySelector('input[name=conf_auto]').checked = options.auto;
 
     });
 

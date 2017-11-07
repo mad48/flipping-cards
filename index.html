@@ -8,7 +8,7 @@
     </title>
     <link href="css/flipping.css" rel="stylesheet"/>
     <script src='js/flipping.js' type='text/javascript'></script>
-    <script src="https://rawgit.com/google/code-prettify/master/loader/run_prettify.js?autoload=true&amp;lang=css"></script>
+    <!--   <script src="https://rawgit.com/google/code-prettify/master/loader/run_prettify.js?autoload=true&amp;lang=css"></script>-->
 </head>
 
 <body>
@@ -19,42 +19,68 @@
         <button>&#9668;</button>
     </div>
 
-
-    <div class="deck">
-        <div><h1>Deep Blue <br>Sea</h1><img src="images/1.jpg"/>
-            <h2>0</h2></div>
-        <div><img src="images/4.jpg"/>
-            <h2>1</h2></div>
-        <div><img src="images/7.jpg"/>
-            <h2>2</h2></div>
-        <div><img src="images/10.jpg"/>
-            <h2>3</h2></div>
-        <div><img src="images/13.jpg"/>
-            <h2>4</h2></div>
-    </div>
-
-    <div class="deck">
-        <div>
-            <h1>Northern <br>Lights</h1>
-            <img src="images/2.jpg"/>
+    <div class="slides">
+        <div class="deck">
+            <div><h1>Deep Blue <br>Sea</h1><img src="images/1.jpg"/>
+                <h2>0</h2></div>
+            <div><img src="images/4.jpg"/>
+                <h2>1</h2></div>
+            <div><img src="images/7.jpg"/>
+                <h2>2</h2></div>
+            <div><img src="images/10.jpg"/>
+                <h2>3</h2></div>
+            <div><img src="images/13.jpg"/>
+                <h2>4</h2></div>
         </div>
-        <div><img src="images/5.jpg"/></div>
-        <div><img src="images/8.jpg"/></div>
-        <div><img src="images/11.jpg"/></div>
-        <div><img src="images/14.jpg"/></div>
-    </div>
 
-    <div class="deck">
-        <div>
-            <h1>Over The <br>Mountains</h1>
-            <img src="images/3.jpg"/>
+        <div class="deck">
+            <div>
+                <h1>Northern <br>Lights</h1>
+                <img src="images/2.jpg"/>
+            </div>
+            <div><img src="images/5.jpg"/></div>
+            <div><img src="images/8.jpg"/></div>
+            <div><img src="images/11.jpg"/></div>
+            <div><img src="images/14.jpg"/></div>
         </div>
-        <div><img src="images/6.jpg"/></div>
-        <div><img src="images/9.jpg"/></div>
-        <div><img src="images/12.jpg"/></div>
-        <div><img src="images/15.jpg"/></div>
-    </div>
 
+        <div class="deck">
+            <div>
+                <h1>Over The <br>Mountains</h1>
+                <img src="images/3.jpg"/>
+            </div>
+            <div><img src="images/6.jpg"/></div>
+            <div><img src="images/9.jpg"/></div>
+            <div><img src="images/12.jpg"/></div>
+            <div><img src="images/15.jpg"/></div>
+        </div>
+
+
+        <div class="deck">
+            <div><img src="images/13.jpg"/></div>
+            <div><img src="images/10.jpg"/></div>
+            <div><img src="images/7.jpg"/></div>
+            <div><img src="images/4.jpg"/></div>
+            <div><img src="images/1.jpg"/></div>
+        </div>
+
+        <div class="deck">
+            <div><img src="images/14.jpg"/></div>
+            <div><img src="images/11.jpg"/></div>
+            <div><img src="images/8.jpg"/></div>
+            <div><img src="images/5.jpg"/></div>
+            <div><img src="images/2.jpg"/></div>
+        </div>
+
+        <div class="deck">
+            <div><img src="images/15.jpg"/></div>
+            <div><img src="images/12.jpg"/></div>
+            <div><img src="images/9.jpg"/></div>
+            <div><img src="images/6.jpg"/></div>
+            <div><img src="images/3.jpg"/></div>
+        </div>
+
+    </div>
 
     <div>
         <button>&#9658;</button>
@@ -66,18 +92,43 @@ Flipping mode:
 <input type="checkbox" name="conf_auto" id="conf_auto" onchange="apply()">
 <label for="conf_auto">Auto</label> <br><br>
 
-Cards direction:
+Rotation mode:
+<input type="radio" name="conf_rotation" id="conf_simultaneous" value="simultaneous" onchange="apply()">
+<label for="conf_simultaneous">Simultaneous</label>
+
+<input type="radio" name="conf_rotation" id="conf_sequential" value="sequential" onchange="apply()">
+<label for="conf_sequential">Sequential</label> <br><br>
+
+
+<!--Cards direction:
 <input type="radio" name="conf_flow" id="conf_flow_row" value="row" checked="checked" onchange="apply()">
 <label for="conf_flow_row">Row</label>
+
 <input type="radio" name="conf_flow" id="conf_flow_col" value="column" onchange="apply()">
-<label for="conf_flow_col">Column</label> <br><br>
+<label for="conf_flow_col">Column</label> <br><br>-->
+
+<label for="conf_sequent">Delay for sequential rotation mode</label>
+<input type="text" name="conf_sequent" id="conf_sequent" value="600" onkeyup="apply()"> ms
+<br><br>
+
+<!--<label for="conf_cards_per_row">Number of cards per row </label>
+<input type="text" name="conf_cards_per_row" id="conf_cards_per_row" value="" onkeyup="apply()">
+<br><br>
+
+<label for="conf_number_of_rows">Number of rows </label>
+<input type="text" name="conf_number_of_rows" id="conf_number_of_rows" value="" onkeyup="apply()">
+<br><br>-->
 
 Options:<br>
-<b>auto</b> - start flip in automatic mode [true | false]<br>
+<b>auto</b> - start flipping in automatic mode [true | false]<br><!--Endless Loop-->
 <b>time</b> - time before all cards flip [ms]<br>
 <b>shadow</b> - on/off shadow [true | false]<br>
 <b>sequent</b> - sequential time before neighboring cards flip [ms]<br>
-<b>flow</b> - row or column display direction [row | column]<br><br>
+<!--<b>flow</b> - row or column display direction [row | column]<br><br>-->
+<b>rotation-mode</b> - simultaneous or sequential mode [simultaneous | sequential]<br>
+<b>cards-per-row</b> - Number of cards per row [number]<br>
+<b>number-of-rows</b> - Number of rows [number]<br><br>
+
 
 Features:<br>
 Auto stop on mouse over and on deactivated browser tab<br>
@@ -88,8 +139,11 @@ Auto stop on mouse over and on deactivated browser tab<br>
             auto: document.querySelector('#conf_auto').checked,
             // shadow: document.querySelector('#conf_shadow').checked,
             //  time: document.querySelector('#conf_time').value,
-            // sequent: document.querySelector('#conf_sequent').value
-            flow: document.querySelector('input[name=conf_flow]:checked').value
+            "sequent": document.querySelector('#conf_sequent').value,
+            // flow: document.querySelector('input[name=conf_flow]:checked').value,
+            "rotation-mode": document.querySelector('input[name=conf_rotation]:checked').value,
+            //"cards-per-row": document.querySelector('#conf_cards_per_row').value,
+            //"number-of-rows": document.querySelector('#conf_number_of_rows').value
 
         };
         flipping.configure(options);
@@ -104,12 +158,26 @@ Auto stop on mouse over and on deactivated browser tab<br>
             time: 1000,
             shadow: true,
             sequent: 600,
-            flow: "row"
+            flow: "row",
+
+            "rotation-mode": "simultaneous",
+
+            "card-width": 250,
+            "card-height": 280,
+
+            "cards-per-row": 3,
+            "number-of-rows": 2
+
         };
 
         flipping.init('flipping_cards', options);
 
         document.querySelector('input[name=conf_auto]').checked = options.auto;
+
+        document.querySelectorAll('input[name=conf_rotation]').forEach(function (el) {
+            if (el.value == options["rotation-mode"])  el.checked = true;
+        });
+
 
     });
 
@@ -152,7 +220,16 @@ Auto stop on mouse over and on deactivated browser tab<br>
             auto: true,
             time: 1500,
             shadow: true,
-            sequent: 500
+            sequent: 500,
+
+
+            "rotation-mode": "simultaneous",
+
+            "card-width": 250,
+            "card-height": 280,
+
+            "cards-per-row": 3,
+            "number-of-rows": 2
         };
 
         flipping.init('flippingcards', options);
@@ -160,6 +237,9 @@ Auto stop on mouse over and on deactivated browser tab<br>
 
 </xmp>
 </pre>
+
+
+Transition duration
 
 
 </body>

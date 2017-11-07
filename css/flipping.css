@@ -18,21 +18,82 @@ body, h4 {
 
 .flipping {
     margin: 10% auto;
+    display: flex;
+   /* border: 2px solid blue;*/
+
     /*
-    width: calc(var(--button-size) * 2 + var(--card-width) * 3);
-    height: var(--card-height);
-    width:500px;
-    height: 300px;
-    */
+      width: calc(var(--button-size) * 2 + var(--card-width) * 3.5);
+     height: var(--card-height);
+       width:500px;
+       height: 300px;
+       */
     justify-content: center;
     align-items: center;
-    display: none;
-    fle4x-direction: column;
-    fle4x-wrap: wrap;
-    flex-flow: row wrap;
+    /* display: none;
+     fle4x-direction: column;
+     fle4x-wrap: wrap;*/
+
     align-content: center;
 
 }
+
+.flipping .slides {
+
+        /*width: calc(var(--card-width) *3.5);*/
+    /* height: var(--card-height);
+   width:500px;
+    height: 300px;
+    */
+    display: flex;
+    ju4stify-content: center;
+    ali4gn-items: center;
+
+    flex-flow: row wrap;
+    align-content: center;
+
+
+}
+.deck{
+    /*width: 30%;*/
+    /* display: contents;
+     width: 250px;
+     height: 280px;*/
+}
+
+/*.deck:nth-child(3n) {
+    border: 5px solid red;
+    page-break-after: always; !* Синтаксис CSS 2.1 *!
+    break-after: always; !* Новый синтаксис *!
+
+}
+
+.deck:nth-child(3n)::after {
+    content: '';
+    width: 100%;
+    margin-right: calc(100% - 125px);
+}*/
+
+/*.deck:nth-child(3) {
+    border: 5px solid red;
+    m4argin-right: 550px;
+    break-after: always;
+}*/
+
+.slides::before, .slides::after {
+    content: '';
+    width: 100%;
+    order: 1;
+}
+/*
+
+.deck:nth-child(n + 3) {
+    order: 1;
+}
+.deck:nth-child(n + 5) {
+    order: 2;
+}
+*/
+
 
 /* buttons container */
 .flipping > div:first-child, .flipping > div:last-child {
@@ -82,14 +143,15 @@ body, h4 {
 .flipping .deck {
     transform-style: preserve-3d;
     perspective: 1000px;
-    w4idth: var(--card-width);
 }
 
-.flipping .deck img {
-    width: var(--card-width);
-    height: var(--card-height);
+.flipping .deck * {
+/*    width: var(--card-width);
+    height: var(--card-height);*/
+    margin-bottom: -3px;
     border-radius: var(--border-radius);
 }
+
 
 .flipping .deck .front, .back {
 
@@ -103,15 +165,13 @@ body, h4 {
     -webkit-backface-visibility: hidden;
     backface-visibility: hidden;
     text-align: center;
-    min-height: 280px;
+    m4in-height: 280px;
 
     border-radius: var(--border-radius);
     color: #fff;
     font-size: 1.0rem;
     font-family: Verdana, sans-serif;
 
-    width: var(--card-width);
-    height: var(--card-height);
     margin: 15px;
 
     -webkit-transform-style: preserve-3d;

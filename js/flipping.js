@@ -9,7 +9,7 @@ var flipping = {
     content: [],
     content_index: [],
 
-    timeout: null,
+    timeout: 0,
     paused: false,
 
     options: {
@@ -18,8 +18,12 @@ var flipping = {
         shadow: true,
         sequent: 0,
         flow: "row",
-        width: 250,
-        height: 280
+
+        "card-width": 250,
+        "card-height": 280,
+
+        "cards-per-row": 1,
+        "number-of-rows": 1
     },
 
 
@@ -28,7 +32,8 @@ var flipping = {
         var i = 0;
 
         self.flipping_cards = document.getElementById(elem);
-        self.flipping_cards.style.display = 'flex';
+        self.slides = flipping_cards.getElementsByClassName('slides')[0];
+        //self.flipping_cards.style.display = 'flex';
         self.buttons = self.flipping_cards.querySelectorAll('button');
         self.decks = self.flipping_cards.getElementsByClassName('deck');
 
@@ -138,8 +143,8 @@ var flipping = {
         x = x - el.offsetLeft;
         y = y - el.offsetTop;
 
-        if (x < self.options.width / 2) self.buttons[0].click();
-        if (x >= self.options.width / 2) self.buttons[1].click();
+        if (x < self.options["card-width"] / 2) self.buttons[0].click();
+        if (x >= self.options["card-width"] / 2) self.buttons[1].click();
     },
 
     //-------------------------------------------------------------------------------------------
@@ -271,6 +276,8 @@ var flipping = {
         /* options */
         var self = this;
 
+        console.log("configure");
+
         if (opt.auto == false) {
             self.options.auto = false;
             self.buttons[0].style.visibility = "visible";
@@ -293,9 +300,37 @@ var flipping = {
         if (opt.sequent != null) self.options.sequent = opt.sequent;
 
         if (opt.flow == "row" || opt.flow == "column") {
-            self.flipping_cards.style.flexFlow = opt.flow + ' wrap';
+            //self.flipping_cards.style.flexFlow = opt.flow + ' wrap';
         }
 
+        if (opt["rotation-mode"] == "simultaneous" || opt["rotation-mode"] == "sequential") {
+            if (opt["rotation-mode"] == "simultaneous") self.options.sequent = 0;
+
+            console.log(opt["rotation-mode"]);
+            console.log(opt["sequent"]);
+        }
+
+
+
+        self.flipping_cards.querySelectorAll('.deck *').forEach(function (el) {
+            el.style.width = opt["card-width"] + "px";
+            el.style.height = opt["card-height"] + "px";
+        });
+
+
+        self.slides.style.width = (opt["card-width"] + 30) * opt["cards-per-row"] + "px";
+
+        self.flipping_cards.querySelectorAll('.deck').forEach(function (el) {
+            el.style.order = "";
+        });
+
+        for (var row = 1; row < opt['number-of-rows']; row++) {
+           self.flipping_cards.querySelectorAll('div.deck:nth-child(n + ' + (1 + opt["cards-per-row"] * row ) + ')').forEach(function (el) {
+                el.style.order = row;
+                //console.log('div.deck:nth-child(n + ' + (1 + opt["cards-per-row"] * row ) + ')');
+                //console.log("el.style.order = " + row);
+            });
+        }
     }
 
 

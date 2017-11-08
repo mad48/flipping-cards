@@ -87,92 +87,125 @@
     </div>
 
 </div>
+<div class="config">
+    <h4>Configuration:</h4>
 
-Flipping mode:
-<input type="checkbox" name="conf_auto" id="conf_auto" onchange="apply()">
-<label for="conf_auto">Auto</label> <br><br>
+    Flipping mode:
+    <input type="checkbox" name="conf_auto" id="conf_auto" onchange="apply()">
+    <label for="conf_auto">Automatic</label> <br><br>
 
-Rotation mode:
-<input type="radio" name="conf_rotation" id="conf_simultaneous" value="simultaneous" onchange="apply()">
-<label for="conf_simultaneous">Simultaneous</label>
+    <label for="conf_autoflip_delay">Delay before next flip in automatic mode</label>
+    <input type="text" name="conf_autoflip_delay" id="conf_autoflip_delay" onkeyup="apply()"> ms
+    <br><br>
 
-<input type="radio" name="conf_rotation" id="conf_sequential" value="sequential" onchange="apply()">
-<label for="conf_sequential">Sequential</label> <br><br>
+    <label for="conf_transition_duration">Transition duration</label>
+    <input type="text" name="conf_transition_duration" id="conf_transition_duration" onkeyup="apply()"> ms
+    <br><br>
 
+    Rotation mode:
+    <input type="radio" name="conf_rotation" id="conf_simultaneous" value="simultaneous" onchange="apply()">
+    <label for="conf_simultaneous">Simultaneous</label>
 
-<!--Cards direction:
-<input type="radio" name="conf_flow" id="conf_flow_row" value="row" checked="checked" onchange="apply()">
-<label for="conf_flow_row">Row</label>
-
-<input type="radio" name="conf_flow" id="conf_flow_col" value="column" onchange="apply()">
-<label for="conf_flow_col">Column</label> <br><br>-->
-
-<label for="conf_sequent">Delay for sequential rotation mode</label>
-<input type="text" name="conf_sequent" id="conf_sequent" value="600" onkeyup="apply()"> ms
-<br><br>
-
-<!--<label for="conf_cards_per_row">Number of cards per row </label>
-<input type="text" name="conf_cards_per_row" id="conf_cards_per_row" value="" onkeyup="apply()">
-<br><br>
-
-<label for="conf_number_of_rows">Number of rows </label>
-<input type="text" name="conf_number_of_rows" id="conf_number_of_rows" value="" onkeyup="apply()">
-<br><br>-->
-
-Options:<br>
-<b>auto</b> - start flipping in automatic mode [true | false]<br><!--Endless Loop-->
-<b>time</b> - time before all cards flip [ms]<br>
-<b>shadow</b> - on/off shadow [true | false]<br>
-<b>sequent</b> - sequential time before neighboring cards flip [ms]<br>
-<!--<b>flow</b> - row or column display direction [row | column]<br><br>-->
-<b>rotation-mode</b> - simultaneous or sequential mode [simultaneous | sequential]<br>
-<b>cards-per-row</b> - Number of cards per row [number]<br>
-<b>number-of-rows</b> - Number of rows [number]<br><br>
+    <input type="radio" name="conf_rotation" id="conf_sequential" value="sequential" onchange="apply()">
+    <label for="conf_sequential">Sequential</label> <br><br>
 
 
-Features:<br>
-Auto stop on mouse over and on deactivated browser tab<br>
+    <!--Cards direction:
+    <input type="radio" name="conf_flow" id="conf_flow_row" value="row" checked="checked" onchange="apply()">
+    <label for="conf_flow_row">Row</label>
+
+    <input type="radio" name="conf_flow" id="conf_flow_col" value="column" onchange="apply()">
+    <label for="conf_flow_col">Column</label> <br><br>-->
+
+    <label for="conf_sequent">Delay for sequential rotation mode</label>
+    <input type="text" name="conf_sequent" id="conf_sequent" value="600" onkeyup="apply()"> ms
+    <br><br>
+
+    <label for="conf_cards_per_row">Number of cards per row </label>
+    <input type="text" name="conf_cards_per_row" id="conf_cards_per_row" value="" onkeyup="apply()"> or
+
+
+    <label for="conf_number_of_rows">number of rows </label>
+    <input type="text" name="conf_number_of_rows" id="conf_number_of_rows" value="" onkeyup="apply()">
+    <br><br>
+
+    <h4>Options:</h4>
+    <blockquote>
+        <b>autoflip-mode</b> - start flipping in automatic mode [true | false]<br><!--Endless Loop-->
+        <b>autoflip-delay</b> - delay before next flip in automatic mode [ms]<br>
+        <b>shadow</b> - on/off shadow [true | false]<br>
+        <b>transition-duration</b> - card flip transition duration [ms]<br>
+
+        <b>sequential-delay</b> - sequential delay before neighboring cards flip [ms]<br>
+        <!--<b>flow</b> - row or column display direction [row | column]<br><br>-->
+        <b>rotation-mode</b> - simultaneous or sequential mode [simultaneous | sequential]<br>
+        <b>cards-per-row</b> - Number of cards per row [number]<br>
+        <b>number-of-rows</b> - Number of rows [number]<br><br>
+    </blockquote>
+
+    <!--    Features:<br>
+        Auto stop on mouse over and on deactivated browser tab<br>-->
+</div>
+
 
 <script>
-    function apply() {
-        var options = {
-            auto: document.querySelector('#conf_auto').checked,
-            // shadow: document.querySelector('#conf_shadow').checked,
-            //  time: document.querySelector('#conf_time').value,
-            "sequent": document.querySelector('#conf_sequent').value,
-            // flow: document.querySelector('input[name=conf_flow]:checked').value,
-            "rotation-mode": document.querySelector('input[name=conf_rotation]:checked').value,
-            //"cards-per-row": document.querySelector('#conf_cards_per_row').value,
-            //"number-of-rows": document.querySelector('#conf_number_of_rows').value
 
+    function apply() {
+
+        var options = {
+            "autoflip-mode": document.querySelector('#conf_auto').checked,
+            "autoflip-delay": document.querySelector('#conf_autoflip_delay').value,
+
+            // shadow: document.querySelector('#conf_shadow').checked,
+            "transition-duration": document.querySelector('#conf_transition_duration').value,
+
+
+            "rotation-mode": document.querySelector('input[name=conf_rotation]:checked').value,
+            "sequential-delay": document.querySelector('#conf_sequent').value,
+
+            "cards-per-row": document.querySelector('#conf_cards_per_row').value,
+            "number-of-rows": document.querySelector('#conf_number_of_rows').value
+
+            // flow: document.querySelector('input[name=conf_flow]:checked').value,
         };
+
         flipping.configure(options);
+
     }
 </script>
 
 <script>
+
     document.addEventListener("DOMContentLoaded", function () {
 
         var options = {
-            auto: false,
-            time: 1000,
-            shadow: true,
-            sequent: 600,
-            flow: "row",
+            "autoflip-mode": false,
+            "autoflip-delay": 1500,
+
+            "shadow": true,
+            "transition-duration": 700,
 
             "rotation-mode": "simultaneous",
+            "sequential-delay": 600,
 
             "card-width": 250,
             "card-height": 280,
 
             "cards-per-row": 3,
             "number-of-rows": 2
-
         };
 
         flipping.init('flipping_cards', options);
 
-        document.querySelector('input[name=conf_auto]').checked = options.auto;
+        document.querySelector('input[name=conf_auto]').checked = options["autoflip-mode"];
+        document.querySelector('input[name=conf_autoflip_delay]').value = options["autoflip-delay"];
+
+        document.querySelector('input[name=conf_transition_duration]').value = options["transition-duration"];
+
+
+        document.querySelector('input[name=conf_cards_per_row]').value = options["cards-per-row"];
+        document.querySelector('input[name=conf_number_of_rows]').value = options["number-of-rows"];
+
 
         document.querySelectorAll('input[name=conf_rotation]').forEach(function (el) {
             if (el.value == options["rotation-mode"])  el.checked = true;
@@ -216,30 +249,31 @@ Auto stop on mouse over and on deactivated browser tab<br>
 
 
     <script>
+
         var options = {
-            auto: true,
-            time: 1500,
-            shadow: true,
-            sequent: 500,
 
+            "autoflip-mode": false,
+            "autoflip-delay": 1500,
 
-            "rotation-mode": "simultaneous",
+            "shadow": true,
+            "transition-duration": 700,
+
+            "rotation-mode": "sequential",
+            "sequential-delay": 600,
 
             "card-width": 250,
             "card-height": 280,
 
-            "cards-per-row": 3,
-            "number-of-rows": 2
+            "cards-per-row": 3
+
         };
 
         flipping.init('flippingcards', options);
+
     </script>
 
 </xmp>
 </pre>
-
-
-Transition duration
 
 
 </body>

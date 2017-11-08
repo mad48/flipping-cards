@@ -1,10 +1,12 @@
 var flipping = {
 
-    last_dir: [],
-
     flipping_cards: null,
-    buttons: null,
+    slides: null,
     decks: null,
+    buttons: null,
+
+    last_dir: [],
+    card_html: null,
 
     content: [],
     content_index: [],
@@ -13,17 +15,19 @@ var flipping = {
     paused: false,
 
     options: {
-        auto: true,
-        time: 1500,
-        shadow: true,
-        sequent: 0,
-        flow: "row",
+        "autoflip-mode": true,
+        "autoflip-delay": 1500,
 
-        "card-width": 250,
-        "card-height": 280,
+        "shadow": true,
 
-        "cards-per-row": 1,
-        "number-of-rows": 1
+        "rotation-mode": "simultaneous",
+        "sequential-delay": 0,
+
+        "card-width": 200,
+        "card-height": 200,
+
+        "cards-per-row": 0,
+        "number-of-rows": 0
     },
 
 
@@ -55,7 +59,7 @@ var flipping = {
 
             }
 
-            self.decks[i].innerHTML = '<div class="front"></div><div class="back"></div>';
+            self.decks[i].innerHTML = self.card_html;
 
             self.decks[i].onclick = function (i) {
                 return function () {
@@ -87,18 +91,18 @@ var flipping = {
 
         // add suspend actions if automatic flipping is enabled
 
-        self.flipping_cards.onmouseover = function () {
+/*        self.flipping_cards.onmouseover = function () {
             self.autoflip(false);
             //self.paused = true;
         };
         self.flipping_cards.onmouseout = function () {
             //self.paused = false;
             self.autoflip(true);
-        };
+        };*/
 
 
         /* shadow */
-        if (self.options.shadow === false) {
+        if (self.options["shadow"] === false) {
             [].forEach.call(self.flipping_cards.querySelectorAll('button'), function (el) {
                 el.style.textShadow = "none";
             });
@@ -147,22 +151,6 @@ var flipping = {
         if (x >= self.options["card-width"] / 2) self.buttons[1].click();
     },
 
-    //-------------------------------------------------------------------------------------------
-    sequential_old: function (dir) {
-        var self = this;
-        var i = 0;
-
-        self.buttonsoff(true);
-
-        self.timer = setInterval(function () {
-            self.flip(i, dir);
-            i++;
-            if (i == self.decks.length) {
-                clearInterval(self.timer);
-                self.buttonsoff(false);
-            }
-        }, self.options.sequent);
-    },
 
     //-------------------------------------------------------------------------------------------
     buttonsoff: function (state) {
@@ -180,41 +168,27 @@ var flipping = {
 
         setTimeout(function () {
             self.buttonsoff(false);
-        }, self.options.sequent * self.decks.length);
+        }, self.options["sequential-delay"] * self.decks.length);
 
 
         for (i = 0; i < self.decks.length; i++) {
             (function (index) {
                 setTimeout(function () {
                     self.flip(index, dir);
-                }, self.options.sequent * index);
+                }, self.options["sequential-delay"] * index);
             })(i);
         }
 
     },
 
-//----------------------------------------------------------------------------------------------
-    autoflip_old: function () {
-        var self = this;
-        if (self.options.auto === true) {
-            self.timeout = setTimeout(function go() {
-                if (self.options.auto && self.paused == false) {
-                    self.buttons[1].click();
-                    //self.sequential(1);
-                    if (self.paused == false) clearTimeout(self.timeout);
-                }
-                self.timeout = setTimeout(go, self.options.time);
-            }, self.options.time);
-        }
-    },
 
     //----------------------------------------------------------------------------------------------
     autoflip: function (state) {
         var self = this;
-        if (state && self.options.auto) {
+        if (state && self.options["autoflip-mode"]) {
             self.timeout = setInterval(function go() {
                 self.buttons[1].click();
-            }, self.options.time);
+            }, self.options["autoflip-delay"]);
         } else {
             clearInterval(self.timeout);
         }
@@ -243,10 +217,11 @@ var flipping = {
             if (event.propertyName == 'transform') {
 
                 var deck = self.decks[num];
-                deck.innerHTML = "<div class='front'>" + self.content[num][i_back] + "</div><div class='back'></div>";
+                deck.innerHTML = self.card_html;
 
                 var front = deck.getElementsByTagName('div')[0];
                 var back = deck.getElementsByTagName('div')[1];
+                front.innerHTML = self.content[num][i_back];
 
                 back.style.transform = 'rotateY(' + (1 * dir * 180) + 'deg)';
 
@@ -278,59 +253,94 @@ var flipping = {
 
         console.log("configure");
 
-        if (opt.auto == false) {
-            self.options.auto = false;
+        if (opt["autoflip-mode"] == false) {
+            self.options["autoflip-mode"] = false;
             self.buttons[0].style.visibility = "visible";
             self.buttons[1].style.visibility = "visible";
             self.autoflip(false);
         }
 
-        if (opt.auto === true) {
-            self.options.auto = true;
+        if (opt["autoflip-mode"] === true) {
+            self.options["autoflip-mode"] = true;
             self.buttons[0].style.visibility = "hidden";
             self.buttons[1].style.visibility = "hidden";
             self.autoflip(true);
         }
 
-        if (opt.time != null) self.options.time = opt.time;
+        // delay for next flip in auto mode
+        if (opt["autoflip-delay"] != 0) self.options["autoflip-delay"] = opt["autoflip-delay"];
 
-        if (opt.shadow == false) self.options.shadow = false;
-        if (opt.shadow == true) self.options.shadow = true;
-
-        if (opt.sequent != null) self.options.sequent = opt.sequent;
-
-        if (opt.flow == "row" || opt.flow == "column") {
-            //self.flipping_cards.style.flexFlow = opt.flow + ' wrap';
-        }
-
-        if (opt["rotation-mode"] == "simultaneous" || opt["rotation-mode"] == "sequential") {
-            if (opt["rotation-mode"] == "simultaneous") self.options.sequent = 0;
-
-            console.log(opt["rotation-mode"]);
-            console.log(opt["sequent"]);
-        }
+        if (opt["shadow"] == false) self.options["shadow"] = false;
+        if (opt["shadow"] == true) self.options["shadow"] = true;
 
 
+        /*  if (opt.flow == "row" || opt.flow == "column") {
+         self.flipping_cards.style.flexFlow = opt.flow + ' wrap';
+         }*/
 
+
+        // card size
+        if (opt["card-width"] > 0) self.options["card-width"] = opt["card-width"];
+        if (opt["card-height"] > 0) self.options["card-height"] = opt["card-height"];
+
+        // sizes of cards content
         self.flipping_cards.querySelectorAll('.deck *').forEach(function (el) {
-            el.style.width = opt["card-width"] + "px";
-            el.style.height = opt["card-height"] + "px";
+            el.style.width = self.options["card-width"] + "px";
+            el.style.height = self.options["card-height"] + "px";
         });
 
 
-        self.slides.style.width = (opt["card-width"] + 30) * opt["cards-per-row"] + "px";
+        // sequential-delay
+        if (opt["sequential-delay"] > 0) self.options["sequential-delay"] = opt["sequential-delay"];
+
+        // rotation-mode
+        if (opt["rotation-mode"] == "simultaneous" || opt["rotation-mode"] == "sequential") {
+            if (opt["rotation-mode"] == "simultaneous") {
+                self.options["rotation-mode"] = "simultaneous";
+                self.options["sequential-delay"] = 0;
+            }
+            else {
+                self.options["rotation-mode"] = "sequential";
+            }
+        }
+
+
+        // cards-per-row or number-of-rows calculation
+        if (opt["cards-per-row"] > 0) {
+            self.options["cards-per-row"] = opt["cards-per-row"];
+            self.options["number-of-rows"] = Math.round(self.decks.length / self.options["cards-per-row"]);
+        }
+
+        if (opt["number-of-rows"] > 0) {
+            self.options["number-of-rows"] = opt["number-of-rows"];
+            self.options["cards-per-row"] = Math.round(self.decks.length / self.options["number-of-rows"]);
+        }
+
+        console.log("self.options[cards-per-row] = " + self.options["cards-per-row"]);
+        console.log("self.options[number-of-rows] = " + self.options["number-of-rows"]);
 
         self.flipping_cards.querySelectorAll('.deck').forEach(function (el) {
             el.style.order = "";
         });
 
-        for (var row = 1; row < opt['number-of-rows']; row++) {
-           self.flipping_cards.querySelectorAll('div.deck:nth-child(n + ' + (1 + opt["cards-per-row"] * row ) + ')').forEach(function (el) {
+
+        // width of cards container
+        self.slides.style.width = ( self.options["card-width"] + 30) * self.options["cards-per-row"] + "px";
+
+        for (var row = 1; row < self.options['number-of-rows']; row++) {
+            self.flipping_cards.querySelectorAll('div.deck:nth-child(n + ' + (1 + self.options["cards-per-row"] * row ) + ')').forEach(function (el) {
                 el.style.order = row;
                 //console.log('div.deck:nth-child(n + ' + (1 + opt["cards-per-row"] * row ) + ')');
                 //console.log("el.style.order = " + row);
             });
         }
+
+        if (opt["transition-duration"] > 0) {
+            self.options["transition-duration"] = opt["transition-duration"] / 1000 + "s";
+        }
+
+        self.card_html = "<div class='front' style='transition-duration:  " + self.options["transition-duration"] + "'></div><div class='back' style='transition-duration:  " + self.options["transition-duration"] + "'></div>";
+
     }
 
 

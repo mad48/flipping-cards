@@ -19,7 +19,7 @@ body, h4 {
 .flipping {
     margin: 10% auto;
     display: flex;
-   /* border: 2px solid blue;*/
+    /* border: 2px solid blue;*/
 
     /*
       width: calc(var(--button-size) * 2 + var(--card-width) * 3.5);
@@ -39,7 +39,7 @@ body, h4 {
 
 .flipping .slides {
 
-        /*width: calc(var(--card-width) *3.5);*/
+    /*width: calc(var(--card-width) *3.5);*/
     /* height: var(--card-height);
    width:500px;
     height: 300px;
@@ -51,9 +51,9 @@ body, h4 {
     flex-flow: row wrap;
     align-content: center;
 
-
 }
-.deck{
+
+.deck {
     /*width: 30%;*/
     /* display: contents;
      width: 250px;
@@ -84,6 +84,7 @@ body, h4 {
     width: 100%;
     order: 1;
 }
+
 /*
 
 .deck:nth-child(n + 3) {
@@ -93,7 +94,6 @@ body, h4 {
     order: 2;
 }
 */
-
 
 /* buttons container */
 .flipping > div:first-child, .flipping > div:last-child {
@@ -146,12 +146,11 @@ body, h4 {
 }
 
 .flipping .deck * {
-/*    width: var(--card-width);
-    height: var(--card-height);*/
+    /*    width: var(--card-width);
+        height: var(--card-height);*/
     margin-bottom: -3px;
     border-radius: var(--border-radius);
 }
-
 
 .flipping .deck .front, .back {
 
@@ -161,7 +160,7 @@ body, h4 {
         transition: -webkit-transform .7s cubic-bezier(0.4, 0.2, 0.2, 1);
         -o-transition: transform .7s cubic-bezier(0.4, 0.2, 0.2, 1);
         transition: transform .7s cubic-bezier(0.4, 0.2, 0.2, 1), -webkit-transform .7s cubic-bezier(0.4, 0.2, 0.2, 1);*/
-    transition: transform .7s cubic-bezier(0.4, 0.2, 0.2, 1); /*property duration timing-function delay*/
+    transition: transform 0.7s cubic-bezier(0.4, 0.2, 0.2, 1); /*property duration timing-function delay*/
     -webkit-backface-visibility: hidden;
     backface-visibility: hidden;
     text-align: center;
@@ -205,171 +204,8 @@ body, h4 {
     text-shadow: 1px 1px 2px black, 0 0 1em rgba(0, 6, 22, 0.67);
 }
 
-/*
-
-:root {
-    --button-size: 60px;
-    !*
-    --button-width: 60px;
-    --button-height: 60px;
-    *!
-    --card-width: 250px;
-    --card-height: 280px;
-    --border-radius: 10px;
+.config input[type='text'] {
+    width: 37px;
+    text-align: right
 
 }
-
-h4 {
-    font-family: Verdana sans-serif;
-}
-
-.flipping {
-    margin: 10% auto;
-    !*width: calc(var(--button-size) * 2 + var(--card-width) * 3);*!
-    justify-content: center;
-    display: none;
-
-}
-
-!* buttons container *!
-.flipping > div:first-child, .flipping > div:last-child {
-    display: flex;
-    align-items: center;
-}
-
-.flipping button {
-
-    !*    -webkit-transform: scaleX(1.1);
-        -moz-transform: scaleX(1.1);
-        -o-transform: scaleX(1.1);
-        transform: scaleX(1.1);*!
-    cursor: pointer;
-    color: #e7e7e7;
-    text-shadow: 0 2px 2px rgba(255, 255, 255, 0.7), 0 5px 6px rgba(0, 0, 0, 0.2);
-    font-size: var(--button-size);
-    !*    width: var(--button-width);
-        height: var(--button-height);*!
-    -moz-user-select: none;
-    -webkit-user-select: none;
-    user-select: none;
-    border: none;
-    background: none;
-}
-
-.flipping button:hover {
-    cursor: pointer;
-    -webkit-transition: all 0.3s ease;
-    -moz-transition: all 0.3s ease;
-    -o-transition: all 0.3s ease;
-    transition: all 0.3s ease;
-    text-shadow: 0 3px 3px #bdbdbd;
-}
-
-.flipping button:active {
-    text-shadow: 0 9px 19px rgba(0, 0, 0, 0.26);
-}
-
-.flipping button:focus {
-    outline: none;
-}
-
-.flipping .card {
-    -webkit-transform-style: preserve-3d;
-    transform-style: preserve-3d;
-    -webkit-perspective: 1000px;
-    perspective: 1000px;
-}
-
-.flipping .card .front, .back {
-
-    background-size: cover;
-    background-position: center;
-    -webkit-transition: -webkit-transform .7s cubic-bezier(0.4, 0.2, 0.2, 1);
-    transition: -webkit-transform .7s cubic-bezier(0.4, 0.2, 0.2, 1);
-    -o-transition: transform .7s cubic-bezier(0.4, 0.2, 0.2, 1);
-    transition: transform .7s cubic-bezier(0.4, 0.2, 0.2, 1), -webkit-transform .7s cubic-bezier(0.4, 0.2, 0.2, 1);
-    transition: transform .7s cubic-bezier(0.4, 0.2, 0.2, 1);
-    -webkit-backface-visibility: hidden;
-    backface-visibility: hidden;
-    text-align: center;
-    min-height: 280px;
-
-    border-radius: var(--border-radius);
-    color: #fff;
-    font-size: 1.0rem;
-    font-family: Verdana, sans-serif;
-
-    width: var(--card-width);
-    height: var(--card-height);
-    margin: 15px;
-
-    -webkit-transform-style: preserve-3d;
-    transform-style: preserve-3d;
-    box-shadow: 5px 5px 10px 5px rgba(0, 0, 0, .2);
-}
-
-.flipping .card .back {
-    position: absolute;
-    top: 0;
-    left: 0;
-    display: none;
-}
-
-!* user styles *!
-
-.flipping .card img {
-    width: var(--card-width);
-    height: var(--card-height);
-    border-radius: var(--border-radius);
-}
-
-.flipping .card h1 {
-    position: absolute;
-    top: 0;
-    text-align: center;
-    width: 100%;
-    color: #ffffff;
-    text-shadow: 1px 1px 2px black, 0 0 1em rgba(0, 6, 22, 0.67);
-}
-
-#nums .card {
-    -webkit-transform-style: preserve-3d;
-    transform-style: preserve-3d;
-    -webkit-perspective: 1000px;
-    perspective: 1000px;
-}
-
-#nums .card {
-
-    background-size: cover;
-    background-position: center;
-    -webkit-transition: -webkit-transform .7s cubic-bezier(0.4, 0.2, 0.2, 1);
-    transition: -webkit-transform .7s cubic-bezier(0.4, 0.2, 0.2, 1);
-    -o-transition: transform .7s cubic-bezier(0.4, 0.2, 0.2, 1);
-    transition: transform .7s cubic-bezier(0.4, 0.2, 0.2, 1), -webkit-transform .7s cubic-bezier(0.4, 0.2, 0.2, 1);
-    transition: transform .7s cubic-bezier(0.4, 0.2, 0.2, 1);
-    -webkit-backface-visibility: hidden;
-    backface-visibility: hidden;
-    text-align: center;
-    min-height: 280px;
-
-    border-radius: var(--border-radius);
-    color: #fff;
-    font-size: 1.0rem;
-    font-family: Verdana, sans-serif;
-
-    width: var(--card-width);
-    height: var(--card-height);
-    margin: 15px;
-
-    -webkit-transform-style: preserve-3d;
-    transform-style: preserve-3d;
-    box-shadow: 5px 5px 10px 5px rgba(0, 0, 0, .2);
-}
-
-.flipping .card .back {
-    position: absolute;
-    top: 0;
-    left: 0;
-    display: none;
-}*/

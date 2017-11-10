@@ -91,14 +91,14 @@ var flipping = {
 
         // add suspend actions if automatic flipping is enabled
 
-/*        self.flipping_cards.onmouseover = function () {
-            self.autoflip(false);
-            //self.paused = true;
-        };
-        self.flipping_cards.onmouseout = function () {
-            //self.paused = false;
-            self.autoflip(true);
-        };*/
+        /*        self.flipping_cards.onmouseover = function () {
+         self.autoflip(false);
+         //self.paused = true;
+         };
+         self.flipping_cards.onmouseout = function () {
+         //self.paused = false;
+         self.autoflip(true);
+         };*/
 
 
         /* shadow */
@@ -284,7 +284,7 @@ var flipping = {
         if (opt["card-height"] > 0) self.options["card-height"] = opt["card-height"];
 
         // sizes of cards content
-        self.flipping_cards.querySelectorAll('.deck *').forEach(function (el) {
+        [].forEach.call(self.flipping_cards.querySelectorAll('.deck *'), function (el) {
             el.style.width = self.options["card-width"] + "px";
             el.style.height = self.options["card-height"] + "px";
         });
@@ -304,22 +304,22 @@ var flipping = {
             }
         }
 
-       
+
         // cards-per-row or number-of-rows calculation
         if (opt["cards-per-row"] > 0) {
             self.options["cards-per-row"] = opt["cards-per-row"];
             self.options["number-of-rows"] = Math.round(self.decks.length / self.options["cards-per-row"]);
         }
 
-      if (opt["number-of-rows"] > 0) {
+        if (opt["number-of-rows"] > 0) {
             self.options["number-of-rows"] = opt["number-of-rows"];
             self.options["cards-per-row"] = Math.round(self.decks.length / self.options["number-of-rows"]);
         }
 
-       console.log("self.options[cards-per-row] = " + self.options["cards-per-row"]);
+        console.log("self.options[cards-per-row] = " + self.options["cards-per-row"]);
         console.log("self.options[number-of-rows] = " + self.options["number-of-rows"]);
 
-        self.flipping_cards.querySelectorAll('.deck').forEach(function (el) {
+        [].forEach.call(self.flipping_cards.querySelectorAll('.deck'), function (el) {
             el.style.order = "";
         });
 
@@ -328,11 +328,10 @@ var flipping = {
         self.slides.style.width = ( self.options["card-width"] + 30) * self.options["cards-per-row"] + "px";
 
         for (var row = 1; row < self.options['number-of-rows']; row++) {
-            self.flipping_cards.querySelectorAll('div.deck:nth-child(n + ' + (1 + self.options["cards-per-row"] * row ) + ')').forEach(function (el) {
-                el.style.order = row;
-                //console.log('div.deck:nth-child(n + ' + (1 + opt["cards-per-row"] * row ) + ')');
-                //console.log("el.style.order = " + row);
-            });
+            var child = document.querySelectorAll('div.deck:nth-child(n + ' + (1 + self.options["cards-per-row"] * row ) + ')');
+            for (var i = 0; i < child.length; i++) {
+                child[i].style.order = row;
+            }
         }
 
         if (opt["transition-duration"] > 0) {

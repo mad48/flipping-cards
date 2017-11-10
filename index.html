@@ -6,9 +6,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="shortcut icon" type="image/x-icon" href="demo/favicon.ico">
     <!--<link href="http://fonts.googleapis.com/css?family=Open+Sans:400,600,700&subset=latin,cyrillic" rel="stylesheet" type="text/css">-->
-<!--    <link href="demo/css/font-awesome.min.css" rel="stylesheet" type="text/css">-->
+    <!--    <link href="demo/css/font-awesome.min.css" rel="stylesheet" type="text/css">-->
 
-    <link href=" https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+    <link href=" https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet"
+          type="text/css">
 
     <title>
         Flipping Cards Carousel
@@ -88,10 +89,10 @@
         /*        document.querySelector('input[name=conf_cards_per_row]').value = options["cards-per-row"];
          document.querySelector('input[name=conf_number_of_rows]').value = options["number-of-rows"];*/
 
-
-        document.querySelectorAll('input[name=conf_rotation]').forEach(function (el) {
-            if (el.value == options["rotation-mode"])  el.checked = true;
-        });
+        var rotation = document.querySelectorAll('input[name=conf_rotation]');
+        for (var i = 0; i < rotation.length; i++) {
+            if (rotation[i].value == options["rotation-mode"])  rotation[i].checked = true;
+        }
 
 
         var sel = document.querySelector('select[name=conf_cards_per_row]');

@@ -37,7 +37,7 @@ var flipping = {
 
         self.flipping_cards = document.getElementById(elem);
         self.slides = flipping_cards.getElementsByClassName('slides')[0];
-        //self.flipping_cards.style.display = 'flex';
+        self.flipping_cards.style.visibility = 'visible';
         self.buttons = self.flipping_cards.querySelectorAll('button');
         self.decks = self.flipping_cards.getElementsByClassName('deck');
 
@@ -304,19 +304,19 @@ var flipping = {
             }
         }
 
-
+       
         // cards-per-row or number-of-rows calculation
         if (opt["cards-per-row"] > 0) {
             self.options["cards-per-row"] = opt["cards-per-row"];
             self.options["number-of-rows"] = Math.round(self.decks.length / self.options["cards-per-row"]);
         }
 
-        if (opt["number-of-rows"] > 0) {
+      if (opt["number-of-rows"] > 0) {
             self.options["number-of-rows"] = opt["number-of-rows"];
             self.options["cards-per-row"] = Math.round(self.decks.length / self.options["number-of-rows"]);
         }
 
-        console.log("self.options[cards-per-row] = " + self.options["cards-per-row"]);
+       console.log("self.options[cards-per-row] = " + self.options["cards-per-row"]);
         console.log("self.options[number-of-rows] = " + self.options["number-of-rows"]);
 
         self.flipping_cards.querySelectorAll('.deck').forEach(function (el) {

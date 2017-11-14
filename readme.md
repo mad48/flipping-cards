@@ -4,10 +4,16 @@ Flipping Cards Carousel
 
 **Supports:**
 
-- forward / backward flip
+- Forward / backward flip
+- Number of cards per row or column
+- Custom items sizes
+- Custom animation delays
+- Simultaneous and  sequential rotation mode
+- Automatic flip mode
 
 
-#### [Demo]
+
+#### [Demo and usage]
 
 
 **To run demo locally:**
@@ -27,5 +33,5 @@ MIT
 
 [//]: #
 
-[Demo]: <https://mad48.github.io/flipping-cards/index.html>
+[Demo]: <https://mad48.github.io/flipping-cards/demo/index.html>
 

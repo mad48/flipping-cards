@@ -1,7 +1,27 @@
+.flipping {
+    margin-top: 10%
+}
 
-@import "../demo/css/demopage.css";
+.flipping .deck h2, h3 {
+    position: absolute;
+    text-align: center;
+    width: 100%;
+    color: #ffffff;
+    text-shadow: 1px 1px 2px black, 0 0 1em rgba(0, 6, 22, 0.67);
+    line-height: normal;
 
-@import "../demo/css/content.css";
+}
+
+.flipping .deck h2 {
+    margin-top: 30px;
+    font-size: 1.3rem;
+
+}
+
+.flipping .deck h3 {
+    margin-top: 130px;
+    font-size: 1.3rem;
+}
 
 :root {
     --button-size: 60px;
@@ -9,13 +29,11 @@
     --button-width: 60px;
     --button-height: 60px;
     */
-/*    --card-width: 250px;
-    --card-height: 280px;*/
+    /*    --card-width: 250px;
+        --card-height: 280px;*/
     --border-radius: 10px;
 
 }
-
-
 
 .flipping {
 
@@ -55,12 +73,8 @@
 
 }
 
-.deck {
-    /*width: 30%;*/
-    /* display: contents;
-     width: 250px;
-     height: 280px;*/
-}
+
+
 
 /*.deck:nth-child(3n) {
     border: 5px solid red;
@@ -147,13 +161,7 @@
     perspective: 1000px;
 }
 
-.flipping .deck * {
-    /*    width: var(--card-width);
-        height: var(--card-height);*/
 
-    margin-bottom: -4px;
-    border-radius: var(--border-radius);
-}
 
 .flipping .deck .front, .back {
 
@@ -167,16 +175,16 @@
     -webkit-backface-visibility: hidden;
     backface-visibility: hidden;
 
-/*    m4in-height: 280px;*/
+    /*    m4in-height: 280px;*/
 
- /*   border-radius: var(--border-radius);*/
+    /*   border-radius: var(--border-radius);*/
     /*
     color: #fff;
     font-size: 1.0rem;
     font-family: Verdana, sans-serif;
     */
 
-    margin: 15px;
+
 
     -webkit-transform-style: preserve-3d;
     transform-style: preserve-3d;
@@ -188,5 +196,19 @@
     position: absolute;
     top: 0;
     left: 0;
-   /* display: none;*/
+    /* display: none;*/
+}
+
+.flipping .deck *{
+        width: 100%;
+height:100%;
+
+    margin-bottom: -4px;
+    border-radius: var(--border-radius);
+}
+
+.flipping .deck div{
+    margin: 15px;
+
+
 }

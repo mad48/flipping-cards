@@ -1,0 +1,219 @@
+$bg-color: pink;
+
+body {
+    background: $bg-color;
+}
+
+.flipping {
+    margin-top: 10%
+}
+
+.flipping .deck h2, h3 {
+    position: absolute;
+    text-align: center;
+    width: 100%;
+    color: #ffffff;
+    text-shadow: 1px 1px 2px black, 0 0 1em rgba(0, 6, 22, 0.67);
+    line-height: normal;
+
+}
+
+.flipping .deck h2 {
+    margin-top: 30px;
+    font-size: 1.3rem;
+
+}
+
+.flipping .deck h3 {
+    margin-top: 130px;
+    font-size: 1.3rem;
+}
+
+:root {
+    --button-size: 60px;
+    /*
+    --button-width: 60px;
+    --button-height: 60px;
+    */
+    /*    --card-width: 250px;
+        --card-height: 280px;*/
+    --border-radius: 10px;
+
+}
+
+.flipping {
+
+    display: flex;
+    visibility: hidden;
+    /* border: 2px solid blue;*/
+
+    /*
+      width: calc(var(--button-size) * 2 + var(--card-width) * 3.5);
+     height: var(--card-height);
+       width:500px;
+       height: 300px;
+       */
+    justify-content: center;
+    align-items: center;
+    /* display: none;
+     fle4x-direction: column;
+     fle4x-wrap: wrap;*/
+
+    align-content: center;
+
+}
+
+.flipping .slides {
+
+    /*width: calc(var(--card-width) *3.5);*/
+    /* height: var(--card-height);
+   width:500px;
+    height: 300px;
+    */
+    display: flex;
+    ju4stify-content: center;
+    ali4gn-items: center;
+
+    flex-flow: row wrap;
+    align-content: center;
+
+}
+
+
+
+
+/*.deck:nth-child(3n) {
+    border: 5px solid red;
+    page-break-after: always; !* Синтаксис CSS 2.1 *!
+    break-after: always; !* Новый синтаксис *!
+
+}
+
+.deck:nth-child(3n)::after {
+    content: '';
+    width: 100%;
+    margin-right: calc(100% - 125px);
+}*/
+
+/*.deck:nth-child(3) {
+    border: 5px solid red;
+    m4argin-right: 550px;
+    break-after: always;
+}*/
+
+.slides::before, .slides::after {
+    content: '';
+    width: 100%;
+    order: 1;
+}
+
+/*
+
+.deck:nth-child(n + 3) {
+    order: 1;
+}
+.deck:nth-child(n + 5) {
+    order: 2;
+}
+*/
+
+/* buttons container */
+.flipping > div:first-child, .flipping > div:last-child {
+
+}
+
+.flipping > div:first-child {
+
+}
+
+.flipping button {
+
+    /*    -webkit-transform: scaleX(1.1);
+        -moz-transform: scaleX(1.1);
+        -o-transform: scaleX(1.1);
+        transform: scaleX(1.1);*/
+    cursor: pointer;
+    color: #e7e7e7;
+    text-shadow: 0 2px 2px rgba(255, 255, 255, 0.7), 0 5px 6px rgba(0, 0, 0, 0.2);
+    font-size: var(--button-size);
+    /*    width: var(--button-width);
+        height: var(--button-height);*/
+
+    user-select: none;
+    border: none;
+    background: none;
+}
+
+.flipping button:hover {
+    cursor: pointer;
+    -webkit-transition: all 0.3s ease;
+    -moz-transition: all 0.3s ease;
+    -o-transition: all 0.3s ease;
+    transition: all 0.3s ease;
+    text-shadow: 0 3px 3px #bdbdbd;
+}
+
+.flipping button:active {
+    text-shadow: 0 9px 19px rgba(0, 0, 0, 0.26);
+}
+
+.flipping button:focus {
+    outline: none;
+}
+
+.flipping .deck {
+    transform-style: preserve-3d;
+    perspective: 1000px;
+}
+
+
+
+.flipping .deck .front, .back {
+
+    background-size: cover;
+    background-position: center;
+    /*    -webkit-transition: -webkit-transform .7s cubic-bezier(0.4, 0.2, 0.2, 1);
+        transition: -webkit-transform .7s cubic-bezier(0.4, 0.2, 0.2, 1);
+        -o-transition: transform .7s cubic-bezier(0.4, 0.2, 0.2, 1);
+        transition: transform .7s cubic-bezier(0.4, 0.2, 0.2, 1), -webkit-transform .7s cubic-bezier(0.4, 0.2, 0.2, 1);*/
+    transition: transform 0.7s cubic-bezier(0.4, 0.2, 0.2, 1); /*property duration timing-function delay*/
+    -webkit-backface-visibility: hidden;
+    backface-visibility: hidden;
+
+    /*    m4in-height: 280px;*/
+
+    /*   border-radius: var(--border-radius);*/
+    /*
+    color: #fff;
+    font-size: 1.0rem;
+    font-family: Verdana, sans-serif;
+    */
+
+
+
+    -webkit-transform-style: preserve-3d;
+    transform-style: preserve-3d;
+    box-shadow: 5px 5px 10px 5px rgba(0, 0, 0, .2);
+
+}
+
+.flipping .deck .back {
+    position: absolute;
+    top: 0;
+    left: 0;
+    /* display: none;*/
+}
+
+.flipping .deck * {
+    /*    width: var(--card-width);
+        height: var(--card-height);*/
+
+    margin-bottom: -4px;
+    border-radius: var(--border-radius);
+}
+
+.flipping .deck div{
+    margin: 15px;
+
+
+}

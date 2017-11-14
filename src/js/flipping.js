@@ -149,6 +149,7 @@ var flipping = {
 
         if (x < self.options["card-width"] / 2) self.buttons[0].click();
         if (x >= self.options["card-width"] / 2) self.buttons[1].click();
+;
     },
 
 
@@ -279,15 +280,13 @@ var flipping = {
          }*/
 
 
-        // card size
-        if (opt["card-width"] > 0) self.options["card-width"] = opt["card-width"];
-        if (opt["card-height"] > 0) self.options["card-height"] = opt["card-height"];
+        if (opt["transition-duration"] > 0) {
+            self.options["transition-duration"] = opt["transition-duration"] / 1000 + "s";
+        }
 
-        // sizes of cards content
-        [].forEach.call(self.flipping_cards.querySelectorAll('.deck *'), function (el) {
-            el.style.width = self.options["card-width"] + "px";
-            el.style.height = self.options["card-height"] + "px";
-        });
+        // card size
+        if (opt["card-width"] > 0) self.options["card-width"] = parseInt(opt["card-width"]);
+        if (opt["card-height"] > 0) self.options["card-height"] = parseInt(opt["card-height"]);
 
 
         // sequential-delay
@@ -316,16 +315,21 @@ var flipping = {
             self.options["cards-per-row"] = Math.round(self.decks.length / self.options["number-of-rows"]);
         }
 
-        console.log("self.options[cards-per-row] = " + self.options["cards-per-row"]);
-        console.log("self.options[number-of-rows] = " + self.options["number-of-rows"]);
+        //console.log("self.options[cards-per-row] = " + self.options["cards-per-row"]);
+        //console.log("self.options[number-of-rows] = " + self.options["number-of-rows"]);
 
-        [].forEach.call(self.flipping_cards.querySelectorAll('.deck'), function (el) {
-            el.style.order = "";
-        });
+
 
 
         // width of cards container
         self.slides.style.width = ( self.options["card-width"] + 30) * self.options["cards-per-row"] + "px";
+
+        console.log(" self.slides.style.width= " + ( self.options["card-width"] + 30) * self.options["cards-per-row"] + "px");
+        console.log("  self.options[card-width]= " + self.options["card-width"]);
+
+        [].forEach.call(self.flipping_cards.querySelectorAll('.deck'), function (el) {
+            el.style.order = "";
+        });
 
         for (var row = 1; row < self.options['number-of-rows']; row++) {
             var child = document.querySelectorAll('div.deck:nth-child(n + ' + (1 + self.options["cards-per-row"] * row ) + ')');
@@ -333,20 +337,34 @@ var flipping = {
                 child[i].style.order = row;
             }
         }
+//alert(self.decks.getElementsByClassName("front").length);
+        // sizes of cards content
+        /*        for (i = 0; i < self.decks.length; i++) {
+         self.decks[i].getElementsByClassName("front")[0].style.width = self.options["card-width"] + "px";
+         //  self.decks[i].style.height = self.options["card-height"] + "px";
 
-        if (opt["transition-duration"] > 0) {
-            self.options["transition-duration"] = opt["transition-duration"] / 1000 + "s";
-        }
+         }*/
 
-        self.card_html = "<div class='front' style='transition-duration:  " + self.options["transition-duration"] + "'></div><div class='back' style='transition-duration:  " + self.options["transition-duration"] + "'></div>";
+
+
+/*
+        [].forEach.call(self.flipping_cards.querySelectorAll('.deck *'), function (el) {
+            el.style.width = self.options["card-width"] + "px";
+            el.style.height = self.options["card-height"] + "px";
+        });*/
+
+
+
+
+        self.card_html = "<div style='width: " + self.options["card-width"] + "px; height: " + self.options["card-height"] + "px' class='front' style='transition-duration:  " + self.options["transition-duration"] + "'></div><div  style='width: " + self.options["card-width"] + "px; height: " + self.options["card-height"] + "px' class='back' style='transition-duration:  " + self.options["transition-duration"] + "'></div>";
 
     }
 
 
 };
 
-
-//export default flipping;
-if (typeof module === 'object') {
-    module.exports.flipping = flipping;
-}
+/*
+ //export default flipping;
+ if (typeof module === 'object') {
+ module.exports.flipping = flipping;
+ }*/

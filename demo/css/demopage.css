@@ -16,6 +16,7 @@ body * {
 
 }
 
+
 a:link, a:hover, a:visited {
     text-decoration: none;
     color: #1679d6;
@@ -61,6 +62,7 @@ section h2 {
     text-align: right
 
 }
+
 
 .flipping {
     margin-top: 20px;

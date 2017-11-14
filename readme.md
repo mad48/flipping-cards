@@ -33,5 +33,5 @@ MIT
 
 [//]: #
 
-[Demo]: <https://mad48.github.io/flipping-cards/demo/index.html>
+[Demo and usage]: <https://mad48.github.io/flipping-cards/demo/index.html>
 

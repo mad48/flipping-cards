@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Flipping Cards Carousel</title>
+
+    <link href="css/flipping.css" rel="stylesheet"/>
+    <script src='js/flipping.js' type='text/javascript'></script>
+
+</head>
+
+<body>
+
+
+<div id="flipping_cards" class="flipping">
+
+    <div>
+        <button>&#9668;</button>
+    </div>
+
+    <div class="slides">
+
+        <div class="deck">
+            <div><h2>Deep Blue <br>Sea</h2>
+                <h3>0</h3><img src="../demo/images/1.jpg"/>
+            </div>
+            <div><h3>1</h3><img src="../demo/images/4.jpg"/></div>
+            <div><h3>2</h3><img src="../demo/images/7.jpg"/></div>
+            <div><h3>3</h3><img src="../demo/images/10.jpg"/></div>
+            <div><h3>4</h3><img src="../demo/images/13.jpg"/></div>
+        </div>
+
+        <div class="deck">
+            <div>
+                <h2>Northern <br>Lights</h2>
+                <img src="../demo/images/2.jpg"/>
+            </div>
+            <div><img src="../demo/images/5.jpg"/></div>
+            <div><img src="../demo/images/8.jpg"/></div>
+            <div><img src="../demo/images/11.jpg"/></div>
+            <div><img src="../demo/images/14.jpg"/></div>
+        </div>
+
+        <div class="deck">
+            <div>
+                <h2>Over The <br>Mountains</h2>
+                <img src="../demo/images/3.jpg"/>
+            </div>
+            <div><img src="../demo/images/6.jpg"/></div>
+            <div><img src="../demo/images/9.jpg"/></div>
+            <div><img src="../demo/images/12.jpg"/></div>
+            <div><img src="../demo/images/15.jpg"/></div>
+        </div>
+
+
+        <div class="deck">
+            <div><img src="../demo/images/13.jpg"/></div>
+            <div><img src="../demo/images/10.jpg"/></div>
+            <div><img src="../demo/images/7.jpg"/></div>
+            <div><img src="../demo/images/4.jpg"/></div>
+            <div><img src="../demo/images/1.jpg"/></div>
+        </div>
+
+        <div class="deck">
+            <div><img src="../demo/images/14.jpg"/></div>
+            <div><img src="../demo/images/11.jpg"/></div>
+            <div><img src="../demo/images/8.jpg"/></div>
+            <div><img src="../demo/images/5.jpg"/></div>
+            <div><img src="../demo/images/2.jpg"/></div>
+        </div>
+
+        <div class="deck">
+            <div><img src="../demo/images/15.jpg"/></div>
+            <div><img src="../demo/images/12.jpg"/></div>
+            <div><img src="../demo/images/9.jpg"/></div>
+            <div><img src="../demo/images/6.jpg"/></div>
+            <div><img src="../demo/images/3.jpg"/></div>
+        </div>
+
+
+    </div>
+
+    <div>
+        <button>&#9658;</button>
+    </div>
+
+</div>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+
+        var options = {
+            "autoflip-mode": false,
+            "autoflip-delay": 1500,
+
+            "shadow": true,
+            "transition-duration": 700,
+
+            "rotation-mode": "simultaneous",
+            "sequential-delay": 600,
+
+            "card-width": 150,
+            "card-height": 180,
+
+            "cards-per-row": 3
+        };
+
+        flipping.init('flipping_cards', options);
+
+    });
+
+</script>
+
+
+</body>
+
+</html>

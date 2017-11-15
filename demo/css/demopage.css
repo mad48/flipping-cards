@@ -16,7 +16,6 @@ body * {
 
 }
 
-
 a:link, a:hover, a:visited {
     text-decoration: none;
     color: #1679d6;
@@ -63,7 +62,6 @@ section h2 {
 
 }
 
-
 .flipping {
     margin-top: 20px;
     margin-bottom: 20px
@@ -73,13 +71,58 @@ h4 {
     margin: 0 0 20px
 }
 
+/*-------------------------------------------------------------------------------------------*/
+
 .config {
     margin-left: 20px
 }
 
+.config input[type=text],
+.config input[type=date],
+.config input[type=datetime],
+.config input[type=number],
+.config input[type=search],
+.config input[type=time],
+.config input[type=url],
+.config input[type=email],
+textarea,
+select {
+    box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    border: 1px solid #BEBEBE;
+    padding: 2px;
+    margin: 0px;
+    -webkit-transition: all 0.30s ease-in-out;
+    -moz-transition: all 0.30s ease-in-out;
+    -ms-transition: all 0.30s ease-in-out;
+    -o-transition: all 0.30s ease-in-out;
+    outline: none;
+}
+
+.config input[type=text]:focus,
+.config input[type=date]:focus,
+.config input[type=datetime]:focus,
+.config input[type=number]:focus,
+.config input[type=search]:focus,
+.config input[type=time]:focus,
+.config input[type=url]:focus,
+.config input[type=email]:focus,
+.config textarea:focus,
+.config select:focus {
+    -moz-box-shadow: 0 0 8px #88D5E9;
+    -webkit-box-shadow: 0 0 8px #88D5E9;
+    box-shadow: 0 0 8px #88D5E9;
+    border: 1px solid #88D5E9;
+}
+
+/*-------------------------------------------------------------------------------------------*/
+
 pre.prettyprint {
     border: none !important
 }
+
+/*-------------------------------------------------------------------------------------------*/
 
 .options ul {
     list-style: none;
@@ -89,13 +132,38 @@ pre.prettyprint {
     line-height: 150%
 }
 
-.news {
+/*-------------------------------------------------------------------------------------------*/
+
+ul.news {
     list-style: none;
 }
 
-.news li {
+ul.news li {
+    margin-top: 20px;
     line-height: 150%
 }
+
+ul.news li .time {
+    display: inline-block;
+    width: 120px
+}
+
+ul.news li .version {
+    display: inline
+}
+
+ul.news li .time:before {
+    font-family: fontawesome;
+    font-weight: normal;
+    margin-right: 10px;
+    content: "\f274";
+}
+
+ul.news li .text {
+    margin-left: 125px
+}
+
+/*-------------------------------------------------------------------------------------------*/
 
 *,
 *:before,
@@ -237,7 +305,7 @@ pre.prettyprint {
 
 .tabs > input:checked + label {
     color: #555;
-    border-top: 1px solid #1679d6;
+    border-top: 1px solid #88D5E9;
     border-bottom: 1px solid #fff;
     background: #fff;
 }

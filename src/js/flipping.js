@@ -149,7 +149,7 @@ var flipping = {
 
         if (x < self.options["card-width"] / 2) self.buttons[0].click();
         if (x >= self.options["card-width"] / 2) self.buttons[1].click();
-;
+        ;
     },
 
 
@@ -319,13 +319,9 @@ var flipping = {
         //console.log("self.options[number-of-rows] = " + self.options["number-of-rows"]);
 
 
-
-
         // width of cards container
         self.slides.style.width = ( self.options["card-width"] + 30) * self.options["cards-per-row"] + "px";
 
-        console.log(" self.slides.style.width= " + ( self.options["card-width"] + 30) * self.options["cards-per-row"] + "px");
-        console.log("  self.options[card-width]= " + self.options["card-width"]);
 
         [].forEach.call(self.flipping_cards.querySelectorAll('.deck'), function (el) {
             el.style.order = "";
@@ -337,23 +333,15 @@ var flipping = {
                 child[i].style.order = row;
             }
         }
-//alert(self.decks.getElementsByClassName("front").length);
+
         // sizes of cards content
-        /*        for (i = 0; i < self.decks.length; i++) {
-         self.decks[i].getElementsByClassName("front")[0].style.width = self.options["card-width"] + "px";
-         //  self.decks[i].style.height = self.options["card-height"] + "px";
-
-         }*/
-
-
-
-/*
-        [].forEach.call(self.flipping_cards.querySelectorAll('.deck *'), function (el) {
-            el.style.width = self.options["card-width"] + "px";
-            el.style.height = self.options["card-height"] + "px";
-        });*/
-
-
+        for (i = 0; i < self.decks.length; i++) {
+            var el = self.decks[i].getElementsByTagName("div");
+            for (var j = 0; j < 2; j++) {
+                el[j].style.width = self.options["card-width"] + "px";
+                el[j].style.height = self.options["card-height"] + "px";
+            }
+        }
 
 
         self.card_html = "<div style='width: " + self.options["card-width"] + "px; height: " + self.options["card-height"] + "px' class='front' style='transition-duration:  " + self.options["transition-duration"] + "'></div><div  style='width: " + self.options["card-width"] + "px; height: " + self.options["card-height"] + "px' class='back' style='transition-duration:  " + self.options["transition-duration"] + "'></div>";
@@ -363,8 +351,8 @@ var flipping = {
 
 };
 
-/*
- //export default flipping;
- if (typeof module === 'object') {
- module.exports.flipping = flipping;
- }*/
+
+//export default flipping;
+if (typeof module === 'object') {
+    module.exports.flipping = flipping;
+}

@@ -44,13 +44,10 @@ var flipping = {
         self.buttons = self.flipping_cards.getElementsByTagName('button');
         self.decks = self.flipping_cards.getElementsByClassName('deck');
 
-        self.configure(opt);
-
 
         //get content
         var divs = null;
         for (i = 0; i < self.decks.length; i++) {
-
             self.content[i] = [];
             self.content_index[i] = 0;
             self.last_dir[i] = 1;
@@ -59,8 +56,13 @@ var flipping = {
 
             for (var j = 0; j < divs.length; j++) {
                 self.content[i][j] = divs[j].innerHTML;
-
             }
+        }
+
+        self.configure(opt);
+
+        //put content
+        for (i = 0; i < self.decks.length; i++) {
 
             self.decks[i].innerHTML = self.card_html;
 
@@ -69,6 +71,7 @@ var flipping = {
                     self.clickOnDeck(self.decks[i]);
                 }
             }(i);
+
         }
 
 
@@ -219,6 +222,7 @@ var flipping = {
     flip: function (num, dir) {
         var self = this;
 
+
         var i_front = self.content_index[num];
         var i_back = self.next(self.content_index[num], self.content[num].length, dir);
 
@@ -229,8 +233,9 @@ var flipping = {
         front.innerHTML = self.content[num][i_front];
         back.innerHTML = self.content[num][i_back];
 
-        front.style.transitionDuration = self.options["transition-duration"] ;
-        back.style.transitionDuration = self.options["transition-duration"] ;
+
+        front.style.transitionDuration = self.options["transition-duration"];
+        back.style.transitionDuration = self.options["transition-duration"];
 
         if (self.browser == 'safari') {
             front.style.webkitTransform = 'rotateY(' + (-1 * dir * 180) + 'deg)';
@@ -246,8 +251,10 @@ var flipping = {
 
                 var deck = self.decks[num];
 
-// especially for safari
+
+                // especially for safari
                 self.card_html = "<div style='width: " + self.options["card-width"] + "px; height: " + self.options["card-height"] + "px' class='front' style='transition-duration:  " + self.options["transition-duration"] + "'></div><div  style='width: " + self.options["card-width"] + "px; height: " + self.options["card-height"] + "px' class='back back" + dir + "' style='transition-duration:  " + self.options["transition-duration"] + "'></div>";
+
 
                 deck.innerHTML = self.card_html;
 
@@ -264,6 +271,7 @@ var flipping = {
                  back.style.transform = 'rotateY(' + (1 * dir * 180) + 'deg)';
                  }
                  */
+                // console.log(self.content[num][i_back]);
             }
             self.content_index[num] = i_back;
             self.last_dir[num] = dir;
@@ -315,7 +323,6 @@ var flipping = {
         // transition for transition
         if (opt["transition-duration"] > 0) {
             self.options["transition-duration"] = opt["transition-duration"] / 1000 + "s";
-            console.log(self.options["transition-duration"] );
         }
 
         // card size
@@ -363,20 +370,25 @@ var flipping = {
         }
 
 
-        /*        // sizes of cards content
-         for (i = 0; i < self.decks.length; i++) {
-         var el = self.decks[i].getElementsByTagName("div");
-         for (var j = 0; j < 2; j++) {
-         el[j].style.width = self.options["card-width"] + "px";
-         el[j].style.height = self.options["card-height"] + "px";
-         }
-         }*/
+        // sizes of cards content
+        for (i = 0; i < self.decks.length; i++) {
+            var el = self.decks[i].getElementsByTagName("div");
+            for (var j = 0; j < 2; j++) {
+                el[j].style.width = self.options["card-width"] + "px";
+                el[j].style.height = self.options["card-height"] + "px";
+            }
+        }
 
-        [].forEach.call(self.flipping_cards.querySelectorAll('.deck *'), function (el) {
-            el.style.width = self.options["card-width"] + "px";
-            el.style.height = self.options["card-height"] + "px";
+        /*       self.flipping_cards.querySelectorAll('.deck *').forEach(function (el) {
+         el.style.width = self.options["card-width"] + "px";
+         el.style.height = self.options["card-height"] + "px";
+         });*/
 
-        });
+        /*        [].forEach.call(self.flipping_cards.querySelectorAll('.deck *'), function (el) {
+         el.style.width = self.options["card-width"] + "px";
+         el.style.height = self.options["card-height"] + "px";
+
+         });*/
 
 
         self.card_html = "<div style='width: " + self.options["card-width"] + "px; height: " + self.options["card-height"] + "px' class='front' style='transition-duration:  " + self.options["transition-duration"] + "'></div><div  style='width: " + self.options["card-width"] + "px; height: " + self.options["card-height"] + "px' class='back' style='transition-duration:  " + self.options["transition-duration"] + "'></div>";

@@ -8,7 +8,7 @@ body {
 body {
     font-size: 14px;
     color: #555;
-    background: #fafafa;
+ /*   background: #fafafa;*/
 }
 
 body * {
@@ -27,7 +27,7 @@ h1 {
     text-align: center;
 }
 
-.config-container {
+/*.config-container {
     width: 100%;
     height: 100%;
     display: flex;
@@ -35,21 +35,34 @@ h1 {
     align-content: center;
     justify-content: center;
     overflow: auto;
-}
+}*/
 
 .config {
     font-size: 15px;
 }
 
-.options, .usage {
-
+section .options, .usage,.config-container   {
+    width: 50%;
+    margin:0 auto;
 }
+
+
 
 section {
+    min-width:500px;
+    max-width: calc(100vw - 50px);
 
-    min-height: 700px;
 
+    margin: 0 auto;
+    padding: 15px;
+    background: #fff;
+    border: 1px solid #ddd;
+    margin-bottom: 20px;
+
+    clear: both
 }
+
+
 
 section h2 {
     margin: 20px 0;
@@ -132,36 +145,7 @@ pre.prettyprint {
     line-height: 150%
 }
 
-/*-------------------------------------------------------------------------------------------*/
 
-ul.news {
-    list-style: none;
-}
-
-ul.news li {
-    margin-top: 20px;
-    line-height: 150%
-}
-
-ul.news li .time {
-    display: inline-block;
-    width: 120px
-}
-
-ul.news li .version {
-    display: inline
-}
-
-ul.news li .time:before {
-    font-family: fontawesome;
-    font-weight: normal;
-    margin-right: 10px;
-    content: "\f274";
-}
-
-ul.news li .text {
-    margin-left: 125px
-}
 
 /*-------------------------------------------------------------------------------------------*/
 
@@ -199,34 +183,7 @@ ul.news li .text {
 /* Конец стилей демо-страницы */
 /* Базовый контейнер табов */
 
-.tabs {
-    min-width: 320px;
-    max-width: 1000px;
-    padding: 0px;
-    margin: 0 auto;
 
-}
-
-/* Стили секций с содержанием */
-
-.tabs > section {
-    display: none;
-    padding: 15px;
-    background: #fff;
-    border: 1px solid #ddd;
-}
-
-.tabs > section > * {
-
-    color: #383838;
-    /* прикрутим анимацию */
-    -webkit-animation-duration: 0.5s;
-    animation-duration: 0.5s;
-    -webkit-animation-fill-mode: both;
-    animation-fill-mode: both;
-    -webkit-animation-name: fadeIn;
-    animation-name: fadeIn;
-}
 
 /* Описываем анимацию свойства opacity */
 
@@ -253,94 +210,4 @@ ul.news li .text {
 .tabs > input {
     display: none;
     position: absolute;
-}
-
-/* Стили переключателей вкладок (табов) */
-
-.tabs > label {
-    display: inline-block;
-    margin: 0 0 -1px;
-    padding: 10px 25px;
-    font-weight: 600;
-    text-align: center;
-    color: #aaa;
-    border: 0px solid #ddd;
-    border-width: 1px 1px 1px 1px;
-    background: #f1f1f1;
-    border-radius: 3px 3px 0 0;
-}
-
-/* Шрифт-иконки от Font Awesome в формате Unicode */
-
-.tabs > label:before {
-    font-family: fontawesome;
-    font-weight: normal;
-    margin-right: 10px;
-}
-
-.tabs > label[for*="1"]:before {
-    content: "\f046";
-}
-
-.tabs > label[for*="2"]:before {
-    content: "\f1c9";
-}
-
-.tabs > label[for*="3"]:before {
-    content: "\f1ea ";
-}
-
-.tabs > label[for*="4"]:before {
-    content: "\f019";
-}
-
-/* Изменения стиля переключателей вкладок при наведении */
-
-.tabs > label:hover {
-    color: #888;
-    cursor: pointer;
-}
-
-/* Стили для активной вкладки */
-
-.tabs > input:checked + label {
-    color: #555;
-    border-top: 1px solid #88D5E9;
-    border-bottom: 1px solid #fff;
-    background: #fff;
-}
-
-/* Активация секций с помощью псевдокласса :checked */
-
-#tab1:checked ~ #content-tab1,
-#tab2:checked ~ #content-tab2,
-#tab3:checked ~ #content-tab3,
-#tab4:checked ~ #content-tab4 {
-    display: block;
-    height: 100%;
-}
-
-/* Убираем текст с переключателей
-* и оставляем иконки на малых экранах
-*/
-
-@media screen and (max-width: 680px) {
-    .tabs > label {
-        font-size: 0;
-    }
-
-    .tabs > label:before {
-        margin: 0;
-        font-size: 18px;
-    }
-}
-
-/* Изменяем внутренние отступы
-*  переключателей для малых экранов
-*/
-
-@media screen and (max-width: 400px) {
-    .tabs > label {
-        padding: 15px;
-    }
 }

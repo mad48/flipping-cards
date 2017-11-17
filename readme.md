@@ -17,7 +17,7 @@ For using Flipping Cards Carousel on a web page use linking to the library and t
 
 ```html
     <link rel="stylesheet" href="/path/to/styles/flipping.css"/>
-    <script src='./path/to/flipping.js'></script>
+    <script src='/path/to/flipping.js'></script>
 ```
 
 On the page put the code for the carousel. For example:
@@ -45,8 +45,6 @@ On the page put the code for the carousel. For example:
                         <img src="images/pic3.jpg"/>
                     </div>
                 </div>
-
-                ...
 
             </div>
 

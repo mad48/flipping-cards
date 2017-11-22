@@ -1,0 +1,81 @@
+/* content styles ----------------------------------------------------------------------*/
+
+.flipping .slides div.deck {
+
+  img {
+    height: 100%;
+    width: 100%;
+  }
+  
+  * {
+    text-align: center;
+    ma4rgin-bottom: -4px;
+    border-radius: 10px;
+    min-height: 180px;
+    height: 100%;
+    width: 100%;
+    /* min-width: 150px*/
+  }
+
+  h2, h3 {
+    position: absolute;
+    width: 100%;
+    line-height: normal;
+    color: #ffffff;
+    font-size: 1.3rem;
+    text-shadow: 1px 1px 2px black, 0 0 1em rgba(0, 6, 22, 0.67);
+    /* border: 1px solid red;*/
+
+  }
+
+  h2 {
+    margin-top: 30px;
+  }
+
+  h3 {
+    margin-top: 130px;
+  }
+
+  h3 {
+    display: none
+  }
+
+  .readmore {
+    position: absolute;
+    width: 100%;
+    text-align: center;
+    /*    border: 1px solid red;*/
+    margin-top: 130px;
+    a {
+      display: inline;
+
+      line-height: normal;
+
+      box-shadow: 0 1px 1px rgba(0, 0, 0, 0.1);
+      text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.2);
+      border: 2px solid rgba(255, 255, 255, 0.8);
+      font-size: 16px;
+
+      background: #3b9dc8;
+      color: #fff;
+
+      padding: 9px 20px 9px 20px;
+      border-radius: 40px !important;;
+
+      transition: background ease .3s;
+
+      &:hover {
+        background-color: #00b3d7;
+      }
+
+      &:link, a:hover, a:visited {
+        cursor: hand;
+        text-decoration: none;
+        color: #fff;
+      }
+
+    }
+
+  }
+
+}

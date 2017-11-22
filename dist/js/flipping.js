@@ -20,9 +20,10 @@ var flipping = {
         "autoflip-delay": 1500,
 
         "shadow": true,
+        "transition-duration": 700,
 
         "rotation-mode": "simultaneous",
-        "sequential-delay": 0,
+        "sequential-delay": 600,
 
         "card-width": 200,
         "card-height": 200,
@@ -34,8 +35,8 @@ var flipping = {
 
     init: function (elem, opt) {
         var self = this;
+        self.browser = self.getBrowser();
 
-        self.browser = getBrowser().browser;
         var i = 0;
 
         self.flipping_cards = document.getElementById(elem);
@@ -66,11 +67,11 @@ var flipping = {
 
             self.decks[i].innerHTML = self.card_html;
 
-            self.decks[i].onclick = function (i) {
-                return function () {
-                    self.clickOnDeck(self.decks[i]);
-                }
-            }(i);
+            /*            self.decks[i].onclick = function (i) {
+             return function () {
+             self.clickOnDeck(self.decks[i]);
+             }
+             }(i);*/
 
         }
 
@@ -81,24 +82,13 @@ var flipping = {
             var back = self.decks[i].getElementsByClassName('back')[0];
             front.innerHTML = self.content[i][0];
             back.innerHTML = self.content[i][1];
-
             back.classList.add("back1");
-            /*
-             if (self.browser == 'safari') {
-
-             back.style.webkitTransform = 'rotateY(' + (180) + 'deg)';
-
-             }
-             else {
-             back.style.transform = 'rotateY(' + (180) + 'deg)';
-             }*/
         }
 
 
         // on deactivate window
         window.onblur = function () {
             self.autoflip(false);
-
             //self.paused = true;
         };
         window.onfocus = function () {
@@ -126,7 +116,7 @@ var flipping = {
             [].forEach.call(self.flipping_cards.getElementsByTagName('button'), function (el) {
                 el.style.textShadow = "none";
             });
-            self.flipping_cards.querySelectorAll('.front, .back').forEach(function (el) {
+            [].forEach.call(self.flipping_cards.querySelectorAll('.front, .back'), function (el) {
                 el.style.boxShadow = "none";
             });
         }
@@ -156,16 +146,16 @@ var flipping = {
         var x = 0;
         var y = 0;
 
-        var event = event || window.event;
-
-        if (typeof event == "undefined") return;
+        var ev = event || window.event;
+        //alert(ev.target.tagName);
+        if (typeof ev == "undefined") return;
 
         if (document.attachEvent != null) { // Internet Explorer & Opera
             x = window.event.clientX + (document.documentElement.scrollLeft ? document.documentElement.scrollLeft : document.body.scrollLeft);
             y = window.event.clientY + (document.documentElement.scrollTop ? document.documentElement.scrollTop : document.body.scrollTop);
         } else if (!document.attachEvent && document.addEventListener) { // Gecko
-            x = event.clientX + window.scrollX;
-            y = event.clientY + window.scrollY;
+            x = ev.clientX + window.scrollX;
+            y = ev.clientY + window.scrollY;
         }
 
         x = x - el.offsetLeft;
@@ -222,22 +212,22 @@ var flipping = {
     flip: function (num, dir) {
         var self = this;
 
-
         var i_front = self.content_index[num];
         var i_back = self.next(self.content_index[num], self.content[num].length, dir);
 
         var deck = self.decks[num];
-        var front = deck.getElementsByTagName('div')[0];
-        var back = deck.getElementsByTagName('div')[1];
+
+        var front = deck.getElementsByClassName('front')[0];
+        var back = deck.getElementsByClassName('back')[0];
+
 
         front.innerHTML = self.content[num][i_front];
         back.innerHTML = self.content[num][i_back];
 
-
         front.style.transitionDuration = self.options["transition-duration"];
         back.style.transitionDuration = self.options["transition-duration"];
 
-        if (self.browser == 'safari') {
+        if (self.browser == "safari") {
             front.style.webkitTransform = 'rotateY(' + (-1 * dir * 180) + 'deg)';
             back.style.webkitTransform = 'rotateY(' + 0 + 'deg)';
         } else {
@@ -245,34 +235,23 @@ var flipping = {
             back.style.transform = 'rotateY(' + 0 + 'deg)';
         }
 
-        back.addEventListener(self.browser == 'safari' ? 'webkitTransitionEnd' : 'transitionend', function (event) {
+        back.addEventListener(self.browser == "safari" ? 'webkitTransitionEnd' : 'transitionend', function (event) {
 
             if (event.propertyName == 'transform' || event.propertyName == "-webkit-transform") {
 
                 var deck = self.decks[num];
 
-
                 // especially for safari
                 self.card_html = "<div style='width: " + self.options["card-width"] + "px; height: " + self.options["card-height"] + "px' class='front' style='transition-duration:  " + self.options["transition-duration"] + "'></div><div  style='width: " + self.options["card-width"] + "px; height: " + self.options["card-height"] + "px' class='back back" + dir + "' style='transition-duration:  " + self.options["transition-duration"] + "'></div>";
 
-
                 deck.innerHTML = self.card_html;
 
-                var front = deck.getElementsByTagName('div')[0];
-                var back = deck.getElementsByTagName('div')[1];
+                var front = deck.getElementsByClassName('front')[0];
+                //var back = deck.getElementsByTagName('div')[1];
                 front.innerHTML = self.content[num][i_back];
 
-                //back.classList.add("back"+dir);
-
-                /*               if (self.browser == 'safari') {
-                 back.style.webkitTransform = 'rotateY(' + (1 * dir * 180) + 'deg)';
-                 }
-                 else {
-                 back.style.transform = 'rotateY(' + (1 * dir * 180) + 'deg)';
-                 }
-                 */
-                // console.log(self.content[num][i_back]);
             }
+
             self.content_index[num] = i_back;
             self.last_dir[num] = dir;
         });
@@ -293,12 +272,16 @@ var flipping = {
         }
     },
 
+    getBrowser: function () {
+        if (navigator.userAgent.search(/Safari/) > -1) return "safari";
+        else return "";
+    },
 // ---------------------------------------------------------------------------------------------
     configure: function (opt) {
         /* options */
         var self = this;
 
-        console.log("configure");
+        //console.log("configure");
 
         if (opt["autoflip-mode"] == false) {
             self.options["autoflip-mode"] = false;
@@ -379,18 +362,6 @@ var flipping = {
             }
         }
 
-        /*       self.flipping_cards.querySelectorAll('.deck *').forEach(function (el) {
-         el.style.width = self.options["card-width"] + "px";
-         el.style.height = self.options["card-height"] + "px";
-         });*/
-
-        /*        [].forEach.call(self.flipping_cards.querySelectorAll('.deck *'), function (el) {
-         el.style.width = self.options["card-width"] + "px";
-         el.style.height = self.options["card-height"] + "px";
-
-         });*/
-
-
         self.card_html = "<div style='width: " + self.options["card-width"] + "px; height: " + self.options["card-height"] + "px' class='front' style='transition-duration:  " + self.options["transition-duration"] + "'></div><div  style='width: " + self.options["card-width"] + "px; height: " + self.options["card-height"] + "px' class='back' style='transition-duration:  " + self.options["transition-duration"] + "'></div>";
 
     }
@@ -403,81 +374,3 @@ var flipping = {
 if (typeof module === 'object') {
     module.exports.flipping = flipping;
 }
-
-
-function getBrowser() {
-    var ua = navigator.userAgent;
-
-    var bName = function () {
-        if (ua.search(/Edge/) > -1) return "edge";
-        if (ua.search(/MSIE/) > -1) return "ie";
-        if (ua.search(/Trident/) > -1) return "ie11";
-        if (ua.search(/Firefox/) > -1) return "firefox";
-        if (ua.search(/Opera/) > -1) return "opera";
-        if (ua.search(/OPR/) > -1) return "operaWebkit";
-        if (ua.search(/YaBrowser/) > -1) return "yabrowser";
-        if (ua.search(/Chrome/) > -1) return "chrome";
-        if (ua.search(/Safari/) > -1) return "safari";
-        if (ua.search(/Maxthon/) > -1) return "maxthon";
-    }();
-
-    var version;
-    switch (bName) {
-        case "edge":
-            version = (ua.split("Edge")[1]).split("/")[1];
-            break;
-        case "ie":
-            version = (ua.split("MSIE ")[1]).split(";")[0];
-            break;
-        case "ie11":
-            bName = "ie";
-            version = (ua.split("; rv:")[1]).split(")")[0];
-            break;
-        case "firefox":
-            version = ua.split("Firefox/")[1];
-            break;
-        case "opera":
-            version = ua.split("Version/")[1];
-            break;
-        case "operaWebkit":
-            bName = "opera";
-            version = ua.split("OPR/")[1];
-            break;
-        case "yabrowser":
-            version = (ua.split("YaBrowser/")[1]).split(" ")[0];
-            break;
-        case "chrome":
-            version = (ua.split("Chrome/")[1]).split(" ")[0];
-            break;
-        case "safari":
-            version = (ua.split("Version/")[1]).split(" ")[0];
-            break;
-        case "maxthon":
-            version = ua.split("Maxthon/")[1];
-            break;
-    }
-
-    var platform = 'desktop';
-    if (/iphone|ipad|ipod|android|blackberry|mini|windows\sce|palm/i.test(navigator.userAgent.toLowerCase())) platform = 'mobile';
-
-    var browsrObj;
-
-    try {
-        browsrObj = {
-            platform: platform,
-            browser: bName,
-            versionFull: version,
-            versionShort: version.split(".")[0]
-        };
-    } catch (err) {
-        browsrObj = {
-            platform: platform,
-            browser: 'unknown',
-            versionFull: 'unknown',
-            versionShort: 'unknown'
-        };
-    }
-
-    return browsrObj;
-}
-

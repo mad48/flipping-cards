@@ -16,7 +16,7 @@ body * {
 
 }
 
-a:link, a:hover, a:visited {
+section a:link, a:hover, a:visited {
     text-decoration: none;
     color: #1679d6;
 }
@@ -148,6 +148,7 @@ pre.prettyprint {
 
 
 /*-------------------------------------------------------------------------------------------*/
+/*
 
 *,
 *:before,
@@ -156,6 +157,7 @@ pre.prettyprint {
     padding: 0;
     box-sizing: border-box;
 }
+*/
 
 .container {
     max-width: 980px;
@@ -184,8 +186,9 @@ pre.prettyprint {
 /* Базовый контейнер табов */
 
 
+/*
 
-/* Описываем анимацию свойства opacity */
+!* Описываем анимацию свойства opacity *!
 
 @-webkit-keyframes fadeIn {
     from {
@@ -205,9 +208,13 @@ pre.prettyprint {
     }
 }
 
-/* Прячем чекбоксы */
+!* Прячем чекбоксы *!
 
 .tabs > input {
     display: none;
     position: absolute;
 }
+*/
+
+
+

@@ -2,6 +2,8 @@
 
 Flipping Cards Carousel
 
+### [Demo and usage]
+
 **Supports:**
 
 - Forward / backward flip
@@ -95,8 +97,8 @@ document.addEventListener("DOMContentLoaded", function () {
 - `card-height` : [num] - Card height
 
 
-#### [Demo and usage]
 
+## Demo
 
 **To run demo locally:**
 

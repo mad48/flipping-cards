@@ -57,7 +57,7 @@ On the page put the code for the carousel. For example:
         </div>
 ```
 
-The block `<div class="deck">` is a deck of cards. You can add multiple decks. Inside it, each card is a `div` element with your custom html content.
+The block `<div class="card-deck">` is a deck of cards. You can add multiple decks. Inside it, each card is a `div` element with your custom html content.
 
 ## Initialization
 

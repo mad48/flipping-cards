@@ -1,11 +1,12 @@
 var flipping = {
 
     flipping_cards: null,
-    slides: null,
+    box: null,
     decks: null,
     buttons: null,
     browser: null,
 
+    direction: 1,
     last_dir: [],
     card_html: null,
 
@@ -40,10 +41,10 @@ var flipping = {
         var i = 0;
 
         self.flipping_cards = document.getElementById(elem);
-        self.slides = flipping_cards.getElementsByClassName('slides')[0];
+        self.box = flipping_cards.getElementsByClassName('card-box')[0];
         self.flipping_cards.style.visibility = 'visible';
         self.buttons = self.flipping_cards.getElementsByTagName('button');
-        self.decks = self.flipping_cards.getElementsByClassName('deck');
+        self.decks = self.flipping_cards.getElementsByClassName('card-deck');
 
 
         //get content
@@ -98,43 +99,68 @@ var flipping = {
 
         // add suspend actions if automatic flipping is enabled
 
-        /*
-         self.flipping_cards.onmouseover = function () {
-         self.autoflip(false);
-         //self.paused = true;
-         };
-         self.flipping_cards.onmouseout = function () {
-         //self.paused = false;
-         self.autoflip(true);
-         };
-         */
+
+/*        self.flipping_cards.onmouseover = function () {
+            self.autoflip(false);
+            //self.paused = true;
+        };
+        self.flipping_cards.onmouseout = function () {
+            //self.paused = false;
+            self.autoflip(true);
+        };*/
 
 
-        /* shadow */
+        /*        self.buttons[0].addEventListener('touchend', function (event) {
+         self.sequential(-1);
+         }, false);
+         self.buttons[1].addEventListener('touchend', function (event) {
+         self.sequential(1);
+         }, false);*/
 
-        if (self.options["shadow"] === false) {
-            [].forEach.call(self.flipping_cards.getElementsByTagName('button'), function (el) {
-                el.style.textShadow = "none";
-            });
-            [].forEach.call(self.flipping_cards.querySelectorAll('.front, .back'), function (el) {
-                el.style.boxShadow = "none";
-            });
-        }
-
-        self.buttons[0].addEventListener('touchend', function (event) {
-            self.sequential(-1);
-        }, false);
-        self.buttons[1].addEventListener('touchend', function (event) {
-            self.sequential(1);
-        }, false);
 
         self.buttons[0].onclick = function () {
-            self.sequential(-1);
-        };
-        self.buttons[1].onclick = function () {
-            self.sequential(1);
+
+            if (self.direction != -1) {
+
+                var backs = self.flipping_cards.getElementsByClassName('back');
+                for (i = 0; i < backs.length; i++) {
+                    backs[i].style.display = "none";
+                    backs[i].classList.remove('back1');
+                    backs[i].classList.add("back-1");
+                }
+                setTimeout(function () {
+                    for (i = 0; i < backs.length; i++) {
+                        backs[i].style.display = "block";
+                    }
+                    self.sequential(-1);
+
+                }, 100);
+            }
+            else self.sequential(-1);
         };
 
+
+        self.buttons[1].onclick = function () {
+
+            if (self.direction != 1) {
+
+                var backs = self.flipping_cards.getElementsByClassName('back');
+                for (i = 0; i < backs.length; i++) {
+                    backs[i].style.display = "none";
+                    backs[i].classList.remove('back-1');
+                    backs[i].classList.add("back1");
+                }
+                setTimeout(function () {
+                    for (i = 0; i < backs.length; i++) {
+                        backs[i].style.display = "block";
+                    }
+                    self.sequential(1);
+
+                }, 100);
+
+            }
+            else self.sequential(1);
+        };
 
     },
 
@@ -179,10 +205,10 @@ var flipping = {
         var i = 0;
 
         self.buttonsoff(true);
-
+        var paus_ = self.options["rotation-mode"] == "sequential" ? self.options["sequential-delay"] * self.decks.length : self.options["transition-duration"];
         setTimeout(function () {
             self.buttonsoff(false);
-        }, self.options["sequential-delay"] * self.decks.length);
+        }, paus_);
 
 
         for (i = 0; i < self.decks.length; i++) {
@@ -224,8 +250,8 @@ var flipping = {
         front.innerHTML = self.content[num][i_front];
         back.innerHTML = self.content[num][i_back];
 
-        front.style.transitionDuration = self.options["transition-duration"];
-        back.style.transitionDuration = self.options["transition-duration"];
+        front.style.transitionDuration = self.options["transition-duration"] + "ms";
+        back.style.transitionDuration = self.options["transition-duration"] + "ms";
 
         if (self.browser == "safari") {
             front.style.webkitTransform = 'rotateY(' + (-1 * dir * 180) + 'deg)';
@@ -242,7 +268,7 @@ var flipping = {
                 var deck = self.decks[num];
 
                 // especially for safari
-                self.card_html = "<div style='width: " + self.options["card-width"] + "px; height: " + self.options["card-height"] + "px' class='front' style='transition-duration:  " + self.options["transition-duration"] + "'></div><div  style='width: " + self.options["card-width"] + "px; height: " + self.options["card-height"] + "px' class='back back" + dir + "' style='transition-duration:  " + self.options["transition-duration"] + "'></div>";
+                self.card_html = "<div style='width: " + self.options["card-width"] + "px; height: " + self.options["card-height"] + "px' class='front " + (self.options['shadow'] == true ? 'shadowon' : 'shadowoff') + "' style='transition-duration:  " + self.options["transition-duration"] + "ms'></div><div  style='width: " + self.options["card-width"] + "px; height: " + self.options["card-height"] + "px' class='back back" + dir + " " + (self.options['shadow'] == true ? 'shadowon' : 'shadowoff') + "' style='transition-duration:  " + self.options["transition-duration"] + "ms'></div>";
 
                 deck.innerHTML = self.card_html;
 
@@ -254,6 +280,7 @@ var flipping = {
 
             self.content_index[num] = i_back;
             self.last_dir[num] = dir;
+            self.direction = dir;
         });
 
 
@@ -300,12 +327,25 @@ var flipping = {
         // delay for next flip in auto mode
         if (opt["autoflip-delay"] != 0) self.options["autoflip-delay"] = opt["autoflip-delay"];
 
-        if (opt["shadow"] == false) self.options["shadow"] = false;
-        if (opt["shadow"] == true) self.options["shadow"] = true;
+        if (opt["shadow"] == false) {
+            self.options["shadow"] = false;
+            self.buttons[0].classList.remove("shadowon");
+            self.buttons[0].classList.add("shadowoff");
+            self.buttons[1].classList.remove("shadowon");
+            self.buttons[1].classList.add("shadowoff");
+        }
+
+        if (opt["shadow"] == true) {
+            self.options["shadow"] = true;
+            self.buttons[0].classList.remove("shadowoff");
+            self.buttons[0].classList.add("shadowon");
+            self.buttons[1].classList.remove("shadowoff");
+            self.buttons[1].classList.add("shadowon");
+        }
 
         // transition for transition
         if (opt["transition-duration"] > 0) {
-            self.options["transition-duration"] = opt["transition-duration"] / 1000 + "s";
+            self.options["transition-duration"] = opt["transition-duration"];
         }
 
         // card size
@@ -340,29 +380,32 @@ var flipping = {
         }
 
         // width of cards container
-        self.slides.style.width = ( self.options["card-width"] + 30) * self.options["cards-per-row"] + "px";
+        self.box.style.width = ( self.options["card-width"] + 30) * self.options["cards-per-row"] + "px";
 
         // clear previous clear="right"
-        [].forEach.call(self.flipping_cards.querySelectorAll('.deck'), function (el) {
+        [].forEach.call(self.flipping_cards.querySelectorAll('.card-deck'), function (el) {
             el.style.clear = "none";
         });
 
-        var child = self.flipping_cards.querySelectorAll('div.deck:nth-child(' + ( 1 + self.options["cards-per-row"] ) + 'n)');
+        var child = self.flipping_cards.querySelectorAll('div.card-deck:nth-child(' + ( 1 + self.options["cards-per-row"] ) + 'n)');
         for (var i = 0; i < child.length; i++) {
             child[i].style.clear = "right";
         }
 
 
-        // sizes of cards content
+        // sizes and shadows of cards content (after generation of .front, .back)
         for (i = 0; i < self.decks.length; i++) {
-            var el = self.decks[i].getElementsByTagName("div");
+            var el = self.decks[i].children;
             for (var j = 0; j < 2; j++) {
                 el[j].style.width = self.options["card-width"] + "px";
                 el[j].style.height = self.options["card-height"] + "px";
+                el[j].classList.remove('shadowon');
+                el[j].classList.remove('shadowoff');
+                el[j].classList.add(self.options['shadow'] ? 'shadowon' : 'shadowoff');
             }
         }
 
-        self.card_html = "<div style='width: " + self.options["card-width"] + "px; height: " + self.options["card-height"] + "px' class='front' style='transition-duration:  " + self.options["transition-duration"] + "'></div><div  style='width: " + self.options["card-width"] + "px; height: " + self.options["card-height"] + "px' class='back' style='transition-duration:  " + self.options["transition-duration"] + "'></div>";
+        self.card_html = "<div style='width: " + self.options["card-width"] + "px; height: " + self.options["card-height"] + "px' class='front  " + (self.options['shadow'] ? 'shadowon' : 'shadowoff') + "' style='transition-duration:  " + self.options["transition-duration"] + "ms'></div><div  style='width: " + self.options["card-width"] + "px; height: " + self.options["card-height"] + "px' class='back  " + (self.options['shadow'] ? 'shadowon' : 'shadowoff') + "' style='transition-duration:  " + self.options["transition-duration"] + "ms'></div>";
 
     }
 

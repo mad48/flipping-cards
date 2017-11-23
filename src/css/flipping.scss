@@ -14,7 +14,6 @@
       button {
         font-size: 3rem;
         color: #e7e7e7;
-        text-shadow: 0 2px 2px rgba(255, 255, 255, 0.7), 0 5px 6px rgba(0, 0, 0, 0.2);
         transform: scaleX(1.1);
         border: none;
         background: none;
@@ -33,15 +32,22 @@
         &:focus {
           outline: none;
         }
+
+      }
+      .shadowon {
+        text-shadow: 0 2px 2px rgba(255, 255, 255, 0.7), 0 5px 6px rgba(0, 0, 0, 0.2);
+      }
+      .shadowoff {
+        text-shadow: none;
       }
 
     }
 
   }
 
-  .slides {
+  .card-box {
 
-    .deck {
+    .card-deck {
 
       transform-style: preserve-3d;
       perspective: 1000px;
@@ -66,7 +72,6 @@
     }
 
     .front, .back {
-      box-shadow: 5px 5px 10px 5px rgba(0, 0, 0, .2);
       transition: transform;
       transition-duration: .7s;
       transition-timing-function: cubic-bezier(0.4, 0.2, 0.2, 1);
@@ -74,6 +79,13 @@
       transform-style: preserve-3d;
       backface-visibility: hidden;
       margin: 15px;
+
+    }
+    .shadowon {
+      box-shadow: 5px 5px 10px 5px rgba(0, 0, 0, .2);
+    }
+    .shadowoff {
+      box-shadow: none;
     }
 
   }

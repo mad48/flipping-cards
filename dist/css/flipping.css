@@ -12,7 +12,6 @@
     .flipping > div:first-child button, .flipping > div:last-child button {
       font-size: 3rem;
       color: #e7e7e7;
-      text-shadow: 0 2px 2px rgba(255, 255, 255, 0.7), 0 5px 6px rgba(0, 0, 0, 0.2);
       -webkit-transform: scaleX(1.1);
               transform: scaleX(1.1);
       border: none;
@@ -27,28 +26,30 @@
         text-shadow: 0 9px 19px rgba(0, 0, 0, 0.26); }
       .flipping > div:first-child button:focus, .flipping > div:last-child button:focus {
         outline: none; }
-  .flipping .slides .deck {
+    .flipping > div:first-child .shadowon, .flipping > div:last-child .shadowon {
+      text-shadow: 0 2px 2px rgba(255, 255, 255, 0.7), 0 5px 6px rgba(0, 0, 0, 0.2); }
+    .flipping > div:first-child .shadowoff, .flipping > div:last-child .shadowoff {
+      text-shadow: none; }
+  .flipping .card-box .card-deck {
     -webkit-transform-style: preserve-3d;
             transform-style: preserve-3d;
     -webkit-perspective: 1000px;
             perspective: 1000px;
     float: left;
     display: inline-block; }
-  .flipping .slides .back {
+  .flipping .card-box .back {
     position: absolute;
     top: 0;
     left: 0;
     /* transform: rotateY(180deg);*/
     /* safari*/ }
-  .flipping .slides .back1 {
+  .flipping .card-box .back1 {
     -webkit-transform: rotateY(180deg);
             transform: rotateY(180deg); }
-  .flipping .slides .back-1 {
+  .flipping .card-box .back-1 {
     -webkit-transform: rotateY(-180deg);
             transform: rotateY(-180deg); }
-  .flipping .slides .front, .flipping .slides .back {
-    -webkit-box-shadow: 5px 5px 10px 5px rgba(0, 0, 0, 0.2);
-            box-shadow: 5px 5px 10px 5px rgba(0, 0, 0, 0.2);
+  .flipping .card-box .front, .flipping .card-box .back {
     -webkit-transition: -webkit-transform;
     transition: -webkit-transform;
     transition: transform;
@@ -64,26 +65,31 @@
     -webkit-backface-visibility: hidden;
             backface-visibility: hidden;
     margin: 15px; }
+  .flipping .card-box .shadowon {
+    -webkit-box-shadow: 5px 5px 10px 5px rgba(0, 0, 0, 0.2);
+            box-shadow: 5px 5px 10px 5px rgba(0, 0, 0, 0.2); }
+  .flipping .card-box .shadowoff {
+    -webkit-box-shadow: none;
+            box-shadow: none; }
 
 /* IE9, IE10 */
 @media screen and (min-width: 0 \0 ) {
   .back {
     display: none; } }
 /* content styles ----------------------------------------------------------------------*/
-.flipping .slides div.deck img {
+.flipping .card-box div.card-deck img {
   height: 100%;
   width: 100%; }
 
-.flipping .slides div.deck * {
+.flipping .card-box div.card-deck * {
   text-align: center;
   ma4rgin-bottom: -4px;
   border-radius: 10px;
-  min-height: 180px;
-  height: 100%;
-  width: 100%;
+  /*  min-height: 180px;*/
+  /*height: 100%;*/
   /* min-width: 150px*/ }
 
-.flipping .slides div.deck h2, .flipping .slides div.deck h3 {
+.flipping .card-box div.card-deck h2, .flipping .card-box div.card-deck h3 {
   position: absolute;
   width: 100%;
   line-height: normal;
@@ -92,22 +98,22 @@
   text-shadow: 1px 1px 2px black, 0 0 1em rgba(0, 6, 22, 0.67);
   /* border: 1px solid red;*/ }
 
-.flipping .slides div.deck h2 {
+.flipping .card-box div.card-deck h2 {
   margin-top: 30px; }
 
-.flipping .slides div.deck h3 {
+.flipping .card-box div.card-deck h3 {
   margin-top: 130px; }
 
-.flipping .slides div.deck h3 {
+.flipping .card-box div.card-deck h3 {
   display: none; }
 
-.flipping .slides div.deck .readmore {
+.flipping .card-box div.card-deck .readmore {
   position: absolute;
-  width: 100%;
   text-align: center;
-  /*    border: 1px solid red;*/
-  margin-top: 130px; }
-  .flipping .slides div.deck .readmore a {
+  /*   border: 1px solid red;*/
+  top: 130px;
+  width: 100%; }
+  .flipping .card-box div.card-deck .readmore a {
     display: inline;
     line-height: normal;
     -webkit-box-shadow: 0 1px 1px rgba(0, 0, 0, 0.1);
@@ -121,9 +127,9 @@
     border-radius: 40px !important;
     -webkit-transition: background ease .3s;
     transition: background ease .3s; }
-    .flipping .slides div.deck .readmore a:hover {
+    .flipping .card-box div.card-deck .readmore a:hover {
       background-color: #00b3d7; }
-    .flipping .slides div.deck .readmore a:link, .flipping .slides div.deck .readmore a a:hover, .flipping .slides div.deck .readmore a a:visited {
+    .flipping .card-box div.card-deck .readmore a:link, .flipping .card-box div.card-deck .readmore a a:hover, .flipping .card-box div.card-deck .readmore a a:visited {
       cursor: hand;
       text-decoration: none;
       color: #fff; }

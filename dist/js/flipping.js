@@ -88,17 +88,6 @@ var flipping = {
             }
 
 
-            // on deactivate window
-            window.onblur = function () {
-                self.autoflip(false);
-                //self.paused = true;
-            };
-            window.onfocus = function () {
-                self.autoflip(true);
-                //self.paused = false;
-            };
-
-
             /*        self.buttons[0].addEventListener('touchend', function (event) {
              self.sequential(-1);
              }, false);
@@ -365,6 +354,15 @@ var flipping = {
                 };
 
             }
+
+
+            // on deactivate window
+            window.onblur = function () {
+                if (self.options["autoflip-mode"]) self.autoflip(false);
+            };
+            window.onfocus = function () {
+                if (self.options["autoflip-mode"]) self.autoflip(true);
+            };
 
 
             // card size

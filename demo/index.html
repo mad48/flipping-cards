@@ -40,7 +40,8 @@
             <div class="card-deck">
                 <div><h2>Deep Blue <br>Sea<br>1</h2>
                     <div class="readmore"><a href="#"
-                                              onclick="alert('More about -1- Lorem ipsum el dolor sit amet...'); return false">Read More</a></div>
+                                             onclick="alert('More about -1- Lorem ipsum el dolor sit amet...'); return false">Read
+                        More</a></div>
                     <h3>0</h3><img src="../demo/images/1.jpg"/>
 
                 </div>
@@ -177,8 +178,9 @@
                 "card-width": document.querySelector('#conf_card_width').value,
                 "card-height": document.querySelector('#conf_card_height').value,
 
-                 "shadow": document.querySelector('#conf_shadow').checked,
+                "shadow": document.querySelector('#conf_shadow').checked,
                 "transition-duration": document.querySelector('#conf_transition_duration').value,
+                "mouseover-pause": document.querySelector('#conf_mouseover').checked,
 
                 "rotation-mode": document.querySelector('input[name=conf_rotation]:checked').value,
                 "sequential-delay": document.querySelector('#conf_sequent').value
@@ -208,9 +210,11 @@
             var options = {
                 "autoflip-mode": false,
                 "autoflip-delay": 1500,
+                "mouseover-pause": true,
 
                 "shadow": true,
                 "transition-duration": 700,
+
 
                 "rotation-mode": "simultaneous",
                 "sequential-delay": 600,
@@ -233,6 +237,7 @@
 
             document.querySelector('input[name=conf_transition_duration]').value = options["transition-duration"];
             document.querySelector('input[name=conf_shadow]').checked = options["shadow"];
+            document.querySelector('input[name=conf_mouseover]').checked = options["mouseover-pause"];
 
             /*        document.querySelector('input[name=conf_cards_per_row]').value = options["cards-per-row"];
              document.querySelector('input[name=conf_number_of_rows]').value = options["number-of-rows"];*/
@@ -277,6 +282,10 @@
 
             <label for="conf_autoflip_delay">Delay before the next set of cards in automatic mode</label>
             <input type="text" name="conf_autoflip_delay" id="conf_autoflip_delay" onkeyup="apply()"> ms
+            <br><br>
+
+            <input type="checkbox" name="conf_mouseover" id="conf_mouseover" onchange="apply()">
+            <label for="conf_mouseover">Pause on mouseover</label>
             <br><br>
 
             <label for="conf_card_width">Card size</label>
@@ -329,9 +338,11 @@
                    onkeyup="apply()">
             <br><br>
 
+
             <input type="checkbox" name="conf_shadow" id="conf_shadow" onchange="apply()">
             <label for="conf_shadow">Shadow</label> <br><br>
-            <br>
+
+
         </div>
     </div>
 </section>
@@ -383,6 +394,7 @@
 
             "autoflip-mode": false,
             "autoflip-delay": 1500,
+            "mouseover-pause": true,
 
             "shadow": true,
             "transition-duration": 700,
@@ -411,11 +423,13 @@
         <h2>Options description:</h2>
         <ul>
 
-            <li><b>autoflip-mode</b> : [true | false] - start flipping in automatic mode<br><!--Endless Loop-->
-            </li>
+            <li><b>autoflip-mode</b> : [true | false] - start flipping in automatic mode<br><!--Endless Loop--></li>
 
-            <li><b>autoflip-delay</b> : [ms] - delay before the next set of cards in automatic mode [ms]<br><br>
-            </li>
+
+            <li><b>autoflip-delay</b> : [ms] - delay before the next set of cards in automatic mode [ms]<br> </li>
+
+            <li><b>mouseover-pause</b> : [true | false] - pausing to flip when you hover over the cards<br><br></li>
+
 
             <li><b>shadow</b> : [true | false] - on/off shadow <br></li>
             <li><b>transition-duration</b> : [ms] - card flip transition duration <br><br></li>

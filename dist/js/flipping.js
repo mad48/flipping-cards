@@ -387,11 +387,13 @@ var flipping = {
 
             // cards-per-row or number-of-rows calculation
             if (opt["cards-per-row"] > 0) {
+                if (opt["cards-per-row"] > self.decks.length) opt["cards-per-row"] = self.decks.length;
                 self.options["cards-per-row"] = opt["cards-per-row"];
                 self.options["number-of-rows"] = Math.round(self.decks.length / self.options["cards-per-row"]);
             }
 
             if (opt["number-of-rows"] > 0) {
+                if (opt["number-of-rows"] > self.decks.length) opt["number-of-rows"] = self.decks.length;
                 self.options["number-of-rows"] = opt["number-of-rows"];
                 self.options["cards-per-row"] = Math.round(self.decks.length / self.options["number-of-rows"]);
             }

@@ -53,7 +53,9 @@
       perspective: 1000px;
       float: left;
       display: inline-block;
-
+      > div {
+      //  margin: 15px;
+      }
     }
 
     .back {
@@ -78,8 +80,6 @@
       transition-delay: 0s;
       transform-style: preserve-3d;
       backface-visibility: hidden;
-      margin: 15px;
-
     }
     .shadowon {
       box-shadow: 5px 5px 10px 5px rgba(0, 0, 0, .2);

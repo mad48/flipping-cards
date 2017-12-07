@@ -63,8 +63,7 @@
     -webkit-transform-style: preserve-3d;
             transform-style: preserve-3d;
     -webkit-backface-visibility: hidden;
-            backface-visibility: hidden;
-    margin: 15px; }
+            backface-visibility: hidden; }
   .flipping .card-box .shadowon {
     -webkit-box-shadow: 5px 5px 10px 5px rgba(0, 0, 0, 0.2);
             box-shadow: 5px 5px 10px 5px rgba(0, 0, 0, 0.2); }

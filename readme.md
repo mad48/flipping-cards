@@ -75,6 +75,8 @@ document.addEventListener("DOMContentLoaded", function () {
         "sequential-delay": 600,
         "card-width": 150,
         "card-height": 180,
+        "spacing-horizontal": 15,
+        "spacing-vertical": 15,
         "cards-per-row": 3
     };
 
@@ -93,9 +95,10 @@ document.addEventListener("DOMContentLoaded", function () {
 - `sequential-delay` : [ms] - sequential delay before neighboring cards flip
 - `cards-per-row` : [num] - Number of cards per row
 - `number-of-rows` : [num] - Number of rows
-- `card-width` : [num] - Card width
-- `card-height` : [num] - Card height
-
+- `card-width` : [px] - Card width
+- `card-height` : [px] - Card height
+- `spacing-horizontal` : [px] - Horizontal cards spacing
+- `spacing-vertical` : [px] - Vertical cards spacing
 
 
 ## Demo

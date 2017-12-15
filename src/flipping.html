@@ -22,9 +22,9 @@
         <button>&#9668;</button>
     </div>
 
-    <div class="slides">
+    <div class="card-box">
 
-        <div class="deck">
+        <div class="card-deck">
             <div><h2>Deep Blue <br>Sea</h2>
                 <h3>0</h3><img src="../demo/images/1.jpg"/>
             </div>
@@ -34,7 +34,7 @@
             <div><h3>4</h3><img src="../demo/images/13.jpg"/></div>
         </div>
 
-        <div class="deck">
+        <div class="card-deck">
             <div>
                 <h2>Northern <br>Lights</h2>
                 <img src="../demo/images/2.jpg"/>
@@ -45,7 +45,7 @@
             <div><img src="../demo/images/14.jpg"/></div>
         </div>
 
-        <div class="deck">
+        <div class="card-deck">
             <div>
                 <h2>Over The <br>Mountains</h2>
                 <img src="../demo/images/3.jpg"/>
@@ -57,7 +57,7 @@
         </div>
 
 
-        <div class="deck">
+        <div class="card-deck">
             <div><img src="../demo/images/13.jpg"/></div>
             <div><img src="../demo/images/10.jpg"/></div>
             <div><img src="../demo/images/7.jpg"/></div>
@@ -65,7 +65,7 @@
             <div><img src="../demo/images/1.jpg"/></div>
         </div>
 
-        <div class="deck">
+        <div class="card-deck">
             <div><img src="../demo/images/14.jpg"/></div>
             <div><img src="../demo/images/11.jpg"/></div>
             <div><img src="../demo/images/8.jpg"/></div>
@@ -73,7 +73,7 @@
             <div><img src="../demo/images/2.jpg"/></div>
         </div>
 
-        <div class="deck">
+        <div class="card-deck">
             <div><img src="../demo/images/15.jpg"/></div>
             <div><img src="../demo/images/12.jpg"/></div>
             <div><img src="../demo/images/9.jpg"/></div>
@@ -96,6 +96,7 @@
         var options = {
             "autoflip-mode": false,
             "autoflip-delay": 1500,
+            "mouseover-pause": true,
 
             "shadow": true,
             "transition-duration": 700,
@@ -105,6 +106,9 @@
 
             "card-width": 150,
             "card-height": 180,
+
+            "spacing-horizontal": 15,
+            "spacing-vertical": 15,
 
             "cards-per-row": 3
         };

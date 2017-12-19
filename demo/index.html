@@ -276,7 +276,7 @@
                 "mouseover-pause": document.querySelector('#conf_mouseover').checked,
 
                 "rotation-mode": document.querySelector('input[name=conf_rotation]:checked').value,
-                "sequential-delay": document.querySelector('#conf_sequent').value
+                "sequential-delay": document.querySelector('#conf_sequential_delay').value
 
                 /* "cards-per-row": document.querySelector('#conf_cards_per_row').value,
                  "number-of-rows": document.querySelector('#conf_number_of_rows').value
@@ -335,6 +335,8 @@
                 "cards-per-row": 3,
                 //"number-of-rows": 2,
 
+                "starting-cart-number":1
+
             };
 
 
@@ -350,6 +352,8 @@
             document.querySelector('input[name=conf_transition_duration]').value = options["transition-duration"];
             document.querySelector('input[name=conf_shadow]').checked = options["shadow"];
             document.querySelector('input[name=conf_mouseover]').checked = options["mouseover-pause"];
+
+            document.querySelector('input[name=conf_sequential_delay]').value = options["sequential-delay"];
 
             /*        document.querySelector('input[name=conf_cards_per_row]').value = options["cards-per-row"];
              document.querySelector('input[name=conf_number_of_rows]').value = options["number-of-rows"];*/
@@ -392,7 +396,7 @@
         <div class="config">
             <h2>Configuration:</h2>
 
-            Number of cards (for demo):
+            Number of decks of cards (for demo):
             <select name="conf_decks_count" onchange="apply()">
                 <option value="1">1</option>
                 <option value="2">2</option>
@@ -402,22 +406,25 @@
                 <option value="6">6</option>
             </select> <br><br>
 
-            Number of:
+            Number of decks:
             <select name="conf_cards_per_row" onchange="apply()">
-                <option name="conf_cards_per_row" value="cards-per-row">cards per row</option>
+                <option name="conf_cards_per_row" value="cards-per-row">per row</option>
                 <option name="conf_number_of_rows" value="number-of-rows">rows</option>
             </select>
 
 
-            <input type="text" name="conf_cards_per_row_or_rows" id="conf_cards_per_row_or_rows" value=""
-                   onclick="select()" onkeyup="apply()">
+            <input type="number" name="conf_cards_per_row_or_rows" id="conf_cards_per_row_or_rows"
+                   min="1" max="6" value=""
+                   onclick="select()" onkeyup="apply()" onchange="apply()">
             <br><br>
 
             <input type="checkbox" name="conf_auto" id="conf_auto" onchange="apply()">
             <label for="conf_auto">Automatic flipping mode</label> <br><br>
 
             <label for="conf_autoflip_delay">Delay before the next set of cards in automatic mode</label>
-            <input type="text" name="conf_autoflip_delay" id="conf_autoflip_delay" onkeyup="apply()"> ms
+            <input type="number" name="conf_autoflip_delay" id="conf_autoflip_delay"
+                   min="0" value=""
+                   onkeyup="apply()" onchange="apply()"> ms
             <br><br>
 
             <input type="checkbox" name="conf_mouseover" id="conf_mouseover" onchange="apply()">
@@ -425,19 +432,24 @@
             <br><br>
 
             <label for="conf_card_width">Card size</label>
-            <input type="text" name="conf_card_width" id="conf_card_width" onkeyup="apply()">
+            <input type="number" name="conf_card_width" id="conf_card_width" min="0" onkeyup="apply()"
+                   onchange="apply()">
             <label for="conf_card_height">x</label>
-            <input type="text" name="conf_card_height" id="conf_card_height" onkeyup="apply()"> px
+            <input type="number" name="conf_card_height" id="conf_card_height" min="0" onkeyup="apply()"
+                   onchange="apply()"> px
             <br> <br>
 
             <label for="conf_card_width">Cards spacing: horizontal </label>
-            <input type="text" name="conf_spacing_horizontal" id="conf_spacing_horizontal" onkeyup="apply()"> px
+            <input type="number" name="conf_spacing_horizontal" id="conf_spacing_horizontal" min="0" onkeyup="apply()"
+                   onchange="apply()"> px
             <label for="conf_card_height"> and vertical</label>
-            <input type="text" name="conf_spacing_vertical" id="conf_spacing_vertical" onkeyup="apply()"> px
+            <input type="number" name="conf_spacing_vertical" id="conf_spacing_vertical" min="0" onkeyup="apply()"
+                   onchange="apply()"> px
             <br> <br>
 
             <label for="conf_transition_duration">Transition duration</label>
-            <input type="text" name="conf_transition_duration" id="conf_transition_duration" onkeyup="apply()"> ms
+            <input type="number" name="conf_transition_duration" id="conf_transition_duration" min="0" onkeyup="apply()"
+                   onchange="apply()"> ms
             <br><br>
 
 
@@ -456,8 +468,9 @@
             <input type="radio" name="conf_flow" id="conf_flow_col" value="column" onchange="apply()">
             <label for="conf_flow_col">Column</label> <br><br>-->
 
-            <label for="conf_sequent">Delay for sequential rotation mode</label>
-            <input type="text" name="conf_sequent" id="conf_sequent" value="600" onkeyup="apply()"> ms
+            <label for="conf_sequential_delay">Delay for sequential rotation mode</label>
+            <input type="number" name="conf_sequential_delay" id="conf_sequential_delay" min="0" onkeyup="apply()"
+                   onchange="apply()"> ms
             <br><br>
 
 
@@ -600,7 +613,7 @@
 </div>-->
 
 <!-- Yandex.Metrika counter -->
-<!--<script type="text/javascript" >
+<script type="text/javascript" >
     (function (d, w, c) {
         (w[c] = w[c] || []).push(function() {
             try {
@@ -626,7 +639,7 @@
         } else { f(); }
     })(document, window, "yandex_metrika_callbacks");
 </script>
-<noscript><div><img src="https://mc.yandex.ru/watch/46747293" style="position:absolute; left:-9999px;" alt="" /></div></noscript>-->
+<noscript><div><img src="https://mc.yandex.ru/watch/46747293" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
 <!-- /Yandex.Metrika counter -->
 
 </body>

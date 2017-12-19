@@ -101,6 +101,13 @@ document.addEventListener("DOMContentLoaded", function () {
 - `spacing-vertical` : [px] - Vertical cards spacing
 
 
+## Browser Support
+- Google Chrome 36+
+- Mozilla Firefox 16+
+- Internet Explorer 10+
+- Apple Safari 9+
+- Opera 23+
+
 ## Demo
 
 **To run demo locally:**

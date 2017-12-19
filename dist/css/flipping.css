@@ -19,11 +19,9 @@
       cursor: pointer; }
       .flipping > div:first-child button:hover, .flipping > div:last-child button:hover {
         cursor: pointer;
-        -webkit-transition: all 0.3s ease;
-        transition: all 0.3s ease;
-        text-shadow: 0 3px 3px #bdbdbd; }
+        text-shadow: 0 7px 7px #bdbdbd; }
       .flipping > div:first-child button:active, .flipping > div:last-child button:active {
-        text-shadow: 0 9px 19px rgba(0, 0, 0, 0.26); }
+        text-shadow: 0 3px 3px #bdbdbd; }
       .flipping > div:first-child button:focus, .flipping > div:last-child button:focus {
         outline: none; }
     .flipping > div:first-child .shadowon, .flipping > div:last-child .shadowon {

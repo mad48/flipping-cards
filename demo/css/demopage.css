@@ -74,11 +74,14 @@ section h2 {
     text-align: center;
 }
 
-.config input[type='text'] {
-    width: 37px;
-    text-align: right
+.config input[type='text'], .config input[type='number'] {
+    width: 55px;
+    text-align: right;
+
+    padding-right:5px;
 
 }
+
 
 .flipping {
     margin-top: 20px;

@@ -1,3 +1,5 @@
+$btncolor: #e7e7e7;
+
 .flipping {
 
   visibility: hidden;
@@ -13,7 +15,7 @@
 
       button {
         font-size: 3rem;
-        color: #e7e7e7;
+        color: $btncolor;
         transform: scaleX(1.1);
         border: none;
         background: none;
@@ -21,12 +23,14 @@
 
         &:hover {
           cursor: pointer;
-          transition: all 0.3s ease;
-          text-shadow: 0 3px 3px #bdbdbd;
+          //transition: all 0.3s ease;
+         // text-shadow: 0 7px 8px rgba(0, 0, 0, 0.26);
+          //color: darken($btncolor, 2%);
+          text-shadow: 0 7px 7px #bdbdbd;
         }
 
         &:active {
-          text-shadow: 0 9px 19px rgba(0, 0, 0, 0.26);
+          text-shadow: 0 3px 3px #bdbdbd;
         }
 
         &:focus {

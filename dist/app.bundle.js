@@ -18446,7 +18446,9 @@ var flipping = {
         "spacing-horizontal": 15,
 
         "cards-per-row": 0,
-        "number-of-rows": 0
+        "number-of-rows": 0,
+
+        "starting-cart-number": 0
     },
 
     init: function init(elem, opt) {
@@ -18465,7 +18467,7 @@ var flipping = {
         var divs = null;
         for (i = 0; i < self.decks.length; i++) {
             self.content[i] = [];
-            self.content_index[i] = 0;
+            self.content_index[i] = self.options["starting-cart-number"];
             self.last_dir[i] = 1;
 
             divs = self.decks[i].children;
@@ -18493,8 +18495,9 @@ var flipping = {
         for (i = 0; i < self.decks.length; i++) {
             var front = self.decks[i].getElementsByClassName('front')[0];
             var back = self.decks[i].getElementsByClassName('back')[0];
-            front.innerHTML = self.content[i][0];
-            back.innerHTML = self.content[i][1];
+            front.innerHTML = self.content[i][self.options["starting-cart-number"]];
+            back.innerHTML = self.content[i][self.next(self.options["starting-cart-number"], self.content[i].length, 1)];
+            self.content_index[i] = self.options["starting-cart-number"];
             back.classList.add("back1");
         }
 
@@ -18719,6 +18722,12 @@ var flipping = {
             self.buttons[0].classList.add("shadowon");
             self.buttons[1].classList.remove("shadowoff");
             self.buttons[1].classList.add("shadowon");
+        }
+
+        // transition for transition
+        if (opt["starting-cart-number"] > 0) {
+            if (opt["starting-cart-number"] > self.content[0].length) opt["starting-cart-number"] = self.content[0].length;
+            self.options["starting-cart-number"] = opt["starting-cart-number"] - 1;
         }
 
         // transition for transition

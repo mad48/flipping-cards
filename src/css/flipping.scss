@@ -24,7 +24,7 @@ $btncolor: #e7e7e7;
         &:hover {
           cursor: pointer;
           //transition: all 0.3s ease;
-         // text-shadow: 0 7px 8px rgba(0, 0, 0, 0.26);
+          // text-shadow: 0 7px 8px rgba(0, 0, 0, 0.26);
           //color: darken($btncolor, 2%);
           text-shadow: 0 7px 7px #bdbdbd;
         }
@@ -57,9 +57,16 @@ $btncolor: #e7e7e7;
       perspective: 1000px;
       float: left;
       display: inline-block;
+
       > div {
-      //  margin: 15px;
+        //  margin: 15px;
       }
+
+      * {
+        overflow: hidden;
+        //pointer-events: none;
+      }
+
     }
 
     .back {
@@ -78,6 +85,7 @@ $btncolor: #e7e7e7;
     }
 
     .front, .back {
+      overflow: hidden;
       transition: transform;
       transition-duration: .7s;
       transition-timing-function: cubic-bezier(0.4, 0.2, 0.2, 1);

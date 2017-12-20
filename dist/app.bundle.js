@@ -18378,7 +18378,7 @@ var ReactFlipping = function (_React$Component) {
                     )
                 ),
                 _react2.default.createElement('div', { className: 'card-box',
-                    dangerouslySetInnerHTML: { __html: this.props.content.slice(0, this.props.count).join('') } }),
+                    dangerouslySetInnerHTML: { __html: this.props.content.slice(0, this.props.count > 0 ? this.props.count : this.props.content.length).join('') } }),
                 _react2.default.createElement(
                     'div',
                     null,
@@ -18628,7 +18628,7 @@ var flipping = {
         var front = deck.getElementsByClassName('front')[0];
         var back = deck.getElementsByClassName('back')[0];
 
-        front.innerHTML = self.content[num][i_front];
+        // front.innerHTML = self.content[num][i_front];
         back.innerHTML = self.content[num][i_back];
 
         front.style.transitionDuration = self.options["transition-duration"] + "ms";
@@ -18684,6 +18684,11 @@ var flipping = {
     configure: function configure(opt) {
         /* options */
         var self = this;
+
+        // disable drags
+        self.flipping_cards.ondragstart = function () {
+            return false;
+        };
 
         //console.log("configure");
 

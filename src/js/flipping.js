@@ -232,7 +232,7 @@ var flipping = {
         var back = deck.getElementsByClassName('back')[0];
 
 
-        front.innerHTML = self.content[num][i_front];
+       // front.innerHTML = self.content[num][i_front];
         back.innerHTML = self.content[num][i_back];
 
         front.style.transitionDuration = self.options["transition-duration"] + "ms";
@@ -259,7 +259,7 @@ var flipping = {
 
                 var front = deck.getElementsByClassName('front')[0];
                 //var back = deck.getElementsByTagName('div')[1];
-                front.innerHTML = self.content[num][i_back];
+               front.innerHTML = self.content[num][i_back];
 
             }
 
@@ -292,6 +292,11 @@ var flipping = {
     configure: function (opt) {
         /* options */
         var self = this;
+
+        // disable drags
+        self.flipping_cards.ondragstart = function () {
+            return false
+        };
 
         //console.log("configure");
 

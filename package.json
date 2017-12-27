@@ -2,11 +2,8 @@
   "name": "flipping-cards",
   "version": "2.0.12",
   "description": "Flipping Cards Carousel",
-  "author": {
-    "name": "Max",
-    "email": "max@develexe.com"
-  },
-  "main": "index.js",
+  "author": "Max <max@develexe.com>",
+  "main": "dist/js/flipping.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "build": "webpack",

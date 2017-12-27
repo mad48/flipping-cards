@@ -4,15 +4,6 @@ Flipping Cards Carousel
 
 ### [Demo and usage]
 
-**Supports:**
-
-- Forward / backward flip
-- Number of cards per row or column
-- Custom items sizes
-- Custom animation delays
-- Simultaneous and  sequential rotation mode
-- Automatic flip mode
-
 ## Usage
 
 For using Flipping Cards Carousel on a web page use linking to the library and the styles:
@@ -77,13 +68,44 @@ document.addEventListener("DOMContentLoaded", function () {
         "card-height": 180,
         "spacing-horizontal": 15,
         "spacing-vertical": 15,
-        "cards-per-row": 3
+        "cards-per-row": 3,
+        "starting-number": 1
     };
 
     flipping.init('flipping_cards', options);
 
 });
 ```
+
+## Usage via npm
+
+First, install the package using npm:
+```sh
+    npm install flipping-cards --save
+```
+Then, require the package and use it like so:
+```javascript
+    var flipping_cards = require('flipping-cards');
+```
+
+
+## Usage via React adapter
+
+Add file ./src/js/flipping-react.js to your folder
+
+Import flipping-react component:
+
+```javascript
+import FlippingCards from "./flipping-react";
+```
+
+Use Flipping Cards Carouser React adapter:
+
+```javascript
+  <FlippingCards id="flipping_cards" options={options} content={content} />
+```
+
+See example of usage in file demo/app.js
 
 ## Options
 
@@ -99,7 +121,16 @@ document.addEventListener("DOMContentLoaded", function () {
 - `card-height` : [px] - Card height
 - `spacing-horizontal` : [px] - Horizontal cards spacing
 - `spacing-vertical` : [px] - Vertical cards spacing
+- `starting-number` : [num] - Starting card number
 
+**Supports:**
+
+- Forward / backward flip
+- Number of cards per row or column
+- Custom items sizes
+- Custom animation delays
+- Simultaneous and  sequential rotation mode
+- Automatic flip mode
 
 ## Browser Support
 - Google Chrome 36+

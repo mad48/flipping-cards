@@ -1,10 +1,11 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="Cache-Control" content="max-age=3600, must-revalidate">
+
     <title>Flipping Cards Carousel</title>
 
     <link rel="shortcut icon" type="image/x-icon" href="favicon.ico">
@@ -14,20 +15,428 @@
     <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet"
           type="text/css">
 
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css"
+          integrity="sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb" crossorigin="anonymous">
+
+
     <link href="../dist/css/flipping.css?new" rel="stylesheet"/>
+
     <link href="css/demopage.css?new" rel="stylesheet" type="text/css">
+
     <script src="js/run_prettify.js?autoload=true&amp;lang=css"></script>
 
     <script src='../src/js/flipping.js?new' type='text/javascript'></script>
+
+    <script src='js/content.js?new' type='text/javascript'></script>
+    <script src='js/reconfigure.js?new' type='text/javascript'></script>
 
 </head>
 
 <body>
 
-<h1>Flipping Cards Carousel</h1>
+<header class="container">
+
+</header>
+
+<main role="main" class="container">
+
+    <h1>Flipping Cards Carousel</h1>
 
 
-<section id="content-tab0">
+    <section class="row">
+
+        <div id="flipping_cards" class="flipping">
+
+            <div>
+                <button>&#9668;</button>
+            </div>
+
+            <div class="card-box">
+
+                <div class="card-deck">
+                    <div>
+                        <h2>Deep Blue <br>Sea<br>1</h2>
+                        <div class="readmore">
+                            <a href="#"
+                               onclick="alert('More about -1- Lorem ipsum el dolor sit amet...'); return false">Read
+                                More</a>
+                        </div>
+                        <h3>0</h3>
+                        <img src="../demo/images/1.jpg"/>
+                    </div>
+                    <div>
+                        <h2>Lorem ipsum<br>4</h2>
+  <span class="readmore"><a href="#"
+                            onclick="alert('More about -4- Lorem ipsum el dolor sit amet...'); return false">Read More</a></span>
+                        <h3>1</h3><img src="../demo/images/4.jpg"/></div>
+                    <div>
+                        <h2>Lorem ipsum<br>7</h2>
+  <span class="readmore"><a href="#"
+                            onclick="alert('More about -7- Lorem ipsum el dolor sit amet...'); return false">Read More</a></span>
+                        <h3>2</h3><img src="../demo/images/7.jpg"/></div>
+                    <div>
+                        <h2>Lorem ipsum<br>10</h2>
+  <span class="readmore"><a href="#"
+                            onclick="alert('More about -10- Lorem ipsum el dolor sit amet...'); return false">Read More</a></span>
+                        <h3>3</h3><img src="../demo/images/10.jpg"/></div>
+                    <div>
+                        <h2>Lorem ipsum<br>13</h2>
+  <span class="readmore"><a href="#"
+                            onclick="alert('More about -13- Lorem ipsum el dolor sit amet...'); return false">Read More</a></span>
+                        <h3>4</h3><img src="../demo/images/13.jpg"/></div>
+                </div>
+
+                <div class="card-deck">
+                    <div>
+                        <h2>Northern <br>Lights<br>2</h2>
+  <span class="readmore"><a href="#"
+                            onclick="alert('More about -2- Lorem ipsum el dolor sit amet...'); return false">Read More</a></span>
+                        <img src="../demo/images/2.jpg"/>
+                    </div>
+                    <div>
+
+                        <h2>Lorem ipsum<br>5</h2>
+  <span class="readmore"><a href="#"
+                            onclick="alert('More about -5- Lorem ipsum el dolor sit amet...'); return false">Read More</a></span><img
+                            src="../demo/images/5.jpg"/></div>
+
+                    <div>
+                        <h2>Lorem ipsum<br>8</h2>
+  <span class="readmore"><a href="#"
+                            onclick="alert('More about -8- Lorem ipsum el dolor sit amet...'); return false">Read More</a></span><img
+                            src="../demo/images/8.jpg"/></div>
+
+                    <div>
+                        <h2>Lorem ipsum<br>11</h2>
+  <span class="readmore"><a href="#"
+                            onclick="alert('More about -11- Lorem ipsum el dolor sit amet...'); return false">Read More</a></span><img
+                            src="../demo/images/11.jpg"/></div>
+
+                    <div>
+                        <h2>Lorem ipsum<br>14</h2>
+  <span class="readmore"><a href="#"
+                            onclick="alert('More about -14- Lorem ipsum el dolor sit amet...'); return false">Read More</a></span><img
+                            src="../demo/images/14.jpg"/></div>
+                </div>
+
+                <div class="card-deck">
+                    <div>
+                        <h2>Over The <br>Mountains<br>3</h2>
+  <span class="readmore"><a href="#"
+                            onclick="alert('More about -3- Lorem ipsum el dolor sit amet...'); return false">Read More</a></span>
+                        <img src="../demo/images/3.jpg"/>
+                    </div>
+                    <div>
+                        <h2>Lorem ipsum<br>6</h2>
+  <span class="readmore"><a href="#"
+                            onclick="alert('More about -6- Lorem ipsum el dolor sit amet...'); return false">Read More</a></span><img
+                            src="../demo/images/6.jpg"/></div>
+                    <div>
+                        <h2>Lorem ipsum<br>9</h2>
+  <span class="readmore"><a href="#"
+                            onclick="alert('More about -9- Lorem ipsum el dolor sit amet...'); return false">Read More</a></span><img
+                            src="../demo/images/9.jpg"/></div>
+                    <div>
+                        <h2>Lorem ipsum<br>12</h2>
+  <span class="readmore"><a href="#"
+                            onclick="alert('More about -12- Lorem ipsum el dolor sit amet...'); return false">Read More</a></span><img
+                            src="../demo/images/12.jpg"/></div>
+                    <div>
+                        <h2>Lorem ipsum<br>15</h2>
+  <span class="readmore"><a href="#"
+                            onclick="alert('More about -15- Lorem ipsum el dolor sit amet...'); return false">Read More</a></span><img
+                            src="../demo/images/15.jpg"/></div>
+                </div>
+
+                <!--
+                            <div class="card-deck">
+                                <div>
+                                    <h2>Lorem ipsum<br></h2>
+                              <span class="readmore"><a href="#"
+                                                        onclick="alert('More about Lorem ipsum el dolor sit amet...'); return false">Read More</a></span>
+                                    <img src="../demo/images/13.jpg"/></div>
+                                <div>
+                                    <h2>Lorem ipsum<br></h2>
+                              <span class="readmore"><a href="#"
+                                                        onclick="alert('More about Lorem ipsum el dolor sit amet...'); return false">Read More</a></span>
+                                    <img src="../demo/images/10.jpg"/></div>
+                                <div>
+                                    <h2>Lorem ipsum<br></h2>
+                              <span class="readmore"><a href="#"
+                                                        onclick="alert('More about Lorem ipsum el dolor sit amet...'); return false">Read More</a></span>
+                                    <img src="../demo/images/7.jpg"/></div>
+                                <div>
+                                    <h2>Lorem ipsum<br></h2>
+                              <span class="readmore"><a href="#"
+                                                        onclick="alert('More about Lorem ipsum el dolor sit amet...'); return false">Read More</a></span>
+                                    <img src="../demo/images/4.jpg"/></div>
+                                <div>
+                                    <h2>Lorem ipsum<br></h2>
+                              <span class="readmore"><a href="#"
+                                                        onclick="alert('More about Lorem ipsum el dolor sit amet...'); return false">Read More</a></span>
+                                    <img src="../demo/images/1.jpg"/></div>
+                            </div>
+
+
+                            <div class="card-deck">
+                                <div>
+                                    <h2>Lorem ipsum<br></h2>
+                        <span class="readmore"><a href="#"
+                                                  onclick="alert('More about Lorem ipsum el dolor sit amet...'); return false">Read More</a></span>
+                                    <img src="../demo/images/14.jpg"/></div>
+                                <div>
+                                    <h2>Lorem ipsum<br></h2>
+                        <span class="readmore"><a href="#"
+                                                  onclick="alert('More about Lorem ipsum el dolor sit amet...'); return false">Read More</a></span><img
+                                        src="../demo/images/1.jpg"/></div>
+
+                                <div>
+                                    <h2>Lorem ipsum<br></h2>
+                        <span class="readmore"><a href="#"
+                                                  onclick="alert('More about Lorem ipsum el dolor sit amet...'); return false">Read More</a></span><img
+                                        src="../demo/images/8.jpg"/></div>
+
+                                <div>
+                                    <h2>Lorem ipsum<br></h2>
+                        <span class="readmore"><a href="#"
+                                                  onclick="alert('More about Lorem ipsum el dolor sit amet...'); return false">Read More</a></span><img
+                                        src="../demo/images/5.jpg"/></div>
+
+                                <div>
+                                    <h2>Lorem ipsum<br></h2>
+                        <span class="readmore"><a href="#"
+                                                  onclick="alert('More about Lorem ipsum el dolor sit amet...'); return false">Read More</a></span><img
+                                        src="../demo/images/2.jpg"/></div>
+                            </div>
+
+
+                                       <div class="card-deck">
+                                           <div>
+                                               <h2>Lorem ipsum<br></h2>
+                           <span class="readmore"><a href="#"
+                                                     onclick="alert('More about Lorem ipsum el dolor sit amet...'); return false">Read More</a></span>
+                                               <img src="../demo/images/15.jpg"/></div>
+                                           <div>
+                                               <h2>Lorem ipsum<br></h2>
+                           <span class="readmore"><a href="#"
+                                                     onclick="alert('More about Lorem ipsum el dolor sit amet...'); return false">Read More</a></span><img
+                                                   src="../demo/images/12.jpg"/></div>
+                                           <div>
+                                               <h2>Lorem ipsum<br></h2>
+                           <span class="readmore"><a href="#"
+                                                     onclick="alert('More about Lorem ipsum el dolor sit amet...'); return false">Read More</a></span><img
+                                                   src="../demo/images/9.jpg"/></div>
+                                           <div>
+                                               <h2>Lorem ipsum<br></h2>
+                           <span class="readmore"><a href="#"
+                                                     onclick="alert('More about Lorem ipsum el dolor sit amet...'); return false">Read More</a></span><img
+                                                   src="../demo/images/6.jpg"/></div>
+                                           <div>
+                                               <h2>Lorem ipsum<br></h2>
+                           <span class="readmore"><a href="#"
+                                                     onclick="alert('More about Lorem ipsum el dolor sit amet...'); return false">Read More</a></span><img
+                                                   src="../demo/images/3.jpg"/></div>
+                                       </div>
+                                        -->
+
+            </div>
+
+            <div>
+                <button>&#9658;</button>
+            </div>
+
+        </div>
+
+
+        <script>
+
+            document.addEventListener("DOMContentLoaded", function () {
+
+                var options = {
+
+                    "autoflip-mode": false,
+                    "autoflip-delay": 1500,
+                    "mouseover-pause": true,
+
+                    "shadow": true,
+                    "transition-duration": 700,
+
+
+                    "rotation-mode": "simultaneous",
+                    "sequential-delay": 600,
+
+                    "card-width": 150,
+                    "card-height": 180,
+
+                    "spacing-horizontal": 15,
+                    "spacing-vertical": 15,
+
+                    "cards-per-row": 3,
+                    //"number-of-rows": 2,
+
+                    "starting-number": 1
+                };
+
+                // for demopage only. transfers parameters from options object to configurator form
+                setDemopageOptions(options);
+
+                flipping.init('flipping_cards', options);
+
+            });
+
+        </script>
+
+    </section>
+
+    <section class="row">
+
+        <div class="config col-xs-12">
+            <h2>Configuration</h2>
+        </div>
+
+
+        <div class="config col-xs-12 col-sm-12 col-md-6" style="padding-left: 50px">
+
+            <label for="conf_decks_count"> Number of decks of cards to show: </label>
+            <select id="conf_decks_count" name="conf_decks_count" onchange="reconfigure()">
+                <option value="1">1</option>
+                <option value="2">2</option>
+                <option value="3">3</option>
+                <option value="4">4</option>
+                <option value="5">5</option>
+                <option value="6">6</option>
+            </select>
+            <br>
+
+
+            <label for="conf_cards_per_row">Number of decks: </label>
+            <select id="conf_cards_per_row" name="conf_cards_per_row" onchange="reconfigure()">
+                <option name="conf_cards_per_row" value="cards-per-row">per row</option>
+                <option name="conf_number_of_rows" value="number-of-rows">rows</option>
+            </select>
+
+            <label for="conf_cards_per_row_or_rows"></label>
+            <input type="number" name="conf_cards_per_row_or_rows" id="conf_cards_per_row_or_rows"
+                   min="1" max="6" value=""
+                   onclick="select()" onkeyup="reconfigure()" onchange="reconfigure()">
+            <br>
+
+            <label for="conf_starting_number">Starting card number: </label>
+            <select id="conf_starting_number" name="conf_starting_number" onchange="reconfigure(true)">
+                <option value="1">1</option>
+                <option value="2">2</option>
+                <option value="3">3</option>
+                <option value="4">4</option>
+                <option value="5">5</option>
+            </select>
+            <br>
+
+
+            <input type="checkbox" name="conf_auto" id="conf_auto" onchange="reconfigure()">
+            <label for="conf_auto">Automatic flipping mode</label>
+            <br>
+
+            <label for="conf_autoflip_delay">Delay before the next set of cards in automatic mode: </label>
+            <input type="number" name="conf_autoflip_delay" id="conf_autoflip_delay"
+                   min="0" value=""
+                   onkeyup="reconfigure()" onchange="reconfigure()"> ms
+            <br>
+
+            <input type="checkbox" name="conf_mouseover" id="conf_mouseover" onchange="reconfigure()">
+            <label for="conf_mouseover">Pause on mouse over</label>
+
+
+        </div>
+
+        <div class="config col-xs-12 col-sm-12 col-md-6">
+
+            <label for="conf_card_width">Card size: </label>
+            <input type="number" name="conf_card_width" id="conf_card_width" min="120" onkeyup="reconfigure()"
+                   onchange="reconfigure()" onblur="this.value<120?this.value=120:''">
+            <label for="conf_card_height">x</label>
+            <input type="number" name="conf_card_height" id="conf_card_height" min="145" onkeyup="reconfigure()"
+                   onchange="reconfigure()" onblur="this.value<145?this.value=145:''"> px
+            <br>
+
+            <label for="conf_card_width">Cards spacing: horizontal </label>
+            <input type="number" name="conf_spacing_horizontal" id="conf_spacing_horizontal" min="0"
+                   onkeyup="reconfigure()"
+                   onchange="reconfigure()"> px
+            <label for="conf_card_height"> and vertical</label>
+            <input type="number" name="conf_spacing_vertical" id="conf_spacing_vertical" min="0"
+                   onkeyup="reconfigure()"
+                   onchange="reconfigure()"> px
+            <br>
+
+            <label for="conf_transition_duration">Transition duration: </label>
+            <input type="number" name="conf_transition_duration" id="conf_transition_duration" min="0"
+                   onkeyup="reconfigure()"
+                   onchange="reconfigure()"> ms
+            <br>
+
+
+            Rotation mode:
+            <input type="radio" name="conf_rotation" id="conf_simultaneous" value="simultaneous"
+                   onchange="reconfigure()">
+            <label for="conf_simultaneous">Simultaneous</label>
+
+            <input type="radio" name="conf_rotation" id="conf_sequential" value="sequential"
+                   onchange="reconfigure()">
+            <label for="conf_sequential">Sequential</label>
+            <br>
+
+
+            <!--Cards direction:
+            <input type="radio" name="conf_flow" id="conf_flow_row" value="row" checked="checked" onchange="reconfigure()">
+            <label for="conf_flow_row">Row</label>
+
+            <input type="radio" name="conf_flow" id="conf_flow_col" value="column" onchange="reconfigure()">
+            <label for="conf_flow_col">Column</label> <br><br>-->
+
+            <label for="conf_sequential_delay">Delay for sequential rotation mode: </label>
+            <input type="number" name="conf_sequential_delay" id="conf_sequential_delay" min="0"
+                   onkeyup="reconfigure()"
+                   onchange="reconfigure()"> ms
+            <br>
+
+
+            <!--                <label for="conf_cards_per_row">Number of cards per row </label>
+          <input type="text" name="conf_cards_per_row" id="conf_cards_per_row" value="" onkeyup="reconfigure()"> or
+
+
+          <label for="conf_number_of_rows">number of rows </label>
+          <input type="text" name="conf_number_of_rows" id="conf_number_of_rows" value="" onkeyup="reconfigure()">
+          <br><br>-->
+
+
+            <input type="checkbox" name="conf_shadow" id="conf_shadow" onchange="reconfigure()">
+            <label for="conf_shadow">Shadow</label> <br><br>
+
+        </div>
+
+        </div>
+
+
+    </section>
+
+
+    <section class="row">
+
+        <div class="usage col-xs-12">
+            <h2>How to use</h2>
+        </div>
+
+
+        <div class="usage col-xs-12 col-sm-12 col-md-6">
+            <h4>Example of usage with pure JavaScript</h4>
+
+<pre class="prettyprint">
+<xmp>
+    <link href="css/flipping.css" rel="stylesheet"/>
+    <link href="css/card.css" rel="stylesheet"/>
+    <script src="js/flipping.js"/>
+
+    ...
 
     <div id="flipping_cards" class="flipping">
 
@@ -37,190 +446,18 @@
 
         <div class="card-box">
 
-            <div class="card-deck">
-                <div>
-                    <h2>Deep Blue <br>Sea<br>1</h2>
-                    <div class="readmore">
-                        <a href="#" onclick="alert('More about -1- Lorem ipsum el dolor sit amet...'); return false">Read
-                            More</a>
-                    </div>
-                    <h3>0</h3>
-                    <img src="../demo/images/1.jpg"/>
+                <div class="card-deck">
+                    <div>Content of deck 1 card 1</div>
+                    <div>Content of deck 1 card 2</div>
+                    <div>Content of deck 1 card 3</div>
                 </div>
-                <div>
-                    <h2>Lorem ipsum<br>4</h2>
-  <span class="readmore"><a href="#"
-                            onclick="alert('More about -4- Lorem ipsum el dolor sit amet...'); return false">Read More</a></span>
-                    <h3>1</h3><img src="../demo/images/4.jpg"/></div>
-                <div>
-                    <h2>Lorem ipsum<br>7</h2>
-  <span class="readmore"><a href="#"
-                            onclick="alert('More about -7- Lorem ipsum el dolor sit amet...'); return false">Read More</a></span>
-                    <h3>2</h3><img src="../demo/images/7.jpg"/></div>
-                <div>
-                    <h2>Lorem ipsum<br>10</h2>
-  <span class="readmore"><a href="#"
-                            onclick="alert('More about -10- Lorem ipsum el dolor sit amet...'); return false">Read More</a></span>
-                    <h3>3</h3><img src="../demo/images/10.jpg"/></div>
-                <div>
-                    <h2>Lorem ipsum<br>13</h2>
-  <span class="readmore"><a href="#"
-                            onclick="alert('More about -13- Lorem ipsum el dolor sit amet...'); return false">Read More</a></span>
-                    <h3>4</h3><img src="../demo/images/13.jpg"/></div>
-            </div>
 
-            <div class="card-deck">
-                <div>
-                    <h2>Northern <br>Lights<br>2</h2>
-  <span class="readmore"><a href="#"
-                            onclick="alert('More about -2- Lorem ipsum el dolor sit amet...'); return false">Read More</a></span>
-                    <img src="../demo/images/2.jpg"/>
+                <div class="card-deck">
+                    <div>Content of deck 2 card 1</div>
+                    <div>Content of deck 2 card 2</div>
+                    <div>Content of deck 2 card 3</div>
                 </div>
-                <div>
-
-                    <h2>Lorem ipsum<br>5</h2>
-  <span class="readmore"><a href="#"
-                            onclick="alert('More about -5- Lorem ipsum el dolor sit amet...'); return false">Read More</a></span><img
-                        src="../demo/images/5.jpg"/></div>
-
-                <div>
-                    <h2>Lorem ipsum<br>8</h2>
-  <span class="readmore"><a href="#"
-                            onclick="alert('More about -8- Lorem ipsum el dolor sit amet...'); return false">Read More</a></span><img
-                        src="../demo/images/8.jpg"/></div>
-
-                <div>
-                    <h2>Lorem ipsum<br>11</h2>
-  <span class="readmore"><a href="#"
-                            onclick="alert('More about -11- Lorem ipsum el dolor sit amet...'); return false">Read More</a></span><img
-                        src="../demo/images/11.jpg"/></div>
-
-                <div>
-                    <h2>Lorem ipsum<br>14</h2>
-  <span class="readmore"><a href="#"
-                            onclick="alert('More about -14- Lorem ipsum el dolor sit amet...'); return false">Read More</a></span><img
-                        src="../demo/images/14.jpg"/></div>
-            </div>
-
-            <div class="card-deck">
-                <div>
-                    <h2>Over The <br>Mountains<br>3</h2>
-  <span class="readmore"><a href="#"
-                            onclick="alert('More about -3- Lorem ipsum el dolor sit amet...'); return false">Read More</a></span>
-                    <img src="../demo/images/3.jpg"/>
-                </div>
-                <div>
-                    <h2>Lorem ipsum<br>6</h2>
-  <span class="readmore"><a href="#"
-                            onclick="alert('More about -6- Lorem ipsum el dolor sit amet...'); return false">Read More</a></span><img
-                        src="../demo/images/6.jpg"/></div>
-                <div>
-                    <h2>Lorem ipsum<br>9</h2>
-  <span class="readmore"><a href="#"
-                            onclick="alert('More about -9- Lorem ipsum el dolor sit amet...'); return false">Read More</a></span><img
-                        src="../demo/images/9.jpg"/></div>
-                <div>
-                    <h2>Lorem ipsum<br>12</h2>
-  <span class="readmore"><a href="#"
-                            onclick="alert('More about -12- Lorem ipsum el dolor sit amet...'); return false">Read More</a></span><img
-                        src="../demo/images/12.jpg"/></div>
-                <div>
-                    <h2>Lorem ipsum<br>15</h2>
-  <span class="readmore"><a href="#"
-                            onclick="alert('More about -15- Lorem ipsum el dolor sit amet...'); return false">Read More</a></span><img
-                        src="../demo/images/15.jpg"/></div>
-            </div>
-
-            <!--
-                        <div class="card-deck">
-                            <div>
-                                <h2>Lorem ipsum<br></h2>
-                          <span class="readmore"><a href="#"
-                                                    onclick="alert('More about Lorem ipsum el dolor sit amet...'); return false">Read More</a></span>
-                                <img src="../demo/images/13.jpg"/></div>
-                            <div>
-                                <h2>Lorem ipsum<br></h2>
-                          <span class="readmore"><a href="#"
-                                                    onclick="alert('More about Lorem ipsum el dolor sit amet...'); return false">Read More</a></span>
-                                <img src="../demo/images/10.jpg"/></div>
-                            <div>
-                                <h2>Lorem ipsum<br></h2>
-                          <span class="readmore"><a href="#"
-                                                    onclick="alert('More about Lorem ipsum el dolor sit amet...'); return false">Read More</a></span>
-                                <img src="../demo/images/7.jpg"/></div>
-                            <div>
-                                <h2>Lorem ipsum<br></h2>
-                          <span class="readmore"><a href="#"
-                                                    onclick="alert('More about Lorem ipsum el dolor sit amet...'); return false">Read More</a></span>
-                                <img src="../demo/images/4.jpg"/></div>
-                            <div>
-                                <h2>Lorem ipsum<br></h2>
-                          <span class="readmore"><a href="#"
-                                                    onclick="alert('More about Lorem ipsum el dolor sit amet...'); return false">Read More</a></span>
-                                <img src="../demo/images/1.jpg"/></div>
-                        </div>
-
-
-                        <div class="card-deck">
-                            <div>
-                                <h2>Lorem ipsum<br></h2>
-                    <span class="readmore"><a href="#"
-                                              onclick="alert('More about Lorem ipsum el dolor sit amet...'); return false">Read More</a></span>
-                                <img src="../demo/images/14.jpg"/></div>
-                            <div>
-                                <h2>Lorem ipsum<br></h2>
-                    <span class="readmore"><a href="#"
-                                              onclick="alert('More about Lorem ipsum el dolor sit amet...'); return false">Read More</a></span><img
-                                    src="../demo/images/1.jpg"/></div>
-
-                            <div>
-                                <h2>Lorem ipsum<br></h2>
-                    <span class="readmore"><a href="#"
-                                              onclick="alert('More about Lorem ipsum el dolor sit amet...'); return false">Read More</a></span><img
-                                    src="../demo/images/8.jpg"/></div>
-
-                            <div>
-                                <h2>Lorem ipsum<br></h2>
-                    <span class="readmore"><a href="#"
-                                              onclick="alert('More about Lorem ipsum el dolor sit amet...'); return false">Read More</a></span><img
-                                    src="../demo/images/5.jpg"/></div>
-
-                            <div>
-                                <h2>Lorem ipsum<br></h2>
-                    <span class="readmore"><a href="#"
-                                              onclick="alert('More about Lorem ipsum el dolor sit amet...'); return false">Read More</a></span><img
-                                    src="../demo/images/2.jpg"/></div>
-                        </div>
-
-
-                                   <div class="card-deck">
-                                       <div>
-                                           <h2>Lorem ipsum<br></h2>
-                       <span class="readmore"><a href="#"
-                                                 onclick="alert('More about Lorem ipsum el dolor sit amet...'); return false">Read More</a></span>
-                                           <img src="../demo/images/15.jpg"/></div>
-                                       <div>
-                                           <h2>Lorem ipsum<br></h2>
-                       <span class="readmore"><a href="#"
-                                                 onclick="alert('More about Lorem ipsum el dolor sit amet...'); return false">Read More</a></span><img
-                                               src="../demo/images/12.jpg"/></div>
-                                       <div>
-                                           <h2>Lorem ipsum<br></h2>
-                       <span class="readmore"><a href="#"
-                                                 onclick="alert('More about Lorem ipsum el dolor sit amet...'); return false">Read More</a></span><img
-                                               src="../demo/images/9.jpg"/></div>
-                                       <div>
-                                           <h2>Lorem ipsum<br></h2>
-                       <span class="readmore"><a href="#"
-                                                 onclick="alert('More about Lorem ipsum el dolor sit amet...'); return false">Read More</a></span><img
-                                               src="../demo/images/6.jpg"/></div>
-                                       <div>
-                                           <h2>Lorem ipsum<br></h2>
-                       <span class="readmore"><a href="#"
-                                                 onclick="alert('More about Lorem ipsum el dolor sit amet...'); return false">Read More</a></span><img
-                                               src="../demo/images/3.jpg"/></div>
-                                   </div>
-                                    -->
+                ...
 
         </div>
 
@@ -230,317 +467,15 @@
 
     </div>
 
-    <script>
-
-        var content = [];
-
-        /*        var carddecks = document.getElementsByClassName("card-deck");
-         for (i = 0; i < carddecks.length; i++) {
-         content[i] = carddecks[i].innerHTML;
-         }*/
-
-        content = [
-            '<div class="card-deck"> <div><h2>Deep Blue <br>Sea<br>1</h2> <div class="readmore"><a href="#" onclick="alert(\'More about -1- Lorem ipsum el dolor sit amet...\'); return false">Read More</a></div> <h3>0</h3><img src="../demo/images/1.jpg"/> </div> <div> <h2>Lorem ipsum<br>4</h2> <span class="readmore"><a href="#" onclick="alert(\'More about -4- Lorem ipsum el dolor sit amet...\'); return false">Read More</a></span> <h3>1</h3><img src="../demo/images/4.jpg"/></div> <div> <h2>Lorem ipsum<br>7</h2> <span class="readmore"><a href="#" onclick="alert(\'More about -7- Lorem ipsum el dolor sit amet...\'); return false">Read More</a></span> <h3>2</h3><img src="../demo/images/7.jpg"/></div> <div> <h2>Lorem ipsum<br>10</h2> <span class="readmore"><a href="#" onclick="alert(\'More about -10- Lorem ipsum el dolor sit amet...\'); return false">Read More</a></span> <h3>3</h3><img src="../demo/images/10.jpg"/></div> <div> <h2>Lorem ipsum<br>13</h2> <span class="readmore"><a href="#" onclick="alert(\'More about -13- Lorem ipsum el dolor sit amet...\'); return false">Read More</a></span> <h3>4</h3><img src="../demo/images/13.jpg"/></div> </div>',
-
-            '<div class="card-deck"> <div> <h2>Northern <br>Lights<br>2</h2> <span class="readmore"><a href="#" onclick="alert(\'More about -2- Lorem ipsum el dolor sit amet...\'); return false">Read More</a></span> <img src="../demo/images/2.jpg"/> </div> <div> <h2>Lorem ipsum<br>5</h2> <span class="readmore"><a href="#" onclick="alert(\'More about -5- Lorem ipsum el dolor sit amet...\'); return false">Read More</a></span><img src="../demo/images/5.jpg"/></div> <div> <h2>Lorem ipsum<br>8</h2> <span class="readmore"><a href="#" onclick="alert(\'More about -8- Lorem ipsum el dolor sit amet...\'); return false">Read More</a></span><img src="../demo/images/8.jpg"/></div> <div> <h2>Lorem ipsum<br>11</h2> <span class="readmore"><a href="#" onclick="alert(\'More about -11- Lorem ipsum el dolor sit amet...\'); return false">Read More</a></span><img src="../demo/images/11.jpg"/></div> <div> <h2>Lorem ipsum<br>14</h2> <span class="readmore"><a href="#" onclick="alert(\'More about -14- Lorem ipsum el dolor sit amet...\'); return false">Read More</a></span><img src="../demo/images/14.jpg"/></div> </div>',
-
-            '<div class="card-deck"> <div> <h2>Over The <br>Mountains<br>3</h2> <span class="readmore"><a href="#" onclick="alert(\'More about -3- Lorem ipsum el dolor sit amet...\'); return false">Read More</a></span> <img src="../demo/images/3.jpg"/> </div> <div> <h2>Lorem ipsum<br>6</h2> <span class="readmore"><a href="#" onclick="alert(\'More about -6- Lorem ipsum el dolor sit amet...\'); return false">Read More</a></span><img src="../demo/images/6.jpg"/></div> <div> <h2>Lorem ipsum<br>9</h2> <span class="readmore"><a href="#" onclick="alert(\'More about -9- Lorem ipsum el dolor sit amet...\'); return false">Read More</a></span><img src="../demo/images/9.jpg"/></div> <div> <h2>Lorem ipsum<br>12</h2> <span class="readmore"><a href="#" onclick="alert(\'More about -12- Lorem ipsum el dolor sit amet...\'); return false">Read More</a></span><img src="../demo/images/12.jpg"/></div> <div> <h2>Lorem ipsum<br>15</h2> <span class="readmore"><a href="#" onclick="alert(\'More about -15- Lorem ipsum el dolor sit amet...\'); return false">Read More</a></span><img src="../demo/images/15.jpg"/></div> </div>',
-
-            '<div class="card-deck"> <div> <h2>Lorem ipsum<br></h2> <span class="readmore"><a href="#" onclick="alert(\'More about Lorem ipsum el dolor sit amet...\'); return false">Read More</a></span> <img src="../demo/images/13.jpg"/></div> <div> <h2>Lorem ipsum<br></h2> <span class="readmore"><a href="#" onclick="alert(\'More about Lorem ipsum el dolor sit amet...\'); return false">Read More</a></span> <img src="../demo/images/10.jpg"/></div> <div> <h2>Lorem ipsum<br></h2> <span class="readmore"><a href="#" onclick="alert(\'More about Lorem ipsum el dolor sit amet...\'); return false">Read More</a></span> <img src="../demo/images/4.jpg"/></div> <div> <h2>Lorem ipsum<br></h2> <span class="readmore"><a href="#" onclick="alert(\'More about Lorem ipsum el dolor sit amet...\'); return false">Read More</a></span> <img src="../demo/images/7.jpg"/></div> <div> <h2>Lorem ipsum<br></h2> <span class="readmore"><a href="#" onclick="alert(\'More about Lorem ipsum el dolor sit amet...\'); return false">Read More</a></span> <img src="../demo/images/1.jpg"/></div> </div>',
-
-            '<div class="card-deck"> <div> <h2>Lorem ipsum<br></h2> <span class="readmore"><a href="#" onclick="alert(\'More about Lorem ipsum el dolor sit amet...\'); return false">Read More</a></span> <img src="../demo/images/8.jpg"/></div> <div> <h2>Lorem ipsum<br></h2> <span class="readmore"><a href="#" onclick="alert(\'More about Lorem ipsum el dolor sit amet...\'); return false">Read More</a></span><img src="../demo/images/1.jpg"/></div> <div> <h2>Lorem ipsum<br></h2> <span class="readmore"><a href="#" onclick="alert(\'More about Lorem ipsum el dolor sit amet...\'); return false">Read More</a></span><img src="../demo/images/14.jpg"/></div> <div> <h2>Lorem ipsum<br></h2> <span class="readmore"><a href="#" onclick="alert(\'More about Lorem ipsum el dolor sit amet...\'); return false">Read More</a></span><img src="../demo/images/5.jpg"/></div> <div> <h2>Lorem ipsum<br></h2> <span class="readmore"><a href="#" onclick="alert(\'More about Lorem ipsum el dolor sit amet...\'); return false">Read More</a></span><img src="../demo/images/2.jpg"/></div> </div>',
-
-            '<div class="card-deck"> <div> <h2>Lorem ipsum<br></h2> <span class="readmore"><a href="#" onclick="alert(\'More about Lorem ipsum el dolor sit amet...\'); return false">Read More</a></span> <img src="../demo/images/15.jpg"/></div> <div> <h2>Lorem ipsum<br></h2> <span class="readmore"><a href="#" onclick="alert(\'More about Lorem ipsum el dolor sit amet...\'); return false">Read More</a></span><img src="../demo/images/12.jpg"/></div> <div> <h2>Lorem ipsum<br></h2> <span class="readmore"><a href="#" onclick="alert(\'More about Lorem ipsum el dolor sit amet...\'); return false">Read More</a></span><img src="../demo/images/6.jpg"/></div> <div> <h2>Lorem ipsum<br></h2> <span class="readmore"><a href="#" onclick="alert(\'More about Lorem ipsum el dolor sit amet...\'); return false">Read More</a></span><img src="../demo/images/9.jpg"/></div> <div> <h2>Lorem ipsum<br></h2> <span class="readmore"><a href="#" onclick="alert(\'More about Lorem ipsum el dolor sit amet...\'); return false">Read More</a></span><img src="../demo/images/3.jpg"/></div> </div>'
-
-        ];
-
-    </script>
-
-    <script>
-
-        function apply() {
-
-            var options = {
-                "autoflip-mode": document.querySelector('#conf_auto').checked,
-                "autoflip-delay": document.querySelector('#conf_autoflip_delay').value,
-
-                "card-width": document.querySelector('#conf_card_width').value,
-                "card-height": document.querySelector('#conf_card_height').value,
-
-                "spacing-horizontal": document.querySelector('#conf_spacing_horizontal').value,
-                "spacing-vertical": document.querySelector('#conf_spacing_vertical').value,
-
-                "shadow": document.querySelector('#conf_shadow').checked,
-
-                "transition-duration": document.querySelector('#conf_transition_duration').value,
-                "mouseover-pause": document.querySelector('#conf_mouseover').checked,
-
-                "rotation-mode": document.querySelector('input[name=conf_rotation]:checked').value,
-                "sequential-delay": document.querySelector('#conf_sequential_delay').value
-
-                /* "cards-per-row": document.querySelector('#conf_cards_per_row').value,
-                 "number-of-rows": document.querySelector('#conf_number_of_rows').value
-                 */
-
-                // flow: document.querySelector('input[name=conf_flow]:checked').value,
-            };
-
-            var sel = document.querySelector('select[name=conf_cards_per_row]').selectedIndex;
-            var sel_param = document.querySelector('select[name=conf_cards_per_row]').options[sel].value;
-
-            options[sel_param] = document.querySelector('#conf_cards_per_row_or_rows').value;
-
-
-            var decks_count = document.querySelector('select[name=conf_decks_count]').options.selectedIndex + 1;
-
-            document.getElementsByClassName("card-box")[0].innerHTML = "";
-            var cont = "";
-            for (i = 0; i < decks_count; i++) {
-                cont = cont + content[i];
-            }
-
-            document.getElementsByClassName("card-box")[0].innerHTML = cont;
-
-            flipping.init('flipping_cards', options);
-
-            //console.log(options);
-            flipping.configure(options);
-
-        }
-    </script>
-
-    <script>
-
-        document.addEventListener("DOMContentLoaded", function () {
-
-
-            var options = {
-                "autoflip-mode": false,
-                "autoflip-delay": 1500,
-                "mouseover-pause": true,
-
-                "shadow": true,
-                "transition-duration": 700,
-
-
-                "rotation-mode": "simultaneous",
-                "sequential-delay": 600,
-
-                "card-width": 150,
-                "card-height": 180,
-
-                "spacing-horizontal": 15,
-                "spacing-vertical": 15,
-
-                "cards-per-row": 3,
-                //"number-of-rows": 2,
-
-                "starting-cart-number":1
-
-            };
-
-
-            document.querySelector('input[name=conf_auto]').checked = options["autoflip-mode"];
-            document.querySelector('input[name=conf_autoflip_delay]').value = options["autoflip-delay"];
-
-            document.querySelector('input[name=conf_card_width]').value = options["card-width"];
-            document.querySelector('input[name=conf_card_height]').value = options["card-height"];
-
-            document.querySelector('input[name=conf_spacing_horizontal]').value = options["spacing-horizontal"];
-            document.querySelector('input[name=conf_spacing_vertical]').value = options["spacing-vertical"];
-
-            document.querySelector('input[name=conf_transition_duration]').value = options["transition-duration"];
-            document.querySelector('input[name=conf_shadow]').checked = options["shadow"];
-            document.querySelector('input[name=conf_mouseover]').checked = options["mouseover-pause"];
-
-            document.querySelector('input[name=conf_sequential_delay]').value = options["sequential-delay"];
-
-            /*        document.querySelector('input[name=conf_cards_per_row]').value = options["cards-per-row"];
-             document.querySelector('input[name=conf_number_of_rows]').value = options["number-of-rows"];*/
-
-            var rotation = document.querySelectorAll('input[name=conf_rotation]');
-            for (var i = 0; i < rotation.length; i++) {
-                if (rotation[i].value == options["rotation-mode"])  rotation[i].checked = true;
-            }
-
-
-            var sel = document.querySelector('select[name=conf_cards_per_row]');
-            for (var i = 0; i < sel.options.length; i++) {
-
-                if (sel.options[i].value == "cards-per-row" && options["cards-per-row"] > 0) {
-                    sel.selectedIndex = i;
-                    document.querySelector('input[name=conf_cards_per_row_or_rows]').value = options["cards-per-row"];
-                }
-
-                if (sel.options[i].value == "number-of-rows" && options["number-of-rows"] > 0) {
-                    sel.selectedIndex = i;
-                    document.querySelector('input[name=conf_cards_per_row_or_rows]').value = options["number-of-rows"];
-                }
-            }
-
-            document.querySelector('select[name=conf_decks_count]').options.selectedIndex = document.querySelectorAll('.card-deck').length - 1;
-
-            flipping.init('flipping_cards', options);
-
-        });
-
-    </script>
-
-</section>
-
-
-<section id="content-tab1">
-
-    <div class="config-container">
-
-        <div class="config">
-            <h2>Configuration:</h2>
-
-            Number of decks of cards (for demo):
-            <select name="conf_decks_count" onchange="apply()">
-                <option value="1">1</option>
-                <option value="2">2</option>
-                <option value="3">3</option>
-                <option value="4">4</option>
-                <option value="5">5</option>
-                <option value="6">6</option>
-            </select> <br><br>
-
-            Number of decks:
-            <select name="conf_cards_per_row" onchange="apply()">
-                <option name="conf_cards_per_row" value="cards-per-row">per row</option>
-                <option name="conf_number_of_rows" value="number-of-rows">rows</option>
-            </select>
-
-
-            <input type="number" name="conf_cards_per_row_or_rows" id="conf_cards_per_row_or_rows"
-                   min="1" max="6" value=""
-                   onclick="select()" onkeyup="apply()" onchange="apply()">
-            <br><br>
-
-            <input type="checkbox" name="conf_auto" id="conf_auto" onchange="apply()">
-            <label for="conf_auto">Automatic flipping mode</label> <br><br>
-
-            <label for="conf_autoflip_delay">Delay before the next set of cards in automatic mode</label>
-            <input type="number" name="conf_autoflip_delay" id="conf_autoflip_delay"
-                   min="0" value=""
-                   onkeyup="apply()" onchange="apply()"> ms
-            <br><br>
-
-            <input type="checkbox" name="conf_mouseover" id="conf_mouseover" onchange="apply()">
-            <label for="conf_mouseover">Pause on mouse over</label>
-            <br><br>
-
-            <label for="conf_card_width">Card size</label>
-            <input type="number" name="conf_card_width" id="conf_card_width" min="0" onkeyup="apply()"
-                   onchange="apply()">
-            <label for="conf_card_height">x</label>
-            <input type="number" name="conf_card_height" id="conf_card_height" min="0" onkeyup="apply()"
-                   onchange="apply()"> px
-            <br> <br>
-
-            <label for="conf_card_width">Cards spacing: horizontal </label>
-            <input type="number" name="conf_spacing_horizontal" id="conf_spacing_horizontal" min="0" onkeyup="apply()"
-                   onchange="apply()"> px
-            <label for="conf_card_height"> and vertical</label>
-            <input type="number" name="conf_spacing_vertical" id="conf_spacing_vertical" min="0" onkeyup="apply()"
-                   onchange="apply()"> px
-            <br> <br>
-
-            <label for="conf_transition_duration">Transition duration</label>
-            <input type="number" name="conf_transition_duration" id="conf_transition_duration" min="0" onkeyup="apply()"
-                   onchange="apply()"> ms
-            <br><br>
-
-
-            Rotation mode:
-            <input type="radio" name="conf_rotation" id="conf_simultaneous" value="simultaneous" onchange="apply()">
-            <label for="conf_simultaneous">Simultaneous</label>
-
-            <input type="radio" name="conf_rotation" id="conf_sequential" value="sequential" onchange="apply()">
-            <label for="conf_sequential">Sequential</label> <br><br>
-
-
-            <!--Cards direction:
-            <input type="radio" name="conf_flow" id="conf_flow_row" value="row" checked="checked" onchange="apply()">
-            <label for="conf_flow_row">Row</label>
-
-            <input type="radio" name="conf_flow" id="conf_flow_col" value="column" onchange="apply()">
-            <label for="conf_flow_col">Column</label> <br><br>-->
-
-            <label for="conf_sequential_delay">Delay for sequential rotation mode</label>
-            <input type="number" name="conf_sequential_delay" id="conf_sequential_delay" min="0" onkeyup="apply()"
-                   onchange="apply()"> ms
-            <br><br>
-
-
-            <!--                <label for="conf_cards_per_row">Number of cards per row </label>
-          <input type="text" name="conf_cards_per_row" id="conf_cards_per_row" value="" onkeyup="apply()"> or
-
-
-          <label for="conf_number_of_rows">number of rows </label>
-          <input type="text" name="conf_number_of_rows" id="conf_number_of_rows" value="" onkeyup="apply()">
-          <br><br>-->
-
-
-            <input type="checkbox" name="conf_shadow" id="conf_shadow" onchange="apply()">
-            <label for="conf_shadow">Shadow</label> <br><br>
-
-
-        </div>
-    </div>
-</section>
-
-
-<section id="content-tab2">
-    <div class="usage">
-        <h2>How to use:</h2>
-
-        <h4>Usage with pure JavaScript:</h4>
-
-<pre class="prettyprint">
-<xmp style="fl4oat: left">
-    <link href="css/flipping.css" rel="stylesheet"/>
-    <script src="js/flipping.js"/>
-    ...
-    <div id="flippingcards" class="flipping">
-
-        <div>
-            <button>&#9668;</button>
-        </div>
-
-        <div class="card-box">
-
-            <div class="card-deck">
-                <div>
-                    <h2>Deep Blue <br>Sea</h2>
-                    <img src="images/1.jpg"/>
-                </div>
-                <div><img src="images/4.jpg"/></div>
-                <div><img src="images/7.jpg"/></div>
-                <div><img src="images/10.jpg"/></div>
-                <div><img src="images/13.jpg"/></div>
-            </div>
-
-        ...
-        </div>
-
-        <div>
-            <button>&#9658;</button>
-        </div>
-
-    </div>
-</xmp>
-    <xmp style="flo4at: right">
     <script>
 
         var options = {
-
             "autoflip-mode": false,
             "autoflip-delay": 1500,
             "mouseover-pause": true,
 
             "shadow": true,
+
             "transition-duration": 700,
 
             "rotation-mode": "sequential",
@@ -552,95 +487,179 @@
             "spacing-horizontal": 15,
             "spacing-vertical": 15,
 
-            "cards-per-row": 3
-
+            "cards-per-row": 3,
+            "starting-number": 1
         };
 
-        flipping.init('flippingcards', options);
+        flipping.init('flipping_cards', options);
 
     </script>
 
 </xmp>
 </pre>
-    </div>
-</section>
+        </div>
 
-<section id="content-tab3" style="">
-    <div class="options">
-        <h2>Options description:</h2>
-        <ul>
+        <div class="usage col-xs-12 col-sm-12 col-md-6">
+            <h4>Example of usage via React adapter</h4>
+<pre class="prettyprint">
+<xmp>
+    <div id="app"></div>
+    <script src="app.bundle.js"></script>
 
-            <li><b>autoflip-mode</b> : [true | false] - start flipping in automatic mode<br><!--Endless Loop--></li>
-            <li><b>autoflip-delay</b> : [ms] - delay before the next set of cards in automatic mode [ms]<br></li>
-            <li><b>mouseover-pause</b> : [true | false] - pausing to flip when you hover over the cards<br><br></li>
+    ...
 
-            <li><b>shadow</b> : [true | false] - on/off shadow <br></li>
-            <li><b>transition-duration</b> : [ms] - card flip transition duration <br><br></li>
+            import React from 'react';
+            import ReactDOM from 'react-dom';
 
-            <!--<b>flow</b> - row or column display direction [row | column]<br><br>-->
+            import FlippingCards from "./js/flipping-react";
 
-            <li><b>rotation-mode</b> : [simultaneous | sequential] - simultaneous or sequential mode<br></li>
-            <li><b>sequential-delay</b> : [ms] - sequential delay before neighboring cards flip<br><br></li>
-
-            <li><b>card-width</b> : [px] - Card width<br></li>
-            <li><b>card-height</b> : [px] - Card height<br><br></li>
-
-            <li><b>spacing-horizontal</b> : [px] - Horizontal cards spacing<br></li>
-            <li><b>spacing-vertical</b> : [px] - Vertical cards spacing<br><br></li>
+            require('./css/flipping.scss');
+            require('./css/card.scss');
 
 
-            <li><b>cards-per-row</b> : [num] - Number of cards per row<br></li>
-            <li><b>number-of-rows</b> : [num] - Number of rows <br><br></li>
+            var options = {
+                "autoflip-mode": false,
+                "autoflip-delay": 1500,
+                "mouseover-pause": true,
 
-        </ul>
-        <!--    Features:<br>
-            Auto stop on mouse over and on deactivated browser tab<br>-->
+                "shadow": true,
+                "transition-duration": 700,
 
-    </div>
+                "rotation-mode": "simultaneous",
+                "sequential-delay": 600,
 
-</section>
+                "card-width": 150,
+                "card-height": 180,
+
+                "spacing-horizontal": 15,
+                "spacing-vertical": 15,
+
+                "cards-per-row": 3,
+                "starting-number": 1
+            };
+
+            var content = [
+                '<div class="card-deck">
+                    <div>Content of deck 1 card 1</div>
+                    <div>Content of deck 1 card 2</div>
+                    <div>Content of deck 1 card 3</div>
+                </div>',
+
+                '<div class="card-deck">
+                    <div>Content of deck 2 card 1</div>
+                    <div>Content of deck 2 card 2</div>
+                    <div>Content of deck 2 card 3</div>
+                </div>'
+            ];
+
+            class App extends React.Component {
+                render() {
+                    return (
+                        <FlippingCards
+                            id="flipping_cards"
+                            options={options}
+                            content={content}
+                        />
+                    )
+               }
+            }
+            ReactDOM.render(<App />, document.getElementById("app"));
+
+        </xmp>
+        </pre>
+        </div>
+    </section>
+
+    <section class="row">
+
+        <div class="options">
+            <h2>Options</h2>
+            <ul>
+
+                <li><b>autoflip-mode</b> : [true | false] - start flipping in automatic mode<br><!--Endless Loop--></li>
+                <li><b>autoflip-delay</b> : [ms] - delay before the next set of cards in automatic mode [ms]<br></li>
+                <li><b>mouseover-pause</b> : [true | false] - pausing to flip when you hover over the cards<br><br></li>
+
+                <li><b>shadow</b> : [true | false] - on/off shadow <br></li>
+                <li><b>transition-duration</b> : [ms] - card flip transition duration <br><br></li>
 
 
-<section id="content-tab4">
-    <h2>Download:</h2>
-    <div style="text-align: center"><i class="fa fa-github" aria-hidden="true"><a
-            href="https://github.com/mad48/flipping-cards/"> Get from GitHub</a></i></div>
-    <br>
-</section>
+                <li><b>rotation-mode</b> : [simultaneous | sequential] - simultaneous or sequential mode<br></li>
+                <li><b>sequential-delay</b> : [ms] - sequential delay before neighboring cards flip<br><br></li>
+
+                <li><b>card-width</b> : [px] - Card width<br></li>
+                <li><b>card-height</b> : [px] - Card height<br><br></li>
+
+                <li><b>spacing-horizontal</b> : [px] - Horizontal cards spacing<br></li>
+                <li><b>spacing-vertical</b> : [px] - Vertical cards spacing<br><br></li>
 
 
-<!--<div class="info"><a href="http://develexe.com">© 2017 Develexe. All Rights Reserved</a>
-</div>-->
+                <li><b>cards-per-row</b> : [num] - Number of cards per row<br></li>
+                <li><b>number-of-rows</b> : [num] - Number of rows <br><br></li>
+
+                <li><b>starting-number</b> : [num] - Starting card number <br><br></li>
+
+            </ul>
+        </div>
+
+    </section>
+
+
+    <section class="row">
+        <div class="download">
+            <h2>Download</h2>
+            <div>
+                <i class="fa fa-github" aria-hidden="true">
+                    <a href="https://github.com/mad48/flipping-cards/"> Get from GitHub</a></i>
+            </div>
+        </div>
+    </section>
+
+
+</main>
 
 <!-- Yandex.Metrika counter -->
-<script type="text/javascript" >
+<script type="text/javascript">
     (function (d, w, c) {
-        (w[c] = w[c] || []).push(function() {
+        (w[c] = w[c] || []).push(function () {
             try {
                 w.yaCounter46747293 = new Ya.Metrika({
-  id:46747293,
-  clickmap:true,
-  trackLinks:true,
-  accurateTrackBounce:true,
-  webvisor:true
+                    id: 46747293,
+                    clickmap: true,
+                    trackLinks: true,
+                    accurateTrackBounce: true,
+                    webvisor: true
                 });
-            } catch(e) { }
+            } catch (e) {
+            }
         });
 
         var n = d.getElementsByTagName("script")[0],
                 s = d.createElement("script"),
-                f = function () { n.parentNode.insertBefore(s, n); };
+                f = function () {
+                    n.parentNode.insertBefore(s, n);
+                };
         s.type = "text/javascript";
         s.async = true;
         s.src = "https://mc.yandex.ru/metrika/watch.js";
 
         if (w.opera == "[object Opera]") {
             d.addEventListener("DOMContentLoaded", f, false);
-        } else { f(); }
+        } else {
+            f();
+        }
     })(document, window, "yandex_metrika_callbacks");
 </script>
-<noscript><div><img src="https://mc.yandex.ru/watch/46747293" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
+<noscript>
+    <div><img src="https://mc.yandex.ru/watch/46747293" style="position:absolute; left:-9999px;" alt=""/></div>
+</noscript>
 <!-- /Yandex.Metrika counter -->
 
+
+<footer class="footer">
+    <div class="container">
+
+    </div>
+</footer>
 </body>
 </html>

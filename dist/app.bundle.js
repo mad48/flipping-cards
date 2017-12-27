@@ -982,11 +982,14 @@ var options = {
     "spacing-horizontal": 15,
     "spacing-vertical": 15,
 
-    "cards-per-row": 3
+    "cards-per-row": 3,
+
+    "starting-number": 1
 };
 
 var content = ['<div class="card-deck"> <div><h2>Deep Blue <br>Sea<br>1</h2> <div class="readmore"><a href="#" onclick="alert(\'More about -1- Lorem ipsum el dolor sit amet...\'); return false">Read More</a></div> <h3>0</h3><img src="../demo/images/1.jpg"/> </div> <div> <h2>Lorem ipsum<br>4</h2> <span class="readmore"><a href="#" onclick="alert(\'More about -4- Lorem ipsum el dolor sit amet...\'); return false">Read More</a></span> <h3>1</h3><img src="../demo/images/4.jpg"/></div> <div> <h2>Lorem ipsum<br>7</h2> <span class="readmore"><a href="#" onclick="alert(\'More about -7- Lorem ipsum el dolor sit amet...\'); return false">Read More</a></span> <h3>2</h3><img src="../demo/images/7.jpg"/></div> <div> <h2>Lorem ipsum<br>10</h2> <span class="readmore"><a href="#" onclick="alert(\'More about -10- Lorem ipsum el dolor sit amet...\'); return false">Read More</a></span> <h3>3</h3><img src="../demo/images/10.jpg"/></div> <div> <h2>Lorem ipsum<br>13</h2> <span class="readmore"><a href="#" onclick="alert(\'More about -13- Lorem ipsum el dolor sit amet...\'); return false">Read More</a></span> <h3>4</h3><img src="../demo/images/13.jpg"/></div> </div>', '<div class="card-deck"> <div> <h2>Northern <br>Lights<br>2</h2> <span class="readmore"><a href="#" onclick="alert(\'More about -2- Lorem ipsum el dolor sit amet...\'); return false">Read More</a></span> <img src="../demo/images/2.jpg"/> </div> <div> <h2>Lorem ipsum<br>5</h2> <span class="readmore"><a href="#" onclick="alert(\'More about -5- Lorem ipsum el dolor sit amet...\'); return false">Read More</a></span><img src="../demo/images/5.jpg"/></div> <div> <h2>Lorem ipsum<br>8</h2> <span class="readmore"><a href="#" onclick="alert(\'More about -8- Lorem ipsum el dolor sit amet...\'); return false">Read More</a></span><img src="../demo/images/8.jpg"/></div> <div> <h2>Lorem ipsum<br>11</h2> <span class="readmore"><a href="#" onclick="alert(\'More about -11- Lorem ipsum el dolor sit amet...\'); return false">Read More</a></span><img src="../demo/images/11.jpg"/></div> <div> <h2>Lorem ipsum<br>14</h2> <span class="readmore"><a href="#" onclick="alert(\'More about -14- Lorem ipsum el dolor sit amet...\'); return false">Read More</a></span><img src="../demo/images/14.jpg"/></div> </div>', '<div class="card-deck"> <div> <h2>Over The <br>Mountains<br>3</h2> <span class="readmore"><a href="#" onclick="alert(\'More about -3- Lorem ipsum el dolor sit amet...\'); return false">Read More</a></span> <img src="../demo/images/3.jpg"/> </div> <div> <h2>Lorem ipsum<br>6</h2> <span class="readmore"><a href="#" onclick="alert(\'More about -6- Lorem ipsum el dolor sit amet...\'); return false">Read More</a></span><img src="../demo/images/6.jpg"/></div> <div> <h2>Lorem ipsum<br>9</h2> <span class="readmore"><a href="#" onclick="alert(\'More about -9- Lorem ipsum el dolor sit amet...\'); return false">Read More</a></span><img src="../demo/images/9.jpg"/></div> <div> <h2>Lorem ipsum<br>12</h2> <span class="readmore"><a href="#" onclick="alert(\'More about -12- Lorem ipsum el dolor sit amet...\'); return false">Read More</a></span><img src="../demo/images/12.jpg"/></div> <div> <h2>Lorem ipsum<br>15</h2> <span class="readmore"><a href="#" onclick="alert(\'More about -15- Lorem ipsum el dolor sit amet...\'); return false">Read More</a></span><img src="../demo/images/15.jpg"/></div> </div>', '<div class="card-deck"> <div> <h2>Lorem ipsum<br></h2> <span class="readmore"><a href="#" onclick="alert(\'More about Lorem ipsum el dolor sit amet...\'); return false">Read More</a></span> <img src="../demo/images/13.jpg"/></div> <div> <h2>Lorem ipsum<br></h2> <span class="readmore"><a href="#" onclick="alert(\'More about Lorem ipsum el dolor sit amet...\'); return false">Read More</a></span> <img src="../demo/images/10.jpg"/></div> <div> <h2>Lorem ipsum<br></h2> <span class="readmore"><a href="#" onclick="alert(\'More about Lorem ipsum el dolor sit amet...\'); return false">Read More</a></span> <img src="../demo/images/4.jpg"/></div> <div> <h2>Lorem ipsum<br></h2> <span class="readmore"><a href="#" onclick="alert(\'More about Lorem ipsum el dolor sit amet...\'); return false">Read More</a></span> <img src="../demo/images/7.jpg"/></div> <div> <h2>Lorem ipsum<br></h2> <span class="readmore"><a href="#" onclick="alert(\'More about Lorem ipsum el dolor sit amet...\'); return false">Read More</a></span> <img src="../demo/images/1.jpg"/></div> </div>', '<div class="card-deck"> <div> <h2>Lorem ipsum<br></h2> <span class="readmore"><a href="#" onclick="alert(\'More about Lorem ipsum el dolor sit amet...\'); return false">Read More</a></span> <img src="../demo/images/8.jpg"/></div> <div> <h2>Lorem ipsum<br></h2> <span class="readmore"><a href="#" onclick="alert(\'More about Lorem ipsum el dolor sit amet...\'); return false">Read More</a></span><img src="../demo/images/1.jpg"/></div> <div> <h2>Lorem ipsum<br></h2> <span class="readmore"><a href="#" onclick="alert(\'More about Lorem ipsum el dolor sit amet...\'); return false">Read More</a></span><img src="../demo/images/14.jpg"/></div> <div> <h2>Lorem ipsum<br></h2> <span class="readmore"><a href="#" onclick="alert(\'More about Lorem ipsum el dolor sit amet...\'); return false">Read More</a></span><img src="../demo/images/5.jpg"/></div> <div> <h2>Lorem ipsum<br></h2> <span class="readmore"><a href="#" onclick="alert(\'More about Lorem ipsum el dolor sit amet...\'); return false">Read More</a></span><img src="../demo/images/2.jpg"/></div> </div>', '<div class="card-deck"> <div> <h2>Lorem ipsum<br></h2> <span class="readmore"><a href="#" onclick="alert(\'More about Lorem ipsum el dolor sit amet...\'); return false">Read More</a></span> <img src="../demo/images/15.jpg"/></div> <div> <h2>Lorem ipsum<br></h2> <span class="readmore"><a href="#" onclick="alert(\'More about Lorem ipsum el dolor sit amet...\'); return false">Read More</a></span><img src="../demo/images/12.jpg"/></div> <div> <h2>Lorem ipsum<br></h2> <span class="readmore"><a href="#" onclick="alert(\'More about Lorem ipsum el dolor sit amet...\'); return false">Read More</a></span><img src="../demo/images/6.jpg"/></div> <div> <h2>Lorem ipsum<br></h2> <span class="readmore"><a href="#" onclick="alert(\'More about Lorem ipsum el dolor sit amet...\'); return false">Read More</a></span><img src="../demo/images/9.jpg"/></div> <div> <h2>Lorem ipsum<br></h2> <span class="readmore"><a href="#" onclick="alert(\'More about Lorem ipsum el dolor sit amet...\'); return false">Read More</a></span><img src="../demo/images/3.jpg"/></div> </div>'];
 
+// only for demo page
 var count = 3;
 
 var App = function (_React$Component) {
@@ -1001,7 +1004,12 @@ var App = function (_React$Component) {
     _createClass(App, [{
         key: 'render',
         value: function render() {
-            return _react2.default.createElement(_flippingReact2.default, { id: 'flipping_cards', options: options, content: content, count: count });
+            return _react2.default.createElement(_flippingReact2.default, {
+                id: 'flipping_cards',
+                options: options,
+                content: content,
+                count: count
+            });
         }
     }]);
 
@@ -18425,6 +18433,8 @@ var flipping = {
     content: [],
     content_index: [],
 
+    current_card_number: 0,
+
     timeout: 0,
     paused: false,
 
@@ -18448,7 +18458,7 @@ var flipping = {
         "cards-per-row": 0,
         "number-of-rows": 0,
 
-        "starting-cart-number": 0
+        "starting-number": 0
     },
 
     init: function init(elem, opt) {
@@ -18467,7 +18477,7 @@ var flipping = {
         var divs = null;
         for (i = 0; i < self.decks.length; i++) {
             self.content[i] = [];
-            self.content_index[i] = self.options["starting-cart-number"];
+            self.content_index[i] = self.options["starting-number"];
             self.last_dir[i] = 1;
 
             divs = self.decks[i].children;
@@ -18495,9 +18505,9 @@ var flipping = {
         for (i = 0; i < self.decks.length; i++) {
             var front = self.decks[i].getElementsByClassName('front')[0];
             var back = self.decks[i].getElementsByClassName('back')[0];
-            front.innerHTML = self.content[i][self.options["starting-cart-number"]];
-            back.innerHTML = self.content[i][self.next(self.options["starting-cart-number"], self.content[i].length, 1)];
-            self.content_index[i] = self.options["starting-cart-number"];
+            front.innerHTML = self.content[i][self.options["starting-number"]];
+            back.innerHTML = self.content[i][self.next(self.options["starting-number"], self.content[i].length, 1)];
+            self.content_index[i] = self.options["starting-number"];
             back.classList.add("back1");
         }
 
@@ -18547,34 +18557,6 @@ var flipping = {
         };
     },
 
-    //-------------------------------------------------------------------------------------------
-    clickOnDeck: function clickOnDeck(el, event) {
-        var self = this;
-
-        var x = 0;
-        var y = 0;
-
-        var ev = event || window.event;
-        //alert(ev.target.tagName);
-        if (typeof ev == "undefined") return;
-
-        if (document.attachEvent != null) {
-            // Internet Explorer & Opera
-            x = window.event.clientX + (document.documentElement.scrollLeft ? document.documentElement.scrollLeft : document.body.scrollLeft);
-            y = window.event.clientY + (document.documentElement.scrollTop ? document.documentElement.scrollTop : document.body.scrollTop);
-        } else if (!document.attachEvent && document.addEventListener) {
-            // Gecko
-            x = ev.clientX + window.scrollX;
-            y = ev.clientY + window.scrollY;
-        }
-
-        x = x - el.offsetLeft;
-        y = y - el.offsetTop;
-
-        if (x < self.options["card-width"] / 2) self.buttons[0].click();
-        if (x >= self.options["card-width"] / 2) self.buttons[1].click();
-    },
-
     //----------------------------------------------------------------------------------------------
     buttonsoff: function buttonsoff(state) {
         var self = this;
@@ -18622,6 +18604,8 @@ var flipping = {
 
         var i_front = self.content_index[num];
         var i_back = self.next(self.content_index[num], self.content[num].length, dir);
+
+        self.current_card_number = i_back;
 
         var deck = self.decks[num];
 
@@ -18729,10 +18713,10 @@ var flipping = {
             self.buttons[1].classList.add("shadowon");
         }
 
-        // transition for transition
-        if (opt["starting-cart-number"] > 0) {
-            if (opt["starting-cart-number"] > self.content[0].length) opt["starting-cart-number"] = self.content[0].length;
-            self.options["starting-cart-number"] = opt["starting-cart-number"] - 1;
+        // starting-number
+        if (opt["starting-number"] > 0) {
+            if (opt["starting-number"] > self.content[0].length) opt["starting-number"] = self.content[0].length;
+            self.options["starting-number"] = opt["starting-number"] - 1;
         }
 
         // transition for transition

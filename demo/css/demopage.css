@@ -1,101 +1,79 @@
-/* Базовые стили демо-страницы */
-
 html,
 body {
-
 }
 
-body {
-    font-size: 14px;
+#app *{
+    font-family: "Trebuchet MS", Helvetica, Geneva, Arial, sans-serif;
+}
+
+h1, h2, h4 {
+    text-align: center;
     color: #555;
-    /*   background: #fafafa;*/
+
 }
 
-body * {
-    font-family: "Trebuchet MS", Verdana, sans-serif;
+h1 {
+    margin-top: 30px;
+    padding: 0 0 25px 0;
+    font-size: xx-large;
+}
 
+h2 {
+    margin: 25px 0 25px 0;
+    font-size: x-large;
+}
+
+h4 {
+    font-size: large;
+}
+
+.flipping {
+    margin-top: 20px;
+    margin-bottom: 20px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+section {
+    border: 1px solid #ddd;
+    margin-top: 15px;
+    margin-bottom: 0;
+
+}
+
+.config, .usage, .options, .download {
+    width: 60%;
+    margin: 0 auto;
 }
 
 section a:link, a:hover, a:visited {
+    font-family: sans-serif;
     text-decoration: none;
     color: #1679d6;
 }
 
-h1 {
-    padding: 25px 0;
-    font-weight: 400;
-    text-align: center;
-}
-
-/*h2 {
-    text-align: center;
-    color: grey;
-    font-family: Verdana, sans-serif;
-    font-weight: normal
-}*/
-
-/*.config-container {
-    width: 100%;
-    height: 100%;
-    display: flex;
-    align-items: center;
-    align-content: center;
-    justify-content: center;
-    overflow: auto;
-}*/
-
-.config {
-    font-size: 15px;
-}
-
-section .options, .usage, .config-container {
-    width: 50%;
-    margin: 0 auto;
-
-    text-transform: none;
-}
-
-section {
-
-    min-width: 500px;
-    max-width: calc(100vw - 50px);
-
-    margin: 0 auto;
-    padding: 15px;
-    background: #fff;
-    border: 1px solid #ddd;
-    margin-bottom: 20px;
-
-    clear: both
-}
-
-section h2 {
-    margin: 20px 0;
-    text-align: center;
-}
-
-.config input[type='text'], .config input[type='number'] {
-    width: 55px;
-    text-align: right;
-
-    padding-right:5px;
-
-}
-
-
-.flipping {
-    margin-top: 20px;
-    margin-bottom: 20px
-}
-
-h4 {
-    margin: 0 0 20px
+/*-------------------------------------------------------------------------------------------*/
+.usage {
+    font-size: large;
 }
 
 /*-------------------------------------------------------------------------------------------*/
 
+.options ul {
+    list-style: none;
+}
+
+.options ul li {
+
+}
+
+.options ul li b {
+    color: #555;
+}
+
+/*-------------------------------------------------------------------------------------------*/
 .config {
-    margin-left: 20px
+    f4ont-size: 14px;
 }
 
 .config input[type=text],
@@ -119,6 +97,7 @@ select {
     -ms-transition: all 0.30s ease-in-out;
     -o-transition: all 0.30s ease-in-out;
     outline: none;
+    font-size: 14px;
 }
 
 .config input[type=text]:focus,
@@ -137,6 +116,20 @@ select {
     border: 1px solid #88D5E9;
 }
 
+.config input[type='text'], .config input[type='number'] {
+    width: 55px;
+    text-align: right;
+    padding-right: 5px;
+}
+
+.config label {
+    margin-top: 10px
+}
+
+.config input, .config select {
+    margin-top: 10px
+}
+
 /*-------------------------------------------------------------------------------------------*/
 
 pre.prettyprint {
@@ -144,82 +137,12 @@ pre.prettyprint {
 }
 
 /*-------------------------------------------------------------------------------------------*/
-
-.options ul {
-    list-style: none;
-}
-
-.options ul li {
-    line-height: 150%
+.download div {
+    text-align: center;
+    margin-bottom: 20px
 }
 
 /*-------------------------------------------------------------------------------------------*/
-/*
-
-*,
-*:before,
-*:after {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
+footer {
+    margin-bottom: 30px
 }
-*/
-
-.container {
-    max-width: 980px;
-    margin: 0 auto;
-    padding: 25px 10px 0;
-}
-
-.info {
-    color: rgba(78, 78, 78, 0.8);
-    width: 100%;
-    margin: 40px auto;
-    text-align: center;
-    font-weight: 300;
-}
-
-.info a {
-    color: #bbb;
-    text-decoration: none;
-}
-
-.info a:hover {
-    color: #888;
-}
-
-/* Конец стилей демо-страницы */
-/* Базовый контейнер табов */
-
-/*
-
-!* Описываем анимацию свойства opacity *!
-
-@-webkit-keyframes fadeIn {
-    from {
-        opacity: 0;
-    }
-    to {
-        opacity: 1;
-    }
-}
-
-@keyframes fadeIn {
-    from {
-        opacity: 0;
-    }
-    to {
-        opacity: 1;
-    }
-}
-
-!* Прячем чекбоксы *!
-
-.tabs > input {
-    display: none;
-    position: absolute;
-}
-*/
-
-
-

@@ -11,6 +11,7 @@
     vertical-align: middle; }
     .flipping > div:first-child button, .flipping > div:last-child button {
       font-size: 3rem;
+      font-family: Geneva, Arial, Helvetica, sans-serif;
       color: #e7e7e7;
       -webkit-transform: scaleX(1.1);
               transform: scaleX(1.1);

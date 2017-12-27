@@ -13,6 +13,8 @@ var flipping = {
     content: [],
     content_index: [],
 
+    current_card_number:0,
+
     timeout: 0,
     paused: false,
 
@@ -36,7 +38,7 @@ var flipping = {
         "cards-per-row": 0,
         "number-of-rows": 0,
 
-        "starting-cart-number": 0
+        "starting-number": 0
     },
 
 
@@ -57,7 +59,7 @@ var flipping = {
         var divs = null;
         for (i = 0; i < self.decks.length; i++) {
             self.content[i] = [];
-            self.content_index[i] = self.options["starting-cart-number"];
+            self.content_index[i] = self.options["starting-number"];
             self.last_dir[i] = 1;
 
             divs = self.decks[i].children;
@@ -87,9 +89,9 @@ var flipping = {
         for (i = 0; i < self.decks.length; i++) {
             var front = self.decks[i].getElementsByClassName('front')[0];
             var back = self.decks[i].getElementsByClassName('back')[0];
-            front.innerHTML = self.content[i][self.options["starting-cart-number"]];
-            back.innerHTML = self.content[i][self.next(self.options["starting-cart-number"], self.content[i].length, 1)];
-            self.content_index[i] = self.options["starting-cart-number"];
+            front.innerHTML = self.content[i][self.options["starting-number"]];
+            back.innerHTML = self.content[i][self.next(self.options["starting-number"], self.content[i].length, 1)];
+            self.content_index[i] = self.options["starting-number"];
             back.classList.add("back1");
         }
 
@@ -149,32 +151,6 @@ var flipping = {
     },
 
 
-    //-------------------------------------------------------------------------------------------
-    clickOnDeck: function (el, event) {
-        var self = this;
-
-        var x = 0;
-        var y = 0;
-
-        var ev = event || window.event;
-        //alert(ev.target.tagName);
-        if (typeof ev == "undefined") return;
-
-        if (document.attachEvent != null) { // Internet Explorer & Opera
-            x = window.event.clientX + (document.documentElement.scrollLeft ? document.documentElement.scrollLeft : document.body.scrollLeft);
-            y = window.event.clientY + (document.documentElement.scrollTop ? document.documentElement.scrollTop : document.body.scrollTop);
-        } else if (!document.attachEvent && document.addEventListener) { // Gecko
-            x = ev.clientX + window.scrollX;
-            y = ev.clientY + window.scrollY;
-        }
-
-        x = x - el.offsetLeft;
-        y = y - el.offsetTop;
-
-        if (x < self.options["card-width"] / 2) self.buttons[0].click();
-        if (x >= self.options["card-width"] / 2) self.buttons[1].click();
-    },
-
 
 //----------------------------------------------------------------------------------------------
     buttonsoff: function (state) {
@@ -226,6 +202,8 @@ var flipping = {
         var i_front = self.content_index[num];
         var i_back = self.next(self.content_index[num], self.content[num].length, dir);
 
+        self.current_card_number = i_back;
+      
         var deck = self.decks[num];
 
         var front = deck.getElementsByClassName('front')[0];
@@ -338,10 +316,10 @@ var flipping = {
             self.buttons[1].classList.add("shadowon");
         }
 
-        // transition for transition
-        if (opt["starting-cart-number"] > 0) {
-            if (opt["starting-cart-number"] > self.content[0].length) opt["starting-cart-number"] = self.content[0].length;
-            self.options["starting-cart-number"] = opt["starting-cart-number"] - 1;
+        // starting-number
+        if (opt["starting-number"] > 0) {
+            if (opt["starting-number"] > self.content[0].length) opt["starting-number"] = self.content[0].length;
+            self.options["starting-number"] = opt["starting-number"] - 1;
         }
 
 

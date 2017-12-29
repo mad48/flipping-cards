@@ -2,7 +2,7 @@ html,
 body {
 }
 
-#app *{
+#app * {
     font-family: "Trebuchet MS", Helvetica, Geneva, Arial, sans-serif;
 }
 
@@ -42,8 +42,11 @@ section {
 }
 
 .config, .usage, .options, .download {
-    width: 60%;
     margin: 0 auto;
+}
+
+@media (min-width: 900px) {
+    .config_column_1 {padding-left: 50px}
 }
 
 section a:link, a:hover, a:visited {
@@ -120,6 +123,16 @@ select {
     width: 55px;
     text-align: right;
     padding-right: 5px;
+}
+
+.config input[type='number'] {
+    -moz-appearance: textfield;
+    width: 45px;
+}
+
+.config input::-webkit-outer-spin-button,
+.config input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
 }
 
 .config label {

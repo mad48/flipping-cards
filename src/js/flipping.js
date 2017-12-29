@@ -13,7 +13,7 @@ var flipping = {
     content: [],
     content_index: [],
 
-    current_card_number:0,
+    current_card_number: 0,
 
     timeout: 0,
     paused: false,
@@ -38,7 +38,7 @@ var flipping = {
         "cards-per-row": 0,
         "number-of-rows": 0,
 
-        "starting-number": 0
+        "starter-set": 0
     },
 
 
@@ -52,14 +52,14 @@ var flipping = {
         self.box = flipping_cards.getElementsByClassName('card-box')[0];
         self.flipping_cards.style.visibility = 'visible';
         self.buttons = self.flipping_cards.getElementsByTagName('button');
-        self.decks = self.flipping_cards.getElementsByClassName('card-deck');
+        self.decks = self.flipping_cards.getElementsByClassName('card-stack');
 
 
         //get content
         var divs = null;
         for (i = 0; i < self.decks.length; i++) {
             self.content[i] = [];
-            self.content_index[i] = self.options["starting-number"];
+            self.content_index[i] = self.options["starter-set"];
             self.last_dir[i] = 1;
 
             divs = self.decks[i].children;
@@ -73,15 +73,7 @@ var flipping = {
 
         //put content
         for (i = 0; i < self.decks.length; i++) {
-
             self.decks[i].innerHTML = self.card_html;
-
-            /*            self.decks[i].onclick = function (i) {
-             return function () {
-             self.clickOnDeck(self.decks[i]);
-             }
-             }(i);*/
-
         }
 
 
@@ -89,9 +81,9 @@ var flipping = {
         for (i = 0; i < self.decks.length; i++) {
             var front = self.decks[i].getElementsByClassName('front')[0];
             var back = self.decks[i].getElementsByClassName('back')[0];
-            front.innerHTML = self.content[i][self.options["starting-number"]];
-            back.innerHTML = self.content[i][self.next(self.options["starting-number"], self.content[i].length, 1)];
-            self.content_index[i] = self.options["starting-number"];
+            front.innerHTML = self.content[i][self.options["starter-set"]];
+            back.innerHTML = self.content[i][self.next(self.options["starter-set"], self.content[i].length, 1)];
+            self.content_index[i] = self.options["starter-set"];
             back.classList.add("back1");
         }
 
@@ -151,7 +143,6 @@ var flipping = {
     },
 
 
-
 //----------------------------------------------------------------------------------------------
     buttonsoff: function (state) {
         var self = this;
@@ -203,14 +194,14 @@ var flipping = {
         var i_back = self.next(self.content_index[num], self.content[num].length, dir);
 
         self.current_card_number = i_back;
-      
+
         var deck = self.decks[num];
 
         var front = deck.getElementsByClassName('front')[0];
         var back = deck.getElementsByClassName('back')[0];
 
 
-       // front.innerHTML = self.content[num][i_front];
+        // front.innerHTML = self.content[num][i_front];
         back.innerHTML = self.content[num][i_back];
 
         front.style.transitionDuration = self.options["transition-duration"] + "ms";
@@ -237,7 +228,7 @@ var flipping = {
 
                 var front = deck.getElementsByClassName('front')[0];
                 //var back = deck.getElementsByTagName('div')[1];
-               front.innerHTML = self.content[num][i_back];
+                front.innerHTML = self.content[num][i_back];
 
             }
 
@@ -316,10 +307,10 @@ var flipping = {
             self.buttons[1].classList.add("shadowon");
         }
 
-        // starting-number
-        if (opt["starting-number"] > 0) {
-            if (opt["starting-number"] > self.content[0].length) opt["starting-number"] = self.content[0].length;
-            self.options["starting-number"] = opt["starting-number"] - 1;
+        // starter-set
+        if (opt["starter-set"] > 0) {
+            if (opt["starter-set"] > self.content[0].length) opt["starter-set"] = self.content[0].length;
+            self.options["starter-set"] = opt["starter-set"] - 1;
         }
 
 
@@ -397,17 +388,17 @@ var flipping = {
         }
 
         // width of cards container
-        //self.box.style.width = self.options["card-width"] * self.options["cards-per-row"] + 2 * self.options["spacing-horizontal"] * self.options["cards-per-row"]+ "px";
+        self.box.style.width = self.options["card-width"] * self.options["cards-per-row"] + 2 * self.options["spacing-horizontal"] * self.options["cards-per-row"] + "px";
 
 
         // clearing
-        [].forEach.call(self.flipping_cards.querySelectorAll('.card-deck'), function (el) {
+        [].forEach.call(self.flipping_cards.querySelectorAll('.card-stack'), function (el) {
             el.style.clear = "none";
         });
 
 
         // line breaks
-        var child = self.flipping_cards.querySelectorAll('div.card-deck');
+        var child = self.flipping_cards.querySelectorAll('div.card-stack');
 
         for (var i = 0; i < child.length; i++) {
             if (i % self.options["cards-per-row"] == 0) {
@@ -422,14 +413,14 @@ var flipping = {
         }
 
         /* //old line breaks
-         var child = self.flipping_cards.querySelectorAll('div.card-deck:nth-child(' + ( 1 + self.options["cards-per-row"] ) + 'n)');
+         var child = self.flipping_cards.querySelectorAll('div.card-stack:nth-child(' + ( 1 + self.options["cards-per-row"] ) + 'n)');
          for (var i = 0; i < child.length; i++) {
          child[i].style.clear = "right";
          }
          */
 
         // vertical and horizontal spacings
-        [].forEach.call(self.flipping_cards.querySelectorAll('.card-deck'), function (el) {
+        [].forEach.call(self.flipping_cards.querySelectorAll('.card-stack'), function (el) {
             el.style.marginLeft = self.options["spacing-horizontal"] + "px";
             el.style.marginRight = self.options["spacing-horizontal"] + "px";
             el.style.marginTop = self.options["spacing-vertical"] + "px";
@@ -459,5 +450,8 @@ var flipping = {
 
 //export default flipping;
 if (typeof module === 'object') {
-    module.exports.flipping = flipping;
+    module.exports = flipping;
 }
+
+
+

@@ -1,9 +1,13 @@
 {
   "name": "flipping-cards",
-  "version": "2.0.12",
+  "version": "2.0.13",
   "description": "Flipping Cards Carousel",
   "author": "Max <max@develexe.com>",
   "main": "dist/js/flipping.js",
+  "files": [
+    "dist",
+    "src"
+  ],
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "build": "webpack",
@@ -19,6 +23,7 @@
   },
   "homepage": "https://github.com/mad48/flipping-cards#readme",
   "dependencies": {
+    "prop-types": "^15.6.0",
     "react": "^16.2.0",
     "react-dom": "^16.2.0"
   },
@@ -40,6 +45,9 @@
     "style-loader": "^0.19.0",
     "uglifyjs-webpack-plugin": "^1.0.1",
     "webpack": "^3.8.1"
+  },
+  "engines": {
+    "node": ">= 8.9.3"
   },
   "license": "ISC"
 }

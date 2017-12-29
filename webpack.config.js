@@ -8,14 +8,14 @@ const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
 
 
 module.exports = {
-    context: path.resolve(__dirname, './src'),
+    context: path.resolve(__dirname, './demo'),
     entry: {
-         app: "./app.js",
-        //"flipping.css": "./css/flipping.scss",
-        //"card.css": "./css/card.scss"
+        app: "./app.js",
+        "flipping.css": "../src/css/flipping.scss",
+        "card.css": "../src/css/card.scss"
     },
     output: {
-        path: path.resolve(__dirname, './dist'),
+        path: path.resolve(__dirname, './demo'),
         //filename: 'js/[name].js',
         filename: '[name].bundle.js'
         //library: "flipping",
@@ -101,19 +101,27 @@ module.exports = {
         ]
     },
     plugins: [
-        new CleanWebpackPlugin(['dist/css/*', 'dist/js/*'], {
-            exclude: ['flipping.html', 'index.html']
-        }),
 
-        /*new ExtractTextPlugin("css/[name]", {
+        new ExtractTextPlugin("css/[name]", {
             // disable: false,
             allChunks: true
-        }),*/
+        }),
 
-       new ExtractTextPlugin('css/flipping.css'),
+
+        new CleanWebpackPlugin(['demo/css/app', 'demo/card.css.bundle.js', 'demo/flipping.css.bundle.js']),
+
+        /*new CleanWebpackPlugin(['dist/css/!*', 'dist/js/!*'], {
+         exclude: ['flipping.html', 'index.html']
+         }),
+         */
+
+        // new ExtractTextPlugin('css/flipping.css'),
 
         new CopyWebpackPlugin([
-            {from: 'js/flipping.js', to: 'js/flipping.js'},
+            {from: '../src/js/flipping.js', to: './js/flipping.js'},
+            {from: '../src/js/flipping.js', to: '../dist/js/flipping.js'},
+            {from: 'css/flipping.css', to: '../dist/css/flipping.css'},
+
             /*{from: 'from/file.txt', to: 'to/file.txt'}*/
         ]),
         /*        new webpack.optimize.UglifyJsPlugin({

@@ -19,13 +19,14 @@
           integrity="sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb" crossorigin="anonymous">
 
 
-    <link href="../dist/css/flipping.css?new" rel="stylesheet"/>
+    <link href="css/flipping.css?new" rel="stylesheet"/>
+    <link href="css/card.css?new" rel="stylesheet"/>
 
     <link href="css/demopage.css?new" rel="stylesheet" type="text/css">
 
     <script src="js/run_prettify.js?autoload=true&amp;lang=css"></script>
 
-    <script src='../src/js/flipping.js?new' type='text/javascript'></script>
+    <script src='js/flipping.js?new' type='text/javascript'></script>
 
     <script src='js/content.js?new' type='text/javascript'></script>
     <script src='js/reconfigure.js?new' type='text/javascript'></script>
@@ -53,7 +54,7 @@
 
             <div class="card-box">
 
-                <div class="card-deck">
+                <div class="card-stack">
                     <div>
                         <h2>Deep Blue <br>Sea<br>1</h2>
                         <div class="readmore">
@@ -86,7 +87,7 @@
                         <h3>4</h3><img src="../demo/images/13.jpg"/></div>
                 </div>
 
-                <div class="card-deck">
+                <div class="card-stack">
                     <div>
                         <h2>Northern <br>Lights<br>2</h2>
   <span class="readmore"><a href="#"
@@ -119,7 +120,7 @@
                             src="../demo/images/14.jpg"/></div>
                 </div>
 
-                <div class="card-deck">
+                <div class="card-stack">
                     <div>
                         <h2>Over The <br>Mountains<br>3</h2>
   <span class="readmore"><a href="#"
@@ -149,7 +150,7 @@
                 </div>
 
                 <!--
-                            <div class="card-deck">
+                            <div class="card-stack">
                                 <div>
                                     <h2>Lorem ipsum<br></h2>
                               <span class="readmore"><a href="#"
@@ -178,7 +179,7 @@
                             </div>
 
 
-                            <div class="card-deck">
+                            <div class="card-stack">
                                 <div>
                                     <h2>Lorem ipsum<br></h2>
                         <span class="readmore"><a href="#"
@@ -210,7 +211,7 @@
                             </div>
 
 
-                                       <div class="card-deck">
+                                       <div class="card-stack">
                                            <div>
                                                <h2>Lorem ipsum<br></h2>
                            <span class="readmore"><a href="#"
@@ -274,9 +275,8 @@
                     "cards-per-row": 3,
                     //"number-of-rows": 2,
 
-                    "starting-number": 1
+                    "starter-set": 1
                 };
-
                 // for demopage only. transfers parameters from options object to configurator form
                 setDemopageOptions(options);
 
@@ -290,45 +290,62 @@
 
     <section class="row">
 
-        <div class="config col-xs-12">
+        <div class="config col-xs-12 col-md-12">
             <h2>Configuration</h2>
         </div>
 
 
-        <div class="config col-xs-12 col-sm-12 col-md-6" style="padding-left: 50px">
+        <div class="config col-xs-12 col-sm-12 col-md-6 config_column_1">
 
-            <label for="conf_decks_count"> Number of decks of cards to show: </label>
-            <select id="conf_decks_count" name="conf_decks_count" onchange="reconfigure()">
-                <option value="1">1</option>
-                <option value="2">2</option>
-                <option value="3">3</option>
-                <option value="4">4</option>
-                <option value="5">5</option>
-                <option value="6">6</option>
-            </select>
+            <!--            <label for="conf_decks_count"> Number of cards to show: </label>
+                        <select id="conf_decks_count" name="conf_decks_count" onchange="reconfigure()">
+                            <option value="1">1</option>
+                            <option value="2">2</option>
+                            <option value="3">3</option>
+                            <option value="4">4</option>
+                            <option value="5">5</option>
+                            <option value="6">6</option>
+                        </select>
+                        <br>-->
+
+            <label for="conf_decks_count">Number of cards to show: </label>
+            <input type="number" name="conf_decks_count" id="conf_decks_count"
+                   min="1" max="6"
+                   onclick="select()" onkeyup="reconfigure()" onchange="reconfigure()">
             <br>
 
-
-            <label for="conf_cards_per_row">Number of decks: </label>
-            <select id="conf_cards_per_row" name="conf_cards_per_row" onchange="reconfigure()">
-                <option name="conf_cards_per_row" value="cards-per-row">per row</option>
-                <option name="conf_number_of_rows" value="number-of-rows">rows</option>
-            </select>
-
-            <label for="conf_cards_per_row_or_rows"></label>
-            <input type="number" name="conf_cards_per_row_or_rows" id="conf_cards_per_row_or_rows"
+            <label for="conf_cards_per_row">Number of cards per row: </label>
+            <input type="number" name="conf_cards_per_row" id="conf_cards_per_row"
                    min="1" max="6" value=""
                    onclick="select()" onkeyup="reconfigure()" onchange="reconfigure()">
             <br>
 
-            <label for="conf_starting_number">Starting card number: </label>
-            <select id="conf_starting_number" name="conf_starting_number" onchange="reconfigure(true)">
-                <option value="1">1</option>
-                <option value="2">2</option>
-                <option value="3">3</option>
-                <option value="4">4</option>
-                <option value="5">5</option>
-            </select>
+            <!--            <label for="conf_cards_per_row">Number of decks: </label>
+                        <select id="conf_cards_per_row" name="conf_cards_per_row" onchange="reconfigure()">
+                            <option name="conf_cards_per_row" value="cards-per-row">per row</option>
+                            <option name="conf_number_of_rows" value="number-of-rows">rows</option>
+                        </select>
+
+                        <label for="conf_cards_per_row_or_rows"></label>
+                        <input type="number" name="conf_cards_per_row_or_rows" id="conf_cards_per_row_or_rows"
+                               min="1" max="6" value=""
+                               onclick="select()" onkeyup="reconfigure()" onchange="reconfigure()">
+                        <br>-->
+
+            <!--            <label for="conf_starter_set">Starter set of cards: </label>
+                        <select id="conf_starter_set" name="conf_starter_set" onchange="reconfigure(true)">
+                            <option value="1">1</option>
+                            <option value="2">2</option>
+                            <option value="3">3</option>
+                            <option value="4">4</option>
+                            <option value="5">5</option>
+                        </select>
+                        <br>-->
+
+            <label for="conf_starter_set">Starter set of cards: </label>
+            <input type="number" name="conf_starter_set" id="conf_starter_set"
+                   min="1" max="5"
+                   onclick="select()" onkeyup="reconfigure(true)" onchange="reconfigure(true)">
             <br>
 
 
@@ -422,12 +439,12 @@
 
     <section class="row">
 
-        <div class="usage col-xs-12">
+        <div class="usage col-xs-12 col-md-12">
             <h2>How to use</h2>
         </div>
 
 
-        <div class="usage col-xs-12 col-sm-12 col-md-6">
+        <div class="usage col-xs-12 col-sm-12 col-md-12 col-lg-6">
             <h4>Example of usage with pure JavaScript</h4>
 
 <pre class="prettyprint">
@@ -438,7 +455,7 @@
 
     ...
 
-    <div id="flipping_cards" class="flipping">
+    <div id="flipping_cards_carousel" class="flipping">
 
         <div>
             <button>&#9668;</button>
@@ -446,13 +463,13 @@
 
         <div class="card-box">
 
-                <div class="card-deck">
+                <div class="card-stack">
                     <div>Content of deck 1 card 1</div>
                     <div>Content of deck 1 card 2</div>
                     <div>Content of deck 1 card 3</div>
                 </div>
 
-                <div class="card-deck">
+                <div class="card-stack">
                     <div>Content of deck 2 card 1</div>
                     <div>Content of deck 2 card 2</div>
                     <div>Content of deck 2 card 3</div>
@@ -475,7 +492,6 @@
             "mouseover-pause": true,
 
             "shadow": true,
-
             "transition-duration": 700,
 
             "rotation-mode": "sequential",
@@ -488,10 +504,10 @@
             "spacing-vertical": 15,
 
             "cards-per-row": 3,
-            "starting-number": 1
+            "starter-set": 1
         };
 
-        flipping.init('flipping_cards', options);
+        flipping.init('flipping_cards_carousel', options);
 
     </script>
 
@@ -499,7 +515,7 @@
 </pre>
         </div>
 
-        <div class="usage col-xs-12 col-sm-12 col-md-6">
+        <div class="usage col-xs-12 col-sm-12 col-md-12 col-lg-6">
             <h4>Example of usage via React adapter</h4>
 <pre class="prettyprint">
 <xmp>
@@ -535,17 +551,17 @@
                 "spacing-vertical": 15,
 
                 "cards-per-row": 3,
-                "starting-number": 1
+                "starter-set": 1
             };
 
             var content = [
-                '<div class="card-deck">
+                '<div class="card-stack">
                     <div>Content of deck 1 card 1</div>
                     <div>Content of deck 1 card 2</div>
                     <div>Content of deck 1 card 3</div>
                 </div>',
 
-                '<div class="card-deck">
+                '<div class="card-stack">
                     <div>Content of deck 2 card 1</div>
                     <div>Content of deck 2 card 2</div>
                     <div>Content of deck 2 card 3</div>
@@ -556,19 +572,21 @@
                 render() {
                     return (
                         <FlippingCards
-                            id="flipping_cards"
-                            options={options}
-                            content={content}
+                                id="flipping_cards"
+                                options={options}
+                                content={content}
                         />
                     )
                }
             }
-            ReactDOM.render(<App />, document.getElementById("app"));
+            ReactDOM.render(<App/>, document.getElementById("app"));
 
         </xmp>
         </pre>
         </div>
     </section>
+
+
 
     <section class="row">
 
@@ -597,7 +615,7 @@
                 <li><b>cards-per-row</b> : [num] - Number of cards per row<br></li>
                 <li><b>number-of-rows</b> : [num] - Number of rows <br><br></li>
 
-                <li><b>starting-number</b> : [num] - Starting card number <br><br></li>
+                <li><b>starter-set</b> : [num] - Starter set of cards <br><br></li>
 
             </ul>
         </div>
@@ -606,7 +624,7 @@
 
 
     <section class="row">
-        <div class="download">
+        <div class="download  col-xs-12 col-md-12">
             <h2>Download</h2>
             <div>
                 <i class="fa fa-github" aria-hidden="true">

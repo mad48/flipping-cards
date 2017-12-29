@@ -14,40 +14,39 @@ function setDemopageOptions(options) {
     document.querySelector('input[name=conf_mouseover]').checked = options["mouseover-pause"];
 
     document.querySelector('input[name=conf_sequential_delay]').value = options["sequential-delay"];
-
-
-    /*        document.querySelector('input[name=conf_cards_per_row]').value = options["cards-per-row"];
-     document.querySelector('input[name=conf_number_of_rows]').value = options["number-of-rows"];*/
+    document.querySelector('input[name=conf_cards_per_row]').value = options["cards-per-row"];
 
     var rotation = document.querySelectorAll('input[name=conf_rotation]');
     for (var i = 0; i < rotation.length; i++) {
         if (rotation[i].value == options["rotation-mode"])  rotation[i].checked = true;
     }
 
+    //document.querySelector('select[name=conf_starter_set]').options.selectedIndex = options["starter_set"];
 
-    document.querySelector('select[name=conf_starting_number]').options.selectedIndex = options["starting_number"];
+    document.querySelector('input[name=conf_starter_set]').value = options["starter-set"];
 
+    /*
+     var sel = document.querySelector('select[name=conf_cards_per_row]');
+     for (var i = 0; i < sel.options.length; i++) {
 
-    var sel = document.querySelector('select[name=conf_cards_per_row]');
-    for (var i = 0; i < sel.options.length; i++) {
+     if (sel.options[i].value == "cards-per-row" && options["cards-per-row"] > 0) {
+     sel.selectedIndex = i;
+     document.querySelector('input[name=conf_cards_per_row_or_rows]').value = options["cards-per-row"];
+     }
 
-        if (sel.options[i].value == "cards-per-row" && options["cards-per-row"] > 0) {
-            sel.selectedIndex = i;
-            document.querySelector('input[name=conf_cards_per_row_or_rows]').value = options["cards-per-row"];
-        }
+     if (sel.options[i].value == "number-of-rows" && options["number-of-rows"] > 0) {
+     sel.selectedIndex = i;
+     document.querySelector('input[name=conf_cards_per_row_or_rows]').value = options["number-of-rows"];
+     }
+     }
+     */
 
-        if (sel.options[i].value == "number-of-rows" && options["number-of-rows"] > 0) {
-            sel.selectedIndex = i;
-            document.querySelector('input[name=conf_cards_per_row_or_rows]').value = options["number-of-rows"];
-        }
-    }
-
-    document.querySelector('select[name=conf_decks_count]').options.selectedIndex = document.querySelectorAll('.card-deck').length - 1;
-
+    //document.querySelector('select[name=conf_decks_count]').options.selectedIndex = document.querySelectorAll('.card-deck').length - 1;
+    document.querySelector('input[name=conf_decks_count]').value = document.querySelectorAll('.card-stack').length;
 }
 
 
-function reconfigure(new_starting_number = false) {
+function reconfigure(new_starter_set = false) {
 
     var options = {
         "autoflip-mode": document.querySelector('#conf_auto').checked,
@@ -66,19 +65,21 @@ function reconfigure(new_starting_number = false) {
 
         "rotation-mode": document.querySelector('input[name=conf_rotation]:checked').value,
         "sequential-delay": document.querySelector('#conf_sequential_delay').value,
+
+        "cards-per-row": document.querySelector('#conf_cards_per_row').value,
+
     };
 
-    if (new_starting_number) {
-
-        //console.log("new_starting_number=true " + (document.querySelector('select[name=conf_starting_number]').selectedIndex + 1));
-        options["starting-number"] = parseInt(document.querySelector('select[name=conf_starting_number]').selectedIndex + 1);
-        flipping.current_card_number = options["starting-number"] - 1;
+    if (new_starter_set) {
+        //console.log("new_starter_set=true " + (document.querySelector('select[name=conf_starter_set]').selectedIndex + 1));
+        //options["starter-set"] = parseInt(document.querySelector('select[name=conf_starter_set]').selectedIndex + 1);
+        options["starter-set"] = parseInt(document.querySelector('#conf_starter_set').value);
+        flipping.current_card_number = options["starter-set"] - 1;
     }
     else {
-        console.log("flipping.current_card_number=" + flipping.current_card_number);
-        options["starting-number"] = parseInt(flipping.current_card_number) + 1;
-
-        //console.log("options['starting-number']" + options["starting-number"]);
+        //console.log("flipping.current_card_number=" + flipping.current_card_number);
+        options["starter-set"] = parseInt(flipping.current_card_number) + 1;
+        //console.log("options['starter-set']" + options["starter-set"]);
         //console.log("flipping.content_index =" + flipping.content_index);
     }
 
@@ -90,14 +91,23 @@ function reconfigure(new_starting_number = false) {
         options["card-height"] = 145;
     }
 
+    if (document.querySelector('#conf_decks_count').value <1) {
+        document.querySelector('#conf_decks_count').value = 1;
+    }
 
-    var sel = document.querySelector('select[name=conf_cards_per_row]').selectedIndex;
-    var sel_param = document.querySelector('select[name=conf_cards_per_row]').options[sel].value;
+    if (document.querySelector('#conf_decks_count').value > content.length) {
+        document.querySelector('#conf_decks_count').value = content.length;
+    }
+    /*
+     var sel = document.querySelector('select[name=conf_cards_per_row]').selectedIndex;
+     var sel_param = document.querySelector('select[name=conf_cards_per_row]').options[sel].value;
 
-    options[sel_param] = document.querySelector('#conf_cards_per_row_or_rows').value;
+     options[sel_param] = document.querySelector('#conf_cards_per_row_or_rows').value;
+     */
 
 
-    var decks_count = document.querySelector('select[name=conf_decks_count]').options.selectedIndex + 1;
+    //var decks_count = document.querySelector('select[name=conf_decks_count]').options.selectedIndex + 1;
+    var decks_count = document.querySelector('#conf_decks_count').value;
 
     document.getElementsByClassName("card-box")[0].innerHTML = "";
     var cont = "";

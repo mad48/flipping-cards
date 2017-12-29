@@ -1,0 +1,48 @@
+/* content styles ----------------------------------------------------------------------*/
+.flipping .card-box div.card-stack img {
+  height: 100%;
+  width: 100%; }
+
+.flipping .card-box div.card-stack * {
+  border-radius: 10px; }
+
+.flipping .card-box div.card-stack h2, .flipping .card-box div.card-stack h3 {
+  position: absolute;
+  width: 100%;
+  line-height: normal;
+  color: #ffffff;
+  font-size: 1.3rem;
+  text-shadow: 1px 1px 2px black, 0 0 1em rgba(0, 6, 22, 0.67); }
+
+.flipping .card-box div.card-stack h2 {
+  margin-top: 1.6vh; }
+
+.flipping .card-box div.card-stack h3 {
+  margin-top: 130px;
+  display: none; }
+
+.flipping .card-box div.card-stack .readmore {
+  position: absolute;
+  text-align: center;
+  bottom: 1.5vh;
+  width: 100%; }
+  .flipping .card-box div.card-stack .readmore a {
+    display: inline-block;
+    line-height: normal;
+    -webkit-box-shadow: 0 1px 1px rgba(0, 0, 0, 0.1);
+            box-shadow: 0 1px 1px rgba(0, 0, 0, 0.1);
+    text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.2);
+    border: 2px solid rgba(255, 255, 255, 0.8);
+    font-size: 16px;
+    background: #3b9dc8;
+    color: #fff;
+    padding: 9px 20px 9px 20px;
+    border-radius: 40px;
+    -webkit-transition: background ease .3s;
+    transition: background ease .3s; }
+    .flipping .card-box div.card-stack .readmore a:hover {
+      background-color: #00b3d7; }
+    .flipping .card-box div.card-stack .readmore a:link, .flipping .card-box div.card-stack .readmore a a:hover, .flipping .card-box div.card-stack .readmore a a:visited {
+      cursor: hand;
+      text-decoration: none;
+      color: #fff; }

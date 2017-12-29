@@ -1,3 +1,5 @@
+[![npm][npm]][npm-url]
+[![node][node]][node-url]
 # flipping-cards
 
 Flipping Cards Carousel
@@ -22,9 +24,9 @@ On the page put the code for the carousel. For example:
                 <button>&#9668;</button>
             </div>
 
-            <div class="slides">
+            <div class="card-box">
 
-                <div class="deck">
+                <div class="card-stack">
                     <div>
                         <h2>Custom text 1</h2>
                         <img src="images/pic1.jpg"/>
@@ -48,7 +50,7 @@ On the page put the code for the carousel. For example:
         </div>
 ```
 
-The block `<div class="card-deck">` is a deck of cards. You can add multiple decks. Inside it, each card is a `div` element with your custom html content.
+The block `<div class="card-stack">` is a stack of cards. You can add multiple stacks. Inside it, each card is a `div` element with your custom html content.
 
 ## Initialization
 
@@ -69,7 +71,7 @@ document.addEventListener("DOMContentLoaded", function () {
         "spacing-horizontal": 15,
         "spacing-vertical": 15,
         "cards-per-row": 3,
-        "starting-number": 1
+        "starter-set": 1
     };
 
     flipping.init('flipping_cards', options);
@@ -115,13 +117,12 @@ See example of usage in file demo/app.js
 - `transition-duration` : [ms] - card flip transition duration
 - `rotation-mode` : [simultaneous | sequential] - simultaneous or sequential mode
 - `sequential-delay` : [ms] - sequential delay before neighboring cards flip
-- `cards-per-row` : [num] - Number of cards per row
-- `number-of-rows` : [num] - Number of rows
 - `card-width` : [px] - Card width
 - `card-height` : [px] - Card height
 - `spacing-horizontal` : [px] - Horizontal cards spacing
 - `spacing-vertical` : [px] - Vertical cards spacing
-- `starting-number` : [num] - Starting card number
+- `cards-per-row` : [num] - Number of cards per row
+- `starter-set` : [num] - Starting card number
 
 **Supports:**
 
@@ -132,7 +133,7 @@ See example of usage in file demo/app.js
 - Simultaneous and  sequential rotation mode
 - Automatic flip mode
 
-## Browser Support
+**Browser Support:**
 - Google Chrome 36+
 - Mozilla Firefox 16+
 - Internet Explorer 10+
@@ -154,9 +155,15 @@ Then open .../flipping-cards/demo/index.html as local file in your browser.
 License
 ----
 
-MIT
+[MIT](http://www.opensource.org/licenses/mit-license.php)
 
 [//]: #
 
 [Demo and usage]: <https://mad48.github.io/flipping-cards/demo/index.html>
 
+[npm]: https://img.shields.io/npm/v/flipping-cards.svg
+[npm-stats]: https://img.shields.io/npm/dm/flipping-cards.svg
+[npm-url]: https://npmjs.com/package/flipping-cards
+
+[node]: https://img.shields.io/node/v/flipping-cards.svg
+[node-url]: https://nodejs.org

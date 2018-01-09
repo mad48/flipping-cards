@@ -9,6 +9,7 @@ var flipping = {
     direction: 1,
     last_dir: [],
     card_html: null,
+    cards_count: 0,
 
     content: [],
     content_index: [],
@@ -35,10 +36,10 @@ var flipping = {
         "spacing-vertical": 15,
         "spacing-horizontal": 15,
 
+        "cards-to-show": 3,
         "cards-per-row": 0,
-        "number-of-rows": 0,
 
-        "starter-set": 0
+        "starting-card-index": 0
     },
 
 
@@ -54,22 +55,75 @@ var flipping = {
         self.buttons = self.flipping_cards.getElementsByTagName('button');
         self.decks = self.flipping_cards.getElementsByClassName('card-stack');
 
+        self.cards = self.box.children;
 
-        //get content
+        self.cards_count = self.box.children.length;
+
+        //old get content
+        /*
+         var divs = null;
+         for (i = 0; i < self.decks.length; i++) {
+         self.content[i] = [];
+         self.content_index[i] = self.options["starting-card-index"];
+         self.last_dir[i] = 1;
+
+         divs = self.decks[i].children;
+
+         for (var j = 0; j < divs.length; j++) {
+         self.content[i][j] = divs[j].innerHTML;
+         }
+         }
+         */
+
+
+        //new get content
+
+
+        // starting-card-index
+        if (opt["starting-card-index"] > 0) {
+            if (opt["starting-card-index"] > self.box.children.length) opt["starting-card-index"] = self.box.children.length;
+            self.options["starting-card-index"] = opt["starting-card-index"] - 1;
+        }
+
+        var content_before_sort = [];
+        for (i = 0; i < self.box.children.length; i++) {
+            content_before_sort[i] = self.box.children[i].outerHTML;
+        }
+
+        var start_part = content_before_sort.slice(0, self.options["starting-card-index"]);
+        var end_part = content_before_sort.slice(self.options["starting-card-index"]);
+        self.box.innerHTML = end_part.concat(start_part).join('');
+
+
         var divs = null;
-        for (i = 0; i < self.decks.length; i++) {
+        divs = self.box.children;
+
+        if (opt["cards-to-show"] > 0) {
+            if (opt["cards-to-show"] > self.box.children.length) opt["cards-to-show"] = self.box.children.length;
+            self.options["cards-to-show"] = opt["cards-to-show"];
+        }
+
+
+        for (i = 0; i < self.options["cards-to-show"]; i++) {
             self.content[i] = [];
-            self.content_index[i] = self.options["starter-set"];
+            self.content_index[i] = self.options["starting-card-index"];
             self.last_dir[i] = 1;
 
-            divs = self.decks[i].children;
-
-            for (var j = 0; j < divs.length; j++) {
-                self.content[i][j] = divs[j].innerHTML;
+            for (var j = 0; j < Math.floor(self.box.children.length / self.options["cards-to-show"]); j++) {
+                self.content[i][j] = divs[j * self.options["cards-to-show"] + i].innerHTML;
             }
         }
 
+
+        self.box.innerHTML = "";
+        for (i = 0; i < self.options["cards-to-show"]; i++) {
+            self.box.innerHTML = self.box.innerHTML + '<div class="card-stack">' + self.content[i][0] + '</div>';
+        }
+        self.decks = self.flipping_cards.getElementsByClassName('card-stack');
+
+
         self.configure(opt);
+
 
         //put content
         for (i = 0; i < self.decks.length; i++) {
@@ -81,19 +135,15 @@ var flipping = {
         for (i = 0; i < self.decks.length; i++) {
             var front = self.decks[i].getElementsByClassName('front')[0];
             var back = self.decks[i].getElementsByClassName('back')[0];
-            front.innerHTML = self.content[i][self.options["starter-set"]];
-            back.innerHTML = self.content[i][self.next(self.options["starter-set"], self.content[i].length, 1)];
-            self.content_index[i] = self.options["starter-set"];
+            //front.innerHTML = self.content[i][self.options["starting-card-index"]];
+            //back.innerHTML = self.content[i][self.next(self.options["starting-card-index"], self.content[i].length, 1)];
+            self.content_index[i] = 0;//self.options["starting-card-index"];
+
+            front.innerHTML = self.content[i][0];
+            back.innerHTML = self.content[i][1];
+
             back.classList.add("back1");
         }
-
-
-        /*        self.buttons[0].addEventListener('touchend', function (event) {
-         self.sequential(-1);
-         }, false);
-         self.buttons[1].addEventListener('touchend', function (event) {
-         self.sequential(1);
-         }, false);*/
 
 
         self.buttons[0].onclick = function () {
@@ -162,6 +212,12 @@ var flipping = {
         }, paus_);
 
 
+        self.current_card_number = self.current_card_number + self.options["cards-to-show"] * dir;
+        if (self.current_card_number < 0) self.current_card_number = self.cards_count - self.options["cards-to-show"];
+        else if (self.current_card_number > self.cards_count - 1) self.current_card_number = 0;
+
+        //console.log(self.current_card_number);
+
         for (i = 0; i < self.decks.length; i++) {
             (function (index) {
                 setTimeout(function () {
@@ -193,7 +249,7 @@ var flipping = {
         var i_front = self.content_index[num];
         var i_back = self.next(self.content_index[num], self.content[num].length, dir);
 
-        self.current_card_number = i_back;
+        //self.current_card_number = i_back;
 
         var deck = self.decks[num];
 
@@ -307,10 +363,10 @@ var flipping = {
             self.buttons[1].classList.add("shadowon");
         }
 
-        // starter-set
-        if (opt["starter-set"] > 0) {
-            if (opt["starter-set"] > self.content[0].length) opt["starter-set"] = self.content[0].length;
-            self.options["starter-set"] = opt["starter-set"] - 1;
+        // starting-card-index
+        if (opt["starting-card-index"] > 0) {
+            if (opt["starting-card-index"] > self.box.children.length) opt["starting-card-index"] = self.box.children.length;
+            self.options["starting-card-index"] = opt["starting-card-index"] - 1;
         }
 
 

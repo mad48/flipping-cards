@@ -25,23 +25,19 @@ On the page put the code for the carousel. For example:
             </div>
 
             <div class="card-box">
-
-                <div class="card-stack">
-                    <div>
-                        <h2>Custom text 1</h2>
-                        <img src="images/pic1.jpg"/>
-                    </div>
-                    <div>
-                        <span>Custom text 2</span>
-                        <img src="images/pic2.jpg"/>
-                    </div>
-                    <div>
-                        <b>Custom text 3</b>
-                        <img src="images/pic3.jpg"/>
-                    </div>
+                <div>
+                    <h2>Custom text 1</h2>
+                    <img src="images/pic1.jpg"/>
                 </div>
-
-            </div>
+                <div>
+                    <span>Custom text 2</span>
+                    <img src="images/pic2.jpg"/>
+                </div>
+                <div>
+                    <b>Custom text 3</b>
+                    <img src="images/pic3.jpg"/>
+                </div>
+                ...
 
             <div>
                 <button>&#9658;</button>
@@ -50,7 +46,7 @@ On the page put the code for the carousel. For example:
         </div>
 ```
 
-The block `<div class="card-stack">` is a stack of cards. You can add multiple stacks. Inside it, each card is a `div` element with your custom html content.
+Each `<div>` item within the element`<div class="card-box">` is a card. You can add multiple cards with your custom html content.
 
 ## Initialization
 
@@ -70,8 +66,9 @@ document.addEventListener("DOMContentLoaded", function () {
         "card-height": 180,
         "spacing-horizontal": 15,
         "spacing-vertical": 15,
+        "cards-to-show": 3,
         "cards-per-row": 3,
-        "starter-set": 1
+        "starting-card-index": 1
     };
 
     flipping.init('flipping_cards', options);
@@ -121,8 +118,9 @@ See example of usage in file demo/app.js
 - `card-height` : [px] - Card height
 - `spacing-horizontal` : [px] - Horizontal cards spacing
 - `spacing-vertical` : [px] - Vertical cards spacing
+- `cards-to-show` : [num] - Number of cards to show
 - `cards-per-row` : [num] - Number of cards per row
-- `starter-set` : [num] - Starting card number
+- `starting-card-index` : [num] - Starter set of cards
 
 **Supports:**
 

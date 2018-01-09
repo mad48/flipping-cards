@@ -1002,11 +1002,12 @@ var options = {
     "spacing-horizontal": 15,
     "spacing-vertical": 15,
 
+    "cards-to-show": 3,
     "cards-per-row": 3,
-    "starter-set": 1
+    "starting-card-index": 1
 };
 
-var content = ['<div class="card-stack"> <div><h2>Deep Blue <br>Sea<br>1</h2> <div class="readmore"><a href="#" onclick="alert(\'More about -1- Lorem ipsum el dolor sit amet...\'); return false">Read More</a></div> <h3>0</h3><img src="../demo/images/1.jpg"/> </div> <div> <h2>Lorem ipsum<br>4</h2> <span class="readmore"><a href="#" onclick="alert(\'More about -4- Lorem ipsum el dolor sit amet...\'); return false">Read More</a></span> <h3>1</h3><img src="../demo/images/4.jpg"/></div> <div> <h2>Lorem ipsum<br>7</h2> <span class="readmore"><a href="#" onclick="alert(\'More about -7- Lorem ipsum el dolor sit amet...\'); return false">Read More</a></span> <h3>2</h3><img src="../demo/images/7.jpg"/></div> <div> <h2>Lorem ipsum<br>10</h2> <span class="readmore"><a href="#" onclick="alert(\'More about -10- Lorem ipsum el dolor sit amet...\'); return false">Read More</a></span> <h3>3</h3><img src="../demo/images/10.jpg"/></div> <div> <h2>Lorem ipsum<br>13</h2> <span class="readmore"><a href="#" onclick="alert(\'More about -13- Lorem ipsum el dolor sit amet...\'); return false">Read More</a></span> <h3>4</h3><img src="../demo/images/13.jpg"/></div> </div>', '<div class="card-stack"> <div> <h2>Northern <br>Lights<br>2</h2> <span class="readmore"><a href="#" onclick="alert(\'More about -2- Lorem ipsum el dolor sit amet...\'); return false">Read More</a></span> <img src="../demo/images/2.jpg"/> </div> <div> <h2>Lorem ipsum<br>5</h2> <span class="readmore"><a href="#" onclick="alert(\'More about -5- Lorem ipsum el dolor sit amet...\'); return false">Read More</a></span><img src="../demo/images/5.jpg"/></div> <div> <h2>Lorem ipsum<br>8</h2> <span class="readmore"><a href="#" onclick="alert(\'More about -8- Lorem ipsum el dolor sit amet...\'); return false">Read More</a></span><img src="../demo/images/8.jpg"/></div> <div> <h2>Lorem ipsum<br>11</h2> <span class="readmore"><a href="#" onclick="alert(\'More about -11- Lorem ipsum el dolor sit amet...\'); return false">Read More</a></span><img src="../demo/images/11.jpg"/></div> <div> <h2>Lorem ipsum<br>14</h2> <span class="readmore"><a href="#" onclick="alert(\'More about -14- Lorem ipsum el dolor sit amet...\'); return false">Read More</a></span><img src="../demo/images/14.jpg"/></div> </div>', '<div class="card-stack"> <div> <h2>Over The <br>Mountains<br>3</h2> <span class="readmore"><a href="#" onclick="alert(\'More about -3- Lorem ipsum el dolor sit amet...\'); return false">Read More</a></span> <img src="../demo/images/3.jpg"/> </div> <div> <h2>Lorem ipsum<br>6</h2> <span class="readmore"><a href="#" onclick="alert(\'More about -6- Lorem ipsum el dolor sit amet...\'); return false">Read More</a></span><img src="../demo/images/6.jpg"/></div> <div> <h2>Lorem ipsum<br>9</h2> <span class="readmore"><a href="#" onclick="alert(\'More about -9- Lorem ipsum el dolor sit amet...\'); return false">Read More</a></span><img src="../demo/images/9.jpg"/></div> <div> <h2>Lorem ipsum<br>12</h2> <span class="readmore"><a href="#" onclick="alert(\'More about -12- Lorem ipsum el dolor sit amet...\'); return false">Read More</a></span><img src="../demo/images/12.jpg"/></div> <div> <h2>Lorem ipsum<br>15</h2> <span class="readmore"><a href="#" onclick="alert(\'More about -15- Lorem ipsum el dolor sit amet...\'); return false">Read More</a></span><img src="../demo/images/15.jpg"/></div> </div>', '<div class="card-stack"> <div> <h2>Lorem ipsum<br></h2> <span class="readmore"><a href="#" onclick="alert(\'More about Lorem ipsum el dolor sit amet...\'); return false">Read More</a></span> <img src="../demo/images/13.jpg"/></div> <div> <h2>Lorem ipsum<br></h2> <span class="readmore"><a href="#" onclick="alert(\'More about Lorem ipsum el dolor sit amet...\'); return false">Read More</a></span> <img src="../demo/images/10.jpg"/></div> <div> <h2>Lorem ipsum<br></h2> <span class="readmore"><a href="#" onclick="alert(\'More about Lorem ipsum el dolor sit amet...\'); return false">Read More</a></span> <img src="../demo/images/4.jpg"/></div> <div> <h2>Lorem ipsum<br></h2> <span class="readmore"><a href="#" onclick="alert(\'More about Lorem ipsum el dolor sit amet...\'); return false">Read More</a></span> <img src="../demo/images/7.jpg"/></div> <div> <h2>Lorem ipsum<br></h2> <span class="readmore"><a href="#" onclick="alert(\'More about Lorem ipsum el dolor sit amet...\'); return false">Read More</a></span> <img src="../demo/images/1.jpg"/></div> </div>', '<div class="card-stack"> <div> <h2>Lorem ipsum<br></h2> <span class="readmore"><a href="#" onclick="alert(\'More about Lorem ipsum el dolor sit amet...\'); return false">Read More</a></span> <img src="../demo/images/8.jpg"/></div> <div> <h2>Lorem ipsum<br></h2> <span class="readmore"><a href="#" onclick="alert(\'More about Lorem ipsum el dolor sit amet...\'); return false">Read More</a></span><img src="../demo/images/1.jpg"/></div> <div> <h2>Lorem ipsum<br></h2> <span class="readmore"><a href="#" onclick="alert(\'More about Lorem ipsum el dolor sit amet...\'); return false">Read More</a></span><img src="../demo/images/14.jpg"/></div> <div> <h2>Lorem ipsum<br></h2> <span class="readmore"><a href="#" onclick="alert(\'More about Lorem ipsum el dolor sit amet...\'); return false">Read More</a></span><img src="../demo/images/5.jpg"/></div> <div> <h2>Lorem ipsum<br></h2> <span class="readmore"><a href="#" onclick="alert(\'More about Lorem ipsum el dolor sit amet...\'); return false">Read More</a></span><img src="../demo/images/2.jpg"/></div> </div>', '<div class="card-stack"> <div> <h2>Lorem ipsum<br></h2> <span class="readmore"><a href="#" onclick="alert(\'More about Lorem ipsum el dolor sit amet...\'); return false">Read More</a></span> <img src="../demo/images/15.jpg"/></div> <div> <h2>Lorem ipsum<br></h2> <span class="readmore"><a href="#" onclick="alert(\'More about Lorem ipsum el dolor sit amet...\'); return false">Read More</a></span><img src="../demo/images/12.jpg"/></div> <div> <h2>Lorem ipsum<br></h2> <span class="readmore"><a href="#" onclick="alert(\'More about Lorem ipsum el dolor sit amet...\'); return false">Read More</a></span><img src="../demo/images/6.jpg"/></div> <div> <h2>Lorem ipsum<br></h2> <span class="readmore"><a href="#" onclick="alert(\'More about Lorem ipsum el dolor sit amet...\'); return false">Read More</a></span><img src="../demo/images/9.jpg"/></div> <div> <h2>Lorem ipsum<br></h2> <span class="readmore"><a href="#" onclick="alert(\'More about Lorem ipsum el dolor sit amet...\'); return false">Read More</a></span><img src="../demo/images/3.jpg"/></div> </div>'];
+var content = ['<div><h2>Lorem ipsum<br>1</h2><span class="readmore"><a href="#"  onclick=" alert(\'More about -1- Lorem ipsum el dolor sit amet...\'); return false">Read More</a></span><img src="../demo/images/1.jpg"/></div>', '<div><h2>Lorem ipsum<br>2</h2><span class="readmore"><a href="#"  onclick="alert(\'More about -2- Lorem ipsum el dolor sit amet...\'); return false">Read More</a></span><img src="../demo/images/2.jpg"/></div>', '<div><h2>Lorem ipsum<br>3</h2><span class="readmore"><a href="#"  onclick="alert(\'More about -3- Lorem ipsum el dolor sit amet...\'); return false">Read More</a></span><img src="../demo/images/3.jpg"/></div>', '<div><h2>Lorem ipsum<br>4</h2><span class="readmore"><a href="#"  onclick="alert(\'More about -4- Lorem ipsum el dolor sit amet...\'); return false">Read More</a></span><img src="../demo/images/4.jpg"/></div>', '<div><h2>Lorem ipsum<br>5</h2><span class="readmore"><a href="#"  onclick="alert(\'More about -5- Lorem ipsum el dolor sit amet...\'); return false">Read More</a></span><img src="../demo/images/5.jpg"/></div>', '<div><h2>Lorem ipsum<br>6</h2><span class="readmore"><a href="#"  onclick="alert(\'More about -6- Lorem ipsum el dolor sit amet...\'); return false">Read More</a></span><img src="../demo/images/6.jpg"/></div>', '<div><h2>Lorem ipsum<br>7</h2><span class="readmore"><a href="#"  onclick="alert(\'More about -7- Lorem ipsum el dolor sit amet...\'); return false">Read More</a></span><img src="../demo/images/7.jpg"/></div>', '<div><h2>Lorem ipsum<br>8</h2><span class="readmore"><a href="#"  onclick="alert(\'More about -8- Lorem ipsum el dolor sit amet...\'); return false">Read More</a></span><img src="../demo/images/8.jpg"/></div>', '<div><h2>Lorem ipsum<br>9</h2><span class="readmore"><a href="#"  onclick="alert(\'More about -9- Lorem ipsum el dolor sit amet...\'); return false">Read More</a></span><img src="../demo/images/9.jpg"/></div>', '<div><h2>Lorem ipsum<br>10</h2><span class="readmore"><a href="#"  onclick="alert(\'More about -10- Lorem ipsum el dolor sit amet...\'); return false">Read More</a></span><img src="../demo/images/10.jpg"/></div>', '<div><h2>Lorem ipsum<br>11</h2><span class="readmore"><a href="#"  onclick="alert(\'More about -11- Lorem ipsum el dolor sit amet...\'); return false">Read More</a></span><img src="../demo/images/11.jpg"/></div>', '<div><h2>Lorem ipsum<br>12</h2><span class="readmore"><a href="#"  onclick="alert(\'More about -12- Lorem ipsum el dolor sit amet...\'); return false">Read More</a></span><img src="../demo/images/12.jpg"/></div>', '<div><h2>Lorem ipsum<br>13</h2><span class="readmore"><a href="#"  onclick="alert(\'More about -13- Lorem ipsum el dolor sit amet...\'); return false">Read More</a></span><img src="../demo/images/13.jpg"/></div>', '<div><h2>Lorem ipsum<br>14</h2><span class="readmore"><a href="#"  onclick="alert(\'More about -14- Lorem ipsum el dolor sit amet...\'); return false">Read More</a></span><img src="../demo/images/14.jpg"/></div>', '<div><h2>Lorem ipsum<br>15</h2><span class="readmore"><a href="#"  onclick="alert(\'More about -15- Lorem ipsum el dolor sit amet...\'); return false">Read More</a></span><img src="../demo/images/15.jpg"/></div>'];
 
 // only for demo page
 var count = 3;
@@ -18392,7 +18393,7 @@ var ReactFlipping = function (_React$Component) {
                          )
                     ),
                     _react2.default.createElement('div', { className: 'card-box',
-                         dangerouslySetInnerHTML: { __html: this.props.content.slice(0, this.props.count > 0 ? this.props.count : this.props.content.length).join('') } }),
+                         dangerouslySetInnerHTML: { __html: this.props.content.join('') } }),
                     _react2.default.createElement(
                          'div',
                          null,
@@ -19118,6 +19119,7 @@ var flipping = {
     direction: 1,
     last_dir: [],
     card_html: null,
+    cards_count: 0,
 
     content: [],
     content_index: [],
@@ -19144,10 +19146,10 @@ var flipping = {
         "spacing-vertical": 15,
         "spacing-horizontal": 15,
 
+        "cards-to-show": 3,
         "cards-per-row": 0,
-        "number-of-rows": 0,
 
-        "starter-set": 0
+        "starting-card-index": 0
     },
 
     init: function init(elem, opt) {
@@ -19162,19 +19164,65 @@ var flipping = {
         self.buttons = self.flipping_cards.getElementsByTagName('button');
         self.decks = self.flipping_cards.getElementsByClassName('card-stack');
 
-        //get content
+        self.cards = self.box.children;
+
+        self.cards_count = self.box.children.length;
+
+        //old get content
+        /*
+         var divs = null;
+         for (i = 0; i < self.decks.length; i++) {
+         self.content[i] = [];
+         self.content_index[i] = self.options["starting-card-index"];
+         self.last_dir[i] = 1;
+           divs = self.decks[i].children;
+           for (var j = 0; j < divs.length; j++) {
+         self.content[i][j] = divs[j].innerHTML;
+         }
+         }
+         */
+
+        //new get content
+
+
+        // starting-card-index
+        if (opt["starting-card-index"] > 0) {
+            if (opt["starting-card-index"] > self.box.children.length) opt["starting-card-index"] = self.box.children.length;
+            self.options["starting-card-index"] = opt["starting-card-index"] - 1;
+        }
+
+        var content_before_sort = [];
+        for (i = 0; i < self.box.children.length; i++) {
+            content_before_sort[i] = self.box.children[i].outerHTML;
+        }
+
+        var start_part = content_before_sort.slice(0, self.options["starting-card-index"]);
+        var end_part = content_before_sort.slice(self.options["starting-card-index"]);
+        self.box.innerHTML = end_part.concat(start_part).join('');
+
         var divs = null;
-        for (i = 0; i < self.decks.length; i++) {
+        divs = self.box.children;
+
+        if (opt["cards-to-show"] > 0) {
+            if (opt["cards-to-show"] > self.box.children.length) opt["cards-to-show"] = self.box.children.length;
+            self.options["cards-to-show"] = opt["cards-to-show"];
+        }
+
+        for (i = 0; i < self.options["cards-to-show"]; i++) {
             self.content[i] = [];
-            self.content_index[i] = self.options["starter-set"];
+            self.content_index[i] = self.options["starting-card-index"];
             self.last_dir[i] = 1;
 
-            divs = self.decks[i].children;
-
-            for (var j = 0; j < divs.length; j++) {
-                self.content[i][j] = divs[j].innerHTML;
+            for (var j = 0; j < Math.floor(self.box.children.length / self.options["cards-to-show"]); j++) {
+                self.content[i][j] = divs[j * self.options["cards-to-show"] + i].innerHTML;
             }
         }
+
+        self.box.innerHTML = "";
+        for (i = 0; i < self.options["cards-to-show"]; i++) {
+            self.box.innerHTML = self.box.innerHTML + '<div class="card-stack">' + self.content[i][0] + '</div>';
+        }
+        self.decks = self.flipping_cards.getElementsByClassName('card-stack');
 
         self.configure(opt);
 
@@ -19187,18 +19235,15 @@ var flipping = {
         for (i = 0; i < self.decks.length; i++) {
             var front = self.decks[i].getElementsByClassName('front')[0];
             var back = self.decks[i].getElementsByClassName('back')[0];
-            front.innerHTML = self.content[i][self.options["starter-set"]];
-            back.innerHTML = self.content[i][self.next(self.options["starter-set"], self.content[i].length, 1)];
-            self.content_index[i] = self.options["starter-set"];
+            //front.innerHTML = self.content[i][self.options["starting-card-index"]];
+            //back.innerHTML = self.content[i][self.next(self.options["starting-card-index"], self.content[i].length, 1)];
+            self.content_index[i] = 0; //self.options["starting-card-index"];
+
+            front.innerHTML = self.content[i][0];
+            back.innerHTML = self.content[i][1];
+
             back.classList.add("back1");
         }
-
-        /*        self.buttons[0].addEventListener('touchend', function (event) {
-         self.sequential(-1);
-         }, false);
-         self.buttons[1].addEventListener('touchend', function (event) {
-         self.sequential(1);
-         }, false);*/
 
         self.buttons[0].onclick = function () {
 
@@ -19257,6 +19302,11 @@ var flipping = {
             self.buttonsoff(false);
         }, paus_);
 
+        self.current_card_number = self.current_card_number + self.options["cards-to-show"] * dir;
+        if (self.current_card_number < 0) self.current_card_number = self.cards_count - self.options["cards-to-show"];else if (self.current_card_number > self.cards_count - 1) self.current_card_number = 0;
+
+        //console.log(self.current_card_number);
+
         for (i = 0; i < self.decks.length; i++) {
             (function (index) {
                 setTimeout(function () {
@@ -19287,7 +19337,7 @@ var flipping = {
         var i_front = self.content_index[num];
         var i_back = self.next(self.content_index[num], self.content[num].length, dir);
 
-        self.current_card_number = i_back;
+        //self.current_card_number = i_back;
 
         var deck = self.decks[num];
 
@@ -19395,10 +19445,10 @@ var flipping = {
             self.buttons[1].classList.add("shadowon");
         }
 
-        // starter-set
-        if (opt["starter-set"] > 0) {
-            if (opt["starter-set"] > self.content[0].length) opt["starter-set"] = self.content[0].length;
-            self.options["starter-set"] = opt["starter-set"] - 1;
+        // starting-card-index
+        if (opt["starting-card-index"] > 0) {
+            if (opt["starting-card-index"] > self.box.children.length) opt["starting-card-index"] = self.box.children.length;
+            self.options["starting-card-index"] = opt["starting-card-index"] - 1;
         }
 
         // transition for transition

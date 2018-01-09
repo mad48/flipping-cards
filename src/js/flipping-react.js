@@ -22,7 +22,7 @@ class ReactFlipping extends React.Component {
                 </div>
 
                 <div className="card-box"
-                     dangerouslySetInnerHTML={{__html:  this.props.content.slice(0,this.props.count>0?this.props.count:this.props.content.length).join('')}}>
+                     dangerouslySetInnerHTML={{__html:  this.props.content.join('')}}>
                 </div>
 
                 <div>

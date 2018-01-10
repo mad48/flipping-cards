@@ -46,7 +46,7 @@ On the page put the code for the carousel. For example:
         </div>
 ```
 
-Each `<div>` item within the element`<div class="card-box">` is a card. You can add multiple cards with your custom html content.
+Each `<div>` item inside the element`<div class="card-box">` is a card. You can add multiple cards with your custom html content.
 
 ## Initialization
 
@@ -56,19 +56,20 @@ Initialize the component by calling `flipping.init('flipping_cards', options)` w
 document.addEventListener("DOMContentLoaded", function () {
 
     var options = {
-        "autoflip-mode": false,
-        "autoflip-delay": 1500,
-        "shadow": true,
-        "transition-duration": 700,
-        "rotation-mode": "sequential",
-        "sequential-delay": 600,
-        "card-width": 150,
-        "card-height": 180,
-        "spacing-horizontal": 15,
-        "spacing-vertical": 15,
-        "cards-to-show": 3,
-        "cards-per-row": 3,
-        "starting-card-index": 1
+        "autoFlipMode": false,
+        "autoFlipDelay": 1500,
+        "pauseMouseOver": true,
+        "displayShadow": true,
+        "transitionDuration": 700,
+        "rotationMode": "sequential",
+        "sequentialDelay": 600,
+        "cardWidth": 150,
+        "cardHeight": 180,
+        "spacingHorizontal": 15,
+        "spacingVertical": 15,
+        "cardsToShow": 3,
+        "cardsPerRow": 3,
+        "startFromIndex": 1
     };
 
     flipping.init('flipping_cards', options);
@@ -108,19 +109,19 @@ See example of usage in file demo/app.js
 
 ## Options
 
-- `autoflip-mode` : [true | false] - start flipping in automatic mode
-- `autoflip-delay` : [ms] - delay before the next set of cards in automatic mode [ms]
-- `shadow` : [true | false] - on/off shadow
-- `transition-duration` : [ms] - card flip transition duration
-- `rotation-mode` : [simultaneous | sequential] - simultaneous or sequential mode
-- `sequential-delay` : [ms] - sequential delay before neighboring cards flip
-- `card-width` : [px] - Card width
-- `card-height` : [px] - Card height
-- `spacing-horizontal` : [px] - Horizontal cards spacing
-- `spacing-vertical` : [px] - Vertical cards spacing
-- `cards-to-show` : [num] - Number of cards to show
-- `cards-per-row` : [num] - Number of cards per row
-- `starting-card-index` : [num] - Starter set of cards
+- `autoFlipMode` : [true | false] - start flipping in automatic mode
+- `autoFlipDelay` : [ms] - delay before the next set of cards in automatic mode [ms]
+- `displayShadow` : [true | false] - on/off displayShadow
+- `transitionDuration` : [ms] - card flip transition duration
+- `rotationMode` : [simultaneous | sequential] - simultaneous or sequential mode
+- `sequentialDelay` : [ms] - sequential delay before neighboring cards flip
+- `cardWidth` : [px] - Card width
+- `cardHeight` : [px] - Card height
+- `spacingHorizontal` : [px] - Horizontal cards spacing
+- `spacingVertical` : [px] - Vertical cards spacing
+- `cardsToShow` : [num] - Number of cards to show
+- `cardsPerRow` : [num] - Number of cards per row
+- `startFromIndex` : [num] - Starter set of cards
 
 **Supports:**
 

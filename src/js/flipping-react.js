@@ -36,26 +36,25 @@ class ReactFlipping extends React.Component {
 
 ReactFlipping.propTypes = {
     /*    "options": PropTypes.objectOf(PropTypes.shape({
-     "autoflip_mode": PropTypes.bool,
-     "autoflip-delay": PropTypes.number,
-     "mouseover-pause": PropTypes.bool,
+     "autoFlipMode": PropTypes.bool,
+     "autoFlipDelay": PropTypes.number,
+     "pauseMouseOver": PropTypes.bool,
 
-     "shadow": PropTypes.bool,
-     "transition-duration": PropTypes.number,
+     "displayShadow": PropTypes.bool,
+     "transitionDuration": PropTypes.number,
 
-     "rotation-mode": PropTypes.oneOf(["simultaneous", "sequential"]),
-     "sequential-delay": PropTypes.number,
+     "rotationMode": PropTypes.oneOf(["simultaneous", "sequential"]),
+     "sequentialDelay": PropTypes.number,
 
-     "card-width": PropTypes.number,
-     "card-height": PropTypes.number,
+     "cardWidth": PropTypes.number,
+     "cardHeight": PropTypes.number,
 
-     "spacing-horizontal": PropTypes.number,
-     "spacing-vertical": PropTypes.number,
+     "spacingHorizontal": PropTypes.number,
+     "spacingVertical": PropTypes.number,
 
-     "cards-per-row": PropTypes.number,
-     "number-of-rows": PropTypes.number,
-
-     "starting-number": PropTypes.number
+     "cardsPerRow": PropTypes.number,
+     
+     "startFromIndex": PropTypes.number
      })).isRequired,
 
      "content": PropTypes.arrayOf(PropTypes.string).isRequired*/
@@ -63,26 +62,25 @@ ReactFlipping.propTypes = {
 
 
 ReactFlipping.defaultProps = {
-    /*    "autoflip-mode": false,
-     "autoflip-delay": 1500,
+    /*    "autoFlipMode": false,
+     "autoFlipDelay": 1500,
 
-     "shadow": true,
-     "transition-duration": 700,
-     "mouseover-pause": true,
+     "displayShadow": true,
+     "transitionDuration": 700,
+     "pauseMouseOver": true,
 
-     "rotation-mode": "simultaneous",
-     "sequential-delay": 600,
+     "rotationMode": "simultaneous",
+     "sequentialDelay": 600,
 
-     "card-width": 200,
-     "card-height": 200,
+     "cardWidth": 200,
+     "cardHeight": 200,
 
-     "spacing-vertical": 15,
-     "spacing-horizontal": 15,
+     "spacingVertical": 15,
+     "spacingHorizontal": 15,
 
-     "cards-per-row": 0,
-     "number-of-rows": 0,
+     "cardsPerRow": 0,
 
-     "starting-number": 0*/
+     "startFromIndex": 1*/
 };
 
 export default ReactFlipping;

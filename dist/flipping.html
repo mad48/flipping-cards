@@ -24,57 +24,54 @@
 
     <div class="card-box">
 
-        <div class="card-stack">
-            <div><h3>0</h3></div>
-            <div><h3>1</h3></div>
-            <div><h3>2</h3></div>
-            <div><h3>3</h3></div>
-            <div><h3>4</h3></div>
+        <div>
+            <h2>Lorem ipsum<br>1</h2>
         </div>
-
-        <div class="card-stack">
-            <div><h3>0</h3></div>
-            <div><h3>1</h3></div>
-            <div><h3>2</h3></div>
-            <div><h3>3</h3></div>
-            <div><h3>4</h3></div>
+        <div>
+            <h2>Lorem ipsum<br>2</h2>
         </div>
-
-        <div class="card-stack">
-            <div><h3>0</h3></div>
-            <div><h3>1</h3></div>
-            <div><h3>2</h3></div>
-            <div><h3>3</h3></div>
-            <div><h3>4</h3></div>
+        <div>
+            <h2>Lorem ipsum<br>3</h2>
         </div>
-
-
-        <div class="card-stack">
-            <div><h3>0</h3></div>
-            <div><h3>1</h3></div>
-            <div><h3>2</h3></div>
-            <div><h3>3</h3></div>
-            <div><h3>4</h3></div>
+        <div>
+            <h2>Lorem ipsum<br>4</h2>
         </div>
-
-        <div class="card-stack">
-            <div><h3>0</h3></div>
-            <div><h3>1</h3></div>
-            <div><h3>2</h3></div>
-            <div><h3>3</h3></div>
-            <div><h3>4</h3></div>
+        <div>
+            <h2>Lorem ipsum<br>5</h2>
         </div>
-
-        <div class="card-stack">
-            <div><h3>0</h3></div>
-            <div><h3>1</h3></div>
-            <div><h3>2</h3></div>
-            <div><h3>3</h3></div>
-            <div><h3>4</h3></div>
+        <div>
+            <h2>Lorem ipsum<br>6</h2>
         </div>
-
+        <div>
+            <h2>Lorem ipsum<br>7</h2>
+        </div>
+        <div>
+            <h2>Lorem ipsum<br>8</h2>
+        </div>
+        <div>
+            <h2>Lorem ipsum<br>9</h2>
+        </div>
+        <div>
+            <h2>Lorem ipsum<br>10</h2>
+        </div>
+        <div>
+            <h2>Lorem ipsum<br>11</h2>
+        </div>
+        <div>
+            <h2>Lorem ipsum<br>12</h2>
+        </div>
+        <div>
+            <h2>Lorem ipsum<br>13</h2>
+        </div>
+        <div>
+            <h2>Lorem ipsum<br>14</h2>
+        </div>
+        <div>
+            <h2>Lorem ipsum<br>15</h2>
+        </div>
 
     </div>
+
 
     <div>
         <button>&#9658;</button>
@@ -83,28 +80,31 @@
 </div>
 
 <script>
+
     document.addEventListener("DOMContentLoaded", function () {
 
         var options = {
-            "autoflip-mode": false,
-            "autoflip-delay": 1500,
-            "mouseover-pause": true,
 
-            "shadow": true,
-            "transition-duration": 700,
+            "autoFlipMode": false,
+            "autoFlipDelay": 1500,
+            "pauseMouseOver": true,
 
-            "rotation-mode": "simultaneous",
-            "sequential-delay": 600,
+            "displayShadow": true,
+            "transitionDuration": 700,
 
-            "card-width": 150,
-            "card-height": 180,
+            "rotationMode": "simultaneous",
+            "sequentialDelay": 600,
 
-            "spacing-horizontal": 15,
-            "spacing-vertical": 15,
+            "cardWidth": 150,
+            "cardHeight": 180,
 
-            "cards-per-row": 3,
+            "spacingHorizontal": 15,
+            "spacingVertical": 15,
 
-            "starter-set": 1
+            "cardsToShow": 3,
+            "cardsPerRow": 3,
+
+            "startFromIndex": 1
         };
 
         flipping.init('flipping_cards', options);

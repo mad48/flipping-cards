@@ -1,40 +1,40 @@
 function setDemopageOptions(options) {
 
-    document.querySelector('input[name=conf_auto]').checked = options["autoflip-mode"];
-    document.querySelector('input[name=conf_autoflip_delay]').value = options["autoflip-delay"];
+    document.querySelector('input[name=conf_auto]').checked = options["autoFlipMode"];
+    document.querySelector('input[name=conf_autoflip_delay]').value = options["autoFlipDelay"];
 
-    document.querySelector('input[name=conf_card_width]').value = options["card-width"];
-    document.querySelector('input[name=conf_card_height]').value = options["card-height"];
+    document.querySelector('input[name=conf_card_width]').value = options["cardWidth"];
+    document.querySelector('input[name=conf_card_height]').value = options["cardHeight"];
 
-    document.querySelector('input[name=conf_spacing_horizontal]').value = options["spacing-horizontal"];
-    document.querySelector('input[name=conf_spacing_vertical]').value = options["spacing-vertical"];
+    document.querySelector('input[name=conf_spacing_horizontal]').value = options["spacingHorizontal"];
+    document.querySelector('input[name=conf_spacing_vertical]').value = options["spacingVertical"];
 
-    document.querySelector('input[name=conf_transition_duration]').value = options["transition-duration"];
-    document.querySelector('input[name=conf_shadow]').checked = options["shadow"];
-    document.querySelector('input[name=conf_mouseover]').checked = options["mouseover-pause"];
+    document.querySelector('input[name=conf_transition_duration]').value = options["transitionDuration"];
+    document.querySelector('input[name=conf_shadow]').checked = options["displayShadow"];
+    document.querySelector('input[name=conf_mouseover]').checked = options["pauseMouseOver"];
 
-    document.querySelector('input[name=conf_sequential_delay]').value = options["sequential-delay"];
+    document.querySelector('input[name=conf_sequential_delay]').value = options["sequentialDelay"];
 
-    document.querySelector('input[name=conf_decks_count]').value = options["cards-to-show"];
+    document.querySelector('input[name=conf_decks_count]').value = options["cardsToShow"];
 
-    document.querySelector('input[name=conf_cards_per_row]').value = options["cards-per-row"];
+    document.querySelector('input[name=conf_cards_per_row]').value = options["cardsPerRow"];
 
     var rotation = document.querySelectorAll('input[name=conf_rotation]');
     for (var i = 0; i < rotation.length; i++) {
-        if (rotation[i].value == options["rotation-mode"])  rotation[i].checked = true;
+        if (rotation[i].value == options["rotationMode"])  rotation[i].checked = true;
     }
 
     //document.querySelector('select[name=conf_starting_card_index]').options.selectedIndex = options["starting_card_index"];
 
-    document.querySelector('input[name=conf_starting_card_index]').value = options["starting-card-index"];
+    document.querySelector('input[name=conf_starting_card_index]').value = options["startFromIndex"];
 
     /*
      var sel = document.querySelector('select[name=conf_cards_per_row]');
      for (var i = 0; i < sel.options.length; i++) {
 
-     if (sel.options[i].value == "cards-per-row" && options["cards-per-row"] > 0) {
+     if (sel.options[i].value == "cardsPerRow" && options["cardsPerRow"] > 0) {
      sel.selectedIndex = i;
-     document.querySelector('input[name=conf_cards_per_row_or_rows]').value = options["cards-per-row"];
+     document.querySelector('input[name=conf_cards_per_row_or_rows]').value = options["cardsPerRow"];
      }
 
      if (sel.options[i].value == "number-of-rows" && options["number-of-rows"] > 0) {
@@ -53,33 +53,33 @@ function setDemopageOptions(options) {
 function reconfigure(new_starting_card_index = false) {
 
     var options = {
-        "autoflip-mode": document.querySelector('#conf_auto').checked,
-        "autoflip-delay": document.querySelector('#conf_autoflip_delay').value,
+        "autoFlipMode": document.querySelector('#conf_auto').checked,
+        "autoFlipDelay": document.querySelector('#conf_autoflip_delay').value,
 
-        "card-width": document.querySelector('#conf_card_width').value,
-        "card-height": document.querySelector('#conf_card_height').value,
+        "cardWidth": document.querySelector('#conf_card_width').value,
+        "cardHeight": document.querySelector('#conf_card_height').value,
 
-        "spacing-horizontal": document.querySelector('#conf_spacing_horizontal').value,
-        "spacing-vertical": document.querySelector('#conf_spacing_vertical').value,
+        "spacingHorizontal": document.querySelector('#conf_spacing_horizontal').value,
+        "spacingVertical": document.querySelector('#conf_spacing_vertical').value,
 
-        "shadow": document.querySelector('#conf_shadow').checked,
+        "displayShadow": document.querySelector('#conf_shadow').checked,
 
-        "transition-duration": document.querySelector('#conf_transition_duration').value,
-        "mouseover-pause": document.querySelector('#conf_mouseover').checked,
+        "transitionDuration": document.querySelector('#conf_transition_duration').value,
+        "pauseMouseOver": document.querySelector('#conf_mouseover').checked,
 
-        "rotation-mode": document.querySelector('input[name=conf_rotation]:checked').value,
-        "sequential-delay": document.querySelector('#conf_sequential_delay').value,
+        "rotationMode": document.querySelector('input[name=conf_rotation]:checked').value,
+        "sequentialDelay": document.querySelector('#conf_sequential_delay').value,
 
-        "cards-to-show": document.querySelector('#conf_decks_count').value,
-        "cards-per-row": document.querySelector('#conf_cards_per_row').value,
+        "cardsToShow": document.querySelector('#conf_decks_count').value,
+        "cardsPerRow": document.querySelector('#conf_cards_per_row').value,
 
     };
 
     if (new_starting_card_index) {
         //console.log("new_starting_card_index=true " + (document.querySelector('select[name=conf_starting_card_index]').selectedIndex + 1));
-        //options["starting-card-index"] = parseInt(document.querySelector('select[name=conf_starting_card_index]').selectedIndex + 1);
-        options["starting-card-index"] = parseInt(document.querySelector('#conf_starting_card_index').value);
-        flipping.current_card_number = (options["starting-card-index"] - 1);
+        //options["startFromIndex"] = parseInt(document.querySelector('select[name=conf_starting_card_index]').selectedIndex + 1);
+        options["startFromIndex"] = parseInt(document.querySelector('#conf_starting_card_index').value);
+        flipping.current_card_number = (options["startFromIndex"] - 1);
        // console.log("flipping.current_card_number=" + flipping.current_card_number);
     }
     else {
@@ -87,23 +87,23 @@ function reconfigure(new_starting_card_index = false) {
 
         ///last change
 
-     options["starting-card-index"] = (parseInt(flipping.current_card_number)+1);
+     options["startFromIndex"] = (parseInt(flipping.current_card_number)+1);
 
 
-        //options["starting-card-index"] = parseInt(document.querySelector('#conf_starting_card_index').value);
+        //options["startFromIndex"] = parseInt(document.querySelector('#conf_starting_card_index').value);
 
-        // options["starting-card-index"] = parseInt(flipping.current_card_number) + 1;
+        // options["startFromIndex"] = parseInt(flipping.current_card_number) + 1;
 
-        //console.log("options['starting-card-index']" + options["starting-card-index"]);
+        //console.log("options['startFromIndex']" + options["startFromIndex"]);
         //console.log("flipping.content_index =" + flipping.content_index);
     }
 
     // only for demo page
     if (document.querySelector('#conf_card_width').value < 120) {
-        options["card-width"] = 120;
+        options["cardWidth"] = 120;
     }
     if (document.querySelector('#conf_card_height').value < 145) {
-        options["card-height"] = 145;
+        options["cardHeight"] = 145;
     }
 
     if (document.querySelector('#conf_decks_count').value < 1) {

@@ -43,7 +43,6 @@
 
     <h1>Flipping Cards Carousel</h1>
 
-
     <section class="row">
 
         <div id="flipping_cards" class="flipping">
@@ -163,28 +162,26 @@
             document.addEventListener("DOMContentLoaded", function () {
 
                 var options = {
+                    "autoFlipMode": false,
+                    "autoFlipDelay": 1500,
+                    "pauseMouseOver": true,
 
-                    "autoflip-mode": false,
-                    "autoflip-delay": 1500,
-                    "mouseover-pause": true,
+                    "displayShadow": true,
+                    "transitionDuration": 700,
 
-                    "shadow": true,
-                    "transition-duration": 700,
+                    "rotationMode": "simultaneous",
+                    "sequentialDelay": 600,
 
+                    "cardWidth": 150,
+                    "cardHeight": 180,
 
-                    "rotation-mode": "simultaneous",
-                    "sequential-delay": 600,
+                    "spacingHorizontal": 15,
+                    "spacingVertical": 15,
 
-                    "card-width": 150,
-                    "card-height": 180,
+                    "cardsToShow": 3,
+                    "cardsPerRow": 3,
 
-                    "spacing-horizontal": 15,
-                    "spacing-vertical": 15,
-
-                    "cards-to-show": 3,
-                    "cards-per-row": 3,
-
-                    "starting-card-index": 1
+                    "startFromIndex": 1
                 };
 
                 // for demopage only. transfers parameters from options object to configurator form
@@ -232,7 +229,7 @@
 
             <!--            <label for="conf_cards_per_row">Number of decks: </label>
                         <select id="conf_cards_per_row" name="conf_cards_per_row" onchange="reconfigure()">
-                            <option name="conf_cards_per_row" value="cards-per-row">per row</option>
+                            <option name="conf_cards_per_row" value="cardsPerRow">per row</option>
                             <option name="conf_number_of_rows" value="number-of-rows">rows</option>
                         </select>
 
@@ -387,25 +384,25 @@
     <script>
 
         var options = {
-            "autoflip-mode": false,
-            "autoflip-delay": 1500,
-            "mouseover-pause": true,
+            "autoFlipMode": false,
+            "autoFlipDelay": 1500,
+            "pauseMouseOver": true,
 
-            "shadow": true,
-            "transition-duration": 700,
+            "displayShadow": true,
+            "transitionDuration": 700,
 
-            "rotation-mode": "sequential",
-            "sequential-delay": 600,
+            "rotationMode": "sequential",
+            "sequentialDelay": 600,
 
-            "card-width": 250,
-            "card-height": 280,
+            "cardWidth": 250,
+            "cardHeight": 280,
 
-            "spacing-horizontal": 15,
-            "spacing-vertical": 15,
+            "spacingHorizontal": 15,
+            "spacingVertical": 15,
 
-            "cards-to-show": 3,
-            "cards-per-row": 3,
-            "starting-card-index": 1
+            "cardsToShow": 3,
+            "cardsPerRow": 3,
+            "startFromIndex": 1
         };
 
         flipping.init('flipping_cards_carousel', options);
@@ -421,7 +418,7 @@
 <pre class="prettyprint">
 <xmp>
     <div id="app"></div>
-    <script src="app.bundle.js"></script>
+    <script src="bundle.min.js"></script>
 
     ...
 
@@ -435,25 +432,25 @@
 
 
             var options = {
-                "autoflip-mode": false,
-                "autoflip-delay": 1500,
-                "mouseover-pause": true,
+                "autoFlipMode": false,
+                "autoFlipDelay": 1500,
+                "pauseMouseOver": true,
 
-                "shadow": true,
-                "transition-duration": 700,
+                "displayShadow": true,
+                "transitionDuration": 700,
 
-                "rotation-mode": "simultaneous",
-                "sequential-delay": 600,
+                "rotationMode": "simultaneous",
+                "sequentialDelay": 600,
 
-                "card-width": 150,
-                "card-height": 180,
+                "cardWidth": 150,
+                "cardHeight": 180,
 
-                "spacing-horizontal": 15,
-                "spacing-vertical": 15,
+                "spacingHorizontal": 15,
+                "spacingVertical": 15,
 
-                "cards-to-show": 3,
-                "cards-per-row": 3,
-                "starting-card-index": 1
+                "cardsToShow": 3,
+                "cardsPerRow": 3,
+                "startFromIndex": 1
             };
 
             var content = [
@@ -488,29 +485,29 @@
             <h2>Options</h2>
             <ul>
 
-                <li><b>autoflip-mode</b> : [true | false] - start flipping in automatic mode<br><!--Endless Loop--></li>
-                <li><b>autoflip-delay</b> : [ms] - delay before the next set of cards in automatic mode [ms]<br></li>
-                <li><b>mouseover-pause</b> : [true | false] - pausing to flip when you hover over the cards<br><br></li>
+                <li><b>autoFlipMode</b> : [true | false] - start flipping in automatic mode<br><!--Endless Loop--></li>
+                <li><b>autoFlipDelay</b> : [ms] - delay before the next set of cards in automatic mode [ms]<br></li>
+                <li><b>rotationMode</b> : [true | false] - pausing to flip when you hover over the cards<br><br></li>
 
-                <li><b>shadow</b> : [true | false] - on/off shadow <br></li>
-                <li><b>transition-duration</b> : [ms] - card flip transition duration <br><br></li>
-
-
-                <li><b>rotation-mode</b> : [simultaneous | sequential] - simultaneous or sequential mode<br></li>
-                <li><b>sequential-delay</b> : [ms] - sequential delay before neighboring cards flip<br><br></li>
-
-                <li><b>card-width</b> : [px] - Card width<br></li>
-                <li><b>card-height</b> : [px] - Card height<br><br></li>
-
-                <li><b>spacing-horizontal</b> : [px] - Horizontal cards spacing<br></li>
-                <li><b>spacing-vertical</b> : [px] - Vertical cards spacing<br><br></li>
+                <li><b>displayShadow</b> : [true | false] - on/off displayShadow <br></li>
+                <li><b>transitionDuration</b> : [ms] - card flip transition duration <br><br></li>
 
 
-                <li><b>cards-to-show</b> : [num] - Number of cards to show<br></li>
-                <li><b>cards-per-row</b> : [num] - Number of cards per row<br></li>
+                <li><b>rotationMode</b> : [simultaneous | sequential] - simultaneous or sequential mode<br></li>
+                <li><b>sequentialDelay</b> : [ms] - sequential delay before neighboring cards flip<br><br></li>
+
+                <li><b>cardWidth</b> : [px] - Card width<br></li>
+                <li><b>cardHeight</b> : [px] - Card height<br><br></li>
+
+                <li><b>spacingHorizontal</b> : [px] - Horizontal cards spacing<br></li>
+                <li><b>spacingVertical</b> : [px] - Vertical cards spacing<br><br></li>
+
+
+                <li><b>cardsToShow</b> : [num] - Number of cards to show<br></li>
+                <li><b>cardsPerRow</b> : [num] - Number of cards per row<br></li>
                 <!--                <li><b>number-of-rows</b> : [num] - Number of rows <br><br></li>-->
 
-                <li><b>starting-card-index</b> : [num] - Start show from card index <br><br></li>
+                <li><b>startFromIndex</b> : [num] - Start show from card index <br><br></li>
 
             </ul>
         </div>

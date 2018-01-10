@@ -20,26 +20,26 @@ var flipping = {
     paused: false,
 
     options: {
-        "autoflip-mode": false,
-        "autoflip-delay": 1500,
+        "autoFlipMode": false,
+        "autoFlipDelay": 1500,
 
-        "shadow": true,
-        "transition-duration": 700,
-        "mouseover-pause": true,
+        "displayShadow": true,
+        "transitionDuration": 700,
+        "pauseMouseOver": true,
 
-        "rotation-mode": "simultaneous",
-        "sequential-delay": 600,
+        "rotationMode": "simultaneous",
+        "sequentialDelay": 600,
 
-        "card-width": 200,
-        "card-height": 200,
+        "cardWidth": 200,
+        "cardHeight": 200,
 
-        "spacing-vertical": 15,
-        "spacing-horizontal": 15,
+        "spacingVertical": 15,
+        "spacingHorizontal": 15,
 
-        "cards-to-show": 3,
-        "cards-per-row": 0,
+        "cardsToShow": 3,
+        "cardsPerRow": 0,
 
-        "starting-card-index": 0
+        "startFromIndex": 1
     },
 
 
@@ -64,7 +64,7 @@ var flipping = {
          var divs = null;
          for (i = 0; i < self.decks.length; i++) {
          self.content[i] = [];
-         self.content_index[i] = self.options["starting-card-index"];
+         self.content_index[i] = self.options["startFromIndex"];
          self.last_dir[i] = 1;
 
          divs = self.decks[i].children;
@@ -79,10 +79,10 @@ var flipping = {
         //new get content
 
 
-        // starting-card-index
-        if (opt["starting-card-index"] > 0) {
-            if (opt["starting-card-index"] > self.box.children.length) opt["starting-card-index"] = self.box.children.length;
-            self.options["starting-card-index"] = opt["starting-card-index"] - 1;
+        // startFromIndex
+        if (opt["startFromIndex"] > 0) {
+            if (opt["startFromIndex"] > self.box.children.length) opt["startFromIndex"] = self.box.children.length;
+            self.options["startFromIndex"] = opt["startFromIndex"] - 1;
         }
 
         var content_before_sort = [];
@@ -90,33 +90,33 @@ var flipping = {
             content_before_sort[i] = self.box.children[i].outerHTML;
         }
 
-        var start_part = content_before_sort.slice(0, self.options["starting-card-index"]);
-        var end_part = content_before_sort.slice(self.options["starting-card-index"]);
+        var start_part = content_before_sort.slice(0, self.options["startFromIndex"]);
+        var end_part = content_before_sort.slice(self.options["startFromIndex"]);
         self.box.innerHTML = end_part.concat(start_part).join('');
 
 
         var divs = null;
         divs = self.box.children;
 
-        if (opt["cards-to-show"] > 0) {
-            if (opt["cards-to-show"] > self.box.children.length) opt["cards-to-show"] = self.box.children.length;
-            self.options["cards-to-show"] = opt["cards-to-show"];
+        if (opt["cardsToShow"] > 0) {
+            if (opt["cardsToShow"] > self.box.children.length) opt["cardsToShow"] = self.box.children.length;
+            self.options["cardsToShow"] = opt["cardsToShow"];
         }
 
 
-        for (i = 0; i < self.options["cards-to-show"]; i++) {
+        for (i = 0; i < self.options["cardsToShow"]; i++) {
             self.content[i] = [];
-            self.content_index[i] = self.options["starting-card-index"];
+            self.content_index[i] = self.options["startFromIndex"];
             self.last_dir[i] = 1;
 
-            for (var j = 0; j < Math.floor(self.box.children.length / self.options["cards-to-show"]); j++) {
-                self.content[i][j] = divs[j * self.options["cards-to-show"] + i].innerHTML;
+            for (var j = 0; j < Math.floor(self.box.children.length / self.options["cardsToShow"]); j++) {
+                self.content[i][j] = divs[j * self.options["cardsToShow"] + i].innerHTML;
             }
         }
 
 
         self.box.innerHTML = "";
-        for (i = 0; i < self.options["cards-to-show"]; i++) {
+        for (i = 0; i < self.options["cardsToShow"]; i++) {
             self.box.innerHTML = self.box.innerHTML + '<div class="card-stack">' + self.content[i][0] + '</div>';
         }
         self.decks = self.flipping_cards.getElementsByClassName('card-stack');
@@ -135,9 +135,9 @@ var flipping = {
         for (i = 0; i < self.decks.length; i++) {
             var front = self.decks[i].getElementsByClassName('front')[0];
             var back = self.decks[i].getElementsByClassName('back')[0];
-            //front.innerHTML = self.content[i][self.options["starting-card-index"]];
-            //back.innerHTML = self.content[i][self.next(self.options["starting-card-index"], self.content[i].length, 1)];
-            self.content_index[i] = 0;//self.options["starting-card-index"];
+            //front.innerHTML = self.content[i][self.options["startFromIndex"]];
+            //back.innerHTML = self.content[i][self.next(self.options["startFromIndex"], self.content[i].length, 1)];
+            self.content_index[i] = 0;//self.options["startFromIndex"];
 
             front.innerHTML = self.content[i][0];
             back.innerHTML = self.content[i][1];
@@ -206,14 +206,14 @@ var flipping = {
         var i = 0;
 
         self.buttonsoff(true);
-        var paus_ = self.options["rotation-mode"] == "sequential" ? self.options["sequential-delay"] * self.decks.length : self.options["transition-duration"];
+        var paus_ = self.options["rotationMode"] == "sequential" ? self.options["sequentialDelay"] * self.decks.length : self.options["transitionDuration"];
         setTimeout(function () {
             self.buttonsoff(false);
         }, paus_);
 
 
-        self.current_card_number = self.current_card_number + self.options["cards-to-show"] * dir;
-        if (self.current_card_number < 0) self.current_card_number = self.cards_count - self.options["cards-to-show"];
+        self.current_card_number = self.current_card_number + self.options["cardsToShow"] * dir;
+        if (self.current_card_number < 0) self.current_card_number = self.cards_count - self.options["cardsToShow"];
         else if (self.current_card_number > self.cards_count - 1) self.current_card_number = 0;
 
         //console.log(self.current_card_number);
@@ -222,7 +222,7 @@ var flipping = {
             (function (index) {
                 setTimeout(function () {
                     self.flip(index, dir);
-                }, self.options["sequential-delay"] * index);
+                }, self.options["sequentialDelay"] * index);
             })(i);
         }
 
@@ -233,10 +233,10 @@ var flipping = {
     autoflip: function (state) {
         var self = this;
 
-        if (state) {// && self.options["autoflip-mode"]
+        if (state) {// && self.options["autoFlipMode"]
             self.timeout = setInterval(function go() {
                 self.buttons[1].click();
-            }, self.options["autoflip-delay"]);
+            }, self.options["autoFlipDelay"]);
         } else {
             clearInterval(self.timeout);
         }
@@ -260,8 +260,8 @@ var flipping = {
         // front.innerHTML = self.content[num][i_front];
         back.innerHTML = self.content[num][i_back];
 
-        front.style.transitionDuration = self.options["transition-duration"] + "ms";
-        back.style.transitionDuration = self.options["transition-duration"] + "ms";
+        front.style.transitionDuration = self.options["transitionDuration"] + "ms";
+        back.style.transitionDuration = self.options["transitionDuration"] + "ms";
 
         if (self.browser == "safari") {
             front.style.webkitTransform = 'rotateY(' + (-1 * dir * 180) + 'deg)';
@@ -278,7 +278,7 @@ var flipping = {
                 var deck = self.decks[num];
 
                 // especially for safari
-                self.card_html = "<div style='width: " + self.options["card-width"] + "px; height: " + self.options["card-height"] + "px' class='front " + (self.options['shadow'] == true ? 'shadowon' : 'shadowoff') + "' style='transition-duration:  " + self.options["transition-duration"] + "ms'></div><div  style='width: " + self.options["card-width"] + "px; height: " + self.options["card-height"] + "px' class='back back" + dir + " " + (self.options['shadow'] == true ? 'shadowon' : 'shadowoff') + "' style='transition-duration:  " + self.options["transition-duration"] + "ms'></div>";
+                self.card_html = "<div style='width: " + self.options["cardWidth"] + "px; height: " + self.options["cardHeight"] + "px' class='front " + (self.options['displayShadow'] == true ? 'shadowon' : 'shadowoff') + "' style='transitionDuration:  " + self.options["transitionDuration"] + "ms'></div><div  style='width: " + self.options["cardWidth"] + "px; height: " + self.options["cardHeight"] + "px' class='back back" + dir + " " + (self.options['displayShadow'] == true ? 'shadowon' : 'shadowoff') + "' style='transitionDuration:  " + self.options["transitionDuration"] + "ms'></div>";
 
                 deck.innerHTML = self.card_html;
 
@@ -295,6 +295,7 @@ var flipping = {
 
 
     },
+
 
 // ---------------------------------------------------------------------------------------------
     next: function (i, len, dir) {
@@ -320,77 +321,77 @@ var flipping = {
 
         // disable drags
         self.flipping_cards.ondragstart = function () {
-            return false
+            return false;
         };
 
         //console.log("configure");
 
-        if (opt["autoflip-mode"] == false) {
-            self.options["autoflip-mode"] = false;
+        if (opt["autoFlipMode"] == false) {
+            self.options["autoFlipMode"] = false;
             self.buttons[0].style.visibility = "visible";
             self.buttons[1].style.visibility = "visible";
             self.autoflip(false);
         }
 
-        if (opt["autoflip-mode"] == true) {
-            if (self.options["autoflip-mode"] == false) self.autoflip(true);
-            self.options["autoflip-mode"] = true;
+        if (opt["autoFlipMode"] == true) {
+            if (self.options["autoFlipMode"] == false) self.autoflip(true);
+            self.options["autoFlipMode"] = true;
             self.buttons[0].style.visibility = "hidden";
             self.buttons[1].style.visibility = "hidden";
 
         }
 
         // delay for next flip in auto mode
-        if (self.options["autoflip-delay"] != opt["autoflip-delay"] && self.options["autoflip-mode"]) {
+        if (self.options["autoFlipDelay"] != opt["autoFlipDelay"] && self.options["autoFlipMode"]) {
             self.autoflip(false);
-            self.options["autoflip-delay"] = parseInt(opt["autoflip-delay"]);
+            self.options["autoFlipDelay"] = parseInt(opt["autoFlipDelay"]);
             self.autoflip(true);
         }
 
-        if (opt["shadow"] == false) {
-            self.options["shadow"] = false;
+        if (opt["displayShadow"] == false) {
+            self.options["displayShadow"] = false;
             self.buttons[0].classList.remove("shadowon");
             self.buttons[0].classList.add("shadowoff");
             self.buttons[1].classList.remove("shadowon");
             self.buttons[1].classList.add("shadowoff");
         }
 
-        if (opt["shadow"] == true) {
-            self.options["shadow"] = true;
+        if (opt["displayShadow"] == true) {
+            self.options["displayShadow"] = true;
             self.buttons[0].classList.remove("shadowoff");
             self.buttons[0].classList.add("shadowon");
             self.buttons[1].classList.remove("shadowoff");
             self.buttons[1].classList.add("shadowon");
         }
 
-        // starting-card-index
-        if (opt["starting-card-index"] > 0) {
-            if (opt["starting-card-index"] > self.box.children.length) opt["starting-card-index"] = self.box.children.length;
-            self.options["starting-card-index"] = opt["starting-card-index"] - 1;
+        // startFromIndex
+        if (opt["startFromIndex"] > 0) {
+            if (opt["startFromIndex"] > self.box.children.length) opt["startFromIndex"] = self.box.children.length;
+            self.options["startFromIndex"] = opt["startFromIndex"] - 1;
         }
 
 
         // transition for transition
-        if (opt["transition-duration"] > 0) {
-            self.options["transition-duration"] = opt["transition-duration"];
+        if (opt["transitionDuration"] > 0) {
+            self.options["transitionDuration"] = opt["transitionDuration"];
         }
 
 
-        if (opt["mouseover-pause"] == false || opt["mouseover-pause"] == true) {
-            self.options["mouseover-pause"] = opt["mouseover-pause"];
+        if (opt["pauseMouseOver"] == false || opt["pauseMouseOver"] == true) {
+            self.options["pauseMouseOver"] = opt["pauseMouseOver"];
         }
 
         // add suspend actions if automatic flipping is enabled
-        if (self.options["mouseover-pause"] == true || self.options["mouseover-pause"] == false) {
+        if (self.options["pauseMouseOver"] == true || self.options["pauseMouseOver"] == false) {
 
             self.flipping_cards.onmouseover = function () {
-                if (self.options["autoflip-mode"] == true && self.options["mouseover-pause"] == true) {
+                if (self.options["autoFlipMode"] == true && self.options["pauseMouseOver"] == true) {
                     self.autoflip(false);
                 }
             };
 
             self.flipping_cards.onmouseout = function () {
-                if (self.options["autoflip-mode"] == true && self.options["mouseover-pause"] == true) {
+                if (self.options["autoFlipMode"] == true && self.options["pauseMouseOver"] == true) {
                     self.autoflip(true);
                 }
             };
@@ -400,51 +401,53 @@ var flipping = {
 
         // on deactivate window
         window.onblur = function () {
-            if (self.options["autoflip-mode"]) self.autoflip(false);
+            if (self.options["autoFlipMode"]) self.autoflip(false);
         };
         window.onfocus = function () {
-            if (self.options["autoflip-mode"]) self.autoflip(true);
+            if (self.options["autoFlipMode"]) self.autoflip(true);
         };
 
 
         // card size
-        if (opt["card-width"] > 0) self.options["card-width"] = parseInt(opt["card-width"]);
-        if (opt["card-height"] > 0) self.options["card-height"] = parseInt(opt["card-height"]);
+        if (opt["cardWidth"] > 0) self.options["cardWidth"] = parseInt(opt["cardWidth"]);
+        if (opt["cardHeight"] > 0) self.options["cardHeight"] = parseInt(opt["cardHeight"]);
 
         // card spacing
-        if (opt["spacing-vertical"] > 0) self.options["spacing-vertical"] = parseInt(opt["spacing-vertical"]);
-        if (opt["spacing-horizontal"] > 0) self.options["spacing-horizontal"] = parseInt(opt["spacing-horizontal"]);
+        if (opt["spacingVertical"] > 0) self.options["spacingVertical"] = parseInt(opt["spacingVertical"]);
+        if (opt["spacingHorizontal"] > 0) self.options["spacingHorizontal"] = parseInt(opt["spacingHorizontal"]);
 
-        // sequential-delay
-        if (opt["sequential-delay"] > 0) self.options["sequential-delay"] = opt["sequential-delay"];
+        // sequentialDelay
+        if (opt["sequentialDelay"] > 0) self.options["sequentialDelay"] = opt["sequentialDelay"];
 
-        // rotation-mode
-        if (opt["rotation-mode"] == "simultaneous" || opt["rotation-mode"] == "sequential") {
-            if (opt["rotation-mode"] == "simultaneous") {
-                self.options["rotation-mode"] = "simultaneous";
-                self.options["sequential-delay"] = 0;
+        // rotationMode
+        if (opt["rotationMode"] == "simultaneous" || opt["rotationMode"] == "sequential") {
+            if (opt["rotationMode"] == "simultaneous") {
+                self.options["rotationMode"] = "simultaneous";
+                self.options["sequentialDelay"] = 0;
             }
             else {
-                self.options["rotation-mode"] = "sequential";
+                self.options["rotationMode"] = "sequential";
             }
         }
 
 
-        // cards-per-row or number-of-rows calculation
-        if (opt["cards-per-row"] > 0) {
-            if (opt["cards-per-row"] > self.decks.length) opt["cards-per-row"] = self.decks.length;
-            self.options["cards-per-row"] = opt["cards-per-row"];
-            self.options["number-of-rows"] = Math.round(self.decks.length / self.options["cards-per-row"]);
+        // cardsPerRow or number-of-rows calculation
+        if (opt["cardsPerRow"] > 0) {
+            if (opt["cardsPerRow"] > self.decks.length) opt["cardsPerRow"] = self.decks.length;
+            self.options["cardsPerRow"] = opt["cardsPerRow"];
+            self.options["number-of-rows"] = Math.round(self.decks.length / self.options["cardsPerRow"]);
         }
 
-        if (opt["number-of-rows"] > 0) {
-            if (opt["number-of-rows"] > self.decks.length) opt["number-of-rows"] = self.decks.length;
-            self.options["number-of-rows"] = opt["number-of-rows"];
-            self.options["cards-per-row"] = Math.round(self.decks.length / self.options["number-of-rows"]);
-        }
+        /*
+         if (opt["number-of-rows"] > 0) {
+         if (opt["number-of-rows"] > self.decks.length) opt["number-of-rows"] = self.decks.length;
+         self.options["number-of-rows"] = opt["number-of-rows"];
+         self.options["cardsPerRow"] = Math.round(self.decks.length / self.options["number-of-rows"]);
+         }
+         */
 
         // width of cards container
-        self.box.style.width = self.options["card-width"] * self.options["cards-per-row"] + 2 * self.options["spacing-horizontal"] * self.options["cards-per-row"] + "px";
+        self.box.style.width = self.options["cardWidth"] * self.options["cardsPerRow"] + 2 * self.options["spacingHorizontal"] * self.options["cardsPerRow"] + "px";
 
 
         // clearing
@@ -457,19 +460,20 @@ var flipping = {
         var child = self.flipping_cards.querySelectorAll('div.card-stack');
 
         for (var i = 0; i < child.length; i++) {
-            if (i % self.options["cards-per-row"] == 0) {
-                if (i == 1 && self.decks.length % self.options["number-of-rows"] == 1) {
-                    child[i].style.clear = "none";
-                }
-                else child[i].style.clear = "left";
+            if (i % self.options["cardsPerRow"] == 0) {
+                /*                if (i == 1 && self.decks.length % self.options["number-of-rows"] == 1) {
+                 child[i].style.clear = "none";
+                 }
+                 else*/
+                child[i].style.clear = "left";
             }
         }
-        if (self.decks.length / self.options["number-of-rows"] > 1 && self.options["number-of-rows"] != 1 && self.decks.length % self.options["number-of-rows"] != 0 && self.decks.length % self.options["number-of-rows"] != 1 && opt["number-of-rows"] > 0) {
-            child[child.length - 1].style.clear = "left";
-        }
+        /*        if (self.decks.length / self.options["number-of-rows"] > 1 && self.options["number-of-rows"] != 1 && self.decks.length % self.options["number-of-rows"] != 0 && self.decks.length % self.options["number-of-rows"] != 1 && opt["number-of-rows"] > 0) {
+         child[child.length - 1].style.clear = "left";
+         }*/
 
         /* //old line breaks
-         var child = self.flipping_cards.querySelectorAll('div.card-stack:nth-child(' + ( 1 + self.options["cards-per-row"] ) + 'n)');
+         var child = self.flipping_cards.querySelectorAll('div.card-stack:nth-child(' + ( 1 + self.options["cardsPerRow"] ) + 'n)');
          for (var i = 0; i < child.length; i++) {
          child[i].style.clear = "right";
          }
@@ -477,26 +481,31 @@ var flipping = {
 
         // vertical and horizontal spacings
         [].forEach.call(self.flipping_cards.querySelectorAll('.card-stack'), function (el) {
-            el.style.marginLeft = self.options["spacing-horizontal"] + "px";
-            el.style.marginRight = self.options["spacing-horizontal"] + "px";
-            el.style.marginTop = self.options["spacing-vertical"] + "px";
-            el.style.marginBottom = self.options["spacing-vertical"] + "px";
+            el.style.marginLeft = self.options["spacingHorizontal"] + "px";
+            el.style.marginRight = self.options["spacingHorizontal"] + "px";
+            el.style.marginTop = self.options["spacingVertical"] + "px";
+            el.style.marginBottom = self.options["spacingVertical"] + "px";
         });
+
+        //self.flipping_cards.getElementsByClassName('card-stack')
 
 
         // sizes and shadows of cards content (after generation of .front, .back)
-        for (i = 0; i < self.decks.length; i++) {
-            var el = self.decks[i].children;
-            for (var j = 0; j < 2; j++) {
-                el[j].style.width = self.options["card-width"] + "px";
-                el[j].style.height = self.options["card-height"] + "px";
-                el[j].classList.remove('shadowon');
-                el[j].classList.remove('shadowoff');
-                el[j].classList.add(self.options['shadow'] ? 'shadowon' : 'shadowoff');
-            }
-        }
+        /*
+         for (i = 0; i < self.decks.length; i++) {
+         var el = self.decks[i].children;
 
-        self.card_html = "<div style='width: " + self.options["card-width"] + "px; height: " + self.options["card-height"] + "px' class='front  " + (self.options['shadow'] ? 'shadowon' : 'shadowoff') + "' style='transition-duration:  " + self.options["transition-duration"] + "ms'></div><div  style='width: " + self.options["card-width"] + "px; height: " + self.options["card-height"] + "px' class='back  " + (self.options['shadow'] ? 'shadowon' : 'shadowoff') + "' style='transition-duration:  " + self.options["transition-duration"] + "ms'></div>";
+         for (var j = 0; j < 2; j++) {
+         el[j].style.width = self.options["cardWidth"] + "px";
+         el[j].style.height = self.options["cardHeight"] + "px";
+         el[j].classList.remove('shadowon');
+         el[j].classList.remove('shadowoff');
+         el[j].classList.add(self.options['displayShadow'] ? 'shadowon' : 'shadowoff');
+         }
+         }
+         */
+
+        self.card_html = "<div style='width: " + self.options["cardWidth"] + "px; height: " + self.options["cardHeight"] + "px' class='front  " + (self.options['displayShadow'] ? 'shadowon' : 'shadowoff') + "' style='transitionDuration:  " + self.options["transitionDuration"] + "ms'></div><div  style='width: " + self.options["cardWidth"] + "px; height: " + self.options["cardHeight"] + "px' class='back  " + (self.options['displayShadow'] ? 'shadowon' : 'shadowoff') + "' style='transitionDuration:  " + self.options["transitionDuration"] + "ms'></div>";
 
     }
 

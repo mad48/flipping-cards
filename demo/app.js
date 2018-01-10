@@ -3,30 +3,31 @@ import ReactDOM from 'react-dom';
 
 import FlippingCards from "../src/js/flipping-react";
 
-//require('../src/css/flipping.scss');
-//require('../src/css/card.scss');
+require('../src/css/flipping.scss');
+require('../src/css/card.scss');
 
 
 var options = {
-    "autoflip-mode": false,
-    "autoflip-delay": 1500,
-    "mouseover-pause": true,
+    "autoFlipMode": false,
+    "autoFlipDelay": 1500,
+    "pauseMouseOver": true,
 
-    "shadow": true,
-    "transition-duration": 700,
+    "displayShadow": true,
+    "transitionDuration": 700,
 
-    "rotation-mode": "simultaneous",
-    "sequential-delay": 600,
+    "rotationMode": "simultaneous",
+    "sequentialDelay": 600,
 
-    "card-width": 150,
-    "card-height": 180,
+    "cardWidth": 150,
+    "cardHeight": 180,
 
-    "spacing-horizontal": 15,
-    "spacing-vertical": 15,
+    "spacingHorizontal": 15,
+    "spacingVertical": 15,
 
-    "cards-to-show": 3,
-    "cards-per-row": 3,
-    "starting-card-index": 1
+    "cardsToShow": 3,
+    "cardsPerRow": 3,
+
+    "startFromIndex": 1
 };
 
 var content = [
@@ -50,8 +51,6 @@ var content = [
 
 ];
 
-// only for demo page
-var count = 3;
 
 class App extends React.Component {
 
@@ -61,7 +60,6 @@ class App extends React.Component {
                 id="flipping_cards"
                 options={options}
                 content={content}
-                count={count}
             />
         )
 

@@ -1,25 +1,15 @@
 const path = require('path');
 const webpack = require('webpack');
-const ExtractTextPlugin = require('extract-text-webpack-plugin');
-const CleanWebpackPlugin = require('clean-webpack-plugin');
 const autoprefixer = require('autoprefixer');
-var CopyWebpackPlugin = require('copy-webpack-plugin');
-const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
-
 
 module.exports = {
     context: path.resolve(__dirname, './demo'),
     entry: {
-        app: "./app.js",
-        "flipping.css": "../src/css/flipping.scss",
-        "card.css": "../src/css/card.scss"
+        "bundle.min": "./app.js"
     },
     output: {
         path: path.resolve(__dirname, './demo'),
-        //filename: 'js/[name].js',
-        filename: '[name].bundle.js'
-        //library: "flipping",
-        //publicPath: '/public'
+        filename: "[name].js"
     },
     devServer: {
         contentBase: path.resolve(__dirname, './src')
@@ -35,122 +25,49 @@ module.exports = {
                 }
             },
 
-            /*            {
-             test: /\.scss$/,
-             //loaders: ['style-loader', 'css-loader', 'sass-loader']
-             loader: ExtractTextPlugin.extract("style-loader", "css-loader","sass-loader")
-             },
-             {
-             test: /\.css$/,
-             loader: ExtractTextPlugin.extract("style-loader", "css-loader")
-             //loaders: ['style-loader', 'css-loader', 'sass-loader']
-             },*/
-
-            /*            {
-             test: /\.css$/,
-             loader: 'css-loader?{discardComments:{removeAll:true}}'
-             },*/
-
-            /*            {
-             test: /\.html$/,
-             use: [ {
-             loader: 'html-loader',
-             options: {
-             minimize: true,
-             removeComments: false,
-             collapseWhitespace: false
-             }
-             }]
-             },*/
             {
                 test: /\.(scss)$/,
-                use: ExtractTextPlugin.extract({
-                    fallback: "style-loader",
-                    use: [
-                        {
-                            loader: 'css-loader',
-                            options: {
-                                sourceMap: true,
-                                // minimize: {discardComments: {removeAll: true}}
-                            }
-                        },
 
-                        {
-                            loader: 'postcss-loader',
-                            options: {
-                                plugins: [
-                                    autoprefixer({
-                                        // browsers: ['ie >= 8', 'last 10 version']
-                                        // browsers: [ 'last 8 versions', 'iOS 7']
+                use: [
+                    {
+                        loader: "style-loader"
+                    },
 
-                                    })
-                                ],
-                                sourceMap: true
-                            }
-                        },
-
-                        {
-                            loader: 'sass-loader',
-                            options: {
-                                sourceMap: true
-                            }
+                    {
+                        loader: 'css-loader',
+                        options: {
+                            sourceMap: true,
+                            minimize: {discardComments: {removeAll: true}}
                         }
-                    ]
-                })
+                    },
+
+                    {
+                        loader: 'postcss-loader',
+                        options: {
+                            plugins: [
+                                autoprefixer({})
+                            ],
+                            sourceMap: true
+                        }
+                    },
+
+                    {
+                        loader: 'sass-loader',
+                        options: {
+                            sourceMap: true
+                        }
+                    }
+                ]
+
             }
         ]
     },
     plugins: [
 
-        new ExtractTextPlugin("css/[name]", {
-            // disable: false,
-            allChunks: true
-        }),
+        new webpack.optimize.UglifyJsPlugin({
+            include: /\.min\.js$/,
+            minimize: true
+        })
 
-
-        new CleanWebpackPlugin(['demo/css/app', 'demo/card.css.bundle.js', 'demo/flipping.css.bundle.js']),
-
-        /*new CleanWebpackPlugin(['dist/css/!*', 'dist/js/!*'], {
-         exclude: ['flipping.html', 'index.html']
-         }),
-         */
-
-        // new ExtractTextPlugin('css/flipping.css'),
-
-        new CopyWebpackPlugin([
-            {from: '../src/js/flipping.js', to: './js/flipping.js'},
-            {from: '../src/js/flipping.js', to: '../dist/js/flipping.js'},
-            {from: 'css/flipping.css', to: '../dist/css/flipping.css'},
-
-            /*{from: 'from/file.txt', to: 'to/file.txt'}*/
-        ]),
-        /*        new webpack.optimize.UglifyJsPlugin({
-         include: /\.min\.js$/,
-         minimize: true
-
-         })*/
-
-
-        /*        new UglifyJsPlugin({
-         uglifyOptions: {
-         ie8: false,
-         ecma: 8,
-         parse: {},
-         mangle: {
-
-         properties: {
-         // mangle property options
-         }
-         },
-         output: {
-         comments: false,
-         beautify: false,
-         mangle: false
-
-         },
-         compress: {warnings: true},
-         warnings: false
-         }
-         })*/
     ]
 };

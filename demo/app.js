@@ -8,26 +8,26 @@ require('../src/css/card.scss');
 
 
 var options = {
-    "autoFlipMode": false,
-    "autoFlipDelay": 1500,
-    "pauseMouseOver": true,
+    autoFlipMode: false,
+    autoFlipDelay: 1500,
+    pauseMouseOver: true,
 
-    "displayShadow": true,
-    "transitionDuration": 700,
+    displayShadow: true,
+    transitionDuration: 700,
 
-    "rotationMode": "simultaneous",
-    "sequentialDelay": 600,
+    rotationMode: "simultaneous",
+    sequentialDelay: 600,
 
-    "cardWidth": 150,
-    "cardHeight": 180,
+    cardWidth: 150,
+    cardHeight: 180,
 
-    "spacingHorizontal": 15,
-    "spacingVertical": 15,
+    spacingHorizontal: 15,
+    spacingVertical: 15,
 
-    "cardsToShow": 3,
-    "cardsPerRow": 3,
+    cardsToShow: 3,
+    cardsPerRow: 3,
 
-    "startFromIndex": 1
+    startFromIndex: 1
 };
 
 var content = [
@@ -46,10 +46,8 @@ var content = [
     '<div><h2>Lorem ipsum<br>13</h2><span class="readmore"><a href="#"  onclick="alert(\'More about -13- Lorem ipsum el dolor sit amet...\'); return false">Read More</a></span><img src="../demo/images/13.jpg"/></div>',
     '<div><h2>Lorem ipsum<br>14</h2><span class="readmore"><a href="#"  onclick="alert(\'More about -14- Lorem ipsum el dolor sit amet...\'); return false">Read More</a></span><img src="../demo/images/14.jpg"/></div>',
     '<div><h2>Lorem ipsum<br>15</h2><span class="readmore"><a href="#"  onclick="alert(\'More about -15- Lorem ipsum el dolor sit amet...\'); return false">Read More</a></span><img src="../demo/images/15.jpg"/></div>',
-    //  '<div><h2>Lorem ipsum<br>16</h2><span class="readmore"><a href="#"  onclick="alert(\'More about -16- Lorem ipsum el dolor sit amet...\'); return false">Read More</a></span><img src="../demo/images/9.jpg"/></div>'
-
-
 ];
+
 
 
 class App extends React.Component {

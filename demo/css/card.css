@@ -1,3 +1,13 @@
+/**
+ * Flipping Cards Carousel 2.1.0
+ * https://github.com/mad48/flipping-cards#readme
+ *
+ * Copyright 2017-2018 Max <max@develexe.com>
+ *
+ * Released on: January 17, 2018
+ * MIT License
+*/
+
 /* content styles ----------------------------------------------------------------------*/
 .flipping .card-box div.card-stack img {
   height: 100%;
@@ -24,13 +34,13 @@
 .flipping .card-box div.card-stack .readmore {
   position: absolute;
   text-align: center;
-  bottom: 1.5vh;
+  bottom: 7%;
   width: 100%; }
   .flipping .card-box div.card-stack .readmore a {
     display: inline-block;
     line-height: normal;
     -webkit-box-shadow: 0 1px 1px rgba(0, 0, 0, 0.1);
-            box-shadow: 0 1px 1px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 1px 1px rgba(0, 0, 0, 0.1);
     text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.2);
     border: 2px solid rgba(255, 255, 255, 0.8);
     font-size: 16px;
@@ -39,6 +49,7 @@
     padding: 9px 20px 9px 20px;
     border-radius: 40px;
     -webkit-transition: background ease .3s;
+    -o-transition: background ease .3s;
     transition: background ease .3s; }
     .flipping .card-box div.card-stack .readmore a:hover {
       background-color: #00b3d7; }

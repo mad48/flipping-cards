@@ -50,6 +50,10 @@ $btncolor: #e7e7e7;
 
   }
 
+  .cards {
+    display: none;
+  }
+
   .card-box {
 
     .card-stack {
@@ -71,8 +75,8 @@ $btncolor: #e7e7e7;
 
     .back {
       position: absolute;
-      top: 0;
-      left: 0;
+      top: 0px;
+      left: 0px;
       /* transform: rotateY(180deg);*/
       /* safari*/
     }

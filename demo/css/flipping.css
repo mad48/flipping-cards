@@ -1,10 +1,20 @@
+/**
+ * Flipping Cards Carousel 2.1.0
+ * https://github.com/mad48/flipping-cards#readme
+ *
+ * Copyright 2017-2018 Max <max@develexe.com>
+ *
+ * Released on: January 17, 2018
+ * MIT License
+*/
+
 .flipping {
   visibility: hidden;
   text-align: center;
   -webkit-user-select: none;
-     -moz-user-select: none;
-      -ms-user-select: none;
-          user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
   white-space: nowrap; }
   .flipping > div {
     display: inline-block;
@@ -14,7 +24,8 @@
       font-family: Geneva, Arial, Helvetica, sans-serif;
       color: #e7e7e7;
       -webkit-transform: scaleX(1.1);
-              transform: scaleX(1.1);
+      -ms-transform: scaleX(1.1);
+      transform: scaleX(1.1);
       border: none;
       background: none;
       cursor: pointer; }
@@ -29,49 +40,55 @@
       text-shadow: 0 2px 2px rgba(255, 255, 255, 0.7), 0 5px 6px rgba(0, 0, 0, 0.2); }
     .flipping > div:first-child .shadowoff, .flipping > div:last-child .shadowoff {
       text-shadow: none; }
+  .flipping .cards {
+    display: none; }
   .flipping .card-box .card-stack {
     -webkit-transform-style: preserve-3d;
-            transform-style: preserve-3d;
+    transform-style: preserve-3d;
     -webkit-perspective: 1000px;
-            perspective: 1000px;
+    perspective: 1000px;
     float: left;
     display: inline-block; }
     .flipping .card-box .card-stack * {
       overflow: hidden; }
   .flipping .card-box .back {
     position: absolute;
-    top: 0;
-    left: 0;
+    top: 0px;
+    left: 0px;
     /* transform: rotateY(180deg);*/
     /* safari*/ }
   .flipping .card-box .back1 {
     -webkit-transform: rotateY(180deg);
-            transform: rotateY(180deg); }
+    transform: rotateY(180deg); }
   .flipping .card-box .back-1 {
     -webkit-transform: rotateY(-180deg);
-            transform: rotateY(-180deg); }
+    transform: rotateY(-180deg); }
   .flipping .card-box .front, .flipping .card-box .back {
     overflow: hidden;
     -webkit-transition: -webkit-transform;
     transition: -webkit-transform;
+    -o-transition: transform;
     transition: transform;
     transition: transform, -webkit-transform;
     -webkit-transition-duration: .7s;
-            transition-duration: .7s;
+    -o-transition-duration: .7s;
+    transition-duration: .7s;
     -webkit-transition-timing-function: cubic-bezier(0.4, 0.2, 0.2, 1);
-            transition-timing-function: cubic-bezier(0.4, 0.2, 0.2, 1);
+    -o-transition-timing-function: cubic-bezier(0.4, 0.2, 0.2, 1);
+    transition-timing-function: cubic-bezier(0.4, 0.2, 0.2, 1);
     -webkit-transition-delay: 0s;
-            transition-delay: 0s;
+    -o-transition-delay: 0s;
+    transition-delay: 0s;
     -webkit-transform-style: preserve-3d;
-            transform-style: preserve-3d;
+    transform-style: preserve-3d;
     -webkit-backface-visibility: hidden;
-            backface-visibility: hidden; }
+    backface-visibility: hidden; }
   .flipping .card-box .shadowon {
     -webkit-box-shadow: 5px 5px 10px 5px rgba(0, 0, 0, 0.2);
-            box-shadow: 5px 5px 10px 5px rgba(0, 0, 0, 0.2); }
+    box-shadow: 5px 5px 10px 5px rgba(0, 0, 0, 0.2); }
   .flipping .card-box .shadowoff {
     -webkit-box-shadow: none;
-            box-shadow: none; }
+    box-shadow: none; }
 
 /* IE9, IE10 */
 @media screen and (min-width: 0 \0 ) {

@@ -2,7 +2,7 @@
 [![node][node]][node-url]
 # flipping-cards
 
-Flipping Cards Carousel
+> Flipping Cards Carousel
 
 ### [Demo and usage]
 
@@ -24,7 +24,7 @@ On the page put the code for the carousel. For example:
                 <button>&#9668;</button>
             </div>
 
-            <div class="card-box">
+            <div class="cards">
                 <div>
                     <h2>Custom text 1</h2>
                     <img src="images/pic1.jpg"/>
@@ -39,6 +39,8 @@ On the page put the code for the carousel. For example:
                 </div>
                 ...
 
+            </div>
+
             <div>
                 <button>&#9658;</button>
             </div>
@@ -46,7 +48,7 @@ On the page put the code for the carousel. For example:
         </div>
 ```
 
-Each `<div>` item inside the element`<div class="card-box">` is a card. You can add multiple cards with your custom html content.
+Each `<div>` item inside the element`<div class="cards">` is a card with your custom html content.
 
 ## Initialization
 
@@ -56,20 +58,20 @@ Initialize the component by calling `flipping.init('flipping_cards', options)` w
 document.addEventListener("DOMContentLoaded", function () {
 
     var options = {
-        "autoFlipMode": false,
-        "autoFlipDelay": 1500,
-        "pauseMouseOver": true,
-        "displayShadow": true,
-        "transitionDuration": 700,
-        "rotationMode": "sequential",
-        "sequentialDelay": 600,
-        "cardWidth": 150,
-        "cardHeight": 180,
-        "spacingHorizontal": 15,
-        "spacingVertical": 15,
-        "cardsToShow": 3,
-        "cardsPerRow": 3,
-        "startFromIndex": 1
+        autoFlipMode: false,
+        autoFlipDelay: 1500,
+        pauseMouseOver: true,
+        displayShadow: true,
+        transitionDuration: 700,
+        rotationMode: "sequential",
+        sequentialDelay: 600,
+        cardWidth: 150,
+        cardHeight: 180,
+        spacingHorizontal: 15,
+        spacingVertical: 15,
+        cardsToShow: 3,
+        cardsPerRow: 3,
+        startFromIndex: 1
     };
 
     flipping.init('flipping_cards', options);
@@ -110,7 +112,7 @@ See example of usage in file demo/app.js
 ## Options
 
 - `autoFlipMode` : [true | false] - start flipping in automatic mode
-- `autoFlipDelay` : [ms] - delay before the next set of cards in automatic mode [ms]
+- `autoFlipDelay` : [ms] - delay before the next set of cards in automatic mode
 - `displayShadow` : [true | false] - on/off displayShadow
 - `transitionDuration` : [ms] - card flip transition duration
 - `rotationMode` : [simultaneous | sequential] - simultaneous or sequential mode

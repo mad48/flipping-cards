@@ -13,6 +13,10 @@ class ReactFlipping extends React.Component {
         flipping.init(this.props.id, this.props.options);
     };
 
+    componentWillUnmount() {
+        //if (typeof flipping !== 'undefined')  delete this.flipping;
+    }
+
     render() {
         return (
             <div id={this.props.id} className="flipping">
@@ -21,7 +25,7 @@ class ReactFlipping extends React.Component {
                     <button>&#9668;</button>
                 </div>
 
-                <div className="card-box"
+                <div className="cards"
                      dangerouslySetInnerHTML={{__html:  this.props.content.join('')}}>
                 </div>
 
@@ -53,7 +57,7 @@ ReactFlipping.propTypes = {
      "spacingVertical": PropTypes.number,
 
      "cardsPerRow": PropTypes.number,
-     
+
      "startFromIndex": PropTypes.number
      })).isRequired,
 

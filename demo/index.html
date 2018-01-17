@@ -43,7 +43,7 @@
 
     <h1>Flipping Cards Carousel</h1>
 
-    <section class="row">
+    <section class="row carousel">
 
         <div id="flipping_cards" class="flipping">
 
@@ -51,7 +51,7 @@
                 <button>&#9668;</button>
             </div>
 
-            <div class="card-box">
+            <div class="cards">
                 <div>
                     <h2>Lorem ipsum<br>1</h2>
                     <span class="readmore"><a href="#"
@@ -162,26 +162,26 @@
             document.addEventListener("DOMContentLoaded", function () {
 
                 var options = {
-                    "autoFlipMode": false,
-                    "autoFlipDelay": 1500,
-                    "pauseMouseOver": true,
+                    autoFlipMode: false,
+                    autoFlipDelay: 1500,
+                    pauseMouseOver: true,
 
-                    "displayShadow": true,
-                    "transitionDuration": 700,
+                    displayShadow: true,
+                    transitionDuration: 700,
 
-                    "rotationMode": "simultaneous",
-                    "sequentialDelay": 600,
+                    rotationMode: "simultaneous",
+                    sequentialDelay: 600,
 
-                    "cardWidth": 150,
-                    "cardHeight": 180,
+                    cardWidth: 150,
+                    cardHeight: 180,
 
-                    "spacingHorizontal": 15,
-                    "spacingVertical": 15,
+                    spacingHorizontal: 15,
+                    spacingVertical: 15,
 
-                    "cardsToShow": 3,
-                    "cardsPerRow": 3,
+                    cardsToShow: 3,
+                    cardsPerRow: 3,
 
-                    "startFromIndex": 1
+                    startFromIndex: 1
                 };
 
                 // for demopage only. transfers parameters from options object to configurator form
@@ -252,7 +252,7 @@
             <label for="conf_starting_card_index">Start show from card index: </label>
             <input type="number" name="conf_starting_card_index" id="conf_starting_card_index"
                    min="1" max="5"
-                   onclick="select()" onkeyup="reconfigure(true)" onchange="reconfigure(true)">
+                   onclick="select()" onkeyup="reconfigure(true)" onch4ange="reconfigure(true)">
             <br>
 
 
@@ -368,7 +368,7 @@
             <button>&#9668;</button>
         </div>
 
-        <div class="card-box">
+        <div class="cards">
             <div>Content of card 1</div>
             <div>Content of card 2</div>
             <div>Content of card 3</div>
@@ -384,25 +384,26 @@
     <script>
 
         var options = {
-            "autoFlipMode": false,
-            "autoFlipDelay": 1500,
-            "pauseMouseOver": true,
+            autoFlipMode: false,
+            autoFlipDelay: 1500,
+            pauseMouseOver: true,
 
-            "displayShadow": true,
-            "transitionDuration": 700,
+            displayShadow: true,
+            transitionDuration: 700,
 
-            "rotationMode": "sequential",
-            "sequentialDelay": 600,
+            rotationMode: "simultaneous",
+            sequentialDelay: 600,
 
-            "cardWidth": 250,
-            "cardHeight": 280,
+            cardWidth: 150,
+            cardHeight: 180,
 
-            "spacingHorizontal": 15,
-            "spacingVertical": 15,
+            spacingHorizontal: 15,
+            spacingVertical: 15,
 
-            "cardsToShow": 3,
-            "cardsPerRow": 3,
-            "startFromIndex": 1
+            cardsToShow: 3,
+            cardsPerRow: 3,
+
+            startFromIndex: 1
         };
 
         flipping.init('flipping_cards_carousel', options);
@@ -430,27 +431,27 @@
             require('./css/flipping.scss');
             require('./css/card.scss');
 
-
             var options = {
-                "autoFlipMode": false,
-                "autoFlipDelay": 1500,
-                "pauseMouseOver": true,
+                    autoFlipMode: false,
+                    autoFlipDelay: 1500,
+                    pauseMouseOver: true,
 
-                "displayShadow": true,
-                "transitionDuration": 700,
+                    displayShadow: true,
+                    transitionDuration: 700,
 
-                "rotationMode": "simultaneous",
-                "sequentialDelay": 600,
+                    rotationMode: "simultaneous",
+                    sequentialDelay: 600,
 
-                "cardWidth": 150,
-                "cardHeight": 180,
+                    cardWidth: 150,
+                    cardHeight: 180,
 
-                "spacingHorizontal": 15,
-                "spacingVertical": 15,
+                    spacingHorizontal: 15,
+                    spacingVertical: 15,
 
-                "cardsToShow": 3,
-                "cardsPerRow": 3,
-                "startFromIndex": 1
+                    cardsToShow: 3,
+                    cardsPerRow: 3,
+
+                    startFromIndex: 1
             };
 
             var content = [
@@ -479,7 +480,7 @@
     </section>
 
 
-    <section class="row">
+    <section class="row" style="display: none">
 
         <div class="options">
             <h2>Options</h2>

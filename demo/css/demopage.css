@@ -38,7 +38,6 @@ section {
     border: 1px solid #ddd;
     margin-top: 15px;
     margin-bottom: 0;
-
 }
 
 .config, .usage, .options, .download {
@@ -46,7 +45,9 @@ section {
 }
 
 @media (min-width: 900px) {
-    .config_column_1 {padding-left: 50px}
+    .config_column_1 {
+        padding-left: 50px
+    }
 }
 
 section a:link, a:hover, a:visited {

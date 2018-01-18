@@ -11,43 +11,41 @@ $btncolor: #e7e7e7;
     display: inline-block;
     vertical-align: middle;
 
-    &:first-child, &:last-child {
+    &.btn-backward, &.btn-forward {
+      font-size: 3rem;
+      font-family: Geneva, Arial, Helvetica, sans-serif;
+      color: $btncolor;
+      transform: scaleX(1.1);
+      will-change: transform;
+      border: none;
+      background: none;
+      cursor: pointer;
 
-      button {
-        font-size: 3rem;
-        font-family: Geneva, Arial, Helvetica, sans-serif;
-        color: $btncolor;
-        transform: scaleX(1.1);
-        border: none;
-        background: none;
+      &:hover {
         cursor: pointer;
-
-        &:hover {
-          cursor: pointer;
-          //transition: all 0.3s ease;
-          // text-shadow: 0 7px 8px rgba(0, 0, 0, 0.26);
-          //color: darken($btncolor, 2%);
-          text-shadow: 0 7px 7px #bdbdbd;
-        }
-
-        &:active {
-          text-shadow: 0 3px 3px #bdbdbd;
-        }
-
-        &:focus {
-          outline: none;
-        }
-
-      }
-      .shadowon {
-        text-shadow: 0 2px 2px rgba(255, 255, 255, 0.7), 0 5px 6px rgba(0, 0, 0, 0.2);
-      }
-      .shadowoff {
-        text-shadow: none;
+        //will-change: transform;
+        //transition: all 0.3s ease;
+        // text-shadow: 0 7px 8px rgba(0, 0, 0, 0.26);
+        //color: darken($btncolor, 2%);
+        text-shadow: 0 7px 7px #bdbdbd;
       }
 
+      &:active {
+        text-shadow: 0 3px 3px #bdbdbd;
+      }
+
+      &:focus {
+        outline: none;
+      }
     }
 
+  }
+
+  .shadowon {
+    text-shadow: 0 2px 2px rgba(255, 255, 255, 0.7), 0 5px 6px rgba(0, 0, 0, 0.2);
+  }
+  .shadowoff {
+    text-shadow: none;
   }
 
   .cards {
@@ -77,13 +75,12 @@ $btncolor: #e7e7e7;
       position: absolute;
       top: 0px;
       left: 0px;
-      /* transform: rotateY(180deg);*/
-      /* safari*/
     }
 
     .back1 {
       transform: rotateY(180deg);
     }
+
     .back-1 {
       transform: rotateY(-180deg);
     }
@@ -96,6 +93,7 @@ $btncolor: #e7e7e7;
       transition-delay: 0s;
       transform-style: preserve-3d;
       backface-visibility: hidden;
+      will-change: contents, transform;
     }
     .shadowon {
       box-shadow: 5px 5px 10px 5px rgba(0, 0, 0, .2);

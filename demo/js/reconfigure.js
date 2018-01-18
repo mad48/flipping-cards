@@ -16,7 +16,10 @@ function setDemopageOptions(options) {
     qS('spacing_vertical').value = options["spacingVertical"];
 
     qS('transition_duration').value = options["transitionDuration"];
-    qS('shadow').checked = options["displayShadow"];
+
+    qS('cards_shadow').checked = options["cardsShadow"];
+    qS('buttons_shadow').checked = options["buttonsShadow"];
+
     qS('mouseover').checked = options["pauseMouseOver"];
 
     qS('sequential_delay').value = options["sequentialDelay"];
@@ -49,7 +52,8 @@ function reconfigure(new_starting_card_index) {
         "spacingHorizontal": document.querySelector('#conf_spacing_horizontal').value,
         "spacingVertical": document.querySelector('#conf_spacing_vertical').value,
 
-        "displayShadow": document.querySelector('#conf_shadow').checked,
+        "cardsShadow": document.querySelector('#conf_cards_shadow').checked,
+        "buttonsShadow": document.querySelector('#conf_buttons_shadow').checked,
 
         "transitionDuration": document.querySelector('#conf_transition_duration').value,
         "pauseMouseOver": document.querySelector('#conf_mouseover').checked,

@@ -21,17 +21,13 @@ class ReactFlipping extends React.Component {
         return (
             <div id={this.props.id} className="flipping">
 
-                <div>
-                    <button>&#9668;</button>
-                </div>
+                <div className="btn-backward"></div>
 
                 <div className="cards"
                      dangerouslySetInnerHTML={{__html:  this.props.content.join('')}}>
                 </div>
 
-                <div>
-                    <button>&#9658;</button>
-                </div>
+                <div className="btn-forward"></div>
 
             </div>)
     }
@@ -44,7 +40,7 @@ ReactFlipping.propTypes = {
      "autoFlipDelay": PropTypes.number,
      "pauseMouseOver": PropTypes.bool,
 
-     "displayShadow": PropTypes.bool,
+     "cardsShadow": PropTypes.bool,
      "transitionDuration": PropTypes.number,
 
      "rotationMode": PropTypes.oneOf(["simultaneous", "sequential"]),
@@ -69,7 +65,7 @@ ReactFlipping.defaultProps = {
     /*    "autoFlipMode": false,
      "autoFlipDelay": 1500,
 
-     "displayShadow": true,
+     "cardsShadow": true,
      "transitionDuration": 700,
      "pauseMouseOver": true,
 

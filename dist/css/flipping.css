@@ -4,7 +4,7 @@
  *
  * Copyright 2017-2018 Max <max@develexe.com>
  *
- * Released on: January 17, 2018
+ * Released on: January 18, 2018
  * MIT License
 */
 
@@ -19,27 +19,28 @@
   .flipping > div {
     display: inline-block;
     vertical-align: middle; }
-    .flipping > div:first-child button, .flipping > div:last-child button {
+    .flipping > div.btn-backward, .flipping > div.btn-forward {
       font-size: 3rem;
       font-family: Geneva, Arial, Helvetica, sans-serif;
       color: #e7e7e7;
       -webkit-transform: scaleX(1.1);
       -ms-transform: scaleX(1.1);
       transform: scaleX(1.1);
+      will-change: transform;
       border: none;
       background: none;
       cursor: pointer; }
-      .flipping > div:first-child button:hover, .flipping > div:last-child button:hover {
+      .flipping > div.btn-backward:hover, .flipping > div.btn-forward:hover {
         cursor: pointer;
         text-shadow: 0 7px 7px #bdbdbd; }
-      .flipping > div:first-child button:active, .flipping > div:last-child button:active {
+      .flipping > div.btn-backward:active, .flipping > div.btn-forward:active {
         text-shadow: 0 3px 3px #bdbdbd; }
-      .flipping > div:first-child button:focus, .flipping > div:last-child button:focus {
+      .flipping > div.btn-backward:focus, .flipping > div.btn-forward:focus {
         outline: none; }
-    .flipping > div:first-child .shadowon, .flipping > div:last-child .shadowon {
-      text-shadow: 0 2px 2px rgba(255, 255, 255, 0.7), 0 5px 6px rgba(0, 0, 0, 0.2); }
-    .flipping > div:first-child .shadowoff, .flipping > div:last-child .shadowoff {
-      text-shadow: none; }
+  .flipping .shadowon {
+    text-shadow: 0 2px 2px rgba(255, 255, 255, 0.7), 0 5px 6px rgba(0, 0, 0, 0.2); }
+  .flipping .shadowoff {
+    text-shadow: none; }
   .flipping .cards {
     display: none; }
   .flipping .card-box .card-stack {
@@ -54,9 +55,7 @@
   .flipping .card-box .back {
     position: absolute;
     top: 0px;
-    left: 0px;
-    /* transform: rotateY(180deg);*/
-    /* safari*/ }
+    left: 0px; }
   .flipping .card-box .back1 {
     -webkit-transform: rotateY(180deg);
     transform: rotateY(180deg); }
@@ -82,7 +81,8 @@
     -webkit-transform-style: preserve-3d;
     transform-style: preserve-3d;
     -webkit-backface-visibility: hidden;
-    backface-visibility: hidden; }
+    backface-visibility: hidden;
+    will-change: contents, transform; }
   .flipping .card-box .shadowon {
     -webkit-box-shadow: 5px 5px 10px 5px rgba(0, 0, 0, 0.2);
     box-shadow: 5px 5px 10px 5px rgba(0, 0, 0, 0.2); }

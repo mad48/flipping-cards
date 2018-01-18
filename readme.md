@@ -20,9 +20,7 @@ On the page put the code for the carousel. For example:
 ```html
 <div id="flipping_cards" class="flipping">
 
-            <div>
-                <button>&#9668;</button>
-            </div>
+            <div class="btn-backward"></div>
 
             <div class="cards">
                 <div>
@@ -41,9 +39,7 @@ On the page put the code for the carousel. For example:
 
             </div>
 
-            <div>
-                <button>&#9658;</button>
-            </div>
+            <div class="btn-forward"></div>
 
         </div>
 ```
@@ -61,7 +57,8 @@ document.addEventListener("DOMContentLoaded", function () {
         autoFlipMode: false,
         autoFlipDelay: 1500,
         pauseMouseOver: true,
-        displayShadow: true,
+        cardsShadow: true,
+        buttonShadow: true,
         transitionDuration: 700,
         rotationMode: "sequential",
         sequentialDelay: 600,
@@ -71,7 +68,9 @@ document.addEventListener("DOMContentLoaded", function () {
         spacingVertical: 15,
         cardsToShow: 3,
         cardsPerRow: 3,
-        startFromIndex: 1
+        startFromIndex: 1,
+        buttonBackwardHtml: "&#9668;",
+        buttonForwardHtml: "&#9658;"
     };
 
     flipping.init('flipping_cards', options);
@@ -113,17 +112,20 @@ See example of usage in file demo/app.js
 
 - `autoFlipMode` : [true | false] - start flipping in automatic mode
 - `autoFlipDelay` : [ms] - delay before the next set of cards in automatic mode
-- `displayShadow` : [true | false] - on/off displayShadow
+- `cardsShadow` : [true | false] - on/off cards shadow
+- `buttonsShadow` : [true | false] - on/off buttons shadow
 - `transitionDuration` : [ms] - card flip transition duration
 - `rotationMode` : [simultaneous | sequential] - simultaneous or sequential mode
 - `sequentialDelay` : [ms] - sequential delay before neighboring cards flip
-- `cardWidth` : [px] - Card width
-- `cardHeight` : [px] - Card height
-- `spacingHorizontal` : [px] - Horizontal cards spacing
-- `spacingVertical` : [px] - Vertical cards spacing
-- `cardsToShow` : [num] - Number of cards to show
-- `cardsPerRow` : [num] - Number of cards per row
-- `startFromIndex` : [num] - Starter set of cards
+- `cardWidth` : [px] - card width
+- `cardHeight` : [px] - card height
+- `spacingHorizontal` : [px] - horizontal cards spacing
+- `spacingVertical` : [px] - vertical cards spacing
+- `cardsToShow` : [num] - number of cards to show
+- `cardsPerRow` : [num] - number of cards per row
+- `startFromIndex` : [num] - starter set of cards
+- `buttonBackwardHtml` : [html] - backward button html code
+- `buttonForwardHtml` : [html] - forward button html code
 
 **Supports:**
 

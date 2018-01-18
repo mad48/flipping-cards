@@ -5,7 +5,9 @@ var flipping = {
         autoFlipDelay: 1500,
         pauseMouseOver: true,
 
-        displayShadow: true,
+        cardsShadow: true,
+        buttonsShadow: true,
+
         transitionDuration: 700,
 
         rotationMode: "simultaneous",
@@ -20,11 +22,14 @@ var flipping = {
         cardsToShow: 1,
         cardsPerRow: 1,
 
-        startFromIndex: 1
+        startFromIndex: 1,
+
+        buttonBackwardHtml: "&#9668;",
+        buttonForwardHtml: "&#9658;"
     },
 
     flipping_cards: null,
-    buttons: null,
+    buttons: [],
     box: null,
 
     cards_count: 0,
@@ -35,6 +40,7 @@ var flipping = {
     direction: 1,
 
     browser: null,
+    touch_position: null,
     timeout: 0,
 
 // ---------------------------------------------------------------------------------------------
@@ -70,21 +76,6 @@ var flipping = {
             self.autoFlip(true);
         }
 
-        if (opt.displayShadow == false) {
-            self.options.displayShadow = false;
-            self.buttons[0].classList.remove("shadowon");
-            self.buttons[0].classList.add("shadowoff");
-            self.buttons[1].classList.remove("shadowon");
-            self.buttons[1].classList.add("shadowoff");
-        }
-
-        if (opt.displayShadow == true) {
-            self.options.displayShadow = true;
-            self.buttons[0].classList.remove("shadowoff");
-            self.buttons[0].classList.add("shadowon");
-            self.buttons[1].classList.remove("shadowoff");
-            self.buttons[1].classList.add("shadowon");
-        }
 
         // startFromIndex
         if (opt.startFromIndex > 0) {
@@ -128,6 +119,15 @@ var flipping = {
         if (opt.spacingVertical > 0) self.options.spacingVertical = parseInt(opt.spacingVertical);
         if (opt.spacingHorizontal > 0) self.options.spacingHorizontal = parseInt(opt.spacingHorizontal);
 
+        // card shadow
+        if (opt.cardsShadow == false) {
+            self.options.cardsShadow = false;
+        }
+
+        if (opt.cardsShadow == true) {
+            self.options.cardsShadow = true;
+        }
+
         // sequentialDelay
         if (opt.sequentialDelay > 0) self.options.sequentialDelay = opt.sequentialDelay;
 
@@ -148,7 +148,7 @@ var flipping = {
         }
 
 
-        // cardsPerRow or number-of-rows calculation
+        // cardsPerRow
         if (opt.cardsPerRow > 0) {
             if (opt.cardsPerRow > opt.cardsToShow) opt.cardsPerRow = opt.cardsToShow;
             self.options.cardsPerRow = opt.cardsPerRow;
@@ -168,14 +168,45 @@ var flipping = {
             if (self.options.autoFlipMode) self.autoFlip(true);
         };
 
-        // buttons click
-        self.buttons[0].onclick = function () {
-            self.arrowClick(-1);
-        };
-        self.buttons[1].onclick = function () {
-            self.arrowClick(1);
-        };
 
+        // buttons shadow
+        if (opt.buttonsShadow == false) {
+            self.options.buttonsShadow = false;
+            self.buttons[0].classList.remove("shadowon");
+            self.buttons[0].classList.add("shadowoff");
+            self.buttons[1].classList.remove("shadowon");
+            self.buttons[1].classList.add("shadowoff");
+        }
+
+        if (opt.buttonsShadow == true || opt.buttonsShadow == undefined) {
+            self.options.buttonsShadow = true;
+            self.buttons[0].classList.remove("shadowoff");
+            self.buttons[0].classList.add("shadowon");
+            self.buttons[1].classList.remove("shadowoff");
+            self.buttons[1].classList.add("shadowon");
+        }
+
+        // set buttons html
+        if (self.buttons[0].innerHTML.trim() !== "") {
+            self.options.buttonBackwardHtml = self.buttons[0].innerHTML;
+        }
+        if (opt.buttonBackwardHtml != undefined) {
+            self.options.buttonBackwardHtml = opt.buttonBackwardHtml;
+        }
+        self.buttons[0].innerHTML = self.options.buttonBackwardHtml;
+
+
+        if (self.buttons[1].innerHTML.trim() !== "") {
+            self.options.buttonForwardHtml = self.buttons[1].innerHTML;
+        }
+        if (opt.buttonForwardHtml != undefined) {
+            self.options.buttonForwardHtml = opt.buttonForwardHtml;
+        }
+        self.buttons[1].innerHTML = self.options.buttonForwardHtml;
+
+
+        // buttons click
+        self.disableButtons(false);
     },
 
 
@@ -206,17 +237,17 @@ var flipping = {
 // ---------------------------------------------------------------------------------------------
     getCardFrontBackHTML: function () {
         var self = this;
-        //alert(self.direction);
+
         return "<div style='" +
             "width: " + self.options.cardWidth + "px; " +
             "height: " + self.options.cardHeight + "px; " +
             "transitionDuration:  " + self.options.transitionDuration + "ms' " +
-            "class='front  " + (self.options.displayShadow ? 'shadowon' : 'shadowoff') + "'></div>" +
+            "class='front  " + (self.options.cardsShadow ? 'shadowon' : 'shadowoff') + "'></div>" +
             "<div  style='" +
             "width: " + self.options.cardWidth + "px; " +
             "height: " + self.options.cardHeight + "px' " +
             "transitionDuration:  " + self.options.transitionDuration + "ms' " +
-            "class='back back" + self.direction + " " + (self.options.displayShadow ? 'shadowon' : 'shadowoff') + "'></div>";
+            "class='back back" + self.direction + " " + (self.options.cardsShadow ? 'shadowon' : 'shadowoff') + "'></div>";
 
     },
 
@@ -280,9 +311,11 @@ var flipping = {
         self.browser = self.getBrowser();
 
         self.flipping_cards = document.getElementById(elem);
+
         var cards_container = flipping_cards.getElementsByClassName('cards')[0];
 
-        self.buttons = self.flipping_cards.getElementsByTagName('button');
+        self.buttons[0] = flipping_cards.getElementsByClassName('btn-backward')[0];
+        self.buttons[1] = flipping_cards.getElementsByClassName('btn-forward')[0];
 
         if (self.box == null) {
             var cards = document.createElement('div');
@@ -308,6 +341,14 @@ var flipping = {
 
         self.flipping_cards.style.visibility = 'visible';
 
+        if ('ontouchstart' in document.documentElement) {
+            self.flipping_cards.addEventListener('touchstart', function (event) {
+                self.touchBackward(event);
+            }, false);
+            self.flipping_cards.addEventListener('touchend', function (event) {
+                self.touchForward(event);
+            }, false);
+        }
 
     },
 
@@ -336,6 +377,33 @@ var flipping = {
         }
         self.direction = direction;
         self.flipAllCards(direction);
+    },
+
+
+// ---------------------------------------------------------------------------------------------
+    touchBackward: function (event) {
+        var self = this;
+        self.touch_position = event.touches[0].pageX;
+    },
+
+
+// ---------------------------------------------------------------------------------------------
+    touchForward: function (event) {
+        var self = this;
+
+        var touches = event.changedTouches;
+
+        var move = self.touch_position - touches[touches.length - 1].pageX;
+
+        if (Math.abs(move) < 10) {
+            return false;
+        }
+        if (move < 0) {
+            self.arrowClick(1);
+        }
+        else {
+            self.arrowClick(-1);
+        }
     },
 
 
@@ -377,6 +445,7 @@ var flipping = {
             }
 
             self.disableButtons(false);
+
         }, full_flip_time);
     },
 
@@ -406,18 +475,35 @@ var flipping = {
 //----------------------------------------------------------------------------------------------
     disableButtons: function (state) {
         var self = this;
-        self.buttons[0].disabled = state;
-        self.buttons[1].disabled = state;
+        /*        var val = state ? "none" : "auto";
+         self.buttons[0].style.pointerEvents = val;
+         self.buttons[1].style.pointerEvents = val;*/
+
+        if (state) {
+            self.buttons[0].onclick = function () {
+                return false;
+            };
+            self.buttons[1].onclick = function () {
+                return false;
+            };
+        } else {
+            self.buttons[0].onclick = function () {
+                self.arrowClick(-1);
+            };
+            self.buttons[1].onclick = function () {
+                self.arrowClick(1);
+            };
+        }
     },
 
 
 //----------------------------------------------------------------------------------------------
-    autoFlip: function (state) {
+    autoFlip: function (state, direction) {
         var self = this;
-
+        if (direction == null) direction = 1;
         if (state) {
-            self.timeout = setInterval(function go() {
-                self.arrowClick(1);
+            self.timeout = setInterval(function () {
+                self.arrowClick(direction);
             }, self.options.autoFlipDelay);
         } else {
             clearInterval(self.timeout);

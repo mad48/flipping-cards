@@ -47,9 +47,7 @@
 
         <div id="flipping_cards" class="flipping">
 
-            <div>
-                <button>&#9668;</button>
-            </div>
+            <div class="btn-backward"></div>
 
             <div class="cards">
                 <div>
@@ -150,9 +148,7 @@
 
             </div>
 
-            <div>
-                <button>&#9658;</button>
-            </div>
+            <div class="btn-forward"></div>
 
         </div>
 
@@ -166,7 +162,9 @@
                     autoFlipDelay: 1500,
                     pauseMouseOver: true,
 
-                    displayShadow: true,
+                    cardsShadow: true,
+                    buttonsShadow: true,
+
                     transitionDuration: 700,
 
                     rotationMode: "simultaneous",
@@ -181,13 +179,16 @@
                     cardsToShow: 3,
                     cardsPerRow: 3,
 
-                    startFromIndex: 1
+                    startFromIndex: 1,
+                    /*                   buttonBackwardHtml: "<",
+                     buttonForwardHtml: ">"*/
                 };
 
                 // for demopage only. transfers parameters from options object to configurator form
                 setDemopageOptions(options);
 
                 flipping.init('flipping_cards', options);
+
 
             });
 
@@ -302,7 +303,7 @@
             Rotation mode:
             <input type="radio" name="conf_rotation" id="conf_simultaneous" value="simultaneous"
                    onchange="reconfigure()">
-            <label for="conf_simultaneous">Simultaneous</label>
+            <label for="conf_simultaneous">Simultaneous</label>&nbsp;&nbsp;
 
             <input type="radio" name="conf_rotation" id="conf_sequential" value="sequential"
                    onchange="reconfigure()">
@@ -333,8 +334,11 @@
           <br><br>-->
 
 
-            <input type="checkbox" name="conf_shadow" id="conf_shadow" onchange="reconfigure()">
-            <label for="conf_shadow">Shadow</label> <br><br>
+            <input type="checkbox" name="conf_cards_shadow" id="conf_cards_shadow" onchange="reconfigure()">
+            <label for="conf_cards_shadow">Cards shadow</label>&nbsp;&nbsp;&nbsp;&nbsp;
+
+            <input type="checkbox" name="conf_buttons_shadow" id="conf_buttons_shadow" onchange="reconfigure()">
+            <label for="conf_buttons_shadow">Buttons shadow</label> <br><br>
 
         </div>
 
@@ -364,9 +368,7 @@
 
     <div id="flipping_cards_carousel" class="flipping">
 
-        <div>
-            <button>&#9668;</button>
-        </div>
+        <div class="btn-backward"></div>
 
         <div class="cards">
             <div>Content of card 1</div>
@@ -375,9 +377,7 @@
             ...
         </div>
 
-        <div>
-            <button>&#9658;</button>
-        </div>
+        <div class="btn-forward"></div>
 
     </div>
 
@@ -388,7 +388,9 @@
             autoFlipDelay: 1500,
             pauseMouseOver: true,
 
-            displayShadow: true,
+            cardsShadow: true,
+            buttonsShadow: true,
+
             transitionDuration: 700,
 
             rotationMode: "simultaneous",
@@ -436,7 +438,9 @@
                     autoFlipDelay: 1500,
                     pauseMouseOver: true,
 
-                    displayShadow: true,
+                    cardsShadow: true,
+                    buttonsShadow: true,
+
                     transitionDuration: 700,
 
                     rotationMode: "simultaneous",
@@ -490,25 +494,29 @@
                 <li><b>autoFlipDelay</b> : [ms] - delay before the next set of cards in automatic mode [ms]<br></li>
                 <li><b>rotationMode</b> : [true | false] - pausing to flip when you hover over the cards<br><br></li>
 
-                <li><b>displayShadow</b> : [true | false] - on/off displayShadow <br></li>
+                <li><b>cardsShadow</b> : [true | false] - on/off cards shadow<br></li>
+                <li><b>buttonsShadow</b> : [true | false] - on/off buttons shadow<br></li>
+
                 <li><b>transitionDuration</b> : [ms] - card flip transition duration <br><br></li>
 
 
                 <li><b>rotationMode</b> : [simultaneous | sequential] - simultaneous or sequential mode<br></li>
                 <li><b>sequentialDelay</b> : [ms] - sequential delay before neighboring cards flip<br><br></li>
 
-                <li><b>cardWidth</b> : [px] - Card width<br></li>
-                <li><b>cardHeight</b> : [px] - Card height<br><br></li>
+                <li><b>cardWidth</b> : [px] - card width<br></li>
+                <li><b>cardHeight</b> : [px] - card height<br><br></li>
 
-                <li><b>spacingHorizontal</b> : [px] - Horizontal cards spacing<br></li>
-                <li><b>spacingVertical</b> : [px] - Vertical cards spacing<br><br></li>
+                <li><b>spacingHorizontal</b> : [px] - horizontal cards spacing<br></li>
+                <li><b>spacingVertical</b> : [px] - vertical cards spacing<br><br></li>
 
 
-                <li><b>cardsToShow</b> : [num] - Number of cards to show<br></li>
-                <li><b>cardsPerRow</b> : [num] - Number of cards per row<br></li>
-                <!--                <li><b>number-of-rows</b> : [num] - Number of rows <br><br></li>-->
+                <li><b>cardsToShow</b> : [num] - number of cards to show<br></li>
+                <li><b>cardsPerRow</b> : [num] - number of cards per row<br></li>
 
-                <li><b>startFromIndex</b> : [num] - Start show from card index <br><br></li>
+                <li><b>startFromIndex</b> : [num] - start show from card index <br><br></li>
+
+                <li><b>buttonBackwardHtml</b> : [html] - backward button html code<br><br></li>
+                <li><b>buttonForwardHtml</b> : [html] - forward button html code<br><br></li>
 
             </ul>
         </div>

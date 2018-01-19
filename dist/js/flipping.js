@@ -41,6 +41,7 @@ var flipping = {
 
     browser: null,
     touch_position: null,
+    flip_disabled: false,
     timeout: 0,
 
 // ---------------------------------------------------------------------------------------------
@@ -395,14 +396,14 @@ var flipping = {
 
         var move = self.touch_position - touches[touches.length - 1].pageX;
 
-        if (Math.abs(move) < 10) {
+        if (Math.abs(move) < 10 || self.flip_disabled == true) {
             return false;
         }
         if (move < 0) {
-            self.arrowClick(1);
+            self.arrowClick(-1);
         }
         else {
-            self.arrowClick(-1);
+            self.arrowClick(1);
         }
     },
 
@@ -414,6 +415,7 @@ var flipping = {
         var i = 0;
 
         self.disableButtons(true);
+        self.flip_disabled = true;
 
         var full_flip_time = self.options.rotationMode == "sequential" ?
         self.options.sequentialDelay * self.cards_count :
@@ -445,6 +447,7 @@ var flipping = {
             }
 
             self.disableButtons(false);
+            self.flip_disabled = false;
 
         }, full_flip_time);
     },
@@ -462,13 +465,10 @@ var flipping = {
         front.style.transitionDuration = self.options.transitionDuration + "ms";
         back.style.transitionDuration = self.options.transitionDuration + "ms";
 
-        if (self.browser == "safari") {
-            front.style.webkitTransform = 'rotateY(' + (-1 * direction * 180) + 'deg)';
-            back.style.webkitTransform = 'rotateY(' + 0 + 'deg)';
-        } else {
-            front.style.transform = 'rotateY(' + (-1 * direction * 180) + 'deg)';
-            back.style.transform = 'rotateY(' + 0 + 'deg)';
-        }
+        var trans = self.browser == "safari" ? "webkitTransform" : "transform";
+
+        front.style[trans] = 'rotateY(' + (-1 * direction * 180) + 'deg)';
+        back.style[trans] = 'rotateY(' + 0 + 'deg)';
     },
 
 

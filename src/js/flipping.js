@@ -1,6 +1,63 @@
-var flipping = {
+// /*##REVIEW: FOLLOWING COMMENTED OUT BECAUSE COMMENTS ISIDE OF JSON OBJECT LITERALS ARE NOT ALLOWED IN ES-5
 
-    options: {
+// var flipping = {/**##REVIEW: flipping seems to be declared as a global variable.
+//   Recommended to check if this identifier is already taken before assignment.
+//
+//     options: { /*##REVIEW: "options" is a misleading name, consider renaming it to
+//     'settings' or 'configuration'. Reason: the word "option" suppose a choice of one criteria,
+//     e.g. for autoFlipMode options are false and true, for rotationMode options will be
+//     'SIMULTANEOUS' and 'SEQUENTIAL', for cardsToShow options will be any numeric value
+//     between 0 and Number.MAX_VALUE. */
+//         autoFlipMode: false,
+//         autoFlipDelay: 1500,
+//         pauseMouseOver: true,
+//
+//         cardsShadow: true,
+//         buttonsShadow: true,
+//
+//         transitionDuration: 700,
+//
+//         rotationMode: "simultaneous", /*##REVIEW: "simultaneous" should be uppercase, because
+//         it is constant value, per standard. */
+//         sequentialDelay: 600,
+//
+//         cardWidth: 150,
+//         cardHeight: 180,
+//
+//         spacingHorizontal: 15,
+//         spacingVertical: 15,
+//
+//         cardsToShow: 1,
+//         cardsPerRow: 1,
+//
+//         startFromIndex: 1,
+//
+//         buttonBackwardHtml: "&#9668;",
+//         buttonForwardHtml: "&#9658;"
+//     },
+//
+//     flipping_cards: null, /*##REVIEW: property names should be camelCased per standard. */
+//     buttons: [],
+//     box: null,
+//
+//     cards_count: 0, /*##REVIEW: property names should be camelCased per standard. */
+//
+//     content: [],
+//     last_index: -1, /*##REVIEW: property names should be camelCased per standard. */
+//     start_index: -1, /*##REVIEW: property names should be camelCased per standard. */
+//     direction: 1, /*##REVIEW: the values of -1 and 1 are not descriptive, recommended to consider
+//     use options 'ltr' and 'rtl'; 'left' and 'right';
+//     The 'back' and 'forward' not so recommended because of how different human languages matching
+//     left and right to back and forward. */
+//
+//     browser: null,
+//     touch_position: null, /*##REVIEW: property names should be camelCased per standard. */
+//     flip_disabled: false, /*##REVIEW: property names should be camelCased per standard. */
+//     timeout: 0,
+
+
+var flipping = {
+  options: {
         autoFlipMode: false,
         autoFlipDelay: 1500,
         pauseMouseOver: true,
@@ -43,11 +100,13 @@ var flipping = {
     touch_position: null,
     flip_disabled: false,
     timeout: 0,
-
 // ---------------------------------------------------------------------------------------------
-    setConfiguration: function (opt) {
+    setConfiguration: function (opt) { /*##REVIEW: 'opt' is not descriptive name, recommended to be
+    renamed to something more descriptive, e.g. nextConfiguration, nextConfig, 'nextParams', 'config',
+    'settings', 'nextSettings'. */
         /* options */
-        var self = this;
+        var self = this; /*##REVIEW: "self" is non-descriptive name, should be renamed to something more
+        descriptive e.g. "carousel" or "carouselDom" or "carouselInstance" depending where it points to. */
 
         // disable drags
         self.box.ondragstart = function () {
@@ -85,7 +144,7 @@ var flipping = {
         }
 
 
-        // transition for transition
+        // transition for transition /*##REVIEW: misleading comment, recommended correct to 'duration of transition'. */
         if (opt.transitionDuration > 0) {
             self.options.transitionDuration = opt.transitionDuration;
         }
@@ -173,7 +232,9 @@ var flipping = {
         // buttons shadow
         if (opt.buttonsShadow == false) {
             self.options.buttonsShadow = false;
-            self.buttons[0].classList.remove("shadowon");
+            self.buttons[0].classList.remove("shadowon"); /*##REVIEW: recommended
+            to modify css class names to use "-" as word separator, per standard.
+            Recommended to apply for all css class names below. */
             self.buttons[0].classList.add("shadowoff");
             self.buttons[1].classList.remove("shadowon");
             self.buttons[1].classList.add("shadowoff");
@@ -213,7 +274,8 @@ var flipping = {
 
 // ---------------------------------------------------------------------------------------------
     setNextContentIndex: function (direction, step) {
-        var self = this;
+        var self = this;  /*##REVIEW: "self" is non-descriptive name, should be renamed to something more
+        descriptive e.g. "carousel" or "carouselDom" or "carouselInstance" depending where it points to. */
         var len = self.content.length;
         var ind = 0;
 
@@ -237,7 +299,8 @@ var flipping = {
 
 // ---------------------------------------------------------------------------------------------
     getCardFrontBackHTML: function () {
-        var self = this;
+        var self = this; /*##REVIEW: "self" is non-descriptive name, should be renamed to something more
+        descriptive e.g. "carousel" or "carouselDom" or "carouselInstance" depending where it points to. */
 
         return "<div style='" +
             "width: " + self.options.cardWidth + "px; " +
@@ -253,8 +316,9 @@ var flipping = {
     },
 
 // ---------------------------------------------------------------------------------------------
-    setCardFrontContent: function (stack_index, direction) {
-        var self = this;
+    setCardFrontContent: function (stack_index, direction) { /*##REVIEW: "stack_index" should be camelCased per standard*/
+        var self = this; /*##REVIEW: "self" is non-descriptive name, should be renamed to something more
+        descriptive e.g. "carousel" or "carouselDom" or "carouselInstance" depending where it points to. */
 
         var front = self.box.children[stack_index].getElementsByClassName('front')[0];
         front.innerHTML = self.content[self.setNextContentIndex(direction)];
@@ -264,8 +328,9 @@ var flipping = {
 
 
 // ---------------------------------------------------------------------------------------------
-    setCardBackContent: function (stack_index, direction) {
-        var self = this;
+    setCardBackContent: function (stack_index, direction) { /*##REVIEW: "stack_index" should be camelCased per standard. */
+        var self = this;  /*##REVIEW: "self" is non-descriptive name, should be renamed to something more
+        descriptive e.g. "carousel" or "carouselDom" or "carouselInstance" depending where it points to. */
         var back = self.box.children[stack_index].getElementsByClassName('back')[0];
         back.classList.remove("back1");
         back.classList.remove("back-1");
@@ -276,7 +341,8 @@ var flipping = {
 
 // ---------------------------------------------------------------------------------------------
     setCardStacksHTML: function () {
-        var self = this;
+        var self = this; /*##REVIEW: "self" is non-descriptive name, should be renamed to something more
+        descriptive e.g. "carousel" or "carouselDom" or "carouselInstance" depending where it points to. */
         self.box.innerHTML = "";
         for (var i = 0; i < self.options.cardsToShow; i++) {
             self.box.innerHTML = self.box.innerHTML +
@@ -303,8 +369,12 @@ var flipping = {
     },
 
 // ---------------------------------------------------------------------------------------------
-    init: function (elem, opt) {
-        var self = this;
+    init: function (elem, opt) { /*##REVIEW: parameter names are not descriptive
+      elem seems to be not element, but ruther an id of a DOM element from which carousel should be built.
+      'opt' is not descriptive name, recommended to be renamed to something more descriptive, e.g.
+      'config', 'settings', 'params'. */
+        var self = this; /*##REVIEW: "self" is non-descriptive name, should be renamed to something more
+        descriptive e.g. "carousel" or "carouselDom" or "carouselInstance" depending where it points to. */
 
         if (self.start_index == -1) self.start_index = self.options.startFromIndex;
         else  self.last_index = self.start_index;
@@ -313,7 +383,12 @@ var flipping = {
 
         self.flipping_cards = document.getElementById(elem);
 
-        var cards_container = flipping_cards.getElementsByClassName('cards')[0];
+        var cards_container = flipping_cards.getElementsByClassName('cards')[0]; /*##REVIEW:
+        variable names should be camelCased for words separation per standard. */
+
+        /*##REVIEW: WHY IS THIS:
+        console.log('is flipping_cards === self.flipping_cards ? ', flipping_cards === self.flipping_cards)
+        */
 
         self.buttons[0] = flipping_cards.getElementsByClassName('btn-backward')[0];
         self.buttons[1] = flipping_cards.getElementsByClassName('btn-forward')[0];
@@ -355,7 +430,8 @@ var flipping = {
 
 // ---------------------------------------------------------------------------------------------
     arrowClick: function (direction) {
-        var self = this;
+        var self = this;  /*##REVIEW: "self" is non-descriptive name, should be renamed to something more
+        descriptive e.g. "carousel" or "carouselDom" or "carouselInstance" depending where it points to. */
 
         if (self.direction != direction) {
 
@@ -383,14 +459,16 @@ var flipping = {
 
 // ---------------------------------------------------------------------------------------------
     touchBackward: function (event) {
-        var self = this;
+        var self = this;  /*##REVIEW: "self" is non-descriptive name, should be renamed to something more
+        descriptive e.g. "carousel" or "carouselDom" or "carouselInstance" depending where it points to. */
         self.touch_position = event.touches[0].pageX;
     },
 
 
 // ---------------------------------------------------------------------------------------------
     touchForward: function (event) {
-        var self = this;
+        var self = this;  /*##REVIEW: "self" is non-descriptive name, should be renamed to something more
+        descriptive e.g. "carousel" or "carouselDom" or "carouselInstance" depending where it points to. */
 
         var touches = event.changedTouches;
 
@@ -411,18 +489,19 @@ var flipping = {
 // ---------------------------------------------------------------------------------------------
     flipAllCards: function (direction) {
 
-        var self = this;
+        var self = this; /*##REVIEW: "self" is non-descriptive name, should be renamed to something more
+        descriptive e.g. "carousel" or "carouselDom" or "carouselInstance" depending where it points to. */
         var i = 0;
 
         self.disableButtons(true);
         self.flip_disabled = true;
 
-        var full_flip_time = self.options.rotationMode == "sequential" ?
+        var full_flip_time = self.options.rotationMode == "sequential" ? /*##REVIEW: "full_flip_time" should be camelCased per standard. */
         self.options.sequentialDelay * self.cards_count :
             self.options.transitionDuration;
 
         for (i = 0; i < self.cards_count; i++) {
-            (function (stack_index) {
+            (function (stack_index) { /*##REVIEW: "stack_index" should be camelCased per standard. */
                 setTimeout(function () {
                     self.flipCard(stack_index, direction);
                 }, self.options.sequentialDelay * stack_index);
@@ -455,7 +534,8 @@ var flipping = {
 
 // ---------------------------------------------------------------------------------------------
     flipCard: function (stack_index, direction) {
-        var self = this;
+        var self = this; /*##REVIEW: "self" is non-descriptive name, should be renamed to something more
+        descriptive e.g. "carousel" or "carouselDom" or "carouselInstance" depending where it points to. */
 
         var stack = self.box.children[stack_index];
 
@@ -473,11 +553,16 @@ var flipping = {
 
 
 //----------------------------------------------------------------------------------------------
-    disableButtons: function (state) {
-        var self = this;
+    disableButtons: function (state) { /*##REVIEW: violation of single responsibility principal of OOD,
+      recommended either to rename method to 'setButtonsDisabledState' or converted into two
+      methods: "disableButtons" and "enableButtons". */
+        var self = this; /*##REVIEW: "self" is non-descriptive name, should be renamed to something more
+        descriptive e.g. "carousel" or "carouselDom" or "carouselInstance" depending where it points to. */
+
         /*        var val = state ? "none" : "auto";
          self.buttons[0].style.pointerEvents = val;
-         self.buttons[1].style.pointerEvents = val;*/
+         self.buttons[1].style.pointerEvents = val;*/ /*##REVIEW: recommended to provide reason why
+         the code block is commented out. */
 
         if (state) {
             self.buttons[0].onclick = function () {
@@ -498,8 +583,10 @@ var flipping = {
 
 
 //----------------------------------------------------------------------------------------------
-    autoFlip: function (state, direction) {
-        var self = this;
+    autoFlip: function (state, direction) { /*##REVIEW: this function seems to be used only for
+      setting mode and never getting. This is why recommended to rename it to setAutoFlip per standard. */
+        var self = this;  /*##REVIEW: "self" is non-descriptive name, should be renamed to something more
+        descriptive e.g. "carousel" or "carouselDom" or "carouselInstance" depending where it points to. */
         if (direction == null) direction = 1;
         if (state) {
             self.timeout = setInterval(function () {
@@ -524,6 +611,3 @@ var flipping = {
 if (typeof module === 'object') {
     module.exports = flipping;
 }
-
-
-

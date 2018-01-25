@@ -10,7 +10,7 @@ class ReactFlipping extends React.Component {
     };
 
     componentDidMount() {
-        flipping.init(this.props.id, this.props.options);
+        flipping.init(this.props.id, this.props.configuration);
     };
 
     componentWillUnmount() {
@@ -35,7 +35,7 @@ class ReactFlipping extends React.Component {
 
 
 ReactFlipping.propTypes = {
-    /*    "options": PropTypes.objectOf(PropTypes.shape({
+    /*    "configuration": PropTypes.objectOf(PropTypes.shape({
      "autoFlipMode": PropTypes.bool,
      "autoFlipDelay": PropTypes.number,
      "pauseMouseOver": PropTypes.bool,

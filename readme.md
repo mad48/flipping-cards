@@ -48,12 +48,12 @@ Each `<div>` item inside the element`<div class="cards">` is a card with your cu
 
 ## Initialization
 
-Initialize the component by calling `flipping.init('flipping_cards', options)` where the first parameter corresponds to the `id` of the html-tag of the carousel.
+Initialize the component by calling `flipping.init('flipping_cards', configuration)` where the first parameter corresponds to the `id` of the html-tag of the carousel.
 
 ```javascript
 document.addEventListener("DOMContentLoaded", function () {
 
-    var options = {
+    var configuration = {
         autoFlipMode: false,
         autoFlipDelay: 1500,
         pauseMouseOver: true,
@@ -73,7 +73,7 @@ document.addEventListener("DOMContentLoaded", function () {
         buttonForwardHtml: "&#9658;"
     };
 
-    flipping.init('flipping_cards', options);
+    flipping.init('flipping_cards', configuration);
 
 });
 ```
@@ -103,7 +103,7 @@ import FlippingCards from "./flipping-react";
 Use Flipping Cards Carouser React adapter:
 
 ```javascript
-  <FlippingCards id="flipping_cards" options={options} content={content} />
+  <FlippingCards id="flipping_cards" configuration={configuration} content={content} />
 ```
 
 See example of usage in file demo/app.js

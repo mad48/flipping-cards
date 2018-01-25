@@ -41,7 +41,7 @@ $btncolor: #e7e7e7;
 
   }
 
-  .shadowon {
+  .shadow-on {
     text-shadow: 0 2px 2px rgba(255, 255, 255, 0.7), 0 5px 6px rgba(0, 0, 0, 0.2);
   }
   .shadowoff {
@@ -95,10 +95,10 @@ $btncolor: #e7e7e7;
       backface-visibility: hidden;
       will-change: contents, transform;
     }
-    .shadowon {
+    .shadow-on {
       box-shadow: 5px 5px 10px 5px rgba(0, 0, 0, .2);
     }
-    .shadowoff {
+    .shadow-off {
       box-shadow: none;
     }
 

@@ -7,7 +7,7 @@ require('../src/css/flipping.scss');
 require('../src/css/card.scss');
 
 
-var options = {
+var configuration = {
     autoFlipMode: false,
     autoFlipDelay: 1500,
     pauseMouseOver: true,
@@ -56,7 +56,7 @@ class App extends React.Component {
         return (
             <FlippingCards
                 id="flipping_cards"
-                options={options}
+                configuration={configuration}
                 content={content}
             />
         )

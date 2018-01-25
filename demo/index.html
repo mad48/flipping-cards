@@ -157,7 +157,7 @@
 
             document.addEventListener("DOMContentLoaded", function () {
 
-                var options = {
+                var configuration = {
                     autoFlipMode: false,
                     autoFlipDelay: 1500,
                     pauseMouseOver: true,
@@ -180,14 +180,14 @@
                     cardsPerRow: 3,
 
                     startFromIndex: 1,
-                    /*                   buttonBackwardHtml: "<",
+                    /* buttonBackwardHtml: "<",
                      buttonForwardHtml: ">"*/
                 };
 
-                // for demopage only. transfers parameters from options object to configurator form
-                setDemopageOptions(options);
+                // for demopage only. transfers parameters from configuration object to configurator form
+                setDemopageConfiguration(configuration);
 
-                flipping.init('flipping_cards', options);
+                flipping.init('flipping_cards', configuration);
 
 
             });
@@ -383,7 +383,7 @@
 
     <script>
 
-        var options = {
+        var configuration = {
             autoFlipMode: false,
             autoFlipDelay: 1500,
             pauseMouseOver: true,
@@ -408,7 +408,7 @@
             startFromIndex: 1
         };
 
-        flipping.init('flipping_cards_carousel', options);
+        flipping.init('flipping_cards_carousel', configuration);
 
     </script>
 
@@ -433,7 +433,7 @@
             require('./css/flipping.scss');
             require('./css/card.scss');
 
-            var options = {
+            var configuration = {
                     autoFlipMode: false,
                     autoFlipDelay: 1500,
                     pauseMouseOver: true,
@@ -470,7 +470,7 @@
                     return (
                         <FlippingCards
                                 id="flipping_cards"
-                                options={options}
+                                configuration={configuration}
                                 content={content}
                         />
                     )
@@ -486,7 +486,7 @@
 
     <section class="row" style="display: none">
 
-        <div class="options">
+        <div class="configuration">
             <h2>Options</h2>
             <ul>
 

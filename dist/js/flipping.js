@@ -1,6 +1,6 @@
 var flipping = {
 
-    options: {
+    configuration: {
         autoFlipMode: false,
         autoFlipDelay: 1500,
         pauseMouseOver: true,
@@ -10,7 +10,7 @@ var flipping = {
 
         transitionDuration: 700,
 
-        rotationMode: "simultaneous",
+        rotationMode: "SIMULTANEOUS",
         sequentialDelay: 600,
 
         cardWidth: 150,
@@ -28,208 +28,209 @@ var flipping = {
         buttonForwardHtml: "&#9658;"
     },
 
-    flipping_cards: null,
+    flippingCards: null,
     buttons: [],
     box: null,
 
-    cards_count: 0,
+    cardsCount: 0,
 
     content: [],
-    last_index: -1,
-    start_index: -1,
+    lastIndex: -1,
+    startIndex: -1,
     direction: 1,
 
     browser: null,
-    touch_position: null,
-    flip_disabled: false,
+    touchPosition: null,
+    flipDisabled: false,
     timeout: 0,
 
 // ---------------------------------------------------------------------------------------------
-    setConfiguration: function (opt) {
-        /* options */
-        var self = this;
+    setConfiguration: function (config) {
+        /* configuration */
+        var carousel = this;
 
         // disable drags
-        self.box.ondragstart = function () {
+        carousel.box.ondragstart = function () {
             return false;
         };
 
-
-        if (opt.autoFlipMode == false) {
-            self.options.autoFlipMode = false;
-            self.buttons[0].style.visibility = "visible";
-            self.buttons[1].style.visibility = "visible";
-            self.autoFlip(false);
+        // auto flipping mode
+        if (config.autoFlipMode == false) {
+            carousel.configuration.autoFlipMode = false;
+            carousel.buttons[0].style.visibility = "visible";
+            carousel.buttons[1].style.visibility = "visible";
+            carousel.setAutoFlip(false);
         }
 
-        if (opt.autoFlipMode == true) {
-            if (self.options.autoFlipMode == false) self.autoFlip(true);
-            self.options.autoFlipMode = true;
-            self.buttons[0].style.visibility = "hidden";
-            self.buttons[1].style.visibility = "hidden";
+        if (config.autoFlipMode == true) {
+            if (carousel.configuration.autoFlipMode == false) carousel.setAutoFlip(true);
+            carousel.configuration.autoFlipMode = true;
+            carousel.buttons[0].style.visibility = "hidden";
+            carousel.buttons[1].style.visibility = "hidden";
 
         }
 
         // delay for next flip in auto mode
-        if (self.options.autoFlipDelay != opt.autoFlipDelay && self.options.autoFlipMode) {
-            self.autoFlip(false);
-            self.options.autoFlipDelay = parseInt(opt.autoFlipDelay);
-            self.autoFlip(true);
+        if (carousel.configuration.autoFlipDelay != config.autoFlipDelay && carousel.configuration.autoFlipMode) {
+            carousel.setAutoFlip(false);
+            carousel.configuration.autoFlipDelay = parseInt(config.autoFlipDelay);
+            carousel.setAutoFlip(true);
         }
 
 
-        // startFromIndex
-        if (opt.startFromIndex > 0) {
-            if (opt.startFromIndex > self.content.length) opt.startFromIndex = self.content.length;
-            self.options.startFromIndex = opt.startFromIndex - 1;
+        // starting card index
+        if (config.startFromIndex > 0) {
+            if (config.startFromIndex > carousel.content.length) config.startFromIndex = carousel.content.length;
+            carousel.configuration.startFromIndex = config.startFromIndex - 1;
         }
 
 
-        // transition for transition
-        if (opt.transitionDuration > 0) {
-            self.options.transitionDuration = opt.transitionDuration;
+        // duration of transition
+        if (config.transitionDuration > 0) {
+            carousel.configuration.transitionDuration = config.transitionDuration;
         }
 
-
-        if (opt.pauseMouseOver == false || opt.pauseMouseOver == true) {
-            self.options.pauseMouseOver = opt.pauseMouseOver;
+        // mouse over carousel
+        if (config.pauseMouseOver == false || config.pauseMouseOver == true) {
+            carousel.configuration.pauseMouseOver = config.pauseMouseOver;
         }
 
         // add suspend actions if automatic flipping is enabled
-        if (self.options.pauseMouseOver == true || self.options.pauseMouseOver == false) {
+        if (carousel.configuration.pauseMouseOver == true || carousel.configuration.pauseMouseOver == false) {
 
-            self.flipping_cards.onmouseover = function () {
-                if (self.options.autoFlipMode == true && self.options.pauseMouseOver == true) {
-                    self.autoFlip(false);
+            carousel.flippingCards.onmouseover = function () {
+                if (carousel.configuration.autoFlipMode == true && carousel.configuration.pauseMouseOver == true) {
+                    carousel.setAutoFlip(false);
                 }
             };
 
-            self.flipping_cards.onmouseout = function () {
-                if (self.options.autoFlipMode == true && self.options.pauseMouseOver == true) {
-                    self.autoFlip(true);
+            carousel.flippingCards.onmouseout = function () {
+                if (carousel.configuration.autoFlipMode == true && carousel.configuration.pauseMouseOver == true) {
+                    carousel.setAutoFlip(true);
                 }
             };
 
         }
 
         // card size
-        if (opt.cardWidth > 0) self.options.cardWidth = parseInt(opt.cardWidth);
-        if (opt.cardHeight > 0) self.options.cardHeight = parseInt(opt.cardHeight);
+        if (config.cardWidth > 0) carousel.configuration.cardWidth = parseInt(config.cardWidth);
+        if (config.cardHeight > 0) carousel.configuration.cardHeight = parseInt(config.cardHeight);
 
         // card spacing
-        if (opt.spacingVertical > 0) self.options.spacingVertical = parseInt(opt.spacingVertical);
-        if (opt.spacingHorizontal > 0) self.options.spacingHorizontal = parseInt(opt.spacingHorizontal);
+        if (config.spacingVertical > 0) carousel.configuration.spacingVertical = parseInt(config.spacingVertical);
+        if (config.spacingHorizontal > 0) carousel.configuration.spacingHorizontal = parseInt(config.spacingHorizontal);
 
         // card shadow
-        if (opt.cardsShadow == false) {
-            self.options.cardsShadow = false;
+        if (config.cardsShadow == false) {
+            carousel.configuration.cardsShadow = false;
+        }
+        if (config.cardsShadow == true) {
+            carousel.configuration.cardsShadow = true;
         }
 
-        if (opt.cardsShadow == true) {
-            self.options.cardsShadow = true;
-        }
+        // sequential delay
+        if (config.sequentialDelay > 0) carousel.configuration.sequentialDelay = config.sequentialDelay;
 
-        // sequentialDelay
-        if (opt.sequentialDelay > 0) self.options.sequentialDelay = opt.sequentialDelay;
-
-        // rotationMode
-        if (opt.rotationMode == "simultaneous" || opt.rotationMode == "sequential") {
-            if (opt.rotationMode == "simultaneous") {
-                self.options.rotationMode = "simultaneous";
-                self.options.sequentialDelay = 0;
+        // simultaneous or sequential rotation mode
+        if (config.rotationMode && (
+            config.rotationMode.toLowerCase() == "simultaneous" ||
+            config.rotationMode.toLowerCase() == "sequential")) {
+            if (config.rotationMode.toLowerCase() == "simultaneous") {
+                carousel.configuration.rotationMode = "simultaneous";
+                carousel.configuration.sequentialDelay = 0;
             }
             else {
-                self.options.rotationMode = "sequential";
+                carousel.configuration.rotationMode = "sequential";
             }
         }
 
-        // cardsToShow
-        if (opt.cardsToShow > 0) {
-            self.options.cardsToShow = opt.cardsToShow;
+        // number of cards to show
+        if (config.cardsToShow >= 0) {
+            carousel.configuration.cardsToShow = config.cardsToShow;
         }
 
-
-        // cardsPerRow
-        if (opt.cardsPerRow > 0) {
-            if (opt.cardsPerRow > opt.cardsToShow) opt.cardsPerRow = opt.cardsToShow;
-            self.options.cardsPerRow = opt.cardsPerRow;
+        // number of cards per row
+        if (config.cardsPerRow > 0) {
+            if (config.cardsPerRow > config.cardsToShow) config.cardsPerRow = config.cardsToShow;
+            carousel.configuration.cardsPerRow = config.cardsPerRow;
         }
-
 
         // width of cards container
-        self.box.style.width = self.options.cardWidth * self.options.cardsPerRow +
-            2 * self.options.spacingHorizontal * self.options.cardsPerRow + "px";
-
+        carousel.box.style.width = carousel.configuration.cardWidth * carousel.configuration.cardsPerRow +
+            2 * carousel.configuration.spacingHorizontal * carousel.configuration.cardsPerRow + "px";
 
         // on deactivate window
         window.onblur = function () {
-            if (self.options.autoFlipMode) self.autoFlip(false);
+            if (carousel.configuration.autoFlipMode) carousel.setAutoFlip(false);
         };
         window.onfocus = function () {
-            if (self.options.autoFlipMode) self.autoFlip(true);
+            if (carousel.configuration.autoFlipMode) carousel.setAutoFlip(true);
         };
 
-
-        // buttons shadow
-        if (opt.buttonsShadow == false) {
-            self.options.buttonsShadow = false;
-            self.buttons[0].classList.remove("shadowon");
-            self.buttons[0].classList.add("shadowoff");
-            self.buttons[1].classList.remove("shadowon");
-            self.buttons[1].classList.add("shadowoff");
+        // hide buttons if no cards
+        if (config.cardsToShow == 0) {
+            carousel.buttons[0].style.display = 'none';
+            carousel.buttons[1].style.display = 'none';
         }
 
-        if (opt.buttonsShadow == true || opt.buttonsShadow == undefined) {
-            self.options.buttonsShadow = true;
-            self.buttons[0].classList.remove("shadowoff");
-            self.buttons[0].classList.add("shadowon");
-            self.buttons[1].classList.remove("shadowoff");
-            self.buttons[1].classList.add("shadowon");
+        // buttons shadow
+        if (config.buttonsShadow == false) {
+            carousel.configuration.buttonsShadow = false;
+            carousel.buttons[0].classList.remove("shadow-on");
+            carousel.buttons[0].classList.add("shadow-off");
+            carousel.buttons[1].classList.remove("shadow-on");
+            carousel.buttons[1].classList.add("shadow-off");
+        }
+        if (config.buttonsShadow == true || config.buttonsShadow == undefined) {
+            carousel.configuration.buttonsShadow = true;
+            carousel.buttons[0].classList.remove("shadow-off");
+            carousel.buttons[0].classList.add("shadow-on");
+            carousel.buttons[1].classList.remove("shadow-off");
+            carousel.buttons[1].classList.add("shadow-on");
         }
 
         // set buttons html
-        if (self.buttons[0].innerHTML.trim() !== "") {
-            self.options.buttonBackwardHtml = self.buttons[0].innerHTML;
+        if (carousel.buttons[0].innerHTML.trim() !== "") {
+            carousel.configuration.buttonBackwardHtml = carousel.buttons[0].innerHTML;
         }
-        if (opt.buttonBackwardHtml != undefined) {
-            self.options.buttonBackwardHtml = opt.buttonBackwardHtml;
+        if (config.buttonBackwardHtml != undefined) {
+            carousel.configuration.buttonBackwardHtml = config.buttonBackwardHtml;
         }
-        self.buttons[0].innerHTML = self.options.buttonBackwardHtml;
+        carousel.buttons[0].innerHTML = carousel.configuration.buttonBackwardHtml;
+
+        if (carousel.buttons[1].innerHTML.trim() !== "") {
+            carousel.configuration.buttonForwardHtml = carousel.buttons[1].innerHTML;
+        }
+        if (config.buttonForwardHtml != undefined) {
+            carousel.configuration.buttonForwardHtml = config.buttonForwardHtml;
+        }
+        carousel.buttons[1].innerHTML = carousel.configuration.buttonForwardHtml;
 
 
-        if (self.buttons[1].innerHTML.trim() !== "") {
-            self.options.buttonForwardHtml = self.buttons[1].innerHTML;
-        }
-        if (opt.buttonForwardHtml != undefined) {
-            self.options.buttonForwardHtml = opt.buttonForwardHtml;
-        }
-        self.buttons[1].innerHTML = self.options.buttonForwardHtml;
-
-
-        // buttons click
-        self.disableButtons(false);
+        // buttons state
+        carousel.setButtonsDisabledState(false);
     },
 
 
 // ---------------------------------------------------------------------------------------------
     setNextContentIndex: function (direction, step) {
-        var self = this;
-        var len = self.content.length;
+        var carousel = this;
+        var len = carousel.content.length;
         var ind = 0;
 
         if (step == null) step = 1;
 
         if (direction == 1) {
-            ind = self.last_index + step;
-            if (ind > len - 1) ind = self.last_index + step - len;
-            self.last_index = ind;
+            ind = carousel.lastIndex + step;
+            if (ind > len - 1) ind = carousel.lastIndex + step - len;
+            carousel.lastIndex = ind;
             return ind;
         }
 
         if (direction == -1) {
-            ind = self.last_index - step;
-            if (ind < 0) ind = self.last_index - step + len;
-            self.last_index = ind;
+            ind = carousel.lastIndex - step;
+            if (ind < 0) ind = carousel.lastIndex - step + len;
+            carousel.lastIndex = ind;
             return ind;
         }
     },
@@ -237,58 +238,58 @@ var flipping = {
 
 // ---------------------------------------------------------------------------------------------
     getCardFrontBackHTML: function () {
-        var self = this;
+        var carousel = this;
 
         return "<div style='" +
-            "width: " + self.options.cardWidth + "px; " +
-            "height: " + self.options.cardHeight + "px; " +
-            "transitionDuration:  " + self.options.transitionDuration + "ms' " +
-            "class='front  " + (self.options.cardsShadow ? 'shadowon' : 'shadowoff') + "'></div>" +
+            "width: " + carousel.configuration.cardWidth + "px; " +
+            "height: " + carousel.configuration.cardHeight + "px; " +
+            "transitionDuration:  " + carousel.configuration.transitionDuration + "ms' " +
+            "class='front  " + (carousel.configuration.cardsShadow ? 'shadow-on' : 'shadow-off') + "'></div>" +
             "<div  style='" +
-            "width: " + self.options.cardWidth + "px; " +
-            "height: " + self.options.cardHeight + "px' " +
-            "transitionDuration:  " + self.options.transitionDuration + "ms' " +
-            "class='back back" + self.direction + " " + (self.options.cardsShadow ? 'shadowon' : 'shadowoff') + "'></div>";
+            "width: " + carousel.configuration.cardWidth + "px; " +
+            "height: " + carousel.configuration.cardHeight + "px' " +
+            "transitionDuration:  " + carousel.configuration.transitionDuration + "ms' " +
+            "class='back back" + carousel.direction + " " + (carousel.configuration.cardsShadow ? 'shadow-on' : 'shadow-off') + "'></div>";
 
     },
 
 // ---------------------------------------------------------------------------------------------
-    setCardFrontContent: function (stack_index, direction) {
-        var self = this;
+    setCardFrontContent: function (stackIndex, direction) {
+        var carousel = this;
 
-        var front = self.box.children[stack_index].getElementsByClassName('front')[0];
-        front.innerHTML = self.content[self.setNextContentIndex(direction)];
+        var front = carousel.box.children[stackIndex].getElementsByClassName('front')[0];
+        front.innerHTML = carousel.content[carousel.setNextContentIndex(direction)];
 
-        if (stack_index == 0) self.start_index = self.last_index - 1;
+        if (stackIndex == 0) carousel.startIndex = carousel.lastIndex - 1;
     },
 
 
 // ---------------------------------------------------------------------------------------------
-    setCardBackContent: function (stack_index, direction) {
-        var self = this;
-        var back = self.box.children[stack_index].getElementsByClassName('back')[0];
+    setCardBackContent: function (stackIndex, direction) {
+        var carousel = this;
+        var back = carousel.box.children[stackIndex].getElementsByClassName('back')[0];
         back.classList.remove("back1");
         back.classList.remove("back-1");
         back.classList.add("back" + direction);
-        back.innerHTML = self.content[self.setNextContentIndex(1)];
+        back.innerHTML = carousel.content[carousel.setNextContentIndex(1)];
     },
 
 
 // ---------------------------------------------------------------------------------------------
     setCardStacksHTML: function () {
-        var self = this;
-        self.box.innerHTML = "";
-        for (var i = 0; i < self.options.cardsToShow; i++) {
-            self.box.innerHTML = self.box.innerHTML +
-                '<div class="card-stack">' + self.getCardFrontBackHTML() + '</div>';
+        var carousel = this;
+        carousel.box.innerHTML = "";
+        for (var i = 0; i < carousel.configuration.cardsToShow; i++) {
+            carousel.box.innerHTML = carousel.box.innerHTML +
+                '<div class="card-stack">' + carousel.getCardFrontBackHTML() + '</div>';
         }
 
         // vertical and horizontal spacings
-        [].forEach.call(self.box.children, function (el) {
-            el.style.marginLeft = self.options.spacingHorizontal + "px";
-            el.style.marginRight = self.options.spacingHorizontal + "px";
-            el.style.marginTop = self.options.spacingVertical + "px";
-            el.style.marginBottom = self.options.spacingVertical + "px";
+        [].forEach.call(carousel.box.children, function (el) {
+            el.style.marginLeft = carousel.configuration.spacingHorizontal + "px";
+            el.style.marginRight = carousel.configuration.spacingHorizontal + "px";
+            el.style.marginTop = carousel.configuration.spacingVertical + "px";
+            el.style.marginBottom = carousel.configuration.spacingVertical + "px";
         });
 
     },
@@ -303,51 +304,51 @@ var flipping = {
     },
 
 // ---------------------------------------------------------------------------------------------
-    init: function (elem, opt) {
-        var self = this;
+    init: function (carouselDomElementId, config) {
+        var carousel = this;
 
-        if (self.start_index == -1) self.start_index = self.options.startFromIndex;
-        else  self.last_index = self.start_index;
+        if (carousel.startIndex == -1) carousel.startIndex = carousel.configuration.startFromIndex;
+        else  carousel.lastIndex = carousel.startIndex;
 
-        self.browser = self.getBrowser();
+        carousel.browser = carousel.getBrowser();
 
-        self.flipping_cards = document.getElementById(elem);
+        carousel.flippingCards = document.getElementById(carouselDomElementId);
 
-        var cards_container = flipping_cards.getElementsByClassName('cards')[0];
+        var cardsContainer = carousel.flippingCards.getElementsByClassName('cards')[0];
 
-        self.buttons[0] = flipping_cards.getElementsByClassName('btn-backward')[0];
-        self.buttons[1] = flipping_cards.getElementsByClassName('btn-forward')[0];
+        carousel.buttons[0] = carousel.flippingCards.getElementsByClassName('btn-backward')[0];
+        carousel.buttons[1] = carousel.flippingCards.getElementsByClassName('btn-forward')[0];
 
-        if (self.box == null) {
+        if (carousel.box == null) {
             var cards = document.createElement('div');
             cards.classList.add("card-box");
-            self.box = cards_container.parentNode.insertBefore(cards, cards_container.nextSibling);
+            carousel.box = cardsContainer.parentNode.insertBefore(cards, cardsContainer.nextSibling);
         }
 
-        self.content = self.getCardsContentArray(cards_container);
+        carousel.content = carousel.getCardsContentArray(cardsContainer);
 
         // configure
-        self.setConfiguration(opt);
+        carousel.setConfiguration(config);
 
-        self.setCardStacksHTML();
+        carousel.setCardStacksHTML();
 
-        self.cards_count = self.box.children.length;
+        carousel.cardsCount = carousel.box.children.length;
 
-        for (var i = 0; i < self.cards_count; i++) {
-            self.setCardFrontContent(i, 1);
+        for (var i = 0; i < carousel.cardsCount; i++) {
+            carousel.setCardFrontContent(i, 1);
         }
-        for (i = 0; i < self.cards_count; i++) {
-            self.setCardBackContent(i, 1);
+        for (i = 0; i < carousel.cardsCount; i++) {
+            carousel.setCardBackContent(i, 1);
         }
 
-        self.flipping_cards.style.visibility = 'visible';
+        carousel.flippingCards.style.visibility = 'visible';
 
         if ('ontouchstart' in document.documentElement) {
-            self.flipping_cards.addEventListener('touchstart', function (event) {
-                self.touchBackward(event);
+            carousel.flippingCards.addEventListener('touchstart', function (event) {
+                carousel.touchActionStart(event);
             }, false);
-            self.flipping_cards.addEventListener('touchend', function (event) {
-                self.touchForward(event);
+            carousel.flippingCards.addEventListener('touchend', function (event) {
+                carousel.touchActionEnd(event);
             }, false);
         }
 
@@ -355,55 +356,55 @@ var flipping = {
 
 // ---------------------------------------------------------------------------------------------
     arrowClick: function (direction) {
-        var self = this;
+        var carousel = this;
 
-        if (self.direction != direction) {
+        if (carousel.direction != direction) {
 
-            self.direction = direction;
+            carousel.direction = direction;
 
-            self.setCardStacksHTML();
+            carousel.setCardStacksHTML();
 
-            if (direction == -1) self.setNextContentIndex(-1, self.cards_count * 2);
+            if (direction == -1) carousel.setNextContentIndex(-1, carousel.cardsCount * 2);
 
-            for (i = 0; i < self.cards_count; i++) {
-                self.setCardFrontContent(i, 1);
+            for (i = 0; i < carousel.cardsCount; i++) {
+                carousel.setCardFrontContent(i, 1);
             }
 
-            if (direction == -1) self.setNextContentIndex(-1, self.cards_count * 2);
+            if (direction == -1) carousel.setNextContentIndex(-1, carousel.cardsCount * 2);
 
-            for (i = 0; i < self.cards_count; i++) {
-                self.setCardBackContent(i, direction);
+            for (i = 0; i < carousel.cardsCount; i++) {
+                carousel.setCardBackContent(i, direction);
             }
 
         }
-        self.direction = direction;
-        self.flipAllCards(direction);
+        carousel.direction = direction;
+        carousel.flipAllCards(direction);
     },
 
 
 // ---------------------------------------------------------------------------------------------
-    touchBackward: function (event) {
-        var self = this;
-        self.touch_position = event.touches[0].pageX;
+    touchActionStart: function (event) {
+        var carousel = this;
+        carousel.touchPosition = event.touches[0].pageX;
     },
 
 
 // ---------------------------------------------------------------------------------------------
-    touchForward: function (event) {
-        var self = this;
+    touchActionEnd: function (event) {
+        var carousel = this;
 
         var touches = event.changedTouches;
 
-        var move = self.touch_position - touches[touches.length - 1].pageX;
+        var move = carousel.touchPosition - touches[touches.length - 1].pageX;
 
-        if (Math.abs(move) < 10 || self.flip_disabled == true) {
+        if (Math.abs(move) < 10 || carousel.flipDisabled == true) {
             return false;
         }
         if (move < 0) {
-            self.arrowClick(-1);
+            carousel.arrowClick(-1);
         }
         else {
-            self.arrowClick(1);
+            carousel.arrowClick(1);
         }
     },
 
@@ -411,61 +412,61 @@ var flipping = {
 // ---------------------------------------------------------------------------------------------
     flipAllCards: function (direction) {
 
-        var self = this;
+        var carousel = this;
         var i = 0;
 
-        self.disableButtons(true);
-        self.flip_disabled = true;
+        carousel.setButtonsDisabledState(true);
+        carousel.flipDisabled = true;
 
-        var full_flip_time = self.options.rotationMode == "sequential" ?
-        self.options.sequentialDelay * self.cards_count :
-            self.options.transitionDuration;
+        var fullFlipTime = carousel.configuration.rotationMode == "sequential" ?
+        carousel.configuration.sequentialDelay * carousel.cardsCount :
+            carousel.configuration.transitionDuration;
 
-        for (i = 0; i < self.cards_count; i++) {
-            (function (stack_index) {
+        for (i = 0; i < carousel.cardsCount; i++) {
+            (function (stackIndex) {
                 setTimeout(function () {
-                    self.flipCard(stack_index, direction);
-                }, self.options.sequentialDelay * stack_index);
+                    carousel.flipCard(stackIndex, direction);
+                }, carousel.configuration.sequentialDelay * stackIndex);
             })(i);
         }
 
         setTimeout(function () {
-            self.setCardStacksHTML();
+            carousel.setCardStacksHTML();
 
-            self.setNextContentIndex(-1, self.cards_count);
+            carousel.setNextContentIndex(-1, carousel.cardsCount);
 
-            for (var i = 0; i < self.cards_count; i++) {
-                self.setCardFrontContent(i, 1);
+            for (var i = 0; i < carousel.cardsCount; i++) {
+                carousel.setCardFrontContent(i, 1);
             }
 
             if (direction == -1) {
-                self.setNextContentIndex(-1, self.cards_count * 2);
+                carousel.setNextContentIndex(-1, carousel.cardsCount * 2);
             }
 
-            for (i = 0; i < self.cards_count; i++) {
-                self.setCardBackContent(i, direction);
+            for (i = 0; i < carousel.cardsCount; i++) {
+                carousel.setCardBackContent(i, direction);
             }
 
-            self.disableButtons(false);
-            self.flip_disabled = false;
+            carousel.setButtonsDisabledState(false);
+            carousel.flipDisabled = false;
 
-        }, full_flip_time);
+        }, fullFlipTime);
     },
 
 
 // ---------------------------------------------------------------------------------------------
-    flipCard: function (stack_index, direction) {
-        var self = this;
+    flipCard: function (stackIndex, direction) {
+        var carousel = this;
 
-        var stack = self.box.children[stack_index];
+        var stack = carousel.box.children[stackIndex];
 
         var front = stack.getElementsByClassName('front')[0];
         var back = stack.getElementsByClassName('back')[0];
 
-        front.style.transitionDuration = self.options.transitionDuration + "ms";
-        back.style.transitionDuration = self.options.transitionDuration + "ms";
+        front.style.transitionDuration = carousel.configuration.transitionDuration + "ms";
+        back.style.transitionDuration = carousel.configuration.transitionDuration + "ms";
 
-        var trans = self.browser == "safari" ? "webkitTransform" : "transform";
+        var trans = carousel.browser == "safari" ? "webkitTransform" : "transform";
 
         front.style[trans] = 'rotateY(' + (-1 * direction * 180) + 'deg)';
         back.style[trans] = 'rotateY(' + 0 + 'deg)';
@@ -473,40 +474,37 @@ var flipping = {
 
 
 //----------------------------------------------------------------------------------------------
-    disableButtons: function (state) {
-        var self = this;
-        /*        var val = state ? "none" : "auto";
-         self.buttons[0].style.pointerEvents = val;
-         self.buttons[1].style.pointerEvents = val;*/
+    setButtonsDisabledState: function (state) {
+        var carousel = this;
 
         if (state) {
-            self.buttons[0].onclick = function () {
+            carousel.buttons[0].onclick = function () {
                 return false;
             };
-            self.buttons[1].onclick = function () {
+            carousel.buttons[1].onclick = function () {
                 return false;
             };
         } else {
-            self.buttons[0].onclick = function () {
-                self.arrowClick(-1);
+            carousel.buttons[0].onclick = function () {
+                carousel.arrowClick(-1);
             };
-            self.buttons[1].onclick = function () {
-                self.arrowClick(1);
+            carousel.buttons[1].onclick = function () {
+                carousel.arrowClick(1);
             };
         }
     },
 
 
 //----------------------------------------------------------------------------------------------
-    autoFlip: function (state, direction) {
-        var self = this;
+    setAutoFlip: function (state, direction) {
+        var carousel = this;
         if (direction == null) direction = 1;
         if (state) {
-            self.timeout = setInterval(function () {
-                self.arrowClick(direction);
-            }, self.options.autoFlipDelay);
+            carousel.timeout = setInterval(function () {
+                carousel.arrowClick(direction);
+            }, carousel.configuration.autoFlipDelay);
         } else {
-            clearInterval(self.timeout);
+            clearInterval(carousel.timeout);
         }
     },
 

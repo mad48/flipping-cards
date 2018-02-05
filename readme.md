@@ -11,8 +11,8 @@
 For using Flipping Cards Carousel on a web page use linking to the library and the styles:
 
 ```html
-    <link rel="stylesheet" href="/path/to/styles/flipping.css"/>
-    <script src='/path/to/flipping.js'></script>
+<link rel="stylesheet" href="/path/to/styles/flipping.css" />
+<script src="/path/to/flipping.js"></script>
 ```
 
 On the page put the code for the carousel. For example:
@@ -78,35 +78,17 @@ document.addEventListener("DOMContentLoaded", function () {
 });
 ```
 
-## Usage via npm
+## Installation
 
 First, install the package using npm:
 ```sh
-    npm install flipping-cards --save
+npm install flipping-cards --save
 ```
 Then, require the package and use it like so:
 ```javascript
-    var flipping_cards = require('flipping-cards');
+import flipping from "flipping-cards";
+import "flipping-cards/dist/css/flipping.css";
 ```
-
-
-## Usage via React adapter
-
-Add file ./src/js/flipping-react.js to your folder
-
-Import flipping-react component:
-
-```javascript
-import FlippingCards from "./flipping-react";
-```
-
-Use Flipping Cards Carouser React adapter:
-
-```javascript
-  <FlippingCards id="flipping_cards" configuration={configuration} content={content} />
-```
-
-See example of usage in file demo/app.js
 
 ## Options
 

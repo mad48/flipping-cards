@@ -9,6 +9,7 @@
     <title>Flipping Cards Carousel</title>
 
     <link rel="shortcut icon" type="image/x-icon" href="favicon.ico">
+
     <!--<link href="http://fonts.googleapis.com/css?family=Open+Sans:400,600,700&subset=latin,cyrillic" rel="stylesheet" type="text/css">-->
     <!--    <link href="demo/css/font-awesome.min.css" rel="stylesheet" type="text/css">-->
 
@@ -18,17 +19,15 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css"
           integrity="sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb" crossorigin="anonymous">
 
-
     <link href="css/flipping.css?new" rel="stylesheet"/>
     <link href="css/card.css?new" rel="stylesheet"/>
 
-    <link href="css/demopage.css?new" rel="stylesheet" type="text/css">
+    <link href="css/demopage.css?new" rel="stylesheet">
 
     <script src="js/run_prettify.js?autoload=true&amp;lang=css"></script>
 
     <script src='../src/js/flipping.js?new' type='text/javascript'></script>
 
-    <script src='js/content.js?new' type='text/javascript'></script>
     <script src='js/reconfigure.js?new' type='text/javascript'></script>
 
 </head>
@@ -188,8 +187,6 @@
                 setDemopageConfiguration(configuration);
 
                 flipping.init('flipping_cards', configuration);
-
-
             });
 
         </script>
@@ -218,13 +215,13 @@
 
             <label for="conf_decks_count">Number of cards to show: </label>
             <input type="number" name="conf_decks_count" id="conf_decks_count"
-                   min="1" max="6"
+                   min="0" max="15"
                    onclick="select()" onkeyup="reconfigure(true)" onchange="reconfigure(true)">
             <br>
 
             <label for="conf_cards_per_row">Number of cards per row: </label>
             <input type="number" name="conf_cards_per_row" id="conf_cards_per_row"
-                   min="1" max="6" value=""
+                   min="1" max="15"
                    onclick="select()" onkeyup="reconfigure(true)" onchange="reconfigure(true)">
             <br>
 
@@ -252,7 +249,7 @@
 
             <label for="conf_starting_card_index">Start show from card index: </label>
             <input type="number" name="conf_starting_card_index" id="conf_starting_card_index"
-                   min="1" max="5"
+                   min="1" max="15"
                    onclick="select()" onkeyup="reconfigure(true)" onch4ange="reconfigure(true)">
             <br>
 
@@ -263,7 +260,7 @@
 
             <label for="conf_autoflip_delay">Delay before the next set of cards in automatic mode: </label>
             <input type="number" name="conf_autoflip_delay" id="conf_autoflip_delay"
-                   min="0" value=""
+                   min="0"
                    onkeyup="reconfigure()" onchange="reconfigure()"> ms
             <br>
 
@@ -355,7 +352,7 @@
         </div>
 
 
-        <div class="usage col-xs-12 col-sm-12 col-md-12 col-lg-6">
+        <div class="usage col-xs-12 col-sm-12 col-md-12 col-lg-6 col-lg-offset-6">
             <h4>Example of usage with pure JavaScript</h4>
 
 <pre class="prettyprint">
@@ -416,71 +413,71 @@
 </pre>
         </div>
 
-        <div class="usage col-xs-12 col-sm-12 col-md-12 col-lg-6">
-            <h4>Example of usage via React adapter</h4>
-<pre class="prettyprint">
-<xmp>
-    <div id="app"></div>
-    <script src="bundle.min.js"></script>
+        <!--        <div class="usage col-xs-12 col-sm-12 col-md-12 col-lg-6">
+                    <h4>Example of usage via React adapter</h4>
+        <pre class="prettyprint">
+        <xmp>
+            <div id="app"></div>
+            <script src="bundle.min.js"></script>
 
-    ...
+            ...
 
-            import React from 'react';
-            import ReactDOM from 'react-dom';
+                    import React from 'react';
+                    import ReactDOM from 'react-dom';
 
-            import FlippingCards from "./js/flipping-react";
+                    import FlippingCards from "./js/flipping-react";
 
-            require('./css/flipping.scss');
-            require('./css/card.scss');
+                    require('./css/flipping.scss');
+                    require('./css/card.scss');
 
-            var configuration = {
-                    autoFlipMode: false,
-                    autoFlipDelay: 1500,
-                    pauseMouseOver: true,
+                    var configuration = {
+                            autoFlipMode: false,
+                            autoFlipDelay: 1500,
+                            pauseMouseOver: true,
 
-                    cardsShadow: true,
-                    buttonsShadow: true,
+                            cardsShadow: true,
+                            buttonsShadow: true,
 
-                    transitionDuration: 700,
+                            transitionDuration: 700,
 
-                    rotationMode: "simultaneous",
-                    sequentialDelay: 600,
+                            rotationMode: "simultaneous",
+                            sequentialDelay: 600,
 
-                    cardWidth: 150,
-                    cardHeight: 180,
+                            cardWidth: 150,
+                            cardHeight: 180,
 
-                    spacingHorizontal: 15,
-                    spacingVertical: 15,
+                            spacingHorizontal: 15,
+                            spacingVertical: 15,
 
-                    cardsToShow: 3,
-                    cardsPerRow: 3,
+                            cardsToShow: 3,
+                            cardsPerRow: 3,
 
-                    startFromIndex: 1
-            };
+                            startFromIndex: 1
+                    };
 
-            var content = [
-                '<div>Content of card 1</div>',
-                '<div>Content of card 2</div>',
-                '<div>Content of card 3</div>',
-                ...
-            ];
+                    var content = [
+                        '<div>Content of card 1</div>',
+                        '<div>Content of card 2</div>',
+                        '<div>Content of card 3</div>',
+                        ...
+                    ];
 
-            class App extends React.Component {
-                render() {
-                    return (
-                        <FlippingCards
-                                id="flipping_cards"
-                                configuration={configuration}
-                                content={content}
-                        />
-                    )
-               }
-            }
-            ReactDOM.render(<App/>, document.getElementById("app"));
+                    class App extends React.Component {
+                        render() {
+                            return (
+                                <FlippingCards
+                                        id="flipping_cards"
+                                        configuration={configuration}
+                                        content={content}
+                                />
+                            )
+                       }
+                    }
+                    ReactDOM.render(<App/>, document.getElementById("app"));
 
-        </xmp>
-        </pre>
-        </div>
+                </xmp>
+                </pre>
+                </div>-->
     </section>
 
 
@@ -538,11 +535,11 @@
 </main>
 
 <!-- Yandex.Metrika counter -->
-<!--<script type="text/javascript">
+<script type="text/javascript">
     (function (d, w, c) {
         (w[c] = w[c] || []).push(function () {
             try {
-                w.yaCounter46747293 = new Ya.Metrika({
+                w.yaCounter46747293 = new Ya.Metrika2({
                     id: 46747293,
                     clickmap: true,
                     trackLinks: true,
@@ -560,18 +557,18 @@
                 };
         s.type = "text/javascript";
         s.async = true;
-        s.src = "https://mc.yandex.ru/metrika/watch.js";
+        s.src = "https://mc.yandex.ru/metrika/tag.js";
 
         if (w.opera == "[object Opera]") {
             d.addEventListener("DOMContentLoaded", f, false);
         } else {
             f();
         }
-    })(document, window, "yandex_metrika_callbacks");
+    })(document, window, "yandex_metrika_callbacks2");
 </script>
 <noscript>
     <div><img src="https://mc.yandex.ru/watch/46747293" style="position:absolute; left:-9999px;" alt=""/></div>
-</noscript>-->
+</noscript>
 <!-- /Yandex.Metrika counter -->
 
 

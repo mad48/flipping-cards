@@ -84,12 +84,12 @@ function reconfigure(new_starting_card_index) {
         configuration["cardHeight"] = 145;
     }
 
-    if (document.querySelector('#conf_decks_count').value < 1) {
-        document.querySelector('#conf_decks_count').value = 1;
+    if (document.querySelector('#conf_decks_count').value < 0) {
+        document.querySelector('#conf_decks_count').value = 0;
     }
 
-    if (document.querySelector('#conf_decks_count').value > content.length) {
-        document.querySelector('#conf_decks_count').value = content.length;
+    if (document.querySelector('#conf_decks_count').value > flipping.content.length) {
+        document.querySelector('#conf_decks_count').value = flipping.content.length;
     }
 
     flipping.init('flipping_cards', configuration);

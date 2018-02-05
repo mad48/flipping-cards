@@ -61,14 +61,14 @@ gulp.task('js', function () {
         })
         .pipe(header(filehead))
         .pipe(rename("flipping.min.js"))
-        .pipe(gulp.dest('./demo/js'));
+        .pipe(gulp.dest('./dist/js'));
 
 });
 
 
 gulp.task('watch', function () {
 
-    gulp.watch('./src/css/*.scss').on("change", function (file) {
+    gulp.watch(['./src/css/*.scss','./demo/css/*.scss']).on("change", function (file) {
         scss(file.path)
     });
 
@@ -78,7 +78,7 @@ gulp.task('watch', function () {
 
 gulp.task('build', ['js'], function () {
     scss('./src/css/flipping.scss');
-    scss('./src/css/card.scss');
+    scss('./demo/css/card.scss');
 
     gulp.src('./demo/css/flipping.css')
         .pipe(gulp.dest('./dist/css'));
@@ -86,6 +86,4 @@ gulp.task('build', ['js'], function () {
     gulp.src('./src/js/flipping.js')
         .pipe(gulp.dest('./dist/js'));
 
-    gulp.src('./demo/js/flipping.min.js')
-        .pipe(gulp.dest('./dist/js'));
 });

@@ -1,10 +1,14 @@
 [![npm][npm]][npm-url]
 [![node][node]][node-url]
-# flipping-cards
 
-> Flipping Cards Carousel
+<h1 align="center">Flipping Cards Carousel</h1>
+<p align="center">
+<a href="https://mad48.github.io/flipping-cards/demo/index.html"><img src="https://mad48.github.io/flipping-cards/demo/screenshot.png" alt="Flipping Cards Carousel"></a>
+</p>
+<h3 align="center">
+<a href="https://mad48.github.io/flipping-cards/demo/index.html">Demo and usage</a>
+</h3>
 
-### [Demo and usage]
 
 ## Usage
 
@@ -82,7 +86,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
 First, install the package using npm:
 ```sh
-npm install flipping-cards --save
+$ npm install flipping-cards --save
 ```
 Then, require the package and use it like so:
 ```javascript
@@ -109,16 +113,16 @@ import "flipping-cards/dist/css/flipping.css";
 - `buttonBackwardHtml` : [html] - backward button html code
 - `buttonForwardHtml` : [html] - forward button html code
 
-**Supports:**
+**Features**
 
 - Forward / backward flip
-- Number of cards per row or column
+- Number of cards to show and  per row
 - Custom items sizes
 - Custom animation delays
-- Simultaneous and  sequential rotation mode
+- Simultaneous and sequential rotation mode
 - Automatic flip mode
 
-**Browser Support:**
+**Browser Support**
 - Google Chrome 36+
 - Mozilla Firefox 16+
 - Internet Explorer 10+

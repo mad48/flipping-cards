@@ -10,6 +10,7 @@ const header = require('gulp-header');
 const cleanCSS = require('gulp-clean-css');
 const pkg = require('./package.json');
 const gutil = require('gulp-util');
+const eslint = require('gulp-eslint');
 
 var filehead = "/**" +
     "\n * " + pkg.description + " " + pkg.version +
@@ -68,13 +69,30 @@ gulp.task('js', function () {
 
 gulp.task('watch', function () {
 
-    gulp.watch(['./src/css/*.scss','./demo/css/*.scss']).on("change", function (file) {
+    gulp.watch(['./src/css/*.scss', './demo/css/*.scss']).on("change", function (file) {
         scss(file.path)
     });
 
-    gulp.watch('./src/js/*.js', ['js'])
+    gulp.watch('./src/js/*.js', ['js', 'lint'])
 });
 
+
+gulp.task('lint', () => {
+
+    return gulp.src(['src/js/*.js', '!node_modules/**'])
+
+        .pipe(eslint({
+                // fix: true,
+                configFile: '.eslintrc.json'
+            }
+        ))
+        // eslint.format() outputs the lint results to the console.
+        // Alternatively use eslint.formatEach() (see Docs).
+        .pipe(eslint.format())
+        // To have the process exit with an error code (1) on
+        // lint error, return the stream and pipe to failAfterError last.
+        .pipe(eslint.failAfterError());
+});
 
 gulp.task('build', ['js'], function () {
     scss('./src/css/flipping.scss');

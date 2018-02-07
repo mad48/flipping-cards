@@ -11,7 +11,8 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "watch": "gulp watch",
-    "build": "gulp build "
+    "lint": "gulp lint",
+    "build": "gulp build"
   },
   "repository": {
     "type": "git",
@@ -21,18 +22,19 @@
     "url": "https://github.com/mad48/flipping-cards/issues"
   },
   "homepage": "https://github.com/mad48/flipping-cards#readme",
-  "dependencies": {},
   "keywords": [
     "carousel",
     "flip",
     "flipping",
     "cards"
   ],
+  "dependencies": {},
   "devDependencies": {
     "autoprefixer": "^7.1.6",
     "gulp": "^3.9.1",
     "gulp-autoprefixer": "^4.1.0",
     "gulp-clean-css": "^3.9.2",
+    "gulp-eslint": "^4.0.2",
     "gulp-header": "^1.8.9",
     "gulp-jshint": "^2.1.0",
     "gulp-rename": "^1.2.2",

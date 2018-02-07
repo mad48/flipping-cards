@@ -47,6 +47,7 @@
 
 // ---------------------------------------------------------------------------------------------
         setConfiguration: function (config) {
+
             /* configuration */
             var carousel = this;
 
@@ -198,20 +199,21 @@
             if (config.cardsToShow == 0) {
                 carousel.buttons[0].style.visibility = "hidden";
                 carousel.buttons[1].style.visibility = "hidden";
-            } else {
+            }
+            else {
                 carousel.buttons[0].style.visibility = "visible";
                 carousel.buttons[1].style.visibility = "visible";
             }
 
             // buttons shadow
-            if (config.buttonsShadow == false) {
+            if (config.buttonsShadow === false) {
                 carousel.configuration.buttonsShadow = false;
                 carousel.buttons[0].classList.remove("shadow-on");
                 carousel.buttons[0].classList.add("shadow-off");
                 carousel.buttons[1].classList.remove("shadow-on");
                 carousel.buttons[1].classList.add("shadow-off");
             }
-            if (config.buttonsShadow == true || config.buttonsShadow == undefined) {
+            if (config.buttonsShadow === true || typeof config.buttonsShadow === "undefined") {
                 carousel.configuration.buttonsShadow = true;
                 carousel.buttons[0].classList.remove("shadow-off");
                 carousel.buttons[0].classList.add("shadow-on");
@@ -223,7 +225,7 @@
             if (carousel.buttons[0].innerHTML.trim() !== "") {
                 carousel.configuration.buttonBackwardHtml = carousel.buttons[0].innerHTML;
             }
-            if (config.buttonBackwardHtml != undefined) {
+            if (typeof config.buttonBackwardHtm !== "undefined") {
                 carousel.configuration.buttonBackwardHtml = config.buttonBackwardHtml;
             }
             carousel.buttons[0].innerHTML = carousel.configuration.buttonBackwardHtml;
@@ -231,7 +233,7 @@
             if (carousel.buttons[1].innerHTML.trim() !== "") {
                 carousel.configuration.buttonForwardHtml = carousel.buttons[1].innerHTML;
             }
-            if (config.buttonForwardHtml != undefined) {
+            if (typeof config.buttonForwardHtml !== "undefined") {
                 carousel.configuration.buttonForwardHtml = config.buttonForwardHtml;
             }
             carousel.buttons[1].innerHTML = carousel.configuration.buttonForwardHtml;
@@ -345,8 +347,12 @@
         init: function (carouselDomElementId, config) {
             var carousel = this;
 
-            if (carousel.startIndex == -1) carousel.startIndex = carousel.configuration.startFromIndex;
-            else  carousel.lastIndex = carousel.startIndex;
+            if (carousel.startIndex == -1) {
+                carousel.startIndex = carousel.configuration.startFromIndex;
+            }
+            else {
+                carousel.lastIndex = carousel.startIndex;
+            }
 
             carousel.browser = carousel.getBrowser();
 
@@ -375,8 +381,8 @@
             for (var i = 0; i < carousel.cardsCount; i++) {
                 carousel.setCardFrontContent(i, 1);
             }
-            for (i = 0; i < carousel.cardsCount; i++) {
-                carousel.setCardBackContent(i, 1);
+            for (var j = 0; j < carousel.cardsCount; j++) {
+                carousel.setCardBackContent(j, 1);
             }
 
             carousel.flippingCards.style.visibility = "visible";
@@ -402,16 +408,20 @@
 
                 carousel.setCardStacksHTML();
 
-                if (direction == -1) carousel.setNextContentIndex(-1, carousel.cardsCount * 2);
+                if (direction == -1) {
+                    carousel.setNextContentIndex(-1, carousel.cardsCount * 2);
+                }
 
-                for (i = 0; i < carousel.cardsCount; i++) {
+                for (var i = 0; i < carousel.cardsCount; i++) {
                     carousel.setCardFrontContent(i, 1);
                 }
 
-                if (direction == -1) carousel.setNextContentIndex(-1, carousel.cardsCount * 2);
+                if (direction == -1) {
+                    carousel.setNextContentIndex(-1, carousel.cardsCount * 2);
+                }
 
-                for (i = 0; i < carousel.cardsCount; i++) {
-                    carousel.setCardBackContent(i, direction);
+                for (var j = 0; j < carousel.cardsCount; j++) {
+                    carousel.setCardBackContent(j, direction);
                 }
 
             }
@@ -456,9 +466,7 @@
             carousel.setButtonsDisabledState(true);
             carousel.flipDisabled = true;
 
-            var fullFlipTime = carousel.configuration.rotationMode == "sequential" ?
-            carousel.configuration.sequentialDelay * carousel.cardsCount :
-                carousel.configuration.transitionDuration;
+            var fullFlipTime = carousel.configuration.rotationMode == "sequential" ? carousel.configuration.sequentialDelay * carousel.cardsCount : carousel.configuration.transitionDuration;
 
             for (i = 0; i < carousel.cardsCount; i++) {
                 (function (stackIndex) {
@@ -481,8 +489,8 @@
                     carousel.setNextContentIndex(-1, carousel.cardsCount * 2);
                 }
 
-                for (i = 0; i < carousel.cardsCount; i++) {
-                    carousel.setCardBackContent(i, direction);
+                for (var j = 0; j < carousel.cardsCount; j++) {
+                    carousel.setCardBackContent(j, direction);
                 }
 
                 carousel.setButtonsDisabledState(false);
@@ -522,7 +530,8 @@
                 carousel.buttons[1].onclick = function () {
                     return false;
                 };
-            } else {
+            }
+            else {
                 carousel.buttons[0].onclick = function () {
                     carousel.arrowClick(-1);
                 };
@@ -536,12 +545,15 @@
 //----------------------------------------------------------------------------------------------
         setAutoFlip: function (state, direction) {
             var carousel = this;
-            if (direction == null) direction = 1;
+            if (direction == null) {
+                direction = 1;
+            }
             if (state) {
                 carousel.timeout = setInterval(function () {
                     carousel.arrowClick(direction);
                 }, carousel.configuration.autoFlipDelay);
-            } else {
+            }
+            else {
                 clearInterval(carousel.timeout);
             }
         },
@@ -549,15 +561,19 @@
 
 // ---------------------------------------------------------------------------------------------
         getBrowser: function () {
-            if (navigator.userAgent.search(/Safari/) > -1) return "safari";
-            else return "";
+            if (navigator.userAgent.search(/Safari/) > -1) {
+                return "safari";
+            }
+            else {
+                return "";
+            }
         }
 
 
     };
 
 
-    if (window.flipping !== undefined) {
+    if (typeof window.flipping !== "undefined") {
         console.error("The global scope name 'flipping' for flipping-cards-carousel already taken. " +
             "Try to set 'flippingCardsCarousel'");
         window.flippingCardsCarousel = flipping;
@@ -566,15 +582,9 @@
         window.flipping = flipping;
     }
 
-    //export default flipping
+    // export flipping
     if (typeof module === "object") {
         module.exports = flipping;
     }
 
 })();
-
-
-
-
-
-

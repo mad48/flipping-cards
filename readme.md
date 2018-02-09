@@ -3,9 +3,8 @@
 
 <h1 align="center">Flipping Cards Carousel</h1>
 <p align="center">
-<a href="https://mad48.github.io/flipping-cards/demo/index.html"><img src="https://mad48.github.io/flipping-cards/demo/screenshot.png" alt="Flipping Cards Carousel"></a>
+<a href="https://mad48.github.io/flipping-cards/demo/index.html"><img src="https://mad48.github.io/flipping-cards/demo/screenshot.png" alt="Flipping Cards Carousel screenshot"></a>
 </p>
-[![screenshot](/demo/screenshot.png)](https://mad48.github.io/flipping-cards/demo/index.html)
 <h3 align="center">
 <a href="https://mad48.github.io/flipping-cards/demo/index.html">Demo and usage</a>
 </h3>

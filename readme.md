@@ -5,13 +5,10 @@
 <p align="center">
 <a href="https://mad48.github.io/flipping-cards/demo/index.html"><img src="https://mad48.github.io/flipping-cards/demo/screenshot.png" alt="Flipping Cards Carousel"></a>
 </p>
-<p align="center">
 [![screenshot](/demo/screenshot.png)](https://mad48.github.io/flipping-cards/demo/index.html)
-</p>
 <h3 align="center">
 <a href="https://mad48.github.io/flipping-cards/demo/index.html">Demo and usage</a>
 </h3>
-
 
 ## Usage
 

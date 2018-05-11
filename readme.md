@@ -23,28 +23,29 @@ On the page put the code for the carousel. For example:
 ```html
 <div id="flipping_cards" class="flipping">
 
-            <div class="btn-backward"></div>
+    <div class="btn-backward"></div>
 
-            <div class="cards">
-                <div>
-                    <h2>Custom text 1</h2>
-                    <img src="images/pic1.jpg"/>
-                </div>
-                <div>
-                    <span>Custom text 2</span>
-                    <img src="images/pic2.jpg"/>
-                </div>
-                <div>
-                    <b>Custom text 3</b>
-                    <img src="images/pic3.jpg"/>
-                </div>
-                ...
-
-            </div>
-
-            <div class="btn-forward"></div>
-
+    <div class="cards">
+        <div>
+            <h2>Custom text 1</h2>
+            <img src="images/pic1.jpg"/>
         </div>
+        <div>
+            <span>Custom text 2</span>
+             <img src="images/pic2.jpg"/>
+        </div>
+        <div>
+            <b>Custom text 3</b>
+            <img src="images/pic3.jpg"/>
+        </div>
+
+        ...
+
+    </div>
+
+    <div class="btn-forward"></div>
+
+</div>
 ```
 
 Each `<div>` item inside the element`<div class="cards">` is a card with your custom html content.
